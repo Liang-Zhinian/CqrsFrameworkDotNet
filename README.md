@@ -20,7 +20,7 @@
 1. Clone the repo
     git clone https://github.com/Liang-Zhinian/CqrsFrameworkDotNet.git
 2. Change directory
-    cd AspNetCoreSpa
+    cd CqrsFrameworkDotNet
 3. dotnet restore
 4. Point to Sqllite or SqlServer
     
