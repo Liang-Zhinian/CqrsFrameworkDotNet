@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Anna.Cqrs</id>
+    <version>0.12.0</version>
+    <authors>Gaute Magnussen</authors>
+    <licenseUrl></licenseUrl>
+    <projectUrl></projectUrl>
+    <iconUrl></iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A lightweight framework to help write CQRS and Eventsourcing applications in C#</description>
+    <copyright>Copyright 2017</copyright>
+    <dependencies>
+      <group targetFramework=".NETFramework4.6.1">
+      <dependency id="System.Data.SqlClient" />
+      </group>
+      <group targetFramework=".NETStandard1.3">
+        <dependency id="NETStandard.Library" version="1.6.1" />
+        <dependency id="System.Dynamic.Runtime" version="4.3.0" />
+        <dependency id="Microsoft.CSharp" version="4.3.0" />
+        <dependency id="System.Reflection.TypeExtensions" version="4.3.0" />
+        <dependency id="Microsoft.Extensions.Caching.Memory" version="1.1.1" />
+      </group>
+      <group targetFramework=".NETStandard1.5">
+        <dependency id="NETStandard.Library" version="1.6.1" />
+        <dependency id="System.Dynamic.Runtime" version="4.3.0" />
+        <dependency id="Microsoft.CSharp" version="4.3.0" />
+        <dependency id="System.Reflection.TypeExtensions" version="4.3.0" />
+        <dependency id="Microsoft.Extensions.Caching.Memory" version="1.1.1" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="Framework\CqrsFramework\bin\Release\netstandard1.3\CqrsFramework.dll" target="lib\netstandard1.3\CqrsFramework.dll" />
+    <file src="Framework\CqrsFramework\bin\Release\netstandard1.3\CqrsFramework.pdb" target="lib\netstandard1.3\CqrsFramework.pdb" />
+    <file src="Framework\CqrsFramework\bin\Release\netstandard1.3\CqrsFramework.deps.json" target="lib\netstandard1.3\CqrsFramework.deps.json" />
+    <file src="Framework\CqrsFramework\bin\Release\netstandard1.5\CqrsFramework.dll" target="lib\netstandard1.5\CqrsFramework.dll" />
+    <file src="Framework\CqrsFramework\bin\Release\netstandard1.5\CqrsFramework.pdb" target="lib\netstandard1.5\CqrsFramework.pdb" />
+    <file src="Framework\CqrsFramework\bin\Release\net461\CqrsFramework.dll" target="lib\net461\CqrsFramework.dll" />
+    <file src="Framework\CqrsFramework\bin\Release\net461\CqrsFramework.pdb" target="lib\net461\CqrsFramework.pdb" />
+  </files>
+</package>
