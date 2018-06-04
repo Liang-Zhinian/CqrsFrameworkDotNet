@@ -3,25 +3,35 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26403.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CqrsFramework", "Framework\CqrsFramework\CqrsFramework.csproj", "{2DF95572-5CF5-463A-97D0-DFF3C72FD6EF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CqrsFramework", "Framework\CqrsFramework\CqrsFramework.csproj", "{2DF95572-5CF5-463A-97D0-DFF3C72FD6EF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CqrsFramework.Tests.Extensions", "Framework\CqrsFramework.Tests.Extensions\CqrsFramework.Tests.Extensions.csproj", "{DDD75F6D-1B10-462E-9D26-AFE883736AC9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CqrsFramework.Tests.Extensions", "Framework\CqrsFramework.Tests.Extensions\CqrsFramework.Tests.Extensions.csproj", "{DDD75F6D-1B10-462E-9D26-AFE883736AC9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CqrsFramework.Tests", "Framework\CqrsFramework.Tests\CqrsFramework.Tests.csproj", "{29717E0D-4FB3-4B59-ACB2-41F7756A57F5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CqrsFramework.Tests", "Framework\CqrsFramework.Tests\CqrsFramework.Tests.csproj", "{29717E0D-4FB3-4B59-ACB2-41F7756A57F5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{CCDA44F7-DC3F-4337-8D2B-005AE17A5B73}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{C26B01E4-52DF-4FF2-8B4F-ECB41998FE23}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonicService.ReservationService", "Sample\SonicService\SonicService.ReservationService\SonicService.ReservationService.csproj", "{32B6220A-FE1F-404E-B8BD-B56F55B5AF75}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonicService.ReservationService", "Sample\SonicService\SonicService.ReservationService\SonicService.ReservationService.csproj", "{32B6220A-FE1F-404E-B8BD-B56F55B5AF75}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SonicService", "SonicService", "{6866A72C-1EF4-45A5-BD6D-19F8E9A69DB6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonicService.ReservationService.Api", "Sample\SonicService\SonicService.ReservationService.Api\SonicService.ReservationService.Api.csproj", "{00BDB641-E872-423E-A832-626C8EDAE0E8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonicService.ReservationService.Api", "Sample\SonicService\SonicService.ReservationService.Api\SonicService.ReservationService.Api.csproj", "{00BDB641-E872-423E-A832-626C8EDAE0E8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SonicService.ReservationService.Tests", "Sample\SonicService\SonicService.ReservationService.Tests\SonicService.ReservationService.Tests.csproj", "{A24EAE56-5AC7-42DF-A602-55A84F0BDFFE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SonicService.ReservationService.Tests", "Sample\SonicService\SonicService.ReservationService.Tests\SonicService.ReservationService.Tests.csproj", "{A24EAE56-5AC7-42DF-A602-55A84F0BDFFE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CqrsFramework.Extensions", "Framework\CqrsFramework.Extensions\CqrsFramework.Extensions.csproj", "{7D7611F0-9498-4050-A880-D06383BDB1E9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Make_a_Reservation", "Make_a_Reservation", "{FBB18596-DF87-4833-A852-C0730D77B93C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAR.Domain", "Sample\Make_a_Reservation\MAR.Domain\MAR.Domain.csproj", "{96289276-F18C-4D54-8261-4E66EBF81E8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAR.Contracts", "Sample\Make_a_Reservation\MAR.Contracts\MAR.Contracts.csproj", "{1E908642-49FF-41A0-A2CB-FAFC5F54100F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAR.Application", "Sample\Make_a_Reservation\MAR.Application\MAR.Application.csproj", "{E9519F0F-5DF5-4496-9CA3-DC7002440D71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAR.Api", "Sample\Make_a_Reservation\MAR.Api\MAR.Api.csproj", "{F6873EF6-B509-4E26-A318-66233F2DB92C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +67,22 @@ Global
 		{7D7611F0-9498-4050-A880-D06383BDB1E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D7611F0-9498-4050-A880-D06383BDB1E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D7611F0-9498-4050-A880-D06383BDB1E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96289276-F18C-4D54-8261-4E66EBF81E8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96289276-F18C-4D54-8261-4E66EBF81E8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96289276-F18C-4D54-8261-4E66EBF81E8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96289276-F18C-4D54-8261-4E66EBF81E8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E908642-49FF-41A0-A2CB-FAFC5F54100F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E908642-49FF-41A0-A2CB-FAFC5F54100F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E908642-49FF-41A0-A2CB-FAFC5F54100F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E908642-49FF-41A0-A2CB-FAFC5F54100F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9519F0F-5DF5-4496-9CA3-DC7002440D71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9519F0F-5DF5-4496-9CA3-DC7002440D71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9519F0F-5DF5-4496-9CA3-DC7002440D71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9519F0F-5DF5-4496-9CA3-DC7002440D71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6873EF6-B509-4E26-A318-66233F2DB92C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6873EF6-B509-4E26-A318-66233F2DB92C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6873EF6-B509-4E26-A318-66233F2DB92C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6873EF6-B509-4E26-A318-66233F2DB92C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,5 +96,10 @@ Global
 		{00BDB641-E872-423E-A832-626C8EDAE0E8} = {6866A72C-1EF4-45A5-BD6D-19F8E9A69DB6}
 		{A24EAE56-5AC7-42DF-A602-55A84F0BDFFE} = {6866A72C-1EF4-45A5-BD6D-19F8E9A69DB6}
 		{7D7611F0-9498-4050-A880-D06383BDB1E9} = {CCDA44F7-DC3F-4337-8D2B-005AE17A5B73}
+		{FBB18596-DF87-4833-A852-C0730D77B93C} = {C26B01E4-52DF-4FF2-8B4F-ECB41998FE23}
+		{96289276-F18C-4D54-8261-4E66EBF81E8C} = {FBB18596-DF87-4833-A852-C0730D77B93C}
+		{1E908642-49FF-41A0-A2CB-FAFC5F54100F} = {FBB18596-DF87-4833-A852-C0730D77B93C}
+		{E9519F0F-5DF5-4496-9CA3-DC7002440D71} = {FBB18596-DF87-4833-A852-C0730D77B93C}
+		{F6873EF6-B509-4E26-A318-66233F2DB92C} = {FBB18596-DF87-4833-A852-C0730D77B93C}
 	EndGlobalSection
 EndGlobal
