@@ -15,22 +15,6 @@ namespace CqrsFramework.Extensions.EventStores
             _publisher = publisher;
         }
 
-        public void Save<T>(IEnumerable<IEvent> events)
-        {
-            foreach (var @event in events)
-            {
-                List<IEvent> list;
-                _inMemoryDb.TryGetValue(@event.Id, out list);
-                if (list == null)
-                {
-                    list = new List<IEvent>();
-                    _inMemoryDb.Add(@event.Id, list);
-                }
-                list.Add(@event);
-                _publisher.Publish(@event);
-            }
-        }
-
         public IEnumerable<IEvent> Get<T>(Guid aggregateId, int fromVersion)
         {
             List<IEvent> events;

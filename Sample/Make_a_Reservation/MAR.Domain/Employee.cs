@@ -8,7 +8,6 @@ namespace MAR.Domain
 {
     public class Employee : AggregateRoot
     {
-        private Guid _employeeID;
         private string _firstName;
         private string _lastName;
         private DateTime _dateOfBirth;
@@ -16,16 +15,22 @@ namespace MAR.Domain
 
         private Employee() { }
 
-        public Employee(Guid id, Guid employeeID, string firstName, string lastName, DateTime dateOfBirth, string jobTitle)
+        public Employee(Guid id, string firstName, string lastName, DateTime dateOfBirth, string jobTitle)
         {
             Id = id;
-            _employeeID = employeeID;
             _firstName = firstName;
             _lastName = lastName;
             _dateOfBirth = dateOfBirth;
             _jobTitle = jobTitle;
 
-            ApplyChange(new EmployeeCreatedEvent(id, employeeID, firstName, lastName, dateOfBirth, jobTitle));
+            ApplyChange(new EmployeeCreatedEvent(id, firstName, lastName, dateOfBirth, jobTitle));
+        }
+
+        public void Apply(EmployeeCreatedEvent @event){
+            _firstName = @event.FirstName;
+            _lastName = @event.LastName;
+            _dateOfBirth = @event.DateOfBirth;
+            _jobTitle = @event.JobTitle;
         }
     }
 }

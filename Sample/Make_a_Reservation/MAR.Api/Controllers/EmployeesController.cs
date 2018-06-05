@@ -8,12 +8,13 @@ using MAR.Domain;
 using System;
 using System.Collections.Generic;
 using MAR.Contracts.Commands.Employees;
+using MAR.Api.Requests.Employees;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace MAR.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/employees")]
     public class EmployeesController : Controller
     {
         private readonly ICommandSender _commandSender;
@@ -25,8 +26,6 @@ namespace MAR.Api.Controllers
             _commandSender = commandSender;
         }
 
-        public string Index(){return "Hello World!";}
-
         // GET: api/values
         [HttpGet]
         public IEnumerable<EmployeeDto> Get()
@@ -34,17 +33,17 @@ namespace MAR.Api.Controllers
             return _readmodel.GetAllEmployees();
         }
 
-        // POST api/values
         [HttpPost]
-        public void Post([FromBody]string firstName, string lastName, DateTime dateOfBirth, string jobTitle)
+        [Route("create")]
+        public ActionResult Create(CreateEmployeeRequest request)
         {
             Guid id = Guid.NewGuid();
-            Guid employeeId = Guid.NewGuid();
 
-            var command = new CreateEmployeeCommand(id,employeeId, firstName, lastName, dateOfBirth, jobTitle);
+            var command = new CreateEmployeeCommand(id, request.FirstName, request.LastName, request.DateOfBirth, request.JobTitle);
             //Configuration.Instance().Bus.Send<ICommand>(command);
 
             _commandSender.Send(command);
+            return Ok();
         }
     }
 }

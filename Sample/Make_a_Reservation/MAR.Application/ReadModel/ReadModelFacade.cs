@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using MAR.Application.ReadModel.Dtos;
+using MAR.Application.ReadModel.Models;
 
 namespace MAR.Application.ReadModel
 {
@@ -10,7 +10,7 @@ namespace MAR.Application.ReadModel
         {
 
         }
-        public IEnumerable<EmployeeDto> GetAllEmployees()
+        public IEnumerable<Employee> GetAllEmployees()
         {
             return InMemoryDatabase.Employees;
         }

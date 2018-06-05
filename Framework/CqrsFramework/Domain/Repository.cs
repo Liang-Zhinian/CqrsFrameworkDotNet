@@ -37,6 +37,7 @@ namespace CqrsFramework.Domain
             if (expectedVersion != null && _eventStore.Get(
                     aggregate.Id, expectedVersion.Value).Any())
                 throw new ConcurrencyException(aggregate.Id);
+
             var i = 0;
             foreach (var @event in aggregate.GetUncommittedChanges())
             {
@@ -49,6 +50,7 @@ namespace CqrsFramework.Domain
                 @event.Version = aggregate.Version + i;
                 @event.TimeStamp = DateTimeOffset.UtcNow;
                 _eventStore.Save(@event);
+                _publisher.Publish(@event);
 
                 // The domain repository is responsible for publishing the events, this would normally be inside a single transaction together with storing the events in the event store.
                 // http://stackoverflow.com/questions/12677926/why-is-the-cqrs-repository-publishing-events-not-the-event-store

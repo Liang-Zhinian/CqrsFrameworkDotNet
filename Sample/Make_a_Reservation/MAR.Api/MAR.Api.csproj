@@ -1,16 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="wwwroot\" />
+    <Folder Include="Requests\" />
+    <Folder Include="Requests\Employees\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.1" />
     <PackageReference Include="Scrutor" Version="1.12.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.0" />
+    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.11" />
+
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.WebSockets" Version="2.1.0" />
+    <PackageReference Include="FluentValidation" Version="7.6.0" />
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\..\Framework\CqrsFramework\CqrsFramework.csproj" />
     <ProjectReference Include="..\MAR.Contracts\MAR.Contracts.csproj" />
@@ -20,5 +28,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Controllers\ResourcesController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="hosting.json" />
+    <Content Remove="launchSettings.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="hosting.json" />
+    <None Include="launchSettings.json" />
   </ItemGroup>
 </Project>

@@ -16,6 +16,7 @@ using MAR.Application.ReadModel;
 using MAR.Application.CommandHandlers;
 using System.Linq;
 using System.Reflection;
+using Microsoft.EntityFrameworkCore;
 
 namespace MAR.Api
 {
@@ -36,6 +37,10 @@ namespace MAR.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseMySQL(Configuration.GetConnectionString("MySqlConnection")));//添加Mysql支持
+
+
             ConfigureCqrs(services);
 
             // Add framework services.
@@ -62,12 +67,15 @@ namespace MAR.Api
             services.AddSingleton<IHandlerRegistrar>(y => y.GetService<InProcessBus>());
             services.AddScoped<ISession, Session>();
             // event store
-            string connectionString = Configuration.GetConnectionString("SqlEventStore");
-            services.AddSingleton<IEventStore>(y => new SqlEventStore(y.GetService<InProcessBus>(), connectionString));
+            //string connectionString = Configuration.GetConnectionString("SqlEventStore");
+            //services.AddSingleton<IEventStore>(y => new SqlEventStore(y.GetService<InProcessBus>(), connectionString));
 
-            services.AddScoped<IRepository>(y => new CacheRepository(new Repository(y.GetService<IEventStore>()), y.GetService<IEventStore>()));
+            services.AddSingleton<IEventStore>(y => new InMemoryEventStore(y.GetService<InProcessBus>()));
+
+            services.AddScoped<IRepository>(y => new CacheRepository(new Repository(y.GetService<IEventStore>(), y.GetService<IEventPublisher>()), y.GetService<IEventStore>()));
 
             services.AddTransient<IReadModelFacade, ReadModelFacade>();
+            //services.AddTransient<IReadModelFacade, ReadModelFacade>();
 
             //Scan for commandhandlers and eventhandlers
             services.Scan(scan => scan
@@ -88,12 +96,12 @@ namespace MAR.Api
             var registrar = new BusRegistrar(new DependencyResolver(serviceProvider));
             registrar.Register(typeof(EmployeeCommandHandler));
 
-            var events = ((SqlEventStore)serviceProvider.GetService<IEventStore>()).GetAllEventsEver();
-            var publisher = serviceProvider.GetService<IEventPublisher>();
-            foreach (var @event in events)
-            {
-                publisher.Publish<IEvent>((IEvent)@event);
-            }
+            //var events = ((SqlEventStore)serviceProvider.GetService<IEventStore>()).GetAllEventsEver();
+            //var publisher = serviceProvider.GetService<IEventPublisher>();
+            //foreach (var @event in events)
+            //{
+            //    publisher.Publish<IEvent>((IEvent)@event);
+            //}
 
 
         }

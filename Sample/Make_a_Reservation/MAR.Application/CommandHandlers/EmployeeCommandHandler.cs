@@ -21,7 +21,7 @@ namespace MAR.Application.CommandHandlers
 
         public void Handle(CreateEmployeeCommand command)
         {
-            Employee employee = new Employee(command.Id, command.EmployeeID, command.FirstName, command.LastName, command.DateOfBirth, command.JobTitle);
+            Employee employee = new Employee(command.Id, command.FirstName, command.LastName, command.DateOfBirth, command.JobTitle);
             _session.Add(employee);
             _session.Commit();
         }

@@ -1,4 +1,4 @@
-﻿using MAR.Application.ReadModel.Dtos;
+﻿using MAR.Application.ReadModel.Models;
 using System;
 using System.Collections.Generic;
 
@@ -6,6 +6,6 @@ namespace MAR.Application.ReadModel
 {
     public interface IReadModelFacade
     {
-        IEnumerable<EmployeeDto> GetAllEmployees();
+        IEnumerable<Employee> GetAllEmployees();
     }
 }
