@@ -3,6 +3,7 @@ namespace MAR.Application.ReadModel
     using System;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
+    using MAR.Application.ReadModel.Models;
     using Microsoft.EntityFrameworkCore;
 
     public partial class ApplicationDbContext : DbContext
