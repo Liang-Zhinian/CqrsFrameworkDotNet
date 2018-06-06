@@ -24,16 +24,16 @@ namespace MAR.Application.EventHandlers
                                                             @event.JobTitle));
             
 
-            using (ApplicationDbContext entities = new ApplicationDbContext())
-            {
-                entities.Employees.Add(new Employee(@event.Id,
-                                                            @event.FirstName,
-                                                            @event.LastName,
-                                                            @event.DateOfBirth,
-                                                            @event.JobTitle));
+            //using (ApplicationDbContext entities = new ApplicationDbContext())
+            //{
+            //    entities.Employees.Add(new Employee(@event.Id,
+            //                                                @event.FirstName,
+            //                                                @event.LastName,
+            //                                                @event.DateOfBirth,
+            //                                                @event.JobTitle));
 
-                entities.SaveChanges();
-            }
+            //    entities.SaveChanges();
+            //}
         }
     }
 }

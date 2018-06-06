@@ -17,6 +17,7 @@ using MAR.Application.CommandHandlers;
 using System.Linq;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
+using CqrsFramework.EventStore.MongoDB;
 
 namespace MAR.Api
 {
@@ -70,7 +71,10 @@ namespace MAR.Api
             //string connectionString = Configuration.GetConnectionString("SqlEventStore");
             //services.AddSingleton<IEventStore>(y => new SqlEventStore(y.GetService<InProcessBus>(), connectionString));
 
-            services.AddSingleton<IEventStore>(y => new InMemoryEventStore(y.GetService<InProcessBus>()));
+            //services.AddSingleton<IEventStore>(y => new InMemoryEventStore(y.GetService<InProcessBus>()));
+
+            string connectionString = Configuration.GetConnectionString("MongoDbEventStore");
+            services.AddSingleton<IEventStore>(y => new MongoDBEventStore(y.GetService<InProcessBus>(), connectionString));
 
             services.AddScoped<IRepository>(y => new CacheRepository(new Repository(y.GetService<IEventStore>(), y.GetService<IEventPublisher>()), y.GetService<IEventStore>()));
 
@@ -103,7 +107,12 @@ namespace MAR.Api
             //    publisher.Publish<IEvent>((IEvent)@event);
             //}
 
-
+            var events = ((MongoDBEventStore)serviceProvider.GetService<IEventStore>()).GetAllEventsEver();
+            var publisher = serviceProvider.GetService<IEventPublisher>();
+            foreach (var @event in events)
+            {
+                publisher.Publish<IEvent>((IEvent)@event);
+            }
         }
     }
 }

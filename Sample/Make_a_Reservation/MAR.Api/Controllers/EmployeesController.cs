@@ -2,13 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using MAR.Api.Code;
 using MAR.Application.ReadModel;
-using MAR.Application.ReadModel.Dtos;
 using MAR.Contracts.Commands;
-using MAR.Domain;
+//using MAR.Domain;
 using System;
 using System.Collections.Generic;
 using MAR.Contracts.Commands.Employees;
 using MAR.Api.Requests.Employees;
+using MAR.Application.ReadModel.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -28,7 +28,7 @@ namespace MAR.Api.Controllers
 
         // GET: api/values
         [HttpGet]
-        public IEnumerable<EmployeeDto> Get()
+        public IEnumerable<Employee> Get()
         {
             return _readmodel.GetAllEmployees();
         }

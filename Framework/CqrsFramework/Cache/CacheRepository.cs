@@ -69,10 +69,10 @@ namespace CqrsFramework.Cache
                     _repository.Save(aggregate, expectedVersion);
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 Remove(aggregate.Id);
-                throw;
+                throw e;
             }
         }
 

@@ -25,6 +25,7 @@
     <ProjectReference Include="..\MAR.Application\MAR.Application.csproj" />
     <ProjectReference Include="..\MAR.Domain\MAR.Domain.csproj" />
     <ProjectReference Include="..\..\..\Framework\CqrsFramework.Extensions\CqrsFramework.Extensions.csproj" />
+    <ProjectReference Include="..\..\..\Framework\CqrsFramework.EventStore.MongoDB\CqrsFramework.EventStore.MongoDB.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Controllers\ResourcesController.cs" />

@@ -35,6 +35,7 @@ namespace CqrsFramework.EventStore.MongoDB
         protected const string DEFAULT_DATABASE_URI = "mongodb://127.0.0.1:27017";
 
         private readonly IMongoDatabase _database;
+        private readonly IEventPublisher _publisher;
 
         /// <summary>
         /// The error code
@@ -42,8 +43,9 @@ namespace CqrsFramework.EventStore.MongoDB
         protected const string CONCURRENCY_ERROR_CODE = "E1100";
 
 
-        public MongoDBEventStore(string connectionString = DEFAULT_DATABASE_URI)
+        public MongoDBEventStore(IEventPublisher publisher, string connectionString = DEFAULT_DATABASE_URI)
         {
+            _publisher = publisher;
             var client = new MongoClient(connectionString);
             _database = client.GetDatabase("EventStore");
         }
@@ -59,8 +61,25 @@ namespace CqrsFramework.EventStore.MongoDB
         public IEnumerable<IEvent> Get(Guid aggregateId, int fromVersion)
         {
             var eventsCollection = _database.GetCollection<IEvent>("events");
+            if (eventsCollection.Count(_=>true) <= 0) return new List<IEvent>();
 
-            return eventsCollection.Find(o => o.Id == aggregateId && o.Version > fromVersion).ToList();
+            var filters = new List<FilterDefinition<IEvent>>();
+
+            FilterDefinition<IEvent> filter = Builders<IEvent>.Filter.Eq("Id", aggregateId);
+            filters.Add(filter);
+            filter = Builders<IEvent>.Filter.Gt("Version", fromVersion);
+            filters.Add(filter);
+            filter = Builders<IEvent>.Filter.And(filters);
+
+
+            return eventsCollection.Find(filter).ToList();
+        }
+
+        public IEnumerable<object> GetAllEventsEver()
+        {
+            var eventsCollection = _database.GetCollection<object>("events");
+
+            return eventsCollection.AsQueryable();
         }
     }
 }

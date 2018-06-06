@@ -11,6 +11,7 @@
     <EmbeddedResource Remove="Models\**" />
     <None Remove="Code\**" />
     <None Remove="Models\**" />
+    <Compile Remove="ReadModel\Dtos\EmployeeDto.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,7 +27,6 @@
     <ProjectReference Include="..\MAR.Domain\MAR.Domain.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ReadModel\Dtos\" />
     <Folder Include="ReadModel\Models\" />
   </ItemGroup>
 </Project>
