@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using CqrsFramework.Events;
 using MongoDB;
+using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 
 namespace CqrsFramework.EventStore.MongoDB
@@ -45,6 +46,14 @@ namespace CqrsFramework.EventStore.MongoDB
 
         public MongoDBEventStore(IEventPublisher publisher, string connectionString = DEFAULT_DATABASE_URI)
         {
+            //register the class map
+            var types = Assembly.GetAssembly(typeof(IEvent))
+                    .GetTypes()
+                    .Where(type => type.IsSubclassOf(typeof(IEvent)));
+
+            foreach (var t in types)
+                BsonClassMap.LookupClassMap(t); 
+            
             _publisher = publisher;
             var client = new MongoClient(connectionString);
             _database = client.GetDatabase("EventStore");

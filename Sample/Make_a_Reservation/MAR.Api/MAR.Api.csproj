@@ -29,6 +29,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Controllers\ResourcesController.cs" />
+    <Compile Remove="Code\EmptyClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="hosting.json" />

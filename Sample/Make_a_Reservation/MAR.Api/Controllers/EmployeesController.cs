@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using MAR.Contracts.Commands.Employees;
 using MAR.Api.Requests.Employees;
 using MAR.Application.ReadModel.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -28,9 +30,23 @@ namespace MAR.Api.Controllers
 
         // GET: api/values
         [HttpGet]
-        public IEnumerable<Employee> Get()
+        public JsonResult Get()
         {
-            return _readmodel.GetAllEmployees();
+
+            //JsonSerializerSettings settings = new JsonSerializerSettings();
+            ////EF Core中默认为驼峰样式序列化处理key
+            ////settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            ////使用默认方式，不更改元数据的key的大小写
+            //settings.ContractResolver = new DefaultContractResolver();
+
+
+            //JsonConvert.DefaultSettings = () => new JsonSerializerSettings
+            //{
+            //    Formatting = Formatting.Indented,
+            //    ContractResolver = new DefaultContractResolver()
+            //};
+
+            return Json(Newtonsoft.Json.JsonConvert.SerializeObject(_readmodel.GetAllEmployees()));
         }
 
         [HttpPost]

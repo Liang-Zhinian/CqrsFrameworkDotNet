@@ -18,6 +18,8 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using CqrsFramework.EventStore.MongoDB;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace MAR.Api
 {
@@ -45,7 +47,17 @@ namespace MAR.Api
             ConfigureCqrs(services);
 
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc()
+            //全局配置Json序列化处理
+            .AddJsonOptions(options =>
+            {
+                //忽略循环引用
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                //不使用驼峰样式的key
+                options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                //设置时间格式
+                options.SerializerSettings.DateFormatString = "yyyy-MM-dd";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,7 +86,11 @@ namespace MAR.Api
             //services.AddSingleton<IEventStore>(y => new InMemoryEventStore(y.GetService<InProcessBus>()));
 
             string connectionString = Configuration.GetConnectionString("MongoDbEventStore");
-            services.AddSingleton<IEventStore>(y => new MongoDBEventStore(y.GetService<InProcessBus>(), connectionString));
+            services.AddSingleton<IEventStore>(y => new MongoEventStore(connectionString));
+
+
+            //string connectionString = Configuration.GetConnectionString("MongoDbEventStore");
+            //services.AddSingleton<IEventStore>(y => new MongoDBEventStore(y.GetService<InProcessBus>(), connectionString));
 
             services.AddScoped<IRepository>(y => new CacheRepository(new Repository(y.GetService<IEventStore>(), y.GetService<IEventPublisher>()), y.GetService<IEventStore>()));
 
@@ -107,7 +123,7 @@ namespace MAR.Api
             //    publisher.Publish<IEvent>((IEvent)@event);
             //}
 
-            var events = ((MongoDBEventStore)serviceProvider.GetService<IEventStore>()).GetAllEventsEver();
+            var events = ((MongoEventStore)serviceProvider.GetService<IEventStore>()).GetAllEventsEver();
             var publisher = serviceProvider.GetService<IEventPublisher>();
             foreach (var @event in events)
             {
