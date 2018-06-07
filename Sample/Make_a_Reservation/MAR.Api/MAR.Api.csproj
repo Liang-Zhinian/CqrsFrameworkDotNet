@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Framework\CqrsFramework\CqrsFramework.csproj" />
-    <ProjectReference Include="..\MAR.Contracts\MAR.Contracts.csproj" />
     <ProjectReference Include="..\MAR.Application\MAR.Application.csproj" />
     <ProjectReference Include="..\MAR.Domain\MAR.Domain.csproj" />
     <ProjectReference Include="..\..\..\Framework\CqrsFramework.Extensions\CqrsFramework.Extensions.csproj" />

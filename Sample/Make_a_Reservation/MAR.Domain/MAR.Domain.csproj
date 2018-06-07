@@ -25,10 +25,40 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Framework\CqrsFramework\CqrsFramework.csproj" />
-    <ProjectReference Include="..\MAR.Contracts\MAR.Contracts.csproj" />
     <ProjectReference Include="..\..\..\Framework\CqrsFramework.Extensions\CqrsFramework.Extensions.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Employees\" />
+    <Folder Include="Models\" />
+    <Folder Include="Models\Employees\" />
+    <Folder Include="Commands\" />
+    <Folder Include="Events\" />
+    <Folder Include="CommandHandlers\" />
+    <Folder Include="EventHandlers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Employees\Employee.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Compile Include="Models\Employees\Job.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Compile Include="Models\Employees\SalesSettings.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Compile Include="Models\Employees\Settings.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Compile Include="Models\Address.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Compile Include="Models\Business.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Compile Include="Models\Client.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Compile Include="Models\Contact.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Compile Include="Models\DateOfBirth.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Compile Include="Models\EmailAddress.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Compile Include="Models\Gender.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Compile Include="Models\Name.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Compile Include="Models\Participator.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Compile Include="Models\Person.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Compile Include="Models\Photo.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Compile Include="Models\Profile.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Compile Include="Models\ProfilePhoto.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Compile Include="Models\Reservation.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Compile Include="Models\ReservationStatus.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Compile Include="Models\ReservationType.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Compile Include="Models\Resource.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Compile Include="Models\ResourceStatus.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Compile Include="Models\ResourceType.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Compile Include="Models\TimeRange.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
   </ItemGroup>
 </Project>

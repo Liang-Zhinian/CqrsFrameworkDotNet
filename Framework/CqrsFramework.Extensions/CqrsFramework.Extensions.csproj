@@ -17,4 +17,7 @@
   <ItemGroup>
     <None Remove="EventStores\ES.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Domain\Participator.cs" />
+  </ItemGroup>
 </Project>
