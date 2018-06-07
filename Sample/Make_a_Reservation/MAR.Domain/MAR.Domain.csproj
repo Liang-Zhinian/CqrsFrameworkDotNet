@@ -28,4 +28,7 @@
     <ProjectReference Include="..\MAR.Contracts\MAR.Contracts.csproj" />
     <ProjectReference Include="..\..\..\Framework\CqrsFramework.Extensions\CqrsFramework.Extensions.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Employees\" />
+  </ItemGroup>
 </Project>

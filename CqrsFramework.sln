@@ -37,6 +37,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{D84826F2-FCF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CqrsFramework.EventStore.MongoDB", "Framework\CqrsFramework.EventStore.MongoDB\CqrsFramework.EventStore.MongoDB.csproj", "{ADFAC7CD-9D83-4FE9-8314-5EE382B4D564}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CqrsFramework.EventStore.SqlServerDB", "Framework\CqrsFramework.EventStore.SqlServerDB\CqrsFramework.EventStore.SqlServerDB.csproj", "{9381ADA7-D4B5-452E-AC28-B7FAF2CF1561}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,6 +93,10 @@ Global
 		{ADFAC7CD-9D83-4FE9-8314-5EE382B4D564}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADFAC7CD-9D83-4FE9-8314-5EE382B4D564}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADFAC7CD-9D83-4FE9-8314-5EE382B4D564}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9381ADA7-D4B5-452E-AC28-B7FAF2CF1561}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9381ADA7-D4B5-452E-AC28-B7FAF2CF1561}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9381ADA7-D4B5-452E-AC28-B7FAF2CF1561}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9381ADA7-D4B5-452E-AC28-B7FAF2CF1561}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -111,5 +117,6 @@ Global
 		{F6873EF6-B509-4E26-A318-66233F2DB92C} = {FBB18596-DF87-4833-A852-C0730D77B93C}
 		{D84826F2-FCF7-457C-9FAA-C7B7E209113B} = {FBB18596-DF87-4833-A852-C0730D77B93C}
 		{ADFAC7CD-9D83-4FE9-8314-5EE382B4D564} = {CCDA44F7-DC3F-4337-8D2B-005AE17A5B73}
+		{9381ADA7-D4B5-452E-AC28-B7FAF2CF1561} = {CCDA44F7-DC3F-4337-8D2B-005AE17A5B73}
 	EndGlobalSection
 EndGlobal

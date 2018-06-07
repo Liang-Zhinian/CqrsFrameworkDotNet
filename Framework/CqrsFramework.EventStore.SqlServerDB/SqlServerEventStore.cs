@@ -8,14 +8,14 @@ using System.Linq;
 using System.Runtime.Loader;
 using System.Reflection;
 
-namespace CqrsFramework.Extensions.EventStores
+namespace CqrsFramework.EventStore.SqlServerDB
 {
-    public class SqlEventStore : IEventStore
+    public class SqlServerEventStore : IEventStore
     {
         private readonly IEventPublisher _publisher;
         private readonly string _connectionString;
 
-        public SqlEventStore(IEventPublisher publisher, string connectionString)
+        public SqlServerEventStore(IEventPublisher publisher, string connectionString)
         {
             _publisher = publisher;
             _connectionString = connectionString;
@@ -61,7 +61,7 @@ namespace CqrsFramework.Extensions.EventStores
                     catch (Exception e)
                     {
                         t.Rollback();
-                        throw;
+                        throw e;
                     }
                 }
             }

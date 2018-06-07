@@ -11,4 +11,9 @@
   <ItemGroup>
     <ProjectReference Include="..\CqrsFramework\CqrsFramework.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="MongoDBEventStore.cs" />
+    <Compile Remove="MongoEventStream.cs" />
+    <Compile Remove="MongoCommit.cs" />
+  </ItemGroup>
 </Project>

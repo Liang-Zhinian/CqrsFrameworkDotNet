@@ -1,9 +1,8 @@
-﻿using CqrsFramework.Events;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CqrsFramework.Extensions.EventStores
+namespace CqrsFramework.Events
 {
     public class InMemoryEventStore : IEventStore
     {
