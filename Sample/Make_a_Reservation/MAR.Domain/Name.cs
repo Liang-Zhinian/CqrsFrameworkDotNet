@@ -9,7 +9,7 @@ namespace MAR.Domain
         public string DisplayName { get; set; }
         public string NickName { get; set; }
 
-        public Name(string firstName, string lastName, string middleName, string displayName, string nickName)
+        public Name(string firstName, string lastName, string middleName="", string displayName= "", string nickName= "")
         {
             FirstName = firstName;
             LastName = lastName;

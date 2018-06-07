@@ -1,9 +1,10 @@
 ﻿using System;
+using CqrsFramework.Domain;
+
 namespace MAR.Domain
 {
-    public class Person
+    public class Person : AggregateRoot
     {
-        public Guid Id { get; set; }
         public Name Name { get; set; }
         public Contact Contact { get; set; }
         public Address Address { get; set; }
