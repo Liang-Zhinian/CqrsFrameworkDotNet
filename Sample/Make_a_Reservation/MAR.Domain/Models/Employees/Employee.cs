@@ -8,17 +8,17 @@ namespace MAR.Domain.Models.Employees
 {
     public class Employee : Person
     {
-        private Job _job;
-        private Settings _settings;
-        private SalesSettings _salesSettings;
+        public Job JobDescription { get; private set; }
+        public Settings GeneralSettings { get; private set; }
+        public SalesSettings SalesSettings { get; private set; }
+        public List<Guid> LoginLocations { get; private set; }
 
         private Employee() { }
 
-        public Employee(Guid id, Name name)
+        public Employee(Guid id, Name name, Gender gender)
         {
-            Id = id;
-
             // 1. raise employee created event
+            ApplyChange(new EmployeeCreatedEvent(id, name, gender));
 
             // 2. raise employee settings applied event
 
@@ -30,14 +30,11 @@ namespace MAR.Domain.Models.Employees
             //_settings = new Settings(false, false, false, true);
             //_salesSettings = new SalesSettings(false, true, true);
 
-            //ApplyChange(new EmployeeCreatedEvent(id, firstName, lastName));
         }
 
         public void Apply(EmployeeCreatedEvent @event){
-            //_firstName = @event.FirstName;
-            //_lastName = @event.LastName;
-            //_dateOfBirth = @event.DateOfBirth;
-            //_jobTitle = @event.JobTitle;
+            Name = @event.Name;
+            Gender = @event.Gender;
         }
     }
 }

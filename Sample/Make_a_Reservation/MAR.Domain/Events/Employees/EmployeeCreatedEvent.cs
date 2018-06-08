@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MAR.Domain.Models;
 
 namespace MAR.Domain.Events.Employees
 {
     public class EmployeeCreatedEvent : BaseEvent
     {
-        public readonly string FirstName;
-        public readonly string LastName;
+        public readonly Name Name;
+        public readonly Gender Gender;
 
-        public EmployeeCreatedEvent(Guid id, string firstName, string lastName)
+        public EmployeeCreatedEvent(Guid id, Name name, Gender gender)
         {
             Id = id;
-            FirstName = firstName;
-            LastName = lastName;
+            Name = name;
+            Gender = gender;
         }
     }
 }

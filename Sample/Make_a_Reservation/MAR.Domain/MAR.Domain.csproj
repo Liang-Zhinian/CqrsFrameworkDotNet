@@ -34,6 +34,10 @@
     <Folder Include="Events\" />
     <Folder Include="CommandHandlers\" />
     <Folder Include="EventHandlers\" />
+    <Folder Include="Models\Businesses\" />
+    <Folder Include="Models\Locations\" />
+    <Folder Include="Events\Locations\" />
+    <Folder Include="Events\Sites\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Employees\Employee.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
@@ -60,5 +64,9 @@
     <Compile Include="Models\ResourceStatus.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
     <Compile Include="Models\ResourceType.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
     <Compile Include="Models\TimeRange.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
+    <Compile Include="Models\Businesses\Site.cs" />
+    <Compile Include="Models\ActionCode.cs" />
+    <Compile Include="Models\Locations\Location.cs" />
+    <Compile Include="Models\Locations\LocationImage.cs" />
   </ItemGroup>
 </Project>
