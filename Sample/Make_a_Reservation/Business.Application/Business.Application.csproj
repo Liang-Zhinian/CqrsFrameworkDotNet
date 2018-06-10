@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Code\**" />
+    <Compile Remove="Models\**" />
+    <EmbeddedResource Remove="Code\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <None Remove="Code\**" />
+    <None Remove="Models\**" />
+    <Compile Remove="ReadModel\Dtos\EmployeeDto.cs" />
+    <Compile Remove="CommandHandlers\EmployeeCommandHandler.cs" />
+    <Compile Remove="EventHandlers\EmployeeEventHandler.cs" />
+    <Compile Remove="ReadModel\ApplicationDbContext.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
+    <PackageReference Include="System.Data.Common" Version="4.3.0" />
+    <PackageReference Include="AutoMapper" Version="6.2.2" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Framework\CqrsFramework\CqrsFramework.csproj" />
+    <ProjectReference Include="..\Business.Domain\Business.Domain.csproj" />
+    <ProjectReference Include="..\Registration.Domain\Registration.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+    <Folder Include="Services\" />
+    <Folder Include="Services\Security\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="EventSourcedNormalizers\" />
+    <Folder Include="AutoMapper\" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  business.api:
+    image: business
+    build:
+      context: .
+      dockerfile: Sample/Make_a_Reservation/Business.Api/Dockerfile
