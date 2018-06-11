@@ -26,6 +26,7 @@ using Business.Application.Services.Security;
 using Business.Application.Interfaces;
 using Business.Api.Configurations;
 using Registration.Domain.EventHandlers.Security;
+using System;
 
 namespace Business.Api
 {
@@ -50,7 +51,6 @@ namespace Business.Api
                 //options.UseMySQL(Configuration.GetConnectionString("MySqlConnection")));//添加Mysql支持
 
 
-            ConfigureCqrs(services);
 
             // Add framework services.
             services.AddMvc()
@@ -64,6 +64,9 @@ namespace Business.Api
                 //设置时间格式
                 options.SerializerSettings.DateFormatString = "yyyy-MM-dd";
             });
+
+
+            ConfigureCqrs(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -77,68 +80,23 @@ namespace Business.Api
 
         public void ConfigureCqrs(IServiceCollection services)
         {
-            //services.AddDbContext<Book2DbContext>(options =>
-                //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            
             services.AddMemoryCache();
 
             //Add Cqrs services
-            services.AddSingleton<InProcessBus>(new InProcessBus());
-            services.AddSingleton<ICommandSender>(y => y.GetService<InProcessBus>());
-            services.AddSingleton<IEventPublisher>(y => y.GetService<InProcessBus>());
-            services.AddSingleton<IHandlerRegistrar>(y => y.GetService<InProcessBus>());
-            services.AddScoped<ISession, Session>();
+            ConfigureCqrsFramework(services);
+
             // event store
-            //string connectionString = Configuration.GetConnectionString("SqlEventStore");
-            //services.AddSingleton<IEventStore>(y => new SqlEventStore(y.GetService<InProcessBus>(), connectionString));
-
-            // InMemoryEventStore
-            services.AddSingleton<IEventStore>(y => new InMemoryEventStore(y.GetService<InProcessBus>()));
-
-            // MongoDbEventStore
-            //string connectionString = Configuration.GetConnectionString("MongoDbEventStore");
-            //services.AddSingleton<IEventStore>(y => new MongoEventStore(connectionString));
-
-            //string connectionString = Configuration.GetConnectionString("MongoDbEventStore");
-            //services.AddSingleton<IEventStore>(y => new MongoDBEventStore(y.GetService<InProcessBus>(), connectionString));
-
-            services.AddScoped<IRepository>(y => new CacheRepository(new Repository(y.GetService<IEventStore>(), y.GetService<IEventPublisher>()), y.GetService<IEventStore>()));
-
-            // App service
-            services.AddScoped<ITenantAppService, TenantService>();
-
+            RegisterEventStore(services);
 
             //Scan for commandhandlers and eventhandlers
-            services.Scan(scan => scan
-                          .FromAssemblies(typeof(StaffCommandHandler).GetTypeInfo().Assembly)
-                    .AddClasses(classes => classes.Where(x =>
-                    {
-                        var allInterfaces = x.GetInterfaces();
-                        return
-                            allInterfaces.Any(y => y.GetTypeInfo().IsGenericType && (y.GetTypeInfo().GetGenericTypeDefinition() == typeof(ICommandHandler<>))) ||
-                            allInterfaces.Any(y => y.GetTypeInfo().IsGenericType && (y.GetTypeInfo().GetGenericTypeDefinition() == typeof(IEventHandler<>)));
-                    }))
-                    .AsSelf()
-                    .WithTransientLifetime()
-                         );
-            services.Scan(scan => scan
-                          .FromAssemblies(typeof(TenantEventHandler).GetTypeInfo().Assembly)
-                    .AddClasses(classes => classes.Where(x =>
-                    {
-                        var allInterfaces = x.GetInterfaces();
-                        return
-                            allInterfaces.Any(y => y.GetTypeInfo().IsGenericType && (y.GetTypeInfo().GetGenericTypeDefinition() == typeof(ICommandHandler<>))) ||
-                            allInterfaces.Any(y => y.GetTypeInfo().IsGenericType && (y.GetTypeInfo().GetGenericTypeDefinition() == typeof(IEventHandler<>)));
-                    }))
-                    .AsSelf()
-                    .WithTransientLifetime()
-            );
+            RegisterCommandHandlers(services);
+            RegisterEventHandlers(services);
+
+            // App service
+            RegisterAppService(services);
 
             // Infra - Data
-            services.AddSingleton<Book2DbContext>(y => new Book2DbContext());
-            //services.AddScoped<IStaffRepository, StaffRepository>();
-            services.AddTransient<ITenantRepository, TenantRepository>();
-            services.AddTransient<IReadModelFacade, ReadModelFacade>();
+            RegisterReadDb(services);
 
             //Register bus
             var serviceProvider = services.BuildServiceProvider();
@@ -148,7 +106,6 @@ namespace Business.Api
 
 
             services.AddAutoMapperSetup();
-
 
 
             //var events = ((SqlEventStore)serviceProvider.GetService<IEventStore>()).GetAllEventsEver();
@@ -164,6 +121,82 @@ namespace Business.Api
             //{
             //    publisher.Publish<IEvent>((IEvent)@event);
             //}
+        }
+
+        private void ConfigureCqrsFramework(IServiceCollection services)
+        {
+            services.AddSingleton<InProcessBus>(new InProcessBus());
+            services.AddSingleton<ICommandSender>(y => y.GetService<InProcessBus>());
+            services.AddSingleton<IEventPublisher>(y => y.GetService<InProcessBus>());
+            services.AddSingleton<IHandlerRegistrar>(y => y.GetService<InProcessBus>());
+            services.AddScoped<ISession, Session>();
+        }
+
+        private void RegisterReadDb(IServiceCollection services)
+        {
+            var connection = Configuration.GetConnectionString("MySqlConnection");
+            services.AddDbContext<Book2DbContext>(options => options.UseMySQL(connection));
+
+
+            services.AddTransient<Book2DbContext>();
+            //services.AddScoped<IStaffRepository, StaffRepository>();
+            services.AddTransient<ITenantRepository, TenantRepository>();
+            services.AddTransient<IReadModelFacade, ReadModelFacade>();
+        }
+
+        private void RegisterAppService(IServiceCollection services)
+        {
+            // App service
+            services.AddScoped<ITenantAppService, TenantService>();
+        }
+
+        private void RegisterCommandHandlers(IServiceCollection services){
+            services.Scan(scan => scan
+                          .FromAssemblies(typeof(StaffCommandHandler).GetTypeInfo().Assembly)
+                    .AddClasses(classes => classes.Where(x =>
+                    {
+                        var allInterfaces = x.GetInterfaces();
+                        return
+                            allInterfaces.Any(y => y.GetTypeInfo().IsGenericType && (y.GetTypeInfo().GetGenericTypeDefinition() == typeof(ICommandHandler<>))) ||
+                            allInterfaces.Any(y => y.GetTypeInfo().IsGenericType && (y.GetTypeInfo().GetGenericTypeDefinition() == typeof(IEventHandler<>)));
+                    }))
+                    .AsSelf()
+                    .WithTransientLifetime()
+                         );
+        }
+
+        private void RegisterEventHandlers(IServiceCollection services) { 
+
+            services.Scan(scan => scan
+                          .FromAssemblies(typeof(TenantEventHandler).GetTypeInfo().Assembly)
+                    .AddClasses(classes => classes.Where(x =>
+                    {
+                        var allInterfaces = x.GetInterfaces();
+                        return
+                            allInterfaces.Any(y => y.GetTypeInfo().IsGenericType && (y.GetTypeInfo().GetGenericTypeDefinition() == typeof(ICommandHandler<>))) ||
+                            allInterfaces.Any(y => y.GetTypeInfo().IsGenericType && (y.GetTypeInfo().GetGenericTypeDefinition() == typeof(IEventHandler<>)));
+                    }))
+                    .AsSelf()
+                    .WithTransientLifetime()
+            );
+        }
+
+        private void RegisterEventStore(IServiceCollection services){
+            //string connectionString = Configuration.GetConnectionString("SqlEventStore");
+            //services.AddSingleton<IEventStore>(y => new SqlEventStore(y.GetService<InProcessBus>(), connectionString));
+
+            // InMemoryEventStore
+            services.AddSingleton<IEventStore>(y => new InMemoryEventStore(y.GetService<InProcessBus>()));
+
+            // MongoDbEventStore
+            //string connectionString = Configuration.GetConnectionString("MongoDbEventStore");
+            //services.AddSingleton<IEventStore>(y => new MongoEventStore(connectionString));
+
+            //string connectionString = Configuration.GetConnectionString("MongoDbEventStore");
+            //services.AddSingleton<IEventStore>(y => new MongoDBEventStore(y.GetService<InProcessBus>(), connectionString));
+
+            services.AddScoped<IRepository>(y => new CacheRepository(new Repository(y.GetService<IEventStore>(), y.GetService<IEventPublisher>()), y.GetService<IEventStore>()));
+
         }
     }
 }

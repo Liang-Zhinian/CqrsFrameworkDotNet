@@ -18,11 +18,11 @@ namespace Business.Application.Services.Security
         private readonly ICommandSender Bus;
 
         public TenantService(IMapper mapper,
-                             /*ITenantRepository tenantRepository,*/
+                             ITenantRepository tenantRepository,
                              ICommandSender bus)
         {
             _mapper = mapper;
-            //_tenantRepository = tenantRepository;
+            _tenantRepository = tenantRepository;
             Bus = bus;
         }
 
@@ -33,7 +33,9 @@ namespace Business.Application.Services.Security
 
         public IEnumerable<TenantViewModel> GetAll()
         {
-            throw new NotImplementedException();
+            var list = _tenantRepository.GetAll();
+            IEnumerable<TenantViewModel> tenants = _mapper.Map<IEnumerable<TenantViewModel>>(list);
+            return tenants;
         }
 
         public IList<TenantHistoryData> GetAllHistory(Guid id)

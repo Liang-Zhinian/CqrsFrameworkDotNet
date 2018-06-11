@@ -49,6 +49,10 @@ namespace Registration.Infra.Data.Context
         public DbSet<Location> Locations { get; set; }
         public DbSet<Staff> Staffs { get; set; }
 
+        //public Book2DbContext(DbContextOptions<Book2DbContext> options) : base(options)
+        //{
+        //}
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new BrandingMap());
@@ -109,11 +113,6 @@ namespace Registration.Infra.Data.Context
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .Build();
-
-            //string connectionString = config.GetConnectionString("ConnectionString");
-            // define the database to use
-            //optionsBuilder.UseSqlServer(connectionString);
-            //optionsBuilder.UseMySQL(connectionString);
 
             optionsBuilder.UseFarmDatabase(config);
         }

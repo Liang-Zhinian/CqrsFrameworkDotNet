@@ -4,14 +4,6 @@
     <DockerComposeProjectPath>../../../docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="wwwroot\" />
-    <Folder Include="Requests\" />
-    <Folder Include="Requests\Staffs\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Configurations\" />
-    <Folder Include="Requests\Tenants\" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Scrutor" Version="1.12.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.0" />
@@ -32,19 +24,5 @@
     <ProjectReference Include="..\Registration.Infra.Data\Registration.Infra.Data.csproj" />
     <ProjectReference Include="..\Registration.Domain\Registration.Domain.csproj" />
     <ProjectReference Include="..\Business.Application\Business.Application.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="Controllers\ResourcesController.cs" />
-    <Compile Remove="Code\EmptyClass.cs" />
-    <Compile Remove="Controllers\EmployeesController.cs" />
-    <Compile Remove="Code\ServiceLocator.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Remove="hosting.json" />
-    <Content Remove="launchSettings.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="hosting.json" />
-    <None Include="launchSettings.json" />
   </ItemGroup>
 </Project>
