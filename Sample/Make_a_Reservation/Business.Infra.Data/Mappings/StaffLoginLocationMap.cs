@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using MAR.Infra.Data.Models.Security;
+using Business.Infra.Data.ReadModel.Security;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace MAR.Infra.Data.Mappings
+namespace Business.Infra.Data.Mappings
 {
     public class StaffLoginLocationMap : IEntityTypeConfiguration<StaffLoginLocation>
     {
@@ -14,6 +14,7 @@ namespace MAR.Infra.Data.Mappings
                 .HasKey(t => new { t.Id, t.StaffId, t.LocationId });
             builder.ToTable("StaffLoginLocation");
 
+            builder.Property<string>("Id").HasColumnType("char(32)");
             builder.Property<string>("StaffId");
             builder.Property<string>("LocationId");
 

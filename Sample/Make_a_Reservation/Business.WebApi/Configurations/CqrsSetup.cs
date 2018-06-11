@@ -87,7 +87,7 @@ namespace Business.WebApi.Configurations
             //services.AddDbContext<Book2DbContext>(options => options.UseMySQL(connection));
 
 
-            services.AddTransient<Book2DbContext>();
+            services.AddTransient<ReservationDbContext>();
             //services.AddScoped<IStaffRepository, StaffRepository>();
             services.AddTransient<ITenantRepository, TenantRepository>();
             services.AddTransient<IReadModelFacade, ReadModelFacade>();

@@ -1,11 +1,12 @@
 ﻿using System;
-namespace MAR.Infra.Data.Constants
+namespace Registration.Infra.Data.Constants
 {
     public class DbConstants
     {
-        public static string BusinessTable { get; private set; }
-        public static string BusinessAddressTable { get; private set; }
-        public static string BusinessContactTable { get; private set; }
+        public static string BrandingTable { get; private set; }
+        public static string TenantTable { get; private set; }
+        public static string TenantAddressTable { get; private set; }
+        public static string TenantContactTable { get; private set; }
         public static string LocationTable { get; private set; }
         public static string LocationAddressTable { get; private set; }
         public static string LocationContactTable { get; private set; }
@@ -14,20 +15,27 @@ namespace MAR.Infra.Data.Constants
         public static string StaffContactTable { get; private set; }
         public static string StaffLoginLocationTable { get; private set; }
         public static string StaffLoginCredentialTable { get; private set; }
+        public static string LocationImageTable { get; private set; }
+        public static string TimeZoneTable { get; set; }
+        public static string RegionTable { get; set; }
 
         static DbConstants()
         {
-            BusinessTable = "Business";
-            BusinessAddressTable = "BusinessAddress";
-            BusinessContactTable = "BusinessContact";
-            LocationTable = "Location";
-            LocationAddressTable = "LocationAddress";
-            LocationContactTable = "LocationContact";
-            StaffTable = "Staff";
-            StaffAddressTable = "StaffAddress";
-            StaffContactTable = "StaffContact";
-            StaffLoginLocationTable = "StaffLoginLocation";
-            StaffLoginCredentialTable = "StaffLoginCredential";
+            BrandingTable = "BrandingView";
+            TenantTable = "TenantView";
+            TenantAddressTable = "TenantAddressView";
+            TenantContactTable = "TenantContactView";
+            LocationTable = "LocationView";
+            LocationAddressTable = "LocationAddressView";
+            LocationContactTable = "LocationContactView";
+            LocationImageTable = "LocationImageView";
+            StaffTable = "StaffView";
+            StaffAddressTable = "StaffAddressView";
+            StaffContactTable = "StaffContactView";
+            StaffLoginLocationTable = "StaffLoginLocationView";
+            StaffLoginCredentialTable = "StaffLoginCredentialView";
+            TimeZoneTable = "TimeZoneView";
+            RegionTable = "RegionView";
         }
     }
 }

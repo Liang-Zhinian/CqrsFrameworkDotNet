@@ -12,7 +12,7 @@ namespace Registration.Infra.Data.Mappings
         {
             builder
                 .HasKey(t => new { t.Id, t.StaffId, t.LocationId });
-            builder.ToTable("StaffLoginLocation");
+            builder.ToTable(Constants.DbConstants.StaffLoginLocationTable);
 
             builder.Property<string>("Id").HasColumnType("char(32)");
             builder.Property<string>("StaffId");

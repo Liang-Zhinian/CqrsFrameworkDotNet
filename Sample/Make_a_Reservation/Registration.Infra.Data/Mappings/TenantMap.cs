@@ -11,7 +11,7 @@ namespace Registration.Infra.Data.Mappings
         public void Configure(EntityTypeBuilder<Tenant> builder)
         {
             builder.HasKey(o => o.Id);
-            builder.ToTable("Tenant");
+            builder.ToTable(Constants.DbConstants.TenantTable);
 
             builder.Property<string>("Id").HasColumnType("char(32)");
             builder.Property<string>("Name").IsRequired();

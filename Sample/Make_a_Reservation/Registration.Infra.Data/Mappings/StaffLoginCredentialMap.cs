@@ -11,7 +11,7 @@ namespace Registration.Infra.Data.Mappings
         public void Configure(EntityTypeBuilder<StaffLoginCredential> builder)
         {
             builder.HasKey(o => o.Id);
-            builder.ToTable("StaffLoginCredential");
+            builder.ToTable(Constants.DbConstants.StaffLoginCredentialTable);
 
             builder.Property<string>("Id").HasColumnType("char(32)");
             builder.Property<string>("UserName");

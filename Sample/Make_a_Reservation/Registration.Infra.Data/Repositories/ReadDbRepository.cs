@@ -8,10 +8,10 @@ namespace Registration.Infra.Data.Repositories
 {
     public class ReadDbRepository<TEntity> : IReadDbRepository<TEntity> where TEntity : class
     {
-        protected readonly Book2DbContext Db;
+        protected readonly ReservationDbContext Db;
         protected readonly DbSet<TEntity> DbSet;
 
-        public ReadDbRepository(Book2DbContext context)
+        public ReadDbRepository(ReservationDbContext context)
         {
             Db = context;
             DbSet = Db.Set<TEntity>();

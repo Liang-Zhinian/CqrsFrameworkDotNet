@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Registration.Infra.Data.Constants
+namespace Business.Infra.Data.Constants
 {
     public class DbConstants
     {

@@ -11,7 +11,7 @@ namespace Registration.Infra.Data.Mappings
         public void Configure(EntityTypeBuilder<Domain.ReadModel.TimeZone> builder)
         {
             builder.HasKey(o => o.Id);
-            builder.ToTable("TimeZone");
+            builder.ToTable(Constants.DbConstants.TimeZoneTable);
 
             //builder.Property<string>("Id").HasColumnType("char(32)");
             builder.Property<string>("DisplayName").IsRequired();

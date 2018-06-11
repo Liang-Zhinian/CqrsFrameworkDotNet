@@ -11,7 +11,7 @@ namespace Registration.Infra.Data.Mappings
         public void Configure(EntityTypeBuilder<Staff> builder)
         {
             builder.HasKey(o => o.Id);
-            builder.ToTable("Staff");
+            builder.ToTable(Constants.DbConstants.StaffTable);
 
             builder.Property<string>("Id").HasColumnType("char(32)");
             builder.Property<string>("FirstName").IsRequired();

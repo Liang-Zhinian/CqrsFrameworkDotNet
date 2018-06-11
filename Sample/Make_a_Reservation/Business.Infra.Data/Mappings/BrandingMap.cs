@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using MAR.Infra.Data.Models.Security;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Business.Infra.Data.ReadModel.Security;
 
-namespace MAR.Infra.Data.Mappings
+namespace Business.Infra.Data.Mappings
 {
     public class BrandingMap : IEntityTypeConfiguration<Branding>
     {
@@ -13,6 +13,7 @@ namespace MAR.Infra.Data.Mappings
             builder.HasKey(o => o.Id);
             builder.ToTable("Branding");
 
+            builder.Property<string>("Id").HasColumnType("char(32)");
             builder.Property<string>("LogoURL");
             builder.Property<string>("PageColor1");
             builder.Property<string>("PageColor1");

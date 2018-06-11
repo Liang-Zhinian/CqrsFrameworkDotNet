@@ -46,6 +46,7 @@
     <Compile Remove="Repositories\IReadModelFacade.cs" />
     <Compile Remove="Migrations\20180610165411_FirstMigration.cs" />
     <Compile Remove="Migrations\20180611145030_First.cs" />
+    <Compile Remove="Migrations\20180611145426_First.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="appsettings.json" />

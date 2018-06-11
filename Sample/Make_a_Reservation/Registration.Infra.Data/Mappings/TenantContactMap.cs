@@ -11,7 +11,7 @@ namespace Registration.Infra.Data.Mappings
         public void Configure(EntityTypeBuilder<TenantContact> builder)
         {
             builder.HasKey(o => o.Id);
-            builder.ToTable("TenantContact");
+            builder.ToTable(Constants.DbConstants.TenantContactTable);
 
             builder.Property<string>("Id").HasColumnType("char(32)");
             builder.Property<string>("Email");

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using MAR.Infra.Data.Context;
+using Business.Infra.Data.Context;
 
-namespace MAR.Infra.Data.Seeders
+namespace Business.Infra.Data.Seeders
 {
     public class TimeZoneSeeder
     {
@@ -13,14 +13,14 @@ namespace MAR.Infra.Data.Seeders
         }
 
         public void SeedIt(){
-            MARContext context = new MARContext();
+            BusinessDbContext context = new BusinessDbContext();
             ReadOnlyCollection<TimeZoneInfo> timeZones = TimeZoneInfo.GetSystemTimeZones();
 
             int i = 1;
-            List<Models.TimeZone> tzList = new List<Models.TimeZone>();
+            List<Business.Infra.Data.ReadModel.TimeZone> tzList = new List<Business.Infra.Data.ReadModel.TimeZone>();
             foreach (TimeZoneInfo timeZone in timeZones)
             {
-                tzList.Add(new Models.TimeZone(){
+                tzList.Add(new Business.Infra.Data.ReadModel.TimeZone(){
                     Id=i++,
                     DisplayName = timeZone.DisplayName,
                     StandardName = timeZone.StandardName

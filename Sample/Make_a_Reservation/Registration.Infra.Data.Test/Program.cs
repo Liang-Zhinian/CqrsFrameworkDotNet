@@ -11,7 +11,7 @@ namespace Registration.Infra.Data.Test
         {
             Console.WriteLine("Hello World!");
 
-            ITenantRepository repository = new TenantRepository(new Context.Book2DbContext());
+            ITenantRepository repository = new TenantRepository(new Context.ReservationDbContext());
 
             for (int i = 0; i < 100; i++)
             {

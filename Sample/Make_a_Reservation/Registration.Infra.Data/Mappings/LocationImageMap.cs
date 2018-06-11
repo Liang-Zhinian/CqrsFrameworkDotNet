@@ -11,7 +11,7 @@ namespace Registration.Infra.Data.Mappings
         public void Configure(EntityTypeBuilder<LocationImage> builder)
         {
             builder.HasKey(o => o.Id);
-            builder.ToTable("LocationImage");
+            builder.ToTable(Constants.DbConstants.LocationImageTable);
 
             builder.Property<string>("Id").HasColumnType("char(32)");
             builder.Property<string>("ImageURL");

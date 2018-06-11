@@ -8,7 +8,7 @@ namespace Registration.Infra.Data.Repositories
 {
     public class TenantRepository : ReadDbRepository<Tenant>, ITenantRepository
     {
-        public TenantRepository(Book2DbContext context):base(context){}
+        public TenantRepository(ReservationDbContext context):base(context){}
 
         //public Staff GetByEmail(string email)
         //{
