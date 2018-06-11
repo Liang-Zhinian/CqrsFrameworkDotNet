@@ -10,8 +10,8 @@ using System;
 namespace Registration.Infra.Data.Migrations
 {
     [DbContext(typeof(Book2DbContext))]
-    [Migration("20180610165411_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20180611145426_First")]
+    partial class First
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

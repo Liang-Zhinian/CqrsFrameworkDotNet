@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Business.Api.Requests.Staffs
+namespace Business.WebApi.Requests.Staffs
 {
     public class CreateStaffRequest
     {

@@ -6,9 +6,9 @@ using Newtonsoft.Json.Serialization;
 using CqrsFramework.Commands;
 using Registration.Domain.Repositories.Interfaces;
 using Business.Domain.Commands.Security.Staffs;
-using Business.Api.Requests.Staffs;
+using Business.WebApi.Requests.Staffs;
 
-namespace Business.Api.Controllers
+namespace Business.WebApi.Controllers
 {
     [Route("api/staffs")]
     public class StaffController: Controller

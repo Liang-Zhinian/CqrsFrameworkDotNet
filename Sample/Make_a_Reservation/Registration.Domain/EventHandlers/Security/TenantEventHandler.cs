@@ -31,7 +31,7 @@ namespace Registration.Domain.EventHandlers.Security
 
             tenant.Contact = new TenantContact()
             {
-                Id = new Guid().ToString(),
+                Id = Guid.NewGuid().ToString(),
                 Email = message.TenantContact.Email,
                 Email2 = message.TenantContact.Email2,
                 Phone = message.TenantContact.Phone,
@@ -41,7 +41,7 @@ namespace Registration.Domain.EventHandlers.Security
             };
             tenant.Address = new TenantAddress()
             {
-                Id = new Guid().ToString(),
+                Id = Guid.NewGuid().ToString(),
                 Street = message.TenantAddress.Street,
                 Street2 = message.TenantAddress.Street2,
                 State = message.TenantAddress.State,
@@ -51,6 +51,7 @@ namespace Registration.Domain.EventHandlers.Security
             };
 
             _tenantRepo.Add(tenant);
+            _tenantRepo.SaveChanges();
             //_tenantRepo.CreateTenant(tenant);
         }
     }

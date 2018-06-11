@@ -15,6 +15,8 @@ using Registration.Infra.Data.Context;
 using Registration.Infra.Data.Repositories;
 using Business.WebApi.Configurations;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace Business.WebApi
 {
@@ -32,7 +34,18 @@ namespace Business.WebApi
         {
             services.AddMemoryCache();
 
-            services.AddMvc();
+            services.AddMvc()
+            //全局配置Json序列化处理
+            .AddJsonOptions(options =>
+            {
+                //忽略循环引用
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                //不使用驼峰样式的key
+                options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                //设置时间格式
+                options.SerializerSettings.DateFormatString = "yyyy-MM-dd";
+            });
+
 
             services.AddAutoMapperSetup();
 

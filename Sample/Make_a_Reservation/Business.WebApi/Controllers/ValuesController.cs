@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Registration.Domain.ReadModel.Security;
 using Registration.Domain.Repositories.Interfaces;
 
@@ -21,9 +22,21 @@ namespace Business.WebApi.Controllers
 
         // GET api/values
         [HttpGet]
-        public IEnumerable<Tenant> Get()
+        public JsonResult Get()
         {
-            return _tenantRepository.GetAll();;
+            var list = _tenantRepository.GetAll()
+                                    .Include(t => t.Address)
+                                        .Include(t => t.Contact)
+                                    .ToList();
+            return Json(list);
+        }
+
+        [HttpGet]
+        [Route("getaddress")]
+        public TenantAddress GetTenantAddress()
+        {
+            var address = _tenantRepository.GetAll().First().Address;
+            return address;
         }
 
         // GET api/values/5

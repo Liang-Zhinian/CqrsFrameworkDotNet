@@ -7,6 +7,9 @@ using Registration.Domain.Repositories.Interfaces;
 using Business.Application.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Business.Application.Interfaces;
+using Business.WebApi.Requests.Tenants;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Business.WebApi.Controllers
 {
@@ -15,26 +18,23 @@ namespace Business.WebApi.Controllers
     public class TenantController: Controller
     {
         private readonly ITenantAppService _tenantAppService;
-        //private readonly IReadModelFacade _readmodel;
-        //private readonly ICommandSender _commandSender;
-        //private readonly IStaffRepository _readmodel;
+        private readonly ITenantRepository _tenantRepository;
 
-        public TenantController(
-                                ITenantAppService tenantAppService
-                                /*ICommandSender commandSender, IStaffRepository readmodel
-                                IReadModelFacade readmodel*/)
+        public TenantController(ITenantAppService tenantAppService, ITenantRepository tenantRepository)
         {
-            //_readmodel = readmodel;
-            //_commandSender = commandSender;
+            _tenantRepository = tenantRepository;
             _tenantAppService = tenantAppService;
         }
 
         [HttpGet]
         [AllowAnonymous]
-        //[Route("tenants")]
         public JsonResult Get()
         {
-            return Json(Newtonsoft.Json.JsonConvert.SerializeObject(_tenantAppService.GetAll()));
+            var list = _tenantRepository.GetAll()
+                                    .Include(t => t.Address)
+                                        .Include(t => t.Contact)
+                                    .ToList();
+            return Json(list);
         }
 
         [HttpGet]
@@ -49,8 +49,8 @@ namespace Business.WebApi.Controllers
         //[Authorize(Policy = "CanWriteTenantData")]
         [Route("register")]
         public ActionResult Create([FromBody]
-                                   /*CreateTenantRequest request*/
-            TenantViewModel request
+                                   CreateTenantRequest request
+                                   /*TenantViewModel request*/
                                   )
         {
 
