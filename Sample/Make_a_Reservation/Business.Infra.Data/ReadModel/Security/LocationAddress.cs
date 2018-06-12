@@ -26,7 +26,7 @@ namespace Business.Infra.Data.ReadModel.Security
         public double Longitude { get; set; }
 
         public string LocationId { get; set; }
-        public Location Location { get; set; }
+        public virtual Location Location { get; set; }
 
         public LocationAddress()
         {

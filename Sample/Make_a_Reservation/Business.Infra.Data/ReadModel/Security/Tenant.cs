@@ -11,11 +11,11 @@ namespace Business.Infra.Data.ReadModel.Security
         public const string DEFAULT_NAME = "default";
         public string Name { get; set; }
         public string DisplayName { get; set; }
-        public TenantContact Contact { get; set; }
-        public TenantAddress Address { get; set; }
-        public Branding Branding { get; set; }
+        public virtual TenantContact Contact { get; set; }
+        public virtual TenantAddress Address { get; set; }
+        public virtual Branding Branding { get; set; }
 
-        public ICollection<Location> Locations { get; set; }
-        public ICollection<Staff> Staffs { get; set; }
+        public virtual ICollection<Location> Locations { get; set; }
+        public virtual ICollection<Staff> Staffs { get; set; }
     }
 }

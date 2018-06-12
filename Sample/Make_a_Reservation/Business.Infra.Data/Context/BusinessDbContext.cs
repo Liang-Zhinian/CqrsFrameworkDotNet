@@ -48,6 +48,8 @@ namespace Business.Infra.Data.Context
         public DbSet<Tenant> Tenants { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Staff> Staffs { get; set; }
+        public DbSet<Resource> Resources { get; set; }
+        public DbSet<ResourceType> ResourceTypes { get; set; }
 
         //public Book2DbContext(DbContextOptions<Book2DbContext> options) : base(options)
         //{
@@ -59,17 +61,26 @@ namespace Business.Infra.Data.Context
             modelBuilder.ApplyConfiguration(new TenantMap());
             modelBuilder.ApplyConfiguration(new TenantAddressMap());
             modelBuilder.ApplyConfiguration(new TenantContactMap());
+
             modelBuilder.ApplyConfiguration(new LocationMap());
-            modelBuilder.ApplyConfiguration(new StaffMap());
-            modelBuilder.ApplyConfiguration(new TimeZoneMap());
             modelBuilder.ApplyConfiguration(new LocationAddressMap());
             modelBuilder.ApplyConfiguration(new LocationContactMap());
             modelBuilder.ApplyConfiguration(new LocationImageMap());
+
+            modelBuilder.ApplyConfiguration(new StaffMap());
             modelBuilder.ApplyConfiguration(new StaffAddressMap());
             modelBuilder.ApplyConfiguration(new StaffContactMap());
             modelBuilder.ApplyConfiguration(new StaffLoginLocationMap());
             modelBuilder.ApplyConfiguration(new StaffLoginCredentialMap());
+
+            modelBuilder.ApplyConfiguration(new RegionMap());
             modelBuilder.ApplyConfiguration(new TimeZoneMap());
+
+            modelBuilder.ApplyConfiguration(new ResourceMap());
+            modelBuilder.ApplyConfiguration(new ResourceStatusMap());
+            modelBuilder.ApplyConfiguration(new ResourceTypeMap());
+            modelBuilder.ApplyConfiguration(new ResourceLocationMap());
+
 
             base.OnModelCreating(modelBuilder);
             /*

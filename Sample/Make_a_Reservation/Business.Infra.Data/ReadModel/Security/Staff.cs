@@ -22,15 +22,17 @@ namespace Business.Infra.Data.ReadModel.Security
 
         public string ImageUrl { get; set; }
 
-        public StaffLoginCredential LoginCredential { get; set; }
+        public virtual StaffLoginCredential LoginCredential { get; set; }
 
-        public StaffAddress Address { get; set; }
+        public virtual StaffAddress Address { get; set; }
 
-        public StaffContact Contact { get; set; }
+        public virtual StaffContact Contact { get; set; }
 
-        public ICollection<StaffLoginLocation> StaffLoginLocations { get; set; }
+        public bool CanLoginAllLocations { get; set; }
+
+        public virtual ICollection<StaffLoginLocation> StaffLoginLocations { get; set; }
 
         public string TenantId { get; set; }
-        public Tenant Tenant { get; set; }
+        public virtual Tenant Tenant { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace Business.Infra.Data.ReadModel.Security
         public string Phone3 { get; set; }
 
         public string LocationId { get; set; }
-        public Location Location { get; set; }
+        public virtual Location Location { get; set; }
 
         public LocationContact()
         {

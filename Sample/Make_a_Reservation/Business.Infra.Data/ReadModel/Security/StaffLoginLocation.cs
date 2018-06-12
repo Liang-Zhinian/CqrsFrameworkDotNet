@@ -8,10 +8,10 @@ namespace Business.Infra.Data.ReadModel.Security
         public string Id { get; set; }
 
         public string StaffId { get; set; }
-        public Staff Staff { get; set; }
+        public virtual Staff Staff { get; set; }
 
         public string LocationId { get; set; }
-        public Location Location { get; set; }
+        public virtual Location Location { get; set; }
 
         public StaffLoginLocation()
         {

@@ -13,7 +13,7 @@ namespace Business.Infra.Data.ReadModel.Security
 
         public string StaffId { get; set; }
 
-        public Staff Staff { get; set; }
+        public virtual Staff Staff { get; set; }
 
         public StaffLoginCredential()
         {

@@ -13,7 +13,7 @@ namespace Business.Infra.Data.ReadModel.Security
         public string Phone3 { get; set; }
 
         public string TenantId { get; set; }
-        public Tenant Tenant { get; set; }
+        public virtual Tenant Tenant { get; set; }
 
         public TenantContact()
         {

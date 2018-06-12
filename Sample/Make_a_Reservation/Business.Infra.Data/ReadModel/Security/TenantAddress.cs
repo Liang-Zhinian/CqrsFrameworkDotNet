@@ -22,7 +22,7 @@ namespace Business.Infra.Data.ReadModel.Security
         public string ForeignZip { get; set; }
 
         public string TenantId { get; set; }
-        public Tenant Tenant { get; set; }
+        public virtual Tenant Tenant { get; set; }
 
         public TenantAddress()
         {
