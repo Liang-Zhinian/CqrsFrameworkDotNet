@@ -11,19 +11,22 @@ namespace Business.Infra.Data.Mappings
         public void Configure(EntityTypeBuilder<ScheduleLayoutTimeSlot> builder)
         {
             builder.HasKey(o => o.Id);
-            builder.ToTable("ScheduleLayoutTimeSlot");
+            builder.ToTable(Constants.DbConstants.ScheduleLayoutTimeSlotTable);
 
-            builder.Property<string>("Id").HasColumnType("char(32)");
-            builder.Property<string>("Label");
-            builder.Property<string>("EndLabel");
-            builder.Property<int>("AvailabilityCode");
-            builder.Property<string>("LayoutId");
-            builder.Property<string>("StartTime");
-            builder.Property<string>("EndTime");
-            builder.Property<int>("DayOfWeek");
-            builder.Property<bool>("IsEnabled");
+            builder.Property<string>("Id").HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<string>("Label").HasColumnType(Constants.DbConstants.String255);
+            builder.Property<string>("EndLabel").HasColumnType(Constants.DbConstants.String255);
+            builder.Property<int>("AvailabilityCode").IsRequired();
+            builder.Property<string>("LayoutId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<string>("StartTime").IsRequired().HasColumnType(Constants.DbConstants.String10);
+            builder.Property<string>("EndTime").IsRequired().HasColumnType(Constants.DbConstants.String10);
+            builder.Property<int>("DayOfWeek").IsRequired();
+            builder.Property<bool>("IsEnabled").IsRequired();
 
-        public virtual ScheduleLayout Layout { get; set; }
+
+            builder.HasOne(_ => _.Layout)
+                   .WithMany(_ => _.TimeSlots)
+                   .HasForeignKey(_ => _.LayoutId);
 
 
         }

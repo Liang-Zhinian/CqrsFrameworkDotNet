@@ -11,10 +11,15 @@ namespace Business.Infra.Data.Mappings
         public void Configure(EntityTypeBuilder<LocationImage> builder)
         {
             builder.HasKey(o => o.Id);
-            builder.ToTable("LocationImage");
+            builder.ToTable(Constants.DbConstants.LocationImageTable);
 
-            builder.Property<string>("Id").HasColumnType("char(32)");
-            builder.Property<string>("ImageURL");
+            builder.Property<string>("Id").HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<string>("LocationId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<string>("ImageURL").IsRequired().HasColumnType(Constants.DbConstants.String255);
+
+            builder.HasOne(p => p.Location)
+                   .WithMany(p => p.AdditionalLocationImages)
+                   .HasForeignKey(f => f.LocationId);
         }
     }
 }

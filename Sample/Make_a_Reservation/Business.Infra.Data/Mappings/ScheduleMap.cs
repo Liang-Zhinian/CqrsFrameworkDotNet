@@ -11,21 +11,21 @@ namespace Business.Infra.Data.Mappings
         public void Configure(EntityTypeBuilder<Schedule> builder)
         {
             builder.HasKey(o => o.Id);
-            builder.ToTable("Schedule");
+            builder.ToTable(Constants.DbConstants.ScheduleTable);
 
-            builder.Property<string>("Id").HasColumnType("char(32)");
-            builder.Property<string>("Name");
-            builder.Property<bool>("IsDefault");
-            builder.Property<int>("WeekdayStart");
-            builder.Property<int>("DaysVisible");
-            builder.Property<DateTime>("StartDateTime");
-            builder.Property<DateTime>("EndDateTime");
-            builder.Property<string>("LayoutId");
-            builder.Property<bool>("IsCalendarSubscriptionAllowed");
+            builder.Property<string>("Id").HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<string>("Name").IsRequired().HasColumnType(Constants.DbConstants.String255);
+            builder.Property<bool>("IsDefault").IsRequired();
+            builder.Property<int>("WeekdayStart").IsRequired();
+            builder.Property<int>("DaysVisible").IsRequired();
+            builder.Property<DateTime>("StartDateTime").IsRequired();
+            builder.Property<DateTime>("EndDateTime").IsRequired();
+            builder.Property<string>("LayoutId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<bool>("IsCalendarSubscriptionAllowed").IsRequired();
 
             builder.HasOne(_ => _.Layout)
-                   .WithOne(_ => _.Schedule)
-                   .HasForeignKey<Schedule>(_ => _.LayoutId);
+                   .WithMany(_=>_.Schedules)
+                   .HasForeignKey(_=>_.LayoutId);
         }
     }
 }

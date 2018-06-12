@@ -11,15 +11,16 @@ namespace Business.Infra.Data.Mappings
         public void Configure(EntityTypeBuilder<Branding> builder)
         {
             builder.HasKey(o => o.Id);
-            builder.ToTable("Branding");
+            builder.ToTable(Constants.DbConstants.BrandingTable);
 
             builder.Property<string>("Id").HasColumnType("char(32)");
-            builder.Property<string>("LogoURL");
-            builder.Property<string>("PageColor1");
-            builder.Property<string>("PageColor1");
-            builder.Property<string>("PageColor2");
-            builder.Property<string>("PageColor3");
-            builder.Property<string>("PageColor4");
+            builder.Property<string>("TenantId").IsRequired();
+            builder.Property<string>("LogoURL").HasColumnType(Constants.DbConstants.String255);
+            builder.Property<string>("PageColor1").HasColumnType(Constants.DbConstants.String10);
+            builder.Property<string>("PageColor1").HasColumnType(Constants.DbConstants.String10);
+            builder.Property<string>("PageColor2").HasColumnType(Constants.DbConstants.String10);
+            builder.Property<string>("PageColor3").HasColumnType(Constants.DbConstants.String10);
+            builder.Property<string>("PageColor4").HasColumnType(Constants.DbConstants.String10);
         }
     }
 }

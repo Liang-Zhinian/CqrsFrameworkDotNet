@@ -8,5 +8,7 @@ namespace Business.Infra.Data.ReadModel
         [Key]
         public int Id { get; set; }
         public string Label { get; set; }
+
+        public virtual Resource Resource { get; set; }
     }
 }

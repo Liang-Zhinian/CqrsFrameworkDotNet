@@ -11,15 +11,19 @@ namespace Business.Infra.Data.Mappings
         public void Configure(EntityTypeBuilder<TenantContact> builder)
         {
             builder.HasKey(o => o.Id);
-            builder.ToTable("TenantContact");
+            builder.ToTable(Constants.DbConstants.TenantContactTable);
 
-            builder.Property<string>("Id").HasColumnType("char(32)");
-            builder.Property<string>("Email");
-            builder.Property<string>("Email2");
-            builder.Property<string>("Phone");
-            builder.Property<string>("Phone2");
-            builder.Property<string>("Phone3");
+            builder.Property<string>("Id").HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<string>("TenantId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<string>("Email").IsRequired().HasColumnType(Constants.DbConstants.String255);
+            builder.Property<string>("Email2").HasColumnType(Constants.DbConstants.String255);
+            builder.Property<string>("Phone").IsRequired().HasColumnType(Constants.DbConstants.String255);
+            builder.Property<string>("Phone2").HasColumnType(Constants.DbConstants.String255);
+            builder.Property<string>("Phone3").HasColumnType(Constants.DbConstants.String255);
 
+            builder.HasOne(p => p.Tenant)
+                   .WithOne(p => p.Contact)
+                   .HasForeignKey<TenantContact>(f => f.TenantId);
         }
     }
 }

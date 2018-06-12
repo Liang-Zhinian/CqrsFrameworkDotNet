@@ -11,10 +11,16 @@ namespace Business.Infra.Data.Mappings
         public void Configure(EntityTypeBuilder<ScheduleLayout> builder)
         {
             builder.HasKey(o => o.Id);
-            builder.ToTable("ScheduleLayout");
+            builder.ToTable(Constants.DbConstants.ScheduleLayoutTable);
 
-            builder.Property<string>("Id").HasColumnType("char(32)");
-            builder.Property<int>("TimeZoneId");
+            builder.Property<string>("Id").HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<int>("TimeZoneId").IsRequired();
+
+            builder.HasOne(_ => _.TimeZone)
+                   .WithMany(_=>_.ScheduleLayouts)
+                   .HasForeignKey(_=>_.TimeZoneId);
+            
+
         }
     }
 }

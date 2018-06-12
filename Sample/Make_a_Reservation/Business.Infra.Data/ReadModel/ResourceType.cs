@@ -5,5 +5,7 @@ namespace Business.Infra.Data.ReadModel
     {
         public string Name { get; set; }
         public string Description { get; set; }
+
+        public virtual Resource Resource { get; set; }
     }
 }

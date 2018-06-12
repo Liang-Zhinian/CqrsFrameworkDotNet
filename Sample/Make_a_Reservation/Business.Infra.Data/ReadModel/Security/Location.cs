@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Business.Infra.Data.ReadModel.Resource;
 
 namespace Business.Infra.Data.ReadModel.Security
 {
@@ -24,6 +23,7 @@ namespace Business.Infra.Data.ReadModel.Security
         public virtual Tenant Tenant { get; set; }
 
         public virtual ICollection<StaffLoginLocation> StaffLoginLocations { get; set; }
+
         public virtual ICollection<ResourceLocation> ResourceLocations { get; set; }
     }
 }

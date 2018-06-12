@@ -11,18 +11,24 @@ namespace Business.Infra.Data.Mappings
         public void Configure(EntityTypeBuilder<LocationAddress> builder)
         {
             builder.HasKey(o => o.Id);
-            builder.ToTable("LocationAddress");
+            builder.ToTable(Constants.DbConstants.LocationAddressTable);
 
-            builder.Property<string>("Id").HasColumnType("char(32)");
-            builder.Property<string>("Street");
-            builder.Property<string>("Street2");
-            builder.Property<string>("City");
-            builder.Property<string>("State");
-            builder.Property<string>("Country");
-            builder.Property<string>("ForeignZip");
+            builder.Property<string>("Id").HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<string>("LocationId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<string>("Street").IsRequired().HasColumnType(Constants.DbConstants.String255);
+            builder.Property<string>("Street2").HasColumnType(Constants.DbConstants.String255);
+            builder.Property<string>("City").IsRequired().HasColumnType(Constants.DbConstants.String255);
+            builder.Property<string>("State").IsRequired().HasColumnType(Constants.DbConstants.String255);
+            builder.Property<string>("Country").IsRequired().HasColumnType(Constants.DbConstants.String255);
+            builder.Property<string>("ForeignZip").HasColumnType(Constants.DbConstants.String255);
+            builder.Property<string>("PostalCode").HasColumnType(Constants.DbConstants.String255);
             builder.Property<double>("Latitude");
             builder.Property<double>("Longitude");
 
+
+            builder.HasOne(p => p.Location)
+                   .WithOne(p => p.Address)
+                   .HasForeignKey<LocationAddress>(f => f.LocationId);
         }
     }
 }

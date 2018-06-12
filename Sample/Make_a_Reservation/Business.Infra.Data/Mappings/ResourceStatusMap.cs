@@ -11,12 +11,15 @@ namespace Business.Infra.Data.Mappings
         public void Configure(EntityTypeBuilder<ResourceStatus> builder)
         {
             builder.HasKey(o => o.Id);
-            builder.ToTable("ResourceStatus");
+            builder.ToTable(Constants.DbConstants.ResourceStatusTable);
 
-            builder.Property<int>("Id");
-            builder.Property<string>("Label");
+            builder.Property<int>("Id").IsRequired();
+            builder.Property<string>("Label").IsRequired().HasColumnType(Constants.DbConstants.String255);
 
-
+            builder
+                .HasOne(p => p.Resource)
+                .WithOne(p => p.Status)
+                .HasForeignKey<Resource>(p=>p.StatusId);
         }
     }
 }

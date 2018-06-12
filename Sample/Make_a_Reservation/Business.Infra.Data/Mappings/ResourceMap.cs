@@ -11,14 +11,14 @@ namespace Business.Infra.Data.Mappings
         public void Configure(EntityTypeBuilder<Resource> builder)
         {
             builder.HasKey(o => o.Id);
-            builder.ToTable("Resource");
+            builder.ToTable(Constants.DbConstants.ResourceTable);
 
-            builder.Property<string>("Id").HasColumnType("char(32)");
-            builder.Property<string>("Name").IsRequired();
-            builder.Property<string>("Description");
-            builder.Property<bool>("IsLocatedAtAllLocations");
-            builder.Property<int>("StatusId");
-            builder.Property<string>("ScheduleId");
+            builder.Property<string>("Id").HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<string>("Name").IsRequired().HasColumnType(Constants.DbConstants.String255);
+            builder.Property<string>("Description").HasColumnType(Constants.DbConstants.String2000);
+            builder.Property<bool>("IsLocatedAtAllLocations").IsRequired();
+            builder.Property<int>("StatusId").IsRequired();
+            builder.Property<string>("ScheduleId").HasColumnType(Constants.DbConstants.KeyType);
 
 
         }

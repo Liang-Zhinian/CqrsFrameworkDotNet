@@ -44,12 +44,15 @@ namespace Business.Infra.Data.Context
     {
         public DbSet<Region> Regions { get; set; }
         public DbSet<Business.Infra.Data.ReadModel.TimeZone> TimeZones { get; set; }
+
         public DbSet<Branding> Brandings { get; set; }
         public DbSet<Tenant> Tenants { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Staff> Staffs { get; set; }
         public DbSet<Resource> Resources { get; set; }
         public DbSet<ResourceType> ResourceTypes { get; set; }
+        public DbSet<Schedule> Schedules { get; set; }
+        public DbSet<ScheduleLayout> ScheduleLayouts { get; set; }
 
         //public Book2DbContext(DbContextOptions<Book2DbContext> options) : base(options)
         //{
@@ -80,6 +83,10 @@ namespace Business.Infra.Data.Context
             modelBuilder.ApplyConfiguration(new ResourceStatusMap());
             modelBuilder.ApplyConfiguration(new ResourceTypeMap());
             modelBuilder.ApplyConfiguration(new ResourceLocationMap());
+
+            modelBuilder.ApplyConfiguration(new ScheduleMap());
+            modelBuilder.ApplyConfiguration(new ScheduleLayoutMap());
+            modelBuilder.ApplyConfiguration(new ScheduleLayoutTimeSlotMap());
 
 
             base.OnModelCreating(modelBuilder);

@@ -29,10 +29,8 @@ namespace DatabaseInitializer
             // Use ConferenceContext as entry point for dropping and recreating DB
             using (var context = new BusinessDbContext())
             {
-                if (context.Database.EnsureCreated())
-                    context.Database.EnsureDeleted();
-
-                context.Database.EnsureCreated();
+                if (context.Database.EnsureDeleted())
+                    context.Database.Migrate();
             }
 
             DbContext[] contexts =

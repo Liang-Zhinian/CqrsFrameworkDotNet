@@ -13,12 +13,11 @@ namespace Business.Infra.Data.Mappings
         {
             builder
                 .HasKey(t => new { t.Id, t.ResourceId, t.LocationId });
-            builder.ToTable("ResourceLocation");
+            builder.ToTable(Constants.DbConstants.ResourceLocationTable);
 
-            builder.Property<string>("Id").HasColumnType("char(32)");
-            builder.Property<string>("ResourceId");
-            builder.Property<string>("LocationId");
-
+            builder.Property<string>("Id").HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<string>("ResourceId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<string>("LocationId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
             
             builder
                 .HasOne(sl => sl.Resource)

@@ -8,5 +8,6 @@ namespace Business.Infra.Data.ReadModel
         public virtual TimeZone TimeZone { get; set; }
 
         public virtual ICollection<ScheduleLayoutTimeSlot> TimeSlots { get; set; }
+        public virtual ICollection<Schedule> Schedules { get; set; }
     }
 }

@@ -8,6 +8,7 @@ namespace Business.Infra.Data.ReadModel
         public string EndLabel { get; set; }
 
         public int AvailabilityCode { get; set; }
+
         public string LayoutId { get; set; }
         public virtual ScheduleLayout Layout { get; set; }
 

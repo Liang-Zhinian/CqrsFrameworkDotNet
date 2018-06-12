@@ -11,19 +11,18 @@ namespace Business.Infra.Data.Mappings
         public void Configure(EntityTypeBuilder<Location> builder)
         {
             builder.HasKey(o => o.Id);
-            builder.ToTable("Location");
+            builder.ToTable(Constants.DbConstants.LocationTable);
 
-            builder.Property<string>("Id").HasColumnType("char(32)");
-            builder.Property<string>("Name").IsRequired();
-            builder.Property<string>("Description");
+            builder.Property<string>("Id").HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<string>("Name").IsRequired().HasColumnType(Constants.DbConstants.String255);
+            builder.Property<string>("Description").HasColumnType(Constants.DbConstants.String2000);
 
-            builder.HasOne(p => p.Address)
-                   .WithOne(p => p.Location)
-                   .HasForeignKey<LocationAddress>(f=>f.LocationId);
 
-            builder.HasOne(p => p.Contact)
-                   .WithOne(p => p.Location)
-                   .HasForeignKey<LocationContact>(f => f.LocationId);
+            builder
+                .HasOne(b => b.Tenant)
+                .WithMany(p => p.Locations)
+                .HasForeignKey(p => p.TenantId);
+            
         }
     }
 }
