@@ -4,7 +4,6 @@ using CqrsFramework.Events;
 using Business.Domain.Commands.Security.Tenants;
 using Business.Domain.Models.Security;
 using MediatR;
-using Business.Infra.Data.Context;
 
 namespace Business.Domain.CommandHandlers.Security
 {

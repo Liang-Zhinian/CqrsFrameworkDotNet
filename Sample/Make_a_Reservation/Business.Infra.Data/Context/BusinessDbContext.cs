@@ -6,11 +6,17 @@ using Business.Infra.Data.Mappings;
 using System.Configuration;
 using System.Reflection;
 using System.Linq;
-using Business.Infra.Data.ReadModel;
-using Business.Infra.Data.ReadModel.Security;
+using Business.Domain.Models;
+using Business.Domain.Models.Security;
 
 namespace Business.Infra.Data.Context
 {
+    public class TestModel
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+    }
 
     public static class DataBaseServer
     {
@@ -30,7 +36,7 @@ namespace Business.Infra.Data.Context
             }
             else if (provider.Equals(DataBaseServer.MySql, StringComparison.InvariantCultureIgnoreCase))
             {
-                return optionsBuilder.UseMySQL(connection);
+                return optionsBuilder.UseMySql(connection);
             }
             else
             {
@@ -42,8 +48,12 @@ namespace Business.Infra.Data.Context
     //[DbConfigurationType(typeof(MySqlEFConfiguration))] // this attribute is must
     public class BusinessDbContext : DbContext
     {
+        //public DbSet<TestModel> TestModels { get; set; }
+        public DbSet<ServiceCategory> ServiceCategories { get; set; }
+        public DbSet<Service> Services { get; set; }
+
         public DbSet<Region> Regions { get; set; }
-        public DbSet<Business.Infra.Data.ReadModel.TimeZone> TimeZones { get; set; }
+        public DbSet<Business.Domain.Models.TimeZone> TimeZones { get; set; }
 
         public DbSet<Branding> Brandings { get; set; }
         public DbSet<Tenant> Tenants { get; set; }
@@ -60,6 +70,7 @@ namespace Business.Infra.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            
             modelBuilder.ApplyConfiguration(new BrandingMap());
             modelBuilder.ApplyConfiguration(new TenantMap());
             modelBuilder.ApplyConfiguration(new TenantAddressMap());
@@ -90,6 +101,22 @@ namespace Business.Infra.Data.Context
 
 
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<TestModel>().HasKey(o => o.Id);
+            modelBuilder.Entity<TestModel>().ToTable("TestTable");
+
+            modelBuilder.Entity<TestModel>()
+                        .Property("Id")
+                        .HasColumnType("binary(16)");
+            modelBuilder.Entity<TestModel>()
+                        .Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType(Constants.DbConstants.String255);
+            modelBuilder.Entity<TestModel>()
+                        .Property<string>("Description")
+                        .HasColumnType(Constants.DbConstants.String2000);
+
+
             /*
             var mappingInterface = typeof(IEntityTypeConfiguration<>);
             // Types that do entity mapping

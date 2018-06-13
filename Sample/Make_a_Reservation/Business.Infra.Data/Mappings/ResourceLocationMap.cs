@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using Business.Infra.Data.ReadModel;
-using Business.Infra.Data.ReadModel.Security;
+using Business.Domain.Models;
+using Business.Domain.Models.Security;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -15,9 +15,9 @@ namespace Business.Infra.Data.Mappings
                 .HasKey(t => new { t.Id, t.ResourceId, t.LocationId });
             builder.ToTable(Constants.DbConstants.ResourceLocationTable);
 
-            builder.Property<string>("Id").HasColumnType(Constants.DbConstants.KeyType);
-            builder.Property<string>("ResourceId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
-            builder.Property<string>("LocationId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<Guid>("Id").HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<Guid>("ResourceId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<Guid>("LocationId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
             
             builder
                 .HasOne(sl => sl.Resource)

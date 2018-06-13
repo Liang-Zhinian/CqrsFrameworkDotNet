@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Business.Infra.Data.ReadModel.Security;
+using Business.Domain.Models.Security;
 
 namespace Business.Infra.Data.Mappings
 {
@@ -13,8 +13,8 @@ namespace Business.Infra.Data.Mappings
             builder.HasKey(o => o.Id);
             builder.ToTable(Constants.DbConstants.BrandingTable);
 
-            builder.Property<string>("Id").HasColumnType("char(32)");
-            builder.Property<string>("TenantId").IsRequired();
+            builder.Property<Guid>("Id").HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<Guid>("TenantId").IsRequired();
             builder.Property<string>("LogoURL").HasColumnType(Constants.DbConstants.String255);
             builder.Property<string>("PageColor1").HasColumnType(Constants.DbConstants.String10);
             builder.Property<string>("PageColor1").HasColumnType(Constants.DbConstants.String10);

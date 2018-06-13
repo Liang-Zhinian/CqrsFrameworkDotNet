@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using Business.Infra.Data.ReadModel;
+using Business.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -17,9 +17,9 @@ namespace Business.Infra.Data.Mappings
             builder.Property<string>("Label").IsRequired().HasColumnType(Constants.DbConstants.String255);
 
             builder
-                .HasOne(p => p.Resource)
+                .HasMany(p => p.Resources)
                 .WithOne(p => p.Status)
-                .HasForeignKey<Resource>(p=>p.StatusId);
+                .HasForeignKey(p=>p.StatusId);
         }
     }
 }

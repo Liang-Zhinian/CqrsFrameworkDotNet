@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using Business.Infra.Data.ReadModel.Security;
+using Business.Domain.Models.Security;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -13,8 +13,8 @@ namespace Business.Infra.Data.Mappings
             builder.HasKey(o => o.Id);
             builder.ToTable(Constants.DbConstants.LocationImageTable);
 
-            builder.Property<string>("Id").HasColumnType(Constants.DbConstants.KeyType);
-            builder.Property<string>("LocationId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<Guid>("Id").HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<Guid>("LocationId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
             builder.Property<string>("ImageURL").IsRequired().HasColumnType(Constants.DbConstants.String255);
 
             builder.HasOne(p => p.Location)

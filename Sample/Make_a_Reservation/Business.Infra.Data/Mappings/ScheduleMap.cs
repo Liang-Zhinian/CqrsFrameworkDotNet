@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Business.Infra.Data.ReadModel;
+using Business.Domain.Models;
 
 namespace Business.Infra.Data.Mappings
 {
@@ -13,14 +13,14 @@ namespace Business.Infra.Data.Mappings
             builder.HasKey(o => o.Id);
             builder.ToTable(Constants.DbConstants.ScheduleTable);
 
-            builder.Property<string>("Id").HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<Guid>("Id").HasColumnType(Constants.DbConstants.KeyType);
             builder.Property<string>("Name").IsRequired().HasColumnType(Constants.DbConstants.String255);
             builder.Property<bool>("IsDefault").IsRequired();
             builder.Property<int>("WeekdayStart").IsRequired();
             builder.Property<int>("DaysVisible").IsRequired();
             builder.Property<DateTime>("StartDateTime").IsRequired();
             builder.Property<DateTime>("EndDateTime").IsRequired();
-            builder.Property<string>("LayoutId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<Guid>("LayoutId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
             builder.Property<bool>("IsCalendarSubscriptionAllowed").IsRequired();
 
             builder.HasOne(_ => _.Layout)

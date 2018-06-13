@@ -18,11 +18,11 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Framework\CqrsFramework\CqrsFramework.csproj" />
     <ProjectReference Include="..\..\..\Framework\CqrsFramework.Extensions\CqrsFramework.Extensions.csproj" />
-    <ProjectReference Include="..\Business.Infra.Data\Business.Infra.Data.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\Service\" />
+    <Folder Include="Models\Services\" />
     <Folder Include="Models\Security\" />
+    <Folder Include="Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\Resource\Resource.cs" />

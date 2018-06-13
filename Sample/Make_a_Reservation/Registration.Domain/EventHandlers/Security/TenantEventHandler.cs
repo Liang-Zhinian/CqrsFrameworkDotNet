@@ -1,4 +1,4 @@
-﻿using Business.Domain.Events.Security.Businesses;
+﻿using Business.Domain.Events.Security.Tenants;
 using CqrsFramework.Events;
 using Registration.Domain.ReadModel.Security;
 using Registration.Domain.Repositories.Interfaces;
@@ -29,26 +29,6 @@ namespace Registration.Domain.EventHandlers.Security
             tenant.Name = message.Name;
             tenant.DisplayName = message.DisplayName;
 
-            tenant.Contact = new TenantContact()
-            {
-                Id = Guid.NewGuid().ToString(),
-                Email = message.TenantContact.Email,
-                Email2 = message.TenantContact.Email2,
-                Phone = message.TenantContact.Phone,
-                Phone2 = message.TenantContact.Phone2,
-                Phone3 = message.TenantContact.Phone3,
-                TenantId = tenant.Id
-            };
-            tenant.Address = new TenantAddress()
-            {
-                Id = Guid.NewGuid().ToString(),
-                Street = message.TenantAddress.Street,
-                Street2 = message.TenantAddress.Street2,
-                State = message.TenantAddress.State,
-                City = message.TenantAddress.City,
-                Country = message.TenantAddress.Country,
-                TenantId = tenant.Id
-            };
 
             _tenantRepo.Add(tenant);
             _tenantRepo.SaveChanges();

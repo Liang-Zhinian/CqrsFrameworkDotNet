@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Business.Infra.Data.ReadModel;
+using Business.Domain.Models;
 
 namespace Business.Infra.Data.Mappings
 {
@@ -13,7 +13,7 @@ namespace Business.Infra.Data.Mappings
             builder.HasKey(o => o.Id);
             builder.ToTable(Constants.DbConstants.ScheduleLayoutTable);
 
-            builder.Property<string>("Id").HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<Guid>("Id").HasColumnType(Constants.DbConstants.KeyType);
             builder.Property<int>("TimeZoneId").IsRequired();
 
             builder.HasOne(_ => _.TimeZone)

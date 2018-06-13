@@ -1,8 +1,20 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Business.Domain.Models
 {
     public class Schedule : BaseObject
     {
+        //public enum ScheduleType{
+        //    All=0,
+        //    DropIn,
+        //    Enrollment,
+        //    Appointment,
+        //    Resource,
+        //    Media,
+        //    Arrival
+        //}
+
         public string Name { get; set; }
         public bool IsDefault { get; set; }
         public int WeekdayStart { get; set; }
@@ -14,5 +26,8 @@ namespace Business.Domain.Models
         public virtual ScheduleLayout Layout { get; set; }
 
         public bool IsCalendarSubscriptionAllowed { get; set; }
+        //public int ScheduleTypeValue { get; set; }
+        //[NotMapped]
+        //public virtual ScheduleType Type { get; set; }
     }
 }

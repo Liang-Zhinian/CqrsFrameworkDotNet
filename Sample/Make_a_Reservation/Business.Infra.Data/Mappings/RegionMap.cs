@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Business.Infra.Data.ReadModel;
+using Business.Domain.Models;
 
 namespace Business.Infra.Data.Mappings
 {
