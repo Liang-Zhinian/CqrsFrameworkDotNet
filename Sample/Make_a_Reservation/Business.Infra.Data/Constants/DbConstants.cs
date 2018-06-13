@@ -41,6 +41,9 @@ namespace Business.Infra.Data.Constants
         public static string ScheduleTable { get; set; }
         public static string ScheduleLayoutTable { get; set; }
         public static string ScheduleLayoutTimeSlotTable { get; set; }
+        public static string ServiceTable { get; set; }
+        public static string ServiceCategoryTable { get; set; }
+
 
         static DbConstants()
         {
@@ -66,6 +69,8 @@ namespace Business.Infra.Data.Constants
             ScheduleTable = "Schedule";
             ScheduleLayoutTable = "ScheduleLayout";
             ScheduleLayoutTimeSlotTable = "ScheduleLayoutTimeSlot";
+            ServiceTable = "Service";
+            ServiceCategoryTable = "ServiceCategory";
 
 
             var config = new ConfigurationBuilder()
