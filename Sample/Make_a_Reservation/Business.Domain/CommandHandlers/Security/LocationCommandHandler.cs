@@ -17,7 +17,7 @@ namespace Business.Domain.CommandHandlers.Security
 
         public void Handle(CreateLocationCommand message)
         {
-            Location location = new Location(message.Id, message.Name, message.Description, message.ContactInfomation, message.AddressInfomation, message.Geolocation);
+            Location location = new Location(message.Id, message.Name, message.Description);
 
             AddToSession(location);
             CommitSession();

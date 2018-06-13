@@ -1,26 +1,26 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using CqrsFramework.Domain;
 using Business.Domain.Events.Security.Businesses;
-using Business.Domain.Models.ValueObjects;
 
 namespace Business.Domain.Models.Security
 {
     public class Tenant : AggregateRoot
     {
         public const string DEFAULT_NAME = "default";
-        public string Name { get; private set; }
-        public string DisplayName { get; private set; }
-        public Contact TenantContact { get; private set; }
-        public Address TenantAddress { get; private set; }
+        public string Name { get; set; }
+        public string DisplayName { get; set; }
+        public virtual TenantContact Contact { get; set; }
+        public virtual TenantAddress Address { get; set; }
+        public virtual Branding Branding { get; set; }
 
-        public Tenant()
+        public virtual ICollection<Location> Locations { get; set; }
+        public virtual ICollection<Staff> Staffs { get; set; }
+
+        public Tenant(Guid id, string name, string displayName)
         {
-
-        }
-
-        public Tenant(Guid id, string name, string displayName, Contact contact, Address address)
-        {
-            ApplyChange(new TenantCreatedEvent(id, name, displayName, contact, address));
+            ApplyChange(new TenantCreatedEvent(id, name, displayName));
         }
 
         public void Apply(TenantCreatedEvent message)
@@ -28,9 +28,6 @@ namespace Business.Domain.Models.Security
             Id = message.Id;
             Name = message.Name;
             DisplayName = message.DisplayName;
-            TenantContact = message.TenantContact;
-            TenantAddress = message.TenantAddress;
         }
-
     }
 }

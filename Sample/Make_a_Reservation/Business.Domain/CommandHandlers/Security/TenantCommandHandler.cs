@@ -18,7 +18,7 @@ namespace Business.Domain.CommandHandlers.Security
 
         public void Handle(CreateTenantCommand message)
         {
-            Tenant tenant = new Tenant(message.Id, message.Name, message.DisplayName, message.TenantContact, message.TenantAddress);
+            Tenant tenant = new Tenant(message.Id, message.Name, message.DisplayName);
 
             AddToSession(tenant);
             CommitSession();

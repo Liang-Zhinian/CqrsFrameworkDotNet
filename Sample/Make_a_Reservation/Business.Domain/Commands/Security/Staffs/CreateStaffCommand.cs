@@ -5,9 +5,11 @@ namespace Business.Domain.Commands.Security.Staffs
 {
     public class CreateStaffCommand : StaffCommand
     {
-        public CreateStaffCommand(PersonalInfo staffProfile)
+        public CreateStaffCommand(string firstName, string lastName, bool isMale)
         {
-            StaffProfile = staffProfile;
+            FirstName = firstName;
+            LastName = lastName;
+            IsMale = isMale;
         }
 
         public override bool IsValid()

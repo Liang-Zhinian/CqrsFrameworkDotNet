@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-//using Business.Infra.Data.ReadModel.Service.PaymentOption;
+using CqrsFramework.Domain;
+//using Business.Domain.Models.Service.PaymentOption;
 
-namespace Business.Infra.Data.ReadModel.Service
+namespace Business.Domain.Models.Service
 {
-    public class ServiceCategory<TService> where TService : class
+    public class ServiceCategory<TService> : AggregateRoot 
+        where TService : class
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
 

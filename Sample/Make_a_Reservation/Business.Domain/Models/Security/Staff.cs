@@ -1,30 +1,47 @@
-﻿using CqrsFramework.Domain;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using Business.Domain.Models.ValueObjects;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Business.Domain.Events.Security.Staffs;
 
 namespace Business.Domain.Models.Security
 {
-    public class Staff : AggregateRoot, IBook2Object
+    public class Staff : BaseObject
     {
-        public Tenant Tenant { get; set; }
-        public LoginCredential LoginCredential { get; private set; }
-        public PersonalInfo StaffProfile { get; private set; }
-        public List<Location> LoginLocations { get; private set; }
 
-        public Staff (){}
+        public string FirstName { get; set; }
 
-        public Staff(Guid id, PersonalInfo staffProfile)
+        public string LastName { get; set; }
+
+        public string DisplayName { get; set; }
+
+        public bool IsMale { get; set; }
+
+        public string Bio { get; set; }
+
+        public string ImageUrl { get; set; }
+
+        public bool CanLoginAllLocations { get; set; }
+
+        public virtual StaffLoginCredential LoginCredential { get; set; }
+
+        public virtual StaffAddress Address { get; set; }
+
+        public virtual StaffContact Contact { get; set; }
+
+        public virtual ICollection<StaffLoginLocation> StaffLoginLocations { get; set; }
+
+        public Staff(Guid id, string firstName, string lastName, bool isMale)
         {
-            ApplyChange(new StaffCreatedEvent(id, staffProfile));
+            ApplyChange(new StaffCreatedEvent(id, firstName, lastName, isMale));
         }
 
         public void Apply(StaffCreatedEvent message)
         {
             Id = message.Id;
-            StaffProfile = message.StaffProfile;
+            FirstName = message.FirstName;
+            LastName = message.LastName;
+            IsMale = message.IsMale;
         }
     }
 }

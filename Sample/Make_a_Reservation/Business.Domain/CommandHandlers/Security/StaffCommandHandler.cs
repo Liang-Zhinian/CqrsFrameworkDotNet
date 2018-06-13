@@ -17,7 +17,7 @@ namespace Business.Domain.CommandHandlers.Security
 
         public void Handle(CreateStaffCommand message)
         {
-            Staff staff = new Staff(message.Id, message.StaffProfile);
+            Staff staff = new Staff(message.Id, message.FirstName, message.LastName, message.IsMale);
 
             AddToSession(staff);
             CommitSession();

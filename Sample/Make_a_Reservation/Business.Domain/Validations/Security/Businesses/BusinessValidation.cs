@@ -23,10 +23,10 @@ namespace Business.Domain.Validations.Security.Tenants
 
         protected void ValidateEmail()
         {
-            RuleFor(c => c.TenantContact.Email)
-                .NotNull()
-                .NotEmpty()
-                .EmailAddress();
+            //RuleFor(c => c.)
+                //.NotNull()
+                //.NotEmpty()
+                //.EmailAddress();
         }
 
         protected void ValidateId()

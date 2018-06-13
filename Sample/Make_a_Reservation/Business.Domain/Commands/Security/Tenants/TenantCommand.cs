@@ -1,5 +1,4 @@
 ﻿using System;
-using Business.Domain.Models.ValueObjects;
 
 namespace Business.Domain.Commands.Security.Tenants
 {
@@ -7,7 +6,5 @@ namespace Business.Domain.Commands.Security.Tenants
     {
         public string Name { get; protected set; }
         public string DisplayName { get; protected set; }
-        public Contact TenantContact { get; protected set; }
-        public Address TenantAddress { get; protected set; }
     }
 }
