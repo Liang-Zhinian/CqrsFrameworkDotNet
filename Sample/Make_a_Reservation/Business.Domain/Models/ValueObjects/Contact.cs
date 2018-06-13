@@ -10,14 +10,5 @@ namespace Business.Domain.Models.ValueObjects
         public string Phone { get; set; }
         public string Phone2 { get; set; }
         public string Phone3 { get; set; }
-
-        public Contact(string email, string email2, string phone, string phone2, string phone3)
-        {
-            Email = email;
-            Email2 = email2;
-            Phone = phone;
-            Phone2 = phone2;
-            Phone3 = phone3;
-        }
     }
 }

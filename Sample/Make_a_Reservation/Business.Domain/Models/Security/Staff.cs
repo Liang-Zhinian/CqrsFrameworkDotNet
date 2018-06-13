@@ -25,9 +25,9 @@ namespace Business.Domain.Models.Security
 
         public virtual StaffLoginCredential LoginCredential { get; set; }
 
-        public virtual StaffAddress Address { get; set; }
+        public StaffAddress Address { get; set; }
 
-        public virtual StaffContact Contact { get; set; }
+        public StaffContact Contact { get; set; }
 
         public virtual ICollection<StaffLoginLocation> StaffLoginLocations { get; set; }
 

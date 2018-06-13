@@ -21,6 +21,8 @@ namespace Business.Infra.Data.Mappings
             builder.Property<string>("Phone2").HasColumnType(Constants.DbConstants.String255);
             builder.Property<string>("Phone3").HasColumnType(Constants.DbConstants.String255);
 
+            builder.Ignore("Version");
+
             builder.HasOne(p => p.Tenant)
                    .WithOne(p => p.Contact)
                    .HasForeignKey<TenantContact>(f => f.TenantId);

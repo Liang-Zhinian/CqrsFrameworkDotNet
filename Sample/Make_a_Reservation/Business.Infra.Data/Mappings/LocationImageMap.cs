@@ -15,11 +15,15 @@ namespace Business.Infra.Data.Mappings
 
             builder.Property<Guid>("Id").HasColumnType(Constants.DbConstants.KeyType);
             builder.Property<Guid>("LocationId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
-            builder.Property<string>("ImageURL").IsRequired().HasColumnType(Constants.DbConstants.String255);
+            builder.Property<Guid>("TenantId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<string>("ImageUrl").IsRequired().HasColumnType(Constants.DbConstants.String255);
+
+            builder.Ignore("Version");
 
             builder.HasOne(p => p.Location)
                    .WithMany(p => p.AdditionalLocationImages)
                    .HasForeignKey(f => f.LocationId);
+            
         }
     }
 }

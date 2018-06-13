@@ -18,7 +18,11 @@ namespace Business.Infra.Data.Mappings
             builder.Property<string>("Description").HasColumnType(Constants.DbConstants.String2000);
             builder.Property<bool>("IsLocatedAtAllLocations").IsRequired();
             builder.Property<int>("StatusId").IsRequired();
+            builder.Property<Guid>("ResourceTypeId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
             builder.Property<Guid>("ScheduleId").HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<Guid>("TenantId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
+
+            builder.Ignore("Version");
 
 
         }

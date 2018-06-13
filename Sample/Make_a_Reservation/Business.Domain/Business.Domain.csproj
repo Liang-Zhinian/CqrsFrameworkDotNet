@@ -28,5 +28,8 @@
     <Compile Remove="Models\Resource\Resource.cs" />
     <Compile Remove="Models\Resource\ResourceStatus.cs" />
     <Compile Remove="Models\ServiceCategory\ReservationStatus.cs" />
+    <Compile Remove="CommandHandlers\CommandHandler.cs" />
+    <Compile Remove="Commands\BaseCommand.cs" />
+    <Compile Remove="Commands\Security\Locations\CreateLocationCommand.cs" />
   </ItemGroup>
 </Project>

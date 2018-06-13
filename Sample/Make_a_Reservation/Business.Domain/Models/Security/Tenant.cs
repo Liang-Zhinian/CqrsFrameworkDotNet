@@ -12,12 +12,13 @@ namespace Business.Domain.Models.Security
         public string Name { get; set; }
         public string DisplayName { get; set; }
         public bool IsEnabled { get; set; }
-        public virtual TenantContact Contact { get; set; }
-        public virtual TenantAddress Address { get; set; }
+        public TenantContact Contact { get; set; }
+        public TenantAddress Address { get; set; }
         public virtual Branding Branding { get; set; }
 
         public virtual ICollection<Location> Locations { get; set; }
         public virtual ICollection<Staff> Staffs { get; set; }
+
 
         public Tenant(Guid id, string name, string displayName)
         {

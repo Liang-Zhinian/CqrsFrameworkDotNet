@@ -47,7 +47,7 @@ namespace Business.Infra.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(32)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Description")
                         .HasColumnType("varchar(2000)");
@@ -58,16 +58,16 @@ namespace Business.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
-                    b.Property<Guid>("ResourceTypeId");
+                    b.Property<Guid>("ResourceTypeId")
+                        .HasColumnType("char(36)");
 
                     b.Property<Guid>("ScheduleId")
-                        .HasColumnType("char(32)");
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("StatusId");
 
-                    b.Property<Guid>("TenantId");
-
-                    b.Property<int>("Version");
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -85,17 +85,16 @@ namespace Business.Infra.Data.Migrations
             modelBuilder.Entity("Business.Domain.Models.ResourceLocation", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("char(32)");
+                        .HasColumnType("char(36)");
 
                     b.Property<Guid>("ResourceId")
-                        .HasColumnType("char(32)");
+                        .HasColumnType("char(36)");
 
                     b.Property<Guid>("LocationId")
-                        .HasColumnType("char(32)");
+                        .HasColumnType("char(36)");
 
-                    b.Property<Guid>("TenantId");
-
-                    b.Property<int>("Version");
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id", "ResourceId", "LocationId");
 
@@ -126,7 +125,7 @@ namespace Business.Infra.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(32)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Description")
                         .HasColumnType("varchar(2000)");
@@ -135,9 +134,8 @@ namespace Business.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
-                    b.Property<Guid>("TenantId");
-
-                    b.Property<int>("Version");
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -150,7 +148,7 @@ namespace Business.Infra.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(32)");
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("DaysVisible");
 
@@ -161,7 +159,7 @@ namespace Business.Infra.Data.Migrations
                     b.Property<bool>("IsDefault");
 
                     b.Property<Guid>("LayoutId")
-                        .HasColumnType("char(32)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -169,9 +167,8 @@ namespace Business.Infra.Data.Migrations
 
                     b.Property<DateTime>("StartDateTime");
 
-                    b.Property<Guid>("TenantId");
-
-                    b.Property<int>("Version");
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("WeekdayStart");
 
@@ -188,13 +185,12 @@ namespace Business.Infra.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(32)");
+                        .HasColumnType("char(36)");
 
-                    b.Property<Guid>("TenantId");
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("TimeZoneId");
-
-                    b.Property<int>("Version");
 
                     b.HasKey("Id");
 
@@ -209,7 +205,7 @@ namespace Business.Infra.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(32)");
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("AvailabilityCode");
 
@@ -228,15 +224,14 @@ namespace Business.Infra.Data.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<Guid>("LayoutId")
-                        .HasColumnType("char(32)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("StartTime")
                         .IsRequired()
                         .HasColumnType("varchar(10)");
 
-                    b.Property<Guid>("TenantId");
-
-                    b.Property<int>("Version");
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -247,41 +242,11 @@ namespace Business.Infra.Data.Migrations
                     b.ToTable("ScheduleLayoutTimeSlot");
                 });
 
-            modelBuilder.Entity("Business.Domain.Models.Security.Address", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("City");
-
-                    b.Property<string>("Country");
-
-                    b.Property<string>("ForeignZip");
-
-                    b.Property<string>("PostalCode");
-
-                    b.Property<string>("State");
-
-                    b.Property<string>("Street");
-
-                    b.Property<string>("Street2");
-
-                    b.Property<Guid>("TenantId");
-
-                    b.Property<int>("Version");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TenantId");
-
-                    b.ToTable("Address");
-                });
-
             modelBuilder.Entity("Business.Domain.Models.Security.Branding", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(32)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("LogoURL")
                         .HasColumnType("varchar(255)");
@@ -298,9 +263,8 @@ namespace Business.Infra.Data.Migrations
                     b.Property<string>("PageColor4")
                         .HasColumnType("varchar(10)");
 
-                    b.Property<Guid>("TenantId");
-
-                    b.Property<int>("Version");
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -310,55 +274,11 @@ namespace Business.Infra.Data.Migrations
                     b.ToTable("Branding");
                 });
 
-            modelBuilder.Entity("Business.Domain.Models.Security.Contact", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("Email2");
-
-                    b.Property<string>("Phone");
-
-                    b.Property<string>("Phone2");
-
-                    b.Property<string>("Phone3");
-
-                    b.Property<Guid>("TenantId");
-
-                    b.Property<int>("Version");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TenantId");
-
-                    b.ToTable("Contact");
-                });
-
-            modelBuilder.Entity("Business.Domain.Models.Security.Image", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ImageUrl");
-
-                    b.Property<Guid>("TenantId");
-
-                    b.Property<int>("Version");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TenantId");
-
-                    b.ToTable("Image");
-                });
-
             modelBuilder.Entity("Business.Domain.Models.Security.Location", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(32)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Description")
                         .HasColumnType("varchar(2000)");
@@ -367,9 +287,8 @@ namespace Business.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
-                    b.Property<Guid>("TenantId");
-
-                    b.Property<int>("Version");
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -382,9 +301,7 @@ namespace Business.Infra.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(32)");
-
-                    b.Property<Guid>("AddressId");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -400,7 +317,7 @@ namespace Business.Infra.Data.Migrations
                     b.Property<double>("Latitude");
 
                     b.Property<Guid>("LocationId")
-                        .HasColumnType("char(32)");
+                        .HasColumnType("char(36)");
 
                     b.Property<double>("Longitude");
 
@@ -418,13 +335,10 @@ namespace Business.Infra.Data.Migrations
                     b.Property<string>("Street2")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<Guid>("TenantId");
-
-                    b.Property<int>("Version");
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AddressId");
 
                     b.HasIndex("LocationId")
                         .IsUnique();
@@ -438,9 +352,7 @@ namespace Business.Infra.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(32)");
-
-                    b.Property<Guid>("ContactId");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -450,7 +362,7 @@ namespace Business.Infra.Data.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<Guid>("LocationId")
-                        .HasColumnType("char(32)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Phone")
                         .IsRequired()
@@ -462,13 +374,10 @@ namespace Business.Infra.Data.Migrations
                     b.Property<string>("Phone3")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<Guid>("TenantId");
-
-                    b.Property<int>("Version");
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ContactId");
 
                     b.HasIndex("LocationId")
                         .IsUnique();
@@ -482,24 +391,19 @@ namespace Business.Infra.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(32)");
+                        .HasColumnType("char(36)");
 
-                    b.Property<Guid>("ImageId");
-
-                    b.Property<string>("ImageURL")
+                    b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<Guid>("LocationId")
-                        .HasColumnType("char(32)");
+                        .HasColumnType("char(36)");
 
-                    b.Property<Guid>("TenantId");
-
-                    b.Property<int>("Version");
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ImageId");
 
                     b.HasIndex("LocationId");
 
@@ -512,7 +416,7 @@ namespace Business.Infra.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(32)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Bio");
 
@@ -534,9 +438,8 @@ namespace Business.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
-                    b.Property<Guid>("TenantId");
-
-                    b.Property<int>("Version");
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -549,9 +452,7 @@ namespace Business.Infra.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(32)");
-
-                    b.Property<Guid>("AddressId");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -568,7 +469,7 @@ namespace Business.Infra.Data.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<Guid>("StaffId")
-                        .HasColumnType("char(32)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("State")
                         .IsRequired()
@@ -581,13 +482,10 @@ namespace Business.Infra.Data.Migrations
                     b.Property<string>("Street2")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<Guid>("TenantId");
-
-                    b.Property<int>("Version");
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AddressId");
 
                     b.HasIndex("StaffId")
                         .IsUnique();
@@ -601,9 +499,7 @@ namespace Business.Infra.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(32)");
-
-                    b.Property<Guid>("ContactId");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -623,15 +519,12 @@ namespace Business.Infra.Data.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<Guid>("StaffId")
-                        .HasColumnType("char(32)");
+                        .HasColumnType("char(36)");
 
-                    b.Property<Guid>("TenantId");
-
-                    b.Property<int>("Version");
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ContactId");
 
                     b.HasIndex("StaffId")
                         .IsUnique();
@@ -645,22 +538,21 @@ namespace Business.Infra.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(32)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<Guid>("StaffId")
-                        .HasColumnType("char(32)");
+                        .HasColumnType("char(36)");
 
-                    b.Property<Guid>("TenantId");
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
-
-                    b.Property<int>("Version");
 
                     b.HasKey("Id");
 
@@ -675,17 +567,16 @@ namespace Business.Infra.Data.Migrations
             modelBuilder.Entity("Business.Domain.Models.Security.StaffLoginLocation", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("char(32)");
+                        .HasColumnType("char(36)");
 
                     b.Property<Guid>("StaffId")
-                        .HasColumnType("char(32)");
+                        .HasColumnType("char(36)");
 
                     b.Property<Guid>("LocationId")
-                        .HasColumnType("char(32)");
+                        .HasColumnType("char(36)");
 
-                    b.Property<Guid>("TenantId");
-
-                    b.Property<int>("Version");
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id", "StaffId", "LocationId");
 
@@ -702,7 +593,7 @@ namespace Business.Infra.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(32)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("DisplayName")
                         .HasColumnType("varchar(2000)");
@@ -713,8 +604,6 @@ namespace Business.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
-                    b.Property<int>("Version");
-
                     b.HasKey("Id");
 
                     b.ToTable("Tenant");
@@ -724,9 +613,7 @@ namespace Business.Infra.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(32)");
-
-                    b.Property<Guid>("AddressId");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -754,13 +641,9 @@ namespace Business.Infra.Data.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<Guid>("TenantId")
-                        .HasColumnType("char(32)");
-
-                    b.Property<int>("Version");
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AddressId");
 
                     b.HasIndex("TenantId")
                         .IsUnique();
@@ -772,9 +655,7 @@ namespace Business.Infra.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(32)");
-
-                    b.Property<Guid>("ContactId");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -794,13 +675,9 @@ namespace Business.Infra.Data.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<Guid>("TenantId")
-                        .HasColumnType("char(32)");
-
-                    b.Property<int>("Version");
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ContactId");
 
                     b.HasIndex("TenantId")
                         .IsUnique();
@@ -811,17 +688,22 @@ namespace Business.Infra.Data.Migrations
             modelBuilder.Entity("Business.Domain.Models.Service", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
 
-                    b.Property<Guid?>("CategoryId");
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("char(36)");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("varchar(2000)");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
-                    b.Property<Guid>("TenantId");
-
-                    b.Property<int>("Version");
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -829,29 +711,35 @@ namespace Business.Infra.Data.Migrations
 
                     b.HasIndex("TenantId");
 
-                    b.ToTable("Services");
+                    b.ToTable("Service");
                 });
 
             modelBuilder.Entity("Business.Domain.Models.ServiceCategory", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
 
                     b.Property<int>("CancelOffset");
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("varchar(2000)");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
                     b.Property<int>("ScheduleType");
 
                     b.Property<int>("ScheduleTypeValue");
 
-                    b.Property<int>("Version");
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ServiceCategories");
+                    b.ToTable("ServiceCategory");
                 });
 
             modelBuilder.Entity("Business.Domain.Models.TimeZone", b =>
@@ -870,24 +758,6 @@ namespace Business.Infra.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TimeZone");
-                });
-
-            modelBuilder.Entity("Business.Infra.Data.Context.TestModel", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("binary(16)");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("varchar(2000)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TestTable");
                 });
 
             modelBuilder.Entity("Business.Domain.Models.Resource", b =>
@@ -978,35 +848,11 @@ namespace Business.Infra.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Business.Domain.Models.Security.Address", b =>
-                {
-                    b.HasOne("Business.Domain.Models.Security.Tenant", "Tenant")
-                        .WithMany()
-                        .HasForeignKey("TenantId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("Business.Domain.Models.Security.Branding", b =>
                 {
                     b.HasOne("Business.Domain.Models.Security.Tenant", "Tenant")
                         .WithOne("Branding")
                         .HasForeignKey("Business.Domain.Models.Security.Branding", "TenantId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Business.Domain.Models.Security.Contact", b =>
-                {
-                    b.HasOne("Business.Domain.Models.Security.Tenant", "Tenant")
-                        .WithMany()
-                        .HasForeignKey("TenantId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Business.Domain.Models.Security.Image", b =>
-                {
-                    b.HasOne("Business.Domain.Models.Security.Tenant", "Tenant")
-                        .WithMany()
-                        .HasForeignKey("TenantId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -1020,11 +866,6 @@ namespace Business.Infra.Data.Migrations
 
             modelBuilder.Entity("Business.Domain.Models.Security.LocationAddress", b =>
                 {
-                    b.HasOne("Business.Domain.Models.Security.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("Business.Domain.Models.Security.Location", "Location")
                         .WithOne("Address")
                         .HasForeignKey("Business.Domain.Models.Security.LocationAddress", "LocationId")
@@ -1038,11 +879,6 @@ namespace Business.Infra.Data.Migrations
 
             modelBuilder.Entity("Business.Domain.Models.Security.LocationContact", b =>
                 {
-                    b.HasOne("Business.Domain.Models.Security.Contact", "Contact")
-                        .WithMany()
-                        .HasForeignKey("ContactId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("Business.Domain.Models.Security.Location", "Location")
                         .WithOne("Contact")
                         .HasForeignKey("Business.Domain.Models.Security.LocationContact", "LocationId")
@@ -1056,11 +892,6 @@ namespace Business.Infra.Data.Migrations
 
             modelBuilder.Entity("Business.Domain.Models.Security.LocationImage", b =>
                 {
-                    b.HasOne("Business.Domain.Models.Security.Image", "Image")
-                        .WithMany()
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("Business.Domain.Models.Security.Location", "Location")
                         .WithMany("AdditionalLocationImages")
                         .HasForeignKey("LocationId")
@@ -1082,11 +913,6 @@ namespace Business.Infra.Data.Migrations
 
             modelBuilder.Entity("Business.Domain.Models.Security.StaffAddress", b =>
                 {
-                    b.HasOne("Business.Domain.Models.Security.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("Business.Domain.Models.Security.Staff", "Staff")
                         .WithOne("Address")
                         .HasForeignKey("Business.Domain.Models.Security.StaffAddress", "StaffId")
@@ -1100,11 +926,6 @@ namespace Business.Infra.Data.Migrations
 
             modelBuilder.Entity("Business.Domain.Models.Security.StaffContact", b =>
                 {
-                    b.HasOne("Business.Domain.Models.Security.Contact", "Contact")
-                        .WithMany()
-                        .HasForeignKey("ContactId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("Business.Domain.Models.Security.Staff", "Staff")
                         .WithOne("Contact")
                         .HasForeignKey("Business.Domain.Models.Security.StaffContact", "StaffId")
@@ -1149,11 +970,6 @@ namespace Business.Infra.Data.Migrations
 
             modelBuilder.Entity("Business.Domain.Models.Security.TenantAddress", b =>
                 {
-                    b.HasOne("Business.Domain.Models.Security.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("Business.Domain.Models.Security.Tenant", "Tenant")
                         .WithOne("Address")
                         .HasForeignKey("Business.Domain.Models.Security.TenantAddress", "TenantId")
@@ -1162,11 +978,6 @@ namespace Business.Infra.Data.Migrations
 
             modelBuilder.Entity("Business.Domain.Models.Security.TenantContact", b =>
                 {
-                    b.HasOne("Business.Domain.Models.Security.Contact", "Contact")
-                        .WithMany()
-                        .HasForeignKey("ContactId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("Business.Domain.Models.Security.Tenant", "Tenant")
                         .WithOne("Contact")
                         .HasForeignKey("Business.Domain.Models.Security.TenantContact", "TenantId")
@@ -1177,7 +988,8 @@ namespace Business.Infra.Data.Migrations
                 {
                     b.HasOne("Business.Domain.Models.ServiceCategory", "Category")
                         .WithMany("Services")
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Business.Domain.Models.Security.Tenant", "Tenant")
                         .WithMany()

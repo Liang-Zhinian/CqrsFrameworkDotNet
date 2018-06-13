@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using CqrsFramework.Domain;
 using Business.Domain.Events.Security.Locations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Business.Domain.Models.Security
 {
@@ -13,8 +14,10 @@ namespace Business.Domain.Models.Security
 
         public string Description { get; set; }
 
+        [NotMapped]
         public virtual LocationContact Contact { get; set; }
 
+        [NotMapped]
         public virtual LocationAddress Address { get; set; }
 
         public virtual ICollection<LocationImage> AdditionalLocationImages { get; set; }
@@ -22,19 +25,5 @@ namespace Business.Domain.Models.Security
         public virtual ICollection<StaffLoginLocation> StaffLoginLocations { get; set; }
 
         public virtual ICollection<ResourceLocation> ResourceLocations { get; set; }
-
-        public Location(Guid id, string name, string description)
-        {
-            ApplyChange(new LocationCreatedEvent(id, name, description));
-        }
-
-        // apply events
-        public void Apply(LocationCreatedEvent message)
-        {
-
-            Id = message.Id;
-            Name = message.Name;
-            Description = message.Description;
-        }
     }
 }

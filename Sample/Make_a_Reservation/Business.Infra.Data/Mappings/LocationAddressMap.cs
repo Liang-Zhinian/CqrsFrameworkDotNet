@@ -15,6 +15,7 @@ namespace Business.Infra.Data.Mappings
 
             builder.Property<Guid>("Id").HasColumnType(Constants.DbConstants.KeyType);
             builder.Property<Guid>("LocationId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<Guid>("TenantId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
             builder.Property<string>("Street").IsRequired().HasColumnType(Constants.DbConstants.String255);
             builder.Property<string>("Street2").HasColumnType(Constants.DbConstants.String255);
             builder.Property<string>("City").IsRequired().HasColumnType(Constants.DbConstants.String255);
@@ -25,10 +26,13 @@ namespace Business.Infra.Data.Mappings
             builder.Property<double>("Latitude");
             builder.Property<double>("Longitude");
 
+            builder.Ignore("Version");
+
 
             builder.HasOne(p => p.Location)
                    .WithOne(p => p.Address)
                    .HasForeignKey<LocationAddress>(f => f.LocationId);
+            
         }
     }
 }

@@ -16,6 +16,8 @@ namespace Business.Infra.Data.Mappings
             builder.Property<Guid>("Id").HasColumnType(Constants.DbConstants.KeyType);
             builder.Property<string>("Name").IsRequired().HasColumnType(Constants.DbConstants.String255);
             builder.Property<string>("DisplayName").HasColumnType(Constants.DbConstants.String2000);
+
+            builder.Ignore("Version");
         }
     }
 }

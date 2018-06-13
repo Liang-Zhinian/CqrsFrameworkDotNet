@@ -16,6 +16,7 @@ namespace Business.Infra.Data.Mappings
             builder.Property<int>("Id").IsRequired();
             builder.Property<string>("Label").IsRequired().HasColumnType(Constants.DbConstants.String255);
 
+
             builder
                 .HasMany(p => p.Resources)
                 .WithOne(p => p.Status)

@@ -14,13 +14,15 @@ namespace Business.Infra.Data.Mappings
             builder.ToTable(Constants.DbConstants.BrandingTable);
 
             builder.Property<Guid>("Id").HasColumnType(Constants.DbConstants.KeyType);
-            builder.Property<Guid>("TenantId").IsRequired();
+            builder.Property<Guid>("TenantId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
             builder.Property<string>("LogoURL").HasColumnType(Constants.DbConstants.String255);
             builder.Property<string>("PageColor1").HasColumnType(Constants.DbConstants.String10);
             builder.Property<string>("PageColor1").HasColumnType(Constants.DbConstants.String10);
             builder.Property<string>("PageColor2").HasColumnType(Constants.DbConstants.String10);
             builder.Property<string>("PageColor3").HasColumnType(Constants.DbConstants.String10);
             builder.Property<string>("PageColor4").HasColumnType(Constants.DbConstants.String10);
+
+            builder.Ignore("Version");
         }
     }
 }

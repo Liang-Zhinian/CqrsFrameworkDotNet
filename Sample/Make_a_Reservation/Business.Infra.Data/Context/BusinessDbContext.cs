@@ -61,8 +61,11 @@ namespace Business.Infra.Data.Context
         public DbSet<Staff> Staffs { get; set; }
         public DbSet<Resource> Resources { get; set; }
         public DbSet<ResourceType> ResourceTypes { get; set; }
+
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<ScheduleLayout> ScheduleLayouts { get; set; }
+        public DbSet<ScheduleLayoutTimeSlot> ScheduleLayoutTimeSlots { get; set; }
+
 
         //public Book2DbContext(DbContextOptions<Book2DbContext> options) : base(options)
         //{
@@ -70,6 +73,10 @@ namespace Business.Infra.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            //modelBuilder.ApplyConfiguration(new AddressMap());
+            //modelBuilder.ApplyConfiguration(new ContactMap());
+            //modelBuilder.ApplyConfiguration(new ImageMap());
             
             modelBuilder.ApplyConfiguration(new BrandingMap());
             modelBuilder.ApplyConfiguration(new TenantMap());
@@ -99,22 +106,12 @@ namespace Business.Infra.Data.Context
             modelBuilder.ApplyConfiguration(new ScheduleLayoutMap());
             modelBuilder.ApplyConfiguration(new ScheduleLayoutTimeSlotMap());
 
+            modelBuilder.ApplyConfiguration(new ServiceMap());
+            modelBuilder.ApplyConfiguration(new ServiceCategoryMap());
+
 
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<TestModel>().HasKey(o => o.Id);
-            modelBuilder.Entity<TestModel>().ToTable("TestTable");
-
-            modelBuilder.Entity<TestModel>()
-                        .Property("Id")
-                        .HasColumnType("binary(16)");
-            modelBuilder.Entity<TestModel>()
-                        .Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType(Constants.DbConstants.String255);
-            modelBuilder.Entity<TestModel>()
-                        .Property<string>("Description")
-                        .HasColumnType(Constants.DbConstants.String2000);
 
 
             /*

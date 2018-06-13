@@ -15,8 +15,11 @@ namespace Business.Infra.Data.Mappings
 
             builder.Property<Guid>("Id").HasColumnType(Constants.DbConstants.KeyType);
             builder.Property<Guid>("StaffId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<Guid>("TenantId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
             builder.Property<string>("UserName").IsRequired().HasColumnType(Constants.DbConstants.String255);
             builder.Property<string>("Password").IsRequired().HasColumnType(Constants.DbConstants.String255);
+
+            builder.Ignore("Version");
 
             builder.HasOne(p => p.Staff)
                    .WithOne(p => p.LoginCredential)

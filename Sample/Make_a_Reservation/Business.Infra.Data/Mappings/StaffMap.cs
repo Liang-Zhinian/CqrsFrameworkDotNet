@@ -20,6 +20,9 @@ namespace Business.Infra.Data.Mappings
             builder.Property<bool>("IsMale").IsRequired();
             builder.Property<string>("Bio");
             builder.Property<string>("ImageUrl").HasColumnType(Constants.DbConstants.String255);
+            builder.Property<Guid>("TenantId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
+
+            builder.Ignore("Version");
 
 
             builder
