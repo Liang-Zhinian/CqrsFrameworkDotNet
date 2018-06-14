@@ -10,7 +10,21 @@ namespace Business.Application.ViewModels
         {
         }
 
-        public TenantViewModel(Guid id, string name, string displayName, string email, string email2, string phone, string phone2, string phone3, string state, string city, string street, string street2, string foreignZip, string country, string postalCode)
+        public TenantViewModel(Guid id, 
+                               string name, 
+                               string displayName, 
+                               string email, 
+                               string email2, 
+                               string phone, 
+                               string phone2, 
+                               string phone3, 
+                               string street,
+                               string street2,
+                               string city, 
+                               string state,
+                               string country, 
+                               string foreignZip, 
+                               string postalCode )
         {
             Id = id;
             Name = name;
@@ -52,11 +66,6 @@ namespace Business.Application.ViewModels
         [EmailAddress]
         [DisplayName("E-mail")]
         public string Email2 { get; set; }
-
-        [Required(ErrorMessage = "The E-mail is Required")]
-        [EmailAddress]
-        [DisplayName("E-mail")]
-        public string Email3 { get; set; }
 
         [Required(ErrorMessage = "The MobilePhone is Required")]
         [MinLength(2)]

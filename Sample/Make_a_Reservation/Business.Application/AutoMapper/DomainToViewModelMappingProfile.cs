@@ -14,18 +14,18 @@ namespace Business.Application.AutoMapper
                 .ConstructUsing(c => new TenantViewModel(c.Id, 
                                                          c.Name,
                                                          c.DisplayName,
-                                                         c.TenantContact.Email,
-                                                         c.TenantContact.Email2,
-                                                         c.TenantContact.Phone,
-                                                         c.TenantContact.Phone2,
-                                                         c.TenantContact.Phone3,
-                                                         c.TenantAddress.State,
-                                                         c.TenantAddress.City,
-                                                         c.TenantAddress.Street,
-                                                         c.TenantAddress.Street2,
-                                                         c.TenantAddress.ForeignZip,
-                                                         c.TenantAddress.Country,
-                                                         c.TenantAddress.PostalCode
+                                                         c.Contact.Email,
+                                                         c.Contact.Email2,
+                                                         c.Contact.Phone,
+                                                         c.Contact.Phone2,
+                                                         c.Contact.Phone3,
+                                                         c.Address.State,
+                                                         c.Address.City,
+                                                         c.Address.Street,
+                                                         c.Address.Street2,
+                                                         c.Address.ForeignZip,
+                                                         c.Address.Country,
+                                                         c.Address.PostalCode
                                                          ));
         }
     }

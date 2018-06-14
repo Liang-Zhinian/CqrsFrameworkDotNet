@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Business.Domain.Models.ValueObjects;
+using Infrastructure.Utils;
 
 namespace Business.Domain.Models.Security
 {
@@ -14,5 +15,10 @@ namespace Business.Domain.Models.Security
         public string Country { get; set; }
         public string PostalCode { get; set; }
         public string ForeignZip { get; set; }
+
+        public TenantAddress(Guid tenantId) : base(tenantId)
+        {
+            Id = GuidUtil.NewSequentialId();
+        }
     }
 }

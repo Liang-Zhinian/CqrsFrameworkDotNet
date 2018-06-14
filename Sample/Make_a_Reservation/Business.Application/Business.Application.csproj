@@ -25,9 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Framework\CqrsFramework\CqrsFramework.csproj" />
     <ProjectReference Include="..\Business.Domain\Business.Domain.csproj" />
-    <ProjectReference Include="..\Registration.Domain\Registration.Domain.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />

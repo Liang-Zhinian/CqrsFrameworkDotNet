@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Infrastructure.Utils;
+
 namespace Business.Domain.Models.Security
 {
     public class Branding : BaseObject
@@ -11,7 +13,9 @@ namespace Business.Domain.Models.Security
         public string PageColor3 { get; set; }
         public string PageColor4 { get; set; }
 
-        public Guid TenantId { get; set; }
-        public virtual Tenant Tenant { get; set; }
+        public Branding(Guid tenantId) : base(tenantId)
+        {
+            Id = GuidUtil.NewSequentialId();
+        }
     }
 }

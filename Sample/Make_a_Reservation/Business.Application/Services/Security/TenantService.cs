@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using Business.Application.EventSourcedNormalizers;
 using Business.Application.Interfaces;
 using Business.Application.ViewModels;
-using CqrsFramework.Commands;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Business.Domain.Commands.Security.Tenants;
-using Registration.Domain.Repositories.Interfaces;
+using Business.Domain.Repositories.Interfaces;
+using Business.Domain.Models.Security;
 
 namespace Business.Application.Services.Security
 {
@@ -15,15 +14,12 @@ namespace Business.Application.Services.Security
     {
         private readonly ITenantRepository _tenantRepository;
         private readonly IMapper _mapper;
-        private readonly ICommandSender Bus;
 
         public TenantService(IMapper mapper,
-                             ITenantRepository tenantRepository,
-                             ICommandSender bus)
+                             ITenantRepository tenantRepository)
         {
             _mapper = mapper;
             _tenantRepository = tenantRepository;
-            Bus = bus;
         }
 
         public void Dispose()
@@ -50,8 +46,9 @@ namespace Business.Application.Services.Security
 
         public void Register(TenantViewModel tenantViewModel)
         {
-            var registerCommand = _mapper.Map<CreateTenantCommand>(tenantViewModel);
-            Bus.Send(registerCommand);
+            var tenant = _mapper.Map<Tenant>(tenantViewModel);
+            _tenantRepository.Add(tenant);
+            _tenantRepository.SaveChanges();
         }
 
         public void Remove(Guid id)

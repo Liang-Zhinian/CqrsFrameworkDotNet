@@ -6,13 +6,19 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGenerators.Mvc" Version="2.1.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Tenant\" />
-    <Folder Include="Views\Tenant\" />
+    <ProjectReference Include="..\Business.Application\Business.Application.csproj" />
+    <ProjectReference Include="..\Business.Domain\Business.Domain.csproj" />
+    <ProjectReference Include="..\Business.Infra.Data\Business.Infra.Data.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Business.Application\Business.Application.csproj" />
+    <Content Remove="Views\Tenant\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Tenant\" />
   </ItemGroup>
 </Project>
