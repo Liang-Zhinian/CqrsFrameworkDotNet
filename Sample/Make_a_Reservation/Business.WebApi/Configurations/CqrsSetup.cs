@@ -18,7 +18,6 @@ using Microsoft.EntityFrameworkCore;
 using CqrsFramework.EventStore.MongoDB;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
-using Business.Domain.CommandHandlers.Security;
 using Registration.Infra.Data.Context;
 using Registration.Domain.Repositories.Interfaces;
 using Registration.Infra.Data.Repositories;
@@ -41,7 +40,7 @@ namespace Business.WebApi.Configurations
             RegisterEventStore(services);
 
             //Scan for commandhandlers and eventhandlers
-            RegisterCommandHandlers(services);
+            //RegisterCommandHandlers(services);
             RegisterEventHandlers(services);
 
             // App service
@@ -53,7 +52,7 @@ namespace Business.WebApi.Configurations
             //Register bus
             var serviceProvider = services.BuildServiceProvider();
             var registrar = new BusRegistrar(new DependencyResolver(serviceProvider));
-            registrar.Register(typeof(StaffCommandHandler));
+            //registrar.Register(typeof(StaffCommandHandler));
             registrar.Register(typeof(TenantEventHandler));
 
 
@@ -99,20 +98,6 @@ namespace Business.WebApi.Configurations
             services.AddScoped<ITenantAppService, TenantService>();
         }
 
-        private static void RegisterCommandHandlers(IServiceCollection services){
-            services.Scan(scan => scan
-                          .FromAssemblies(typeof(StaffCommandHandler).GetTypeInfo().Assembly)
-                    .AddClasses(classes => classes.Where(x =>
-                    {
-                        var allInterfaces = x.GetInterfaces();
-                        return
-                            allInterfaces.Any(y => y.GetTypeInfo().IsGenericType && (y.GetTypeInfo().GetGenericTypeDefinition() == typeof(ICommandHandler<>))) ||
-                            allInterfaces.Any(y => y.GetTypeInfo().IsGenericType && (y.GetTypeInfo().GetGenericTypeDefinition() == typeof(IEventHandler<>)));
-                    }))
-                    .AsSelf()
-                    .WithTransientLifetime()
-                         );
-        }
 
         private static void RegisterEventHandlers(IServiceCollection services) { 
 

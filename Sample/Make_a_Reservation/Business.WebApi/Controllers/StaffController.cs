@@ -5,7 +5,6 @@ using Newtonsoft.Json.Serialization;
 
 using CqrsFramework.Commands;
 using Registration.Domain.Repositories.Interfaces;
-using Business.Domain.Commands.Security.Staffs;
 using Business.WebApi.Requests.Staffs;
 
 namespace Business.WebApi.Controllers

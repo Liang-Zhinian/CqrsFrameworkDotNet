@@ -16,9 +16,32 @@ namespace Business.Domain.Models.Security
         public string PostalCode { get; set; }
         public string ForeignZip { get; set; }
 
+        public TenantAddress()
+        {
+
+        }
+
         public TenantAddress(Guid tenantId) : base(tenantId)
         {
             Id = GuidUtil.NewSequentialId();
+        }
+
+        public TenantAddress(Guid tenantId,
+                             string country,
+                             string state,
+                             string city,
+                             string street,
+                             string street2,
+                             string postalCode,
+                             string foreignZip) : this(tenantId)
+        {
+            Country = country;
+            State = state;
+            City = city;
+            Street = street;
+            Street2 = street2;
+            PostalCode = postalCode;
+            ForeignZip = foreignZip;
         }
     }
 }

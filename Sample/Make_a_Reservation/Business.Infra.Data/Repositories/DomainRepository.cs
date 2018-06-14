@@ -48,5 +48,10 @@ namespace Business.Infra.Data.Repositories
         {
             return DbSet.Where<TEntity>(predicate);
         }
+
+        public TEntity Find(Guid id)
+        {
+            return DbSet.Find(id);
+        }
     }
 }

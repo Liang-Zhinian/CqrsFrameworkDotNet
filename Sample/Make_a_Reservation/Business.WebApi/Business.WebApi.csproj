@@ -26,5 +26,6 @@
     <ProjectReference Include="..\Registration.Infra.Data\Registration.Infra.Data.csproj" />
     <ProjectReference Include="..\Business.Application\Business.Application.csproj" />
     <ProjectReference Include="..\..\..\Framework\CqrsFramework.EventStore.MongoDB\CqrsFramework.EventStore.MongoDB.csproj" />
+    <ProjectReference Include="..\Business.Infra.Data\Business.Infra.Data.csproj" />
   </ItemGroup>
 </Project>

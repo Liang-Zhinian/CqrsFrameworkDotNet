@@ -5,9 +5,9 @@ using Business.Domain.Models.Security;
 
 namespace Business.Domain.Repositories.Interfaces
 {
-    public interface ITenantRepository: IDomainRepository<Tenant>
+    public interface ILocationRepository: IDomainRepository<Location>
     {
-        void Register(Tenant tenant);
-
+        //GetBusinessLocationsWithinRadius
+        //GetLocations
     }
 }

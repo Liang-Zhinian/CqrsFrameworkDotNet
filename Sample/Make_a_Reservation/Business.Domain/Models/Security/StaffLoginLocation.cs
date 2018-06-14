@@ -9,5 +9,16 @@ namespace Business.Domain.Models.Security
 
         public Guid LocationId { get; set; }
         public virtual Location Location { get; set; }
+
+        public StaffLoginLocation()
+        {
+
+        }
+
+        public StaffLoginLocation(Guid staffId, Guid locationId, Guid tenantId) : base(tenantId)
+        {
+            StaffId = staffId;
+            LocationId = locationId;
+        }
     }
 }

@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Linq;
 using Business.Domain.Models;
 using Business.Domain.Models.Security;
+using Business.Domain.Models.Localization;
 
 namespace Business.Infra.Data.Context
 {
@@ -48,6 +49,7 @@ namespace Business.Infra.Data.Context
     //[DbConfigurationType(typeof(MySqlEFConfiguration))] // this attribute is must
     public class BusinessDbContext : DbContext
     {
+
         //public DbSet<TestModel> TestModels { get; set; }
         public DbSet<ServiceCategory> ServiceCategories { get; set; }
         public DbSet<Service> Services { get; set; }

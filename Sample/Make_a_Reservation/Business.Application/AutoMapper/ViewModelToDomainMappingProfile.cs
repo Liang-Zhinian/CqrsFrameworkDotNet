@@ -15,7 +15,7 @@ namespace Business.Application.AutoMapper
                 {
                     Name = c.Name,
                     DisplayName = c.DisplayName,
-                    Contact = new TenantContact
+                    Contact = new TenantContact()
                     {
                         Email = c.Email,
                         Email2 = c.Email2,
@@ -23,7 +23,7 @@ namespace Business.Application.AutoMapper
                         Phone2 = c.Phone2,
                         Phone3 = c.Phone3
                     },
-                    Address = new TenantAddress
+                    Address = new TenantAddress()
                     {
                         Street = c.Street,
                         Street2 = c.Street2,

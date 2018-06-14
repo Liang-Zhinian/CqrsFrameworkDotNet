@@ -10,5 +10,10 @@ namespace Business.Infra.Data.Repositories
     {
         public TenantRepository(BusinessDbContext context):base(context){}
 
+        public void Register(Tenant tenant)
+        {
+            this.Add(tenant);
+            this.SaveChanges();
+        }
     }
 }

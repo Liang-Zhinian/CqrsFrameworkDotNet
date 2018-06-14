@@ -15,15 +15,26 @@ namespace Business.Domain.Models.Security
         public string Description { get; set; }
 
         [NotMapped]
-        public virtual LocationContact Contact { get; set; }
+        public LocationContact Contact { get; set; }
 
         [NotMapped]
-        public virtual LocationAddress Address { get; set; }
+        public LocationAddress Address { get; set; }
 
         public virtual ICollection<LocationImage> AdditionalLocationImages { get; set; }
 
         public virtual ICollection<StaffLoginLocation> StaffLoginLocations { get; set; }
 
         public virtual ICollection<ResourceLocation> ResourceLocations { get; set; }
+
+        public Location()
+        {
+
+        }
+
+        public Location(Guid tenantId) : base(tenantId)
+        {
+            Contact = new LocationContact(Id, tenantId);
+            Address = new LocationAddress(Id, tenantId);
+        }
     }
 }

@@ -13,6 +13,11 @@ namespace Business.Domain.Models.Security
         public string PageColor3 { get; set; }
         public string PageColor4 { get; set; }
 
+        public Branding()
+        {
+
+        } 
+
         public Branding(Guid tenantId) : base(tenantId)
         {
             Id = GuidUtil.NewSequentialId();

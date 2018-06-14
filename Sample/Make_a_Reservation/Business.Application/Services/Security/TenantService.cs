@@ -29,7 +29,7 @@ namespace Business.Application.Services.Security
 
         public IEnumerable<TenantViewModel> GetAll()
         {
-            var list = _tenantRepository.GetAll();
+            var list = _tenantRepository.Find(_=>true);
             IEnumerable<TenantViewModel> tenants = _mapper.Map<IEnumerable<TenantViewModel>>(list);
             return tenants;
         }
@@ -47,8 +47,7 @@ namespace Business.Application.Services.Security
         public void Register(TenantViewModel tenantViewModel)
         {
             var tenant = _mapper.Map<Tenant>(tenantViewModel);
-            _tenantRepository.Add(tenant);
-            _tenantRepository.SaveChanges();
+            _tenantRepository.Register(tenant);
         }
 
         public void Remove(Guid id)

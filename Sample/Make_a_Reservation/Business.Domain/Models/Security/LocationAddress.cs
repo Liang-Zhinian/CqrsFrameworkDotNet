@@ -20,5 +20,34 @@ namespace Business.Domain.Models.Security
 
         public Guid LocationId { get; set; }
         public virtual Location Location { get; set; }
+
+        public LocationAddress()
+        {
+
+        }
+
+        public LocationAddress(Guid locationId, Guid tenantId): base(tenantId)
+        {
+            LocationId = locationId;
+        }
+
+        public LocationAddress(Guid locationId,
+                               Guid tenantId,
+                             string country,
+                             string state,
+                             string city,
+                             string street,
+                             string street2,
+                             string postalCode,
+                               string foreignZip) : this(locationId, tenantId)
+        {
+            Country = country;
+            State = state;
+            City = city;
+            Street = street;
+            Street2 = street2;
+            PostalCode = postalCode;
+            ForeignZip = foreignZip;
+        }
     }
 }

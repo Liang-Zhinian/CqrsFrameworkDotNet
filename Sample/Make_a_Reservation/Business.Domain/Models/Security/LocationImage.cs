@@ -10,5 +10,15 @@ namespace Business.Domain.Models.Security
 
         public Guid LocationId { get; set; }
         public virtual Location Location { get; set; }
+
+        public LocationImage()
+        {
+
+        }
+
+        public LocationImage(Guid locationId, Guid tenantId) : base(tenantId)
+        {
+            LocationId = locationId;
+        }
     }
 }

@@ -37,5 +37,12 @@ namespace Business.Domain.Models.Security
             Branding = new Branding(Id);
             StatusValue = (int)TenantStatus.Created;
         }
+
+        public Tenant(string name, string displayName)
+            : this()
+        {
+            Name = name;
+            DisplayName = displayName;
+        }
     }
 }

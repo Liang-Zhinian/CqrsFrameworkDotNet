@@ -31,17 +31,15 @@ namespace Business.Domain.Models.Security
 
         public virtual ICollection<StaffLoginLocation> StaffLoginLocations { get; set; }
 
-        public Staff(Guid id, string firstName, string lastName, bool isMale)
+
+        public Staff(Guid tenantId) : base(tenantId)
         {
-            ApplyChange(new StaffCreatedEvent(id, firstName, lastName, isMale));
+            Contact = new StaffContact(Id, tenantId);
+            Address = new StaffAddress(Id, tenantId);
         }
 
-        public void Apply(StaffCreatedEvent message)
+        public Staff()
         {
-            Id = message.Id;
-            FirstName = message.FirstName;
-            LastName = message.LastName;
-            IsMale = message.IsMale;
         }
     }
 }
