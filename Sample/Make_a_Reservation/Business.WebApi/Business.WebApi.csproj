@@ -22,10 +22,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Registration.Domain\Registration.Domain.csproj" />
-    <ProjectReference Include="..\Registration.Infra.Data\Registration.Infra.Data.csproj" />
     <ProjectReference Include="..\Business.Application\Business.Application.csproj" />
     <ProjectReference Include="..\..\..\Framework\CqrsFramework.EventStore.MongoDB\CqrsFramework.EventStore.MongoDB.csproj" />
     <ProjectReference Include="..\Business.Infra.Data\Business.Infra.Data.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Controllers\ValuesController.cs" />
+    <Compile Remove="Controllers\StaffController.cs" />
   </ItemGroup>
 </Project>

@@ -55,6 +55,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reservation.WebApi", "Sampl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reservation.Localization", "Sample\Make_a_Reservation\Reservation.Localization\Reservation.Localization.csproj", "{57E81D23-AB3A-4772-B8F6-665B139E1FB0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerRoleCommandProcessor", "Sample\Make_a_Reservation\WorkerRoleCommandProcessor\WorkerRoleCommandProcessor.csproj", "{5261BCC0-2C51-4D44-88EC-6F661767F7BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -141,6 +143,10 @@ Global
 		{57E81D23-AB3A-4772-B8F6-665B139E1FB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57E81D23-AB3A-4772-B8F6-665B139E1FB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57E81D23-AB3A-4772-B8F6-665B139E1FB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5261BCC0-2C51-4D44-88EC-6F661767F7BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5261BCC0-2C51-4D44-88EC-6F661767F7BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5261BCC0-2C51-4D44-88EC-6F661767F7BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5261BCC0-2C51-4D44-88EC-6F661767F7BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -170,5 +176,6 @@ Global
 		{7D3D36E8-3A24-4C51-A94D-389B0B96C208} = {D84826F2-FCF7-457C-9FAA-C7B7E209113B}
 		{27BA0840-FAB8-4137-9658-17B5C624CCBA} = {FBB18596-DF87-4833-A852-C0730D77B93C}
 		{57E81D23-AB3A-4772-B8F6-665B139E1FB0} = {FBB18596-DF87-4833-A852-C0730D77B93C}
+		{5261BCC0-2C51-4D44-88EC-6F661767F7BD} = {FBB18596-DF87-4833-A852-C0730D77B93C}
 	EndGlobalSection
 EndGlobal

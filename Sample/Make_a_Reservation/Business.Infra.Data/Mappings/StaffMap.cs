@@ -18,7 +18,7 @@ namespace Business.Infra.Data.Mappings
             builder.Property<string>("LastName").IsRequired().HasColumnType(Constants.DbConstants.String255);
             builder.Property<string>("DisplayName").HasColumnType(Constants.DbConstants.String255);
             builder.Property<bool>("IsMale").IsRequired();
-            builder.Property<string>("Bio");
+            builder.Property<string>("Bio").HasColumnType(Constants.DbConstants.String2000);
             builder.Property<string>("ImageUrl").HasColumnType(Constants.DbConstants.String255);
             builder.Property<Guid>("TenantId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
 

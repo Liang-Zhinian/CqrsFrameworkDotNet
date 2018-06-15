@@ -5,13 +5,13 @@ namespace Registration.Domain.ReadModel.Security
     public class StaffLoginCredential
     {
         [Key]
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
         public string UserName { get; set; }
 
         public string Password { get; set; }
 
-        public string StaffId { get; set; }
+        public Guid StaffId { get; set; }
 
         public Staff Staff { get; set; }
 

@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Registration.Domain.Repositories.Interfaces
 {
     public interface IReadDbRepository<TEntity> : IDisposable where TEntity : class
     {
+        IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
+        TEntity Find(Guid id);
         void Add(TEntity obj);
-        TEntity GetById(Guid id);
-        IQueryable<TEntity> GetAll();
         void Update(TEntity obj);
         void Remove(Guid id);
         int SaveChanges();

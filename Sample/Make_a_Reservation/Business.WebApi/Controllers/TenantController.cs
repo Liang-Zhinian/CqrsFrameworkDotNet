@@ -1,15 +1,11 @@
 ﻿using System;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-
-using Registration.Domain.Repositories.Interfaces;
-using Business.Application.ViewModels;
-using Microsoft.AspNetCore.Authorization;
-using Business.Application.Interfaces;
-using Business.WebApi.Requests.Tenants;
-using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using Business.Application.Interfaces;
+using Business.Application.ViewModels;
+using Business.Domain.Repositories.Interfaces;
+using Business.WebApi.Requests.Tenants;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Business.WebApi.Controllers
 {
@@ -30,9 +26,7 @@ namespace Business.WebApi.Controllers
         [AllowAnonymous]
         public JsonResult Get()
         {
-            var list = _tenantRepository.GetAll()
-                                    .Include(t => t.Address)
-                                        .Include(t => t.Contact)
+            var list = _tenantRepository.Find(_=>true)
                                     .ToList();
             return Json(list);
         }
@@ -69,12 +63,12 @@ namespace Business.WebApi.Controllers
                 request.Phone,
                 request.Phone2,
                 request.Phone3,
-                request.State,
-                request.City,
                 request.Street,
                 request.Street2,
-                request.ForeignZip,
+                request.City,
+                request.State,
                 request.Country,
+                request.ForeignZip,
                 request.PostalCode
             );
 

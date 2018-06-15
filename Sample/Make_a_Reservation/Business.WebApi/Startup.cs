@@ -1,20 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Business.WebApi.Configurations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Business.Application.Interfaces;
-using Business.Application.Services.Security;
-using Registration.Domain.Repositories.Interfaces;
-using Registration.Infra.Data.Context;
-using Registration.Infra.Data.Repositories;
-using Business.WebApi.Configurations;
-using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -32,6 +20,13 @@ namespace Business.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+        //    var builder = new ConfigurationBuilder()
+        //.SetBasePath(env.ContentRootPath)
+        //.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+        //.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+        //.AddEnvironmentVariables();
+            //Configuration = builder.Build();
+
             services.AddMemoryCache();
 
             services.AddMvc()

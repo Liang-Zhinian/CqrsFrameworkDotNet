@@ -60,8 +60,8 @@ namespace Business.Infra.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
                     DisplayName = table.Column<string>(type: "varchar(2000)", nullable: true),
-                    IsEnabled = table.Column<bool>(nullable: false),
-                    Name = table.Column<string>(type: "varchar(255)", nullable: false)
+                    Name = table.Column<string>(type: "varchar(255)", nullable: false),
+                    StatusValue = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -177,7 +177,7 @@ namespace Business.Infra.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
-                    Bio = table.Column<string>(nullable: true),
+                    Bio = table.Column<string>(type: "varchar(2000)", nullable: true),
                     CanLoginAllLocations = table.Column<bool>(nullable: false),
                     DisplayName = table.Column<string>(type: "varchar(255)", nullable: true),
                     FirstName = table.Column<string>(type: "varchar(255)", nullable: false),
@@ -228,7 +228,7 @@ namespace Business.Infra.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
                     Email = table.Column<string>(type: "varchar(255)", nullable: false),
-                    Email2 = table.Column<string>(type: "varchar(255)", nullable: true),
+                    Email2 = table.Column<string>(type: "varchar(255)", nullable: false),
                     Phone = table.Column<string>(type: "varchar(255)", nullable: false),
                     Phone2 = table.Column<string>(type: "varchar(255)", nullable: true),
                     Phone3 = table.Column<string>(type: "varchar(255)", nullable: true),
@@ -310,7 +310,7 @@ namespace Business.Infra.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
                     Email = table.Column<string>(type: "varchar(255)", nullable: false),
-                    Email2 = table.Column<string>(type: "varchar(255)", nullable: true),
+                    Email2 = table.Column<string>(type: "varchar(255)", nullable: false),
                     LocationId = table.Column<Guid>(type: "char(36)", nullable: false),
                     Phone = table.Column<string>(type: "varchar(255)", nullable: false),
                     Phone2 = table.Column<string>(type: "varchar(255)", nullable: true),
@@ -398,7 +398,7 @@ namespace Business.Infra.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
                     Email = table.Column<string>(type: "varchar(255)", nullable: false),
-                    Email2 = table.Column<string>(type: "varchar(255)", nullable: true),
+                    Email2 = table.Column<string>(type: "varchar(255)", nullable: false),
                     Phone = table.Column<string>(type: "varchar(255)", nullable: false),
                     Phone2 = table.Column<string>(type: "varchar(255)", nullable: true),
                     Phone3 = table.Column<string>(type: "varchar(255)", nullable: true),
@@ -427,7 +427,7 @@ namespace Business.Infra.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
-                    Password = table.Column<string>(type: "varchar(255)", nullable: false),
+                    Password = table.Column<string>(type: "varchar(255)", maxLength: 8, nullable: false),
                     StaffId = table.Column<Guid>(type: "char(36)", nullable: false),
                     TenantId = table.Column<Guid>(type: "char(36)", nullable: false),
                     UserName = table.Column<string>(type: "varchar(255)", nullable: false)

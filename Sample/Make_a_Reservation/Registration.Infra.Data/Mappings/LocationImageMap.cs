@@ -13,8 +13,10 @@ namespace Registration.Infra.Data.Mappings
             builder.HasKey(o => o.Id);
             builder.ToTable(Constants.DbConstants.LocationImageTable);
 
-            builder.Property<string>("Id").HasColumnType("char(32)");
-            builder.Property<string>("ImageURL");
+            builder.Property<Guid>("Id").HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<Guid>("LocationId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<Guid>("TenantId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<string>("ImageUrl").IsRequired().HasColumnType(Constants.DbConstants.String255);
         }
     }
 }

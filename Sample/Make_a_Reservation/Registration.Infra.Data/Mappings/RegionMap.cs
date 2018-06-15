@@ -14,10 +14,9 @@ namespace Registration.Infra.Data.Mappings
             builder.HasKey(o => o.Id);
             builder.ToTable(Constants.DbConstants.RegionTable);
 
-            //builder.Property<string>("Id").HasColumnType("char(32)");
-            builder.Property<string>("RegionString").IsRequired();
-            builder.Property<string>("Abbreviation");
-            builder.Property<string>("EquivalentLocaleName");
+            builder.Property<string>("RegionString").IsRequired().HasColumnType(Constants.DbConstants.String255);
+            builder.Property<string>("Abbreviation").IsRequired().HasColumnType(Constants.DbConstants.String255);
+            builder.Property<string>("EquivalentLocaleName").IsRequired().HasColumnType(Constants.DbConstants.String255);
 
         }
     }

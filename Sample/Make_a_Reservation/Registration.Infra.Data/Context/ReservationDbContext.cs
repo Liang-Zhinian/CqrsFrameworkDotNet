@@ -2,12 +2,9 @@
 using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Registration.Infra.Data.Mappings;
-using System.Configuration;
-using System.Reflection;
-using System.Linq;
 using Registration.Domain.ReadModel;
 using Registration.Domain.ReadModel.Security;
+using Registration.Infra.Data.Mappings;
 
 namespace Registration.Infra.Data.Context
 {
@@ -30,7 +27,7 @@ namespace Registration.Infra.Data.Context
             }
             else if (provider.Equals(DataBaseServer.MySql, StringComparison.InvariantCultureIgnoreCase))
             {
-                return optionsBuilder.UseMySQL(connection);
+                return optionsBuilder.UseMySql(connection);
             }
             else
             {
@@ -44,7 +41,6 @@ namespace Registration.Infra.Data.Context
     {
         public DbSet<Region> Regions { get; set; }
         public DbSet<Domain.ReadModel.TimeZone> TimeZones { get; set; }
-        public DbSet<Branding> Brandings { get; set; }
         public DbSet<Tenant> Tenants { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Staff> Staffs { get; set; }
@@ -55,18 +51,11 @@ namespace Registration.Infra.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new BrandingMap());
             modelBuilder.ApplyConfiguration(new TenantMap());
-            modelBuilder.ApplyConfiguration(new TenantAddressMap());
-            modelBuilder.ApplyConfiguration(new TenantContactMap());
             modelBuilder.ApplyConfiguration(new LocationMap());
             modelBuilder.ApplyConfiguration(new StaffMap());
             modelBuilder.ApplyConfiguration(new TimeZoneMap());
-            modelBuilder.ApplyConfiguration(new LocationAddressMap());
-            modelBuilder.ApplyConfiguration(new LocationContactMap());
             modelBuilder.ApplyConfiguration(new LocationImageMap());
-            modelBuilder.ApplyConfiguration(new StaffAddressMap());
-            modelBuilder.ApplyConfiguration(new StaffContactMap());
             modelBuilder.ApplyConfiguration(new StaffLoginLocationMap());
             modelBuilder.ApplyConfiguration(new StaffLoginCredentialMap());
             modelBuilder.ApplyConfiguration(new TimeZoneMap());

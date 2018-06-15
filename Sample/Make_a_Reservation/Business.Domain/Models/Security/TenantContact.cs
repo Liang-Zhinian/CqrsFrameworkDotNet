@@ -15,7 +15,6 @@ namespace Business.Domain.Models.Security
 
         [EmailAddress(ErrorMessage = "The Email field is not a valid email address.")]
         [Display(Name = "Email")]
-        [Required(AllowEmptyStrings = true)]
         [RegularExpression(@"[\w-]+(\.?[\w-])*\@[\w-]+(\.[\w-]+)+")]
         public string Email2 { get; set; }
 

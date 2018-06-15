@@ -3,6 +3,7 @@ using System.Linq;
 using Registration.Domain.Repositories.Interfaces;
 using Registration.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace Registration.Infra.Data.Repositories
 {
@@ -22,14 +23,14 @@ namespace Registration.Infra.Data.Repositories
             DbSet.Add(obj);
         }
 
-        public virtual TEntity GetById(Guid id)
+        public IQueryable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {
-            return DbSet.Find(id);
+            return DbSet.Where<TEntity>(predicate);
         }
 
-        public virtual IQueryable<TEntity> GetAll()
+        public TEntity Find(Guid id)
         {
-            return DbSet;
+            return DbSet.Find(id);
         }
 
         public virtual void Update(TEntity obj)

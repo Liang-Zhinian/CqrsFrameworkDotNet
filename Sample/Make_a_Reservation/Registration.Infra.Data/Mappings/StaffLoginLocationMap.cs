@@ -14,9 +14,10 @@ namespace Registration.Infra.Data.Mappings
                 .HasKey(t => new { t.Id, t.StaffId, t.LocationId });
             builder.ToTable(Constants.DbConstants.StaffLoginLocationTable);
 
-            builder.Property<string>("Id").HasColumnType("char(32)");
-            builder.Property<string>("StaffId");
-            builder.Property<string>("LocationId");
+            builder.Property<Guid>("Id").HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<Guid>("StaffId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<Guid>("LocationId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<Guid>("TenantId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
 
             
             builder

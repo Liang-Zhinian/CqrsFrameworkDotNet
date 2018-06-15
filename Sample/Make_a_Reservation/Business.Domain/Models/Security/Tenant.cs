@@ -36,6 +36,25 @@ namespace Business.Domain.Models.Security
             Address = new TenantAddress(Id);
             Branding = new Branding(Id);
             StatusValue = (int)TenantStatus.Created;
+
+            ApplyChange(new TenantCreatedEvent()
+            {
+                Id = this.Id,
+                Name = this.Name,
+                DisplayName = this.DisplayName,
+                Email = this.Contact.Email,
+                Email2 = this.Contact.Email2,
+                Phone = this.Contact.Phone,
+                Phone2 = this.Contact.Phone2,
+                Phone3 = this.Contact.Phone3,
+                Street = this.Address.Street,
+                Street2 = this.Address.Street2,
+                ForeignZip = this.Address.ForeignZip,
+                PostalCode = this.Address.PostalCode,
+                City = this.Address.City,
+                State = this.Address.State,
+                Country = this.Address.Country
+            });
         }
 
         public Tenant(string name, string displayName)

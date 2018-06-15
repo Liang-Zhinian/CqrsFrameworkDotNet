@@ -1,14 +1,10 @@
 ﻿using System;
 using System.IO;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Business.Infra.Data.Mappings;
-using System.Configuration;
-using System.Reflection;
-using System.Linq;
 using Business.Domain.Models;
 using Business.Domain.Models.Security;
-using Business.Domain.Models.Localization;
+using Business.Infra.Data.Mappings;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace Business.Infra.Data.Context
 {

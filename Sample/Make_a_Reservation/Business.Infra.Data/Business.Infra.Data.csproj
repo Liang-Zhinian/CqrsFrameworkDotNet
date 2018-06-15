@@ -37,6 +37,7 @@
     <Compile Remove="Migrations\20180612144323_first.cs" />
     <Compile Remove="ReadModel\BaseObject.cs" />
     <Compile Remove="Migrations\20180613102803_first.cs" />
+    <Compile Remove="Migrations\20180613172842_first.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Business.Domain\Business.Domain.csproj" />

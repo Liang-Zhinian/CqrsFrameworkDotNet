@@ -2,16 +2,7 @@
 
 namespace Business.Domain.Events.Security.Tenants
 {
-    public class TenantCreatedEvent : BaseEvent
+    public class TenantCreatedEvent : TenantEvent
     {
-        public string Name { get; private set; }
-        public string DisplayName { get; private set; }
-
-        public TenantCreatedEvent(Guid id, string name, string displayName)
-        {
-            Id = id;
-            Name = name;
-            DisplayName = displayName;
-        }
     }
 }

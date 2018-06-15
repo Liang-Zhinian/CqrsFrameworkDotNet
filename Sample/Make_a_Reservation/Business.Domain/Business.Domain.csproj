@@ -13,6 +13,8 @@
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.4.3" />
     <PackageReference Include="FluentValidation" Version="7.6.100" />
+    <PackageReference Include="RabbitMQ.Client" Version="5.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.0.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +26,7 @@
     <Folder Include="Models\Services\" />
     <Folder Include="Models\Security\" />
     <Folder Include="Repositories\" />
+    <Folder Include="Bus\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\Resource\Resource.cs" />

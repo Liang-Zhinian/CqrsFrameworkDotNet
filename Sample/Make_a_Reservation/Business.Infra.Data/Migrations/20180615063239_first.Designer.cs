@@ -6,13 +6,12 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
 namespace Business.Infra.Data.Migrations
 {
     [DbContext(typeof(BusinessDbContext))]
-    [Migration("20180613172842_first")]
+    [Migration("20180615063239_first")]
     partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -360,6 +359,7 @@ namespace Business.Infra.Data.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("Email2")
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<Guid>("LocationId")
@@ -419,7 +419,8 @@ namespace Business.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("Bio");
+                    b.Property<string>("Bio")
+                        .HasColumnType("varchar(2000)");
 
                     b.Property<bool>("CanLoginAllLocations");
 
@@ -507,6 +508,7 @@ namespace Business.Infra.Data.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("Email2")
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("Phone")
@@ -543,7 +545,8 @@ namespace Business.Infra.Data.Migrations
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("varchar(255)")
+                        .HasMaxLength(8);
 
                     b.Property<Guid>("StaffId")
                         .HasColumnType("char(36)");
@@ -599,11 +602,11 @@ namespace Business.Infra.Data.Migrations
                     b.Property<string>("DisplayName")
                         .HasColumnType("varchar(2000)");
 
-                    b.Property<bool>("IsEnabled");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
+
+                    b.Property<int>("StatusValue");
 
                     b.HasKey("Id");
 
@@ -663,6 +666,7 @@ namespace Business.Infra.Data.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("Email2")
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("Phone")

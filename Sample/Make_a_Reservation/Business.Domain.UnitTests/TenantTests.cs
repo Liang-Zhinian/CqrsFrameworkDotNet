@@ -191,11 +191,4 @@ namespace Business.Domain.UnitTests
             Assert.Equal(expected.Count(), actual.Count());  
         }
     }
-
-    public interface IDbContext
-    {
-        DbSet<Tenant> Blogs { get; set; }
-        //...other properties and members needed for db context
-        int SaveChanges();
-    }
 }

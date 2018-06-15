@@ -27,6 +27,9 @@
     <Compile Remove="Repositories\IReadDbRepository.cs" />
     <Compile Remove="ReadModel\Repositories\MARContext.cs" />
     <Compile Remove="CommandHandlers\Security\StaffCommandHandler.cs" />
+    <Compile Remove="ReadModel\Security\TenantAddress.cs" />
+    <Compile Remove="ReadModel\Security\LocationAddress.cs" />
+    <Compile Remove="ReadModel\Security\Branding.cs" />
   </ItemGroup>
 
   <ItemGroup>

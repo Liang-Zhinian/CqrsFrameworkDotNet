@@ -18,7 +18,7 @@ namespace Registration.Domain.EventHandlers.Security
         public void Handle(StaffCreatedEvent message)
         {
             Staff staff = new Staff();
-            staff.Id = message.Id.ToString();
+            staff.Id = message.Id;
             staff.FirstName = message.FirstName;
             staff.LastName = message.LastName;
             staff.IsMale = message.IsMale;
