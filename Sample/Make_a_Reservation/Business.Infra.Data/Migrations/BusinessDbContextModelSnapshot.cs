@@ -76,8 +76,6 @@ namespace Business.Infra.Data.Migrations
 
                     b.HasIndex("StatusId");
 
-                    b.HasIndex("TenantId");
-
                     b.ToTable("Resource");
                 });
 
@@ -100,8 +98,6 @@ namespace Business.Infra.Data.Migrations
                     b.HasIndex("LocationId");
 
                     b.HasIndex("ResourceId");
-
-                    b.HasIndex("TenantId");
 
                     b.ToTable("ResourceLocation");
                 });
@@ -138,8 +134,6 @@ namespace Business.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TenantId");
-
                     b.ToTable("ResourceType");
                 });
 
@@ -175,8 +169,6 @@ namespace Business.Infra.Data.Migrations
 
                     b.HasIndex("LayoutId");
 
-                    b.HasIndex("TenantId");
-
                     b.ToTable("Schedule");
                 });
 
@@ -192,8 +184,6 @@ namespace Business.Infra.Data.Migrations
                     b.Property<int>("TimeZoneId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TenantId");
 
                     b.HasIndex("TimeZoneId");
 
@@ -236,8 +226,6 @@ namespace Business.Infra.Data.Migrations
 
                     b.HasIndex("LayoutId");
 
-                    b.HasIndex("TenantId");
-
                     b.ToTable("ScheduleLayoutTimeSlot");
                 });
 
@@ -267,9 +255,6 @@ namespace Business.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TenantId")
-                        .IsUnique();
-
                     b.ToTable("Branding");
                 });
 
@@ -279,112 +264,41 @@ namespace Business.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<string>("BusinessDescription")
+                        .IsRequired()
+                        .HasColumnType("varchar(2000)");
+
+                    b.Property<Guid>("BusinessID")
+                        .HasColumnType("char(36)");
+
                     b.Property<string>("Description")
                         .HasColumnType("varchar(2000)");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<double>("Latitude");
+
+                    b.Property<double>("Longitude");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
+                    b.Property<string>("PrimaryTelephone")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("SecondaryTelephone")
+                        .HasColumnType("varchar(255)");
+
                     b.Property<Guid>("TenantId")
                         .HasColumnType("char(36)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TenantId");
 
                     b.ToTable("Location");
-                });
-
-            modelBuilder.Entity("Business.Domain.Models.Security.LocationAddress", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("ForeignZip")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<double>("Latitude");
-
-                    b.Property<Guid>("LocationId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<double>("Longitude");
-
-                    b.Property<string>("PostalCode")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("Street")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("Street2")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<Guid>("TenantId")
-                        .HasColumnType("char(36)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LocationId")
-                        .IsUnique();
-
-                    b.HasIndex("TenantId");
-
-                    b.ToTable("LocationAddress");
-                });
-
-            modelBuilder.Entity("Business.Domain.Models.Security.LocationContact", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("Email2")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<Guid>("LocationId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("Phone2")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("Phone3")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<Guid>("TenantId")
-                        .HasColumnType("char(36)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LocationId")
-                        .IsUnique();
-
-                    b.HasIndex("TenantId");
-
-                    b.ToTable("LocationContact");
                 });
 
             modelBuilder.Entity("Business.Domain.Models.Security.LocationImage", b =>
@@ -407,8 +321,6 @@ namespace Business.Infra.Data.Migrations
 
                     b.HasIndex("LocationId");
 
-                    b.HasIndex("TenantId");
-
                     b.ToTable("LocationImage");
                 });
 
@@ -423,148 +335,17 @@ namespace Business.Infra.Data.Migrations
 
                     b.Property<bool>("CanLoginAllLocations");
 
-                    b.Property<string>("DisplayName")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
                     b.Property<string>("ImageUrl")
                         .HasColumnType("varchar(255)");
 
                     b.Property<bool>("IsMale");
 
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
                     b.Property<Guid>("TenantId")
                         .HasColumnType("char(36)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TenantId");
 
                     b.ToTable("Staff");
-                });
-
-            modelBuilder.Entity("Business.Domain.Models.Security.StaffAddress", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("ForeignZip")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("PostalCode")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<Guid>("StaffId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("Street")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("Street2")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<Guid>("TenantId")
-                        .HasColumnType("char(36)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StaffId")
-                        .IsUnique();
-
-                    b.HasIndex("TenantId");
-
-                    b.ToTable("StaffAddress");
-                });
-
-            modelBuilder.Entity("Business.Domain.Models.Security.StaffContact", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("Email2")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("Phone2")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("Phone3")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<Guid>("StaffId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("TenantId")
-                        .HasColumnType("char(36)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StaffId")
-                        .IsUnique();
-
-                    b.HasIndex("TenantId");
-
-                    b.ToTable("StaffContact");
-                });
-
-            modelBuilder.Entity("Business.Domain.Models.Security.StaffLoginCredential", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)")
-                        .HasMaxLength(8);
-
-                    b.Property<Guid>("StaffId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("TenantId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StaffId")
-                        .IsUnique();
-
-                    b.HasIndex("TenantId");
-
-                    b.ToTable("StaffLoginCredential");
                 });
 
             modelBuilder.Entity("Business.Domain.Models.Security.StaffLoginLocation", b =>
@@ -587,29 +368,7 @@ namespace Business.Infra.Data.Migrations
 
                     b.HasIndex("StaffId");
 
-                    b.HasIndex("TenantId");
-
                     b.ToTable("StaffLoginLocation");
-                });
-
-            modelBuilder.Entity("Business.Domain.Models.Security.Tenant", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("DisplayName")
-                        .HasColumnType("varchar(2000)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<int>("StatusValue");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Tenant");
                 });
 
             modelBuilder.Entity("Business.Domain.Models.Security.TenantAddress", b =>
@@ -618,38 +377,10 @@ namespace Business.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("ForeignZip")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("PostalCode")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("Street")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("Street2")
-                        .HasColumnType("varchar(255)");
-
                     b.Property<Guid>("TenantId")
                         .HasColumnType("char(36)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TenantId")
-                        .IsUnique();
 
                     b.ToTable("TenantAddress");
                 });
@@ -664,27 +395,16 @@ namespace Business.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("Email2")
-                        .IsRequired()
+                    b.Property<string>("PrimaryTelephone")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("Phone2")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("Phone3")
+                    b.Property<string>("SecondaryTelephone")
                         .HasColumnType("varchar(255)");
 
                     b.Property<Guid>("TenantId")
                         .HasColumnType("char(36)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TenantId")
-                        .IsUnique();
 
                     b.ToTable("TenantContact");
                 });
@@ -712,8 +432,6 @@ namespace Business.Infra.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("TenantId");
 
                     b.ToTable("Service");
                 });
@@ -780,11 +498,6 @@ namespace Business.Infra.Data.Migrations
                         .WithMany("Resources")
                         .HasForeignKey("StatusId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Business.Domain.Models.Security.Tenant", "Tenant")
-                        .WithMany()
-                        .HasForeignKey("TenantId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Business.Domain.Models.ResourceLocation", b =>
@@ -798,19 +511,6 @@ namespace Business.Infra.Data.Migrations
                         .WithMany("ResourceLocations")
                         .HasForeignKey("ResourceId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Business.Domain.Models.Security.Tenant", "Tenant")
-                        .WithMany()
-                        .HasForeignKey("TenantId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Business.Domain.Models.ResourceType", b =>
-                {
-                    b.HasOne("Business.Domain.Models.Security.Tenant", "Tenant")
-                        .WithMany()
-                        .HasForeignKey("TenantId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Business.Domain.Models.Schedule", b =>
@@ -819,20 +519,10 @@ namespace Business.Infra.Data.Migrations
                         .WithMany("Schedules")
                         .HasForeignKey("LayoutId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Business.Domain.Models.Security.Tenant", "Tenant")
-                        .WithMany()
-                        .HasForeignKey("TenantId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Business.Domain.Models.ScheduleLayout", b =>
                 {
-                    b.HasOne("Business.Domain.Models.Security.Tenant", "Tenant")
-                        .WithMany()
-                        .HasForeignKey("TenantId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("Business.Domain.Models.TimeZone", "TimeZone")
                         .WithMany("ScheduleLayouts")
                         .HasForeignKey("TimeZoneId")
@@ -845,53 +535,46 @@ namespace Business.Infra.Data.Migrations
                         .WithMany("TimeSlots")
                         .HasForeignKey("LayoutId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Business.Domain.Models.Security.Tenant", "Tenant")
-                        .WithMany()
-                        .HasForeignKey("TenantId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Business.Domain.Models.Security.Branding", b =>
-                {
-                    b.HasOne("Business.Domain.Models.Security.Tenant", "Tenant")
-                        .WithOne("Branding")
-                        .HasForeignKey("Business.Domain.Models.Security.Branding", "TenantId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Business.Domain.Models.Security.Location", b =>
                 {
-                    b.HasOne("Business.Domain.Models.Security.Tenant", "Tenant")
-                        .WithMany("Locations")
-                        .HasForeignKey("TenantId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
+                    b.OwnsOne("Business.Domain.Models.ValueObjects.PostalAddress", "PostalAddress", b1 =>
+                        {
+                            b1.Property<Guid>("LocationId")
+                                .HasColumnType("char(36)");
 
-            modelBuilder.Entity("Business.Domain.Models.Security.LocationAddress", b =>
-                {
-                    b.HasOne("Business.Domain.Models.Security.Location", "Location")
-                        .WithOne("Address")
-                        .HasForeignKey("Business.Domain.Models.Security.LocationAddress", "LocationId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                            b1.Property<string>("City")
+                                .HasColumnName("City")
+                                .HasColumnType("varchar(255)");
 
-                    b.HasOne("Business.Domain.Models.Security.Tenant", "Tenant")
-                        .WithMany()
-                        .HasForeignKey("TenantId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
+                            b1.Property<string>("CountryCode")
+                                .HasColumnName("CountryCode")
+                                .HasColumnType("varchar(255)");
 
-            modelBuilder.Entity("Business.Domain.Models.Security.LocationContact", b =>
-                {
-                    b.HasOne("Business.Domain.Models.Security.Location", "Location")
-                        .WithOne("Contact")
-                        .HasForeignKey("Business.Domain.Models.Security.LocationContact", "LocationId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                            b1.Property<string>("PostalCode")
+                                .HasColumnName("PostalCode")
+                                .HasColumnType("varchar(255)");
 
-                    b.HasOne("Business.Domain.Models.Security.Tenant", "Tenant")
-                        .WithMany()
-                        .HasForeignKey("TenantId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                            b1.Property<string>("StateProvince")
+                                .HasColumnName("StateProvince")
+                                .HasColumnType("varchar(255)");
+
+                            b1.Property<string>("StreetAddress")
+                                .HasColumnName("StreetAddress")
+                                .HasColumnType("varchar(255)");
+
+                            b1.Property<string>("StreetAddress2")
+                                .HasColumnName("StreetAddress2")
+                                .HasColumnType("varchar(255)");
+
+                            b1.ToTable("Location");
+
+                            b1.HasOne("Business.Domain.Models.Security.Location")
+                                .WithOne("PostalAddress")
+                                .HasForeignKey("Business.Domain.Models.ValueObjects.PostalAddress", "LocationId")
+                                .OnDelete(DeleteBehavior.Cascade);
+                        });
                 });
 
             modelBuilder.Entity("Business.Domain.Models.Security.LocationImage", b =>
@@ -899,58 +582,6 @@ namespace Business.Infra.Data.Migrations
                     b.HasOne("Business.Domain.Models.Security.Location", "Location")
                         .WithMany("AdditionalLocationImages")
                         .HasForeignKey("LocationId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Business.Domain.Models.Security.Tenant", "Tenant")
-                        .WithMany()
-                        .HasForeignKey("TenantId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Business.Domain.Models.Security.Staff", b =>
-                {
-                    b.HasOne("Business.Domain.Models.Security.Tenant", "Tenant")
-                        .WithMany("Staffs")
-                        .HasForeignKey("TenantId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Business.Domain.Models.Security.StaffAddress", b =>
-                {
-                    b.HasOne("Business.Domain.Models.Security.Staff", "Staff")
-                        .WithOne("Address")
-                        .HasForeignKey("Business.Domain.Models.Security.StaffAddress", "StaffId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Business.Domain.Models.Security.Tenant", "Tenant")
-                        .WithMany()
-                        .HasForeignKey("TenantId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Business.Domain.Models.Security.StaffContact", b =>
-                {
-                    b.HasOne("Business.Domain.Models.Security.Staff", "Staff")
-                        .WithOne("Contact")
-                        .HasForeignKey("Business.Domain.Models.Security.StaffContact", "StaffId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Business.Domain.Models.Security.Tenant", "Tenant")
-                        .WithMany()
-                        .HasForeignKey("TenantId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Business.Domain.Models.Security.StaffLoginCredential", b =>
-                {
-                    b.HasOne("Business.Domain.Models.Security.Staff", "Staff")
-                        .WithOne("LoginCredential")
-                        .HasForeignKey("Business.Domain.Models.Security.StaffLoginCredential", "StaffId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Business.Domain.Models.Security.Tenant", "Tenant")
-                        .WithMany()
-                        .HasForeignKey("TenantId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -965,27 +596,46 @@ namespace Business.Infra.Data.Migrations
                         .WithMany("StaffLoginLocations")
                         .HasForeignKey("StaffId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Business.Domain.Models.Security.Tenant", "Tenant")
-                        .WithMany()
-                        .HasForeignKey("TenantId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Business.Domain.Models.Security.TenantAddress", b =>
                 {
-                    b.HasOne("Business.Domain.Models.Security.Tenant", "Tenant")
-                        .WithOne("Address")
-                        .HasForeignKey("Business.Domain.Models.Security.TenantAddress", "TenantId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
+                    b.OwnsOne("Business.Domain.Models.ValueObjects.PostalAddress", "PostalAddress", b1 =>
+                        {
+                            b1.Property<Guid>("TenantAddressId")
+                                .HasColumnType("char(36)");
 
-            modelBuilder.Entity("Business.Domain.Models.Security.TenantContact", b =>
-                {
-                    b.HasOne("Business.Domain.Models.Security.Tenant", "Tenant")
-                        .WithOne("Contact")
-                        .HasForeignKey("Business.Domain.Models.Security.TenantContact", "TenantId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                            b1.Property<string>("City")
+                                .HasColumnName("City")
+                                .HasColumnType("varchar(255)");
+
+                            b1.Property<string>("CountryCode")
+                                .HasColumnName("CountryCode")
+                                .HasColumnType("varchar(255)");
+
+                            b1.Property<string>("PostalCode")
+                                .HasColumnName("PostalCode")
+                                .HasColumnType("varchar(255)");
+
+                            b1.Property<string>("StateProvince")
+                                .HasColumnName("StateProvince")
+                                .HasColumnType("varchar(255)");
+
+                            b1.Property<string>("StreetAddress")
+                                .HasColumnName("StreetAddress")
+                                .HasColumnType("varchar(255)");
+
+                            b1.Property<string>("StreetAddress2")
+                                .HasColumnName("StreetAddress2")
+                                .HasColumnType("varchar(255)");
+
+                            b1.ToTable("TenantAddress");
+
+                            b1.HasOne("Business.Domain.Models.Security.TenantAddress")
+                                .WithOne("PostalAddress")
+                                .HasForeignKey("Business.Domain.Models.ValueObjects.PostalAddress", "TenantAddressId")
+                                .OnDelete(DeleteBehavior.Cascade);
+                        });
                 });
 
             modelBuilder.Entity("Business.Domain.Models.Service", b =>
@@ -993,11 +643,6 @@ namespace Business.Infra.Data.Migrations
                     b.HasOne("Business.Domain.Models.ServiceCategory", "Category")
                         .WithMany("Services")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Business.Domain.Models.Security.Tenant", "Tenant")
-                        .WithMany()
-                        .HasForeignKey("TenantId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

@@ -6,6 +6,7 @@ namespace Business.Domain.UnitTests
 {
 	public class StaffTests
     {
+        /*
         private Tenant newTenant;
         private Location newLocation;
         private Staff newStaff;
@@ -75,5 +76,6 @@ namespace Business.Domain.UnitTests
             Assert.Equal(newStaff.Id, newStaff.Contact.StaffId);
             Assert.Equal(newTenant.Id, newStaff.Contact.TenantId);
         }
+        */
     }
 }

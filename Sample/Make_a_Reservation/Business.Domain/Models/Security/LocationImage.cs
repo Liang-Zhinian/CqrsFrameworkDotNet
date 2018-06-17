@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Business.Domain.Models.ValueObjects;
+using Infrastructure.Utils;
 
 namespace Business.Domain.Models.Security
 {
@@ -13,7 +14,7 @@ namespace Business.Domain.Models.Security
 
         public LocationImage()
         {
-
+            Id = GuidUtil.NewSequentialId();
         }
 
         public LocationImage(Guid locationId, Guid tenantId) : base(tenantId)

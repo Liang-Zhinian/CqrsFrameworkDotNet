@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <RuntimeFrameworkVersion>2.0.0</RuntimeFrameworkVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\Framework\CqrsFramework\CqrsFramework.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="TenantContact.cs" />
+    <Compile Remove="MigrationMappings\LocationAddressMap.cs" />
+    <Compile Remove="Migrations\20180616122636_first.cs" />
+    <Compile Remove="Migrations\20180616122636_first.Designer.cs" />
+    <Compile Remove="Migrations\BizInfoDbContextModelSnapshot.cs" />
+    <Compile Remove="Migrations\20180616122742_first.cs" />
+    <Compile Remove="Migrations\20180616123421_first.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.3" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MigrationMappings\" />
+    <Folder Include="Constants\" />
+  </ItemGroup>
+</Project>

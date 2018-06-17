@@ -8,13 +8,6 @@ namespace Business.Domain.Models.Security
 {
     public class Staff : BaseObject
     {
-
-        public string FirstName { get; set; }
-
-        public string LastName { get; set; }
-
-        public string DisplayName { get; set; }
-
         public bool IsMale { get; set; }
 
         public string Bio { get; set; }
@@ -23,22 +16,13 @@ namespace Business.Domain.Models.Security
 
         public bool CanLoginAllLocations { get; set; }
 
-        public virtual StaffLoginCredential LoginCredential { get; set; }
-
-        public StaffAddress Address { get; set; }
-
-        public StaffContact Contact { get; set; }
-
         public virtual ICollection<StaffLoginLocation> StaffLoginLocations { get; set; }
-
 
         public Staff(Guid tenantId) : base(tenantId)
         {
-            Contact = new StaffContact(Id, tenantId);
-            Address = new StaffAddress(Id, tenantId);
         }
 
-        public Staff()
+        protected Staff()
         {
         }
     }

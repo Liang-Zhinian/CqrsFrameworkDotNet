@@ -6,6 +6,7 @@ namespace Business.Domain.UnitTests
 {
 	public class LocationTests
     {
+        /*
         private Tenant newTenant;
         private Location newLocation;
 
@@ -63,6 +64,6 @@ namespace Business.Domain.UnitTests
             Assert.NotEqual<Guid>(newLocation.Contact.Id, Guid.Empty);
             Assert.Equal(newLocation.Id, newLocation.Contact.LocationId);
             Assert.Equal(newTenant.Id, newLocation.Contact.TenantId);
-        }
+        }*/
     }
 }

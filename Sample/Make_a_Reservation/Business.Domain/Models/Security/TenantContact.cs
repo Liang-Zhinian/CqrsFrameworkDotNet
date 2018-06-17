@@ -13,14 +13,15 @@ namespace Business.Domain.Models.Security
         [RegularExpression(@"[\w-]+(\.?[\w-])*\@[\w-]+(\.[\w-]+)+")]
         public string Email { get; set; }
 
-        [EmailAddress(ErrorMessage = "The Email field is not a valid email address.")]
-        [Display(Name = "Email")]
-        [RegularExpression(@"[\w-]+(\.?[\w-])*\@[\w-]+(\.[\w-]+)+")]
-        public string Email2 { get; set; }
+        //[EmailAddress(ErrorMessage = "The Email field is not a valid email address.")]
+        //[Display(Name = "Email")]
+        //[RegularExpression(@"[\w-]+(\.?[\w-])*\@[\w-]+(\.[\w-]+)+")]
+        //public string Email2 { get; set; }
 
-        public string Phone { get; set; }
-        public string Phone2 { get; set; }
-        public string Phone3 { get; set; }
+
+        public string PrimaryTelephone { get; set; }
+
+        public string SecondaryTelephone { get; set; }
 
         public TenantContact()
         {
@@ -34,16 +35,12 @@ namespace Business.Domain.Models.Security
 
         public TenantContact(Guid tenantId,
                              string email,
-                             string email2,
-                             string phone,
-                             string phone2,
-                             string phone3) : this(tenantId)
+                             string primaryTelephone,
+                             string secondaryTelephone) : this(tenantId)
         {
             Email = email;
-            Email2 = email2;
-            Phone = phone;
-            Phone2 = phone2;
-            Phone3 = phone3;
+            PrimaryTelephone = primaryTelephone;
+            SecondaryTelephone = secondaryTelephone;
         }
     }
 }

@@ -14,9 +14,6 @@ namespace Business.Infra.Data.Mappings
             builder.ToTable(Constants.DbConstants.StaffTable);
 
             builder.Property<Guid>("Id").HasColumnType(Constants.DbConstants.KeyType);
-            builder.Property<string>("FirstName").IsRequired().HasColumnType(Constants.DbConstants.String255);
-            builder.Property<string>("LastName").IsRequired().HasColumnType(Constants.DbConstants.String255);
-            builder.Property<string>("DisplayName").HasColumnType(Constants.DbConstants.String255);
             builder.Property<bool>("IsMale").IsRequired();
             builder.Property<string>("Bio").HasColumnType(Constants.DbConstants.String2000);
             builder.Property<string>("ImageUrl").HasColumnType(Constants.DbConstants.String255);
@@ -24,11 +21,6 @@ namespace Business.Infra.Data.Mappings
 
             builder.Ignore("Version");
 
-
-            builder
-                .HasOne(b => b.Tenant)
-                .WithMany(p => p.Staffs)
-                .HasForeignKey(p => p.TenantId);
         }
     }
 }

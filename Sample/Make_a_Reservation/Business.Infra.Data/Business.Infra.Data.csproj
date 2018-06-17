@@ -16,7 +16,6 @@
     <Folder Include="Constants\" />
     <Folder Include="Seeders\" />
     <Folder Include="Mappings\" />
-    <Folder Include="Migrations\" />
     <Folder Include="Repositories\" />
   </ItemGroup>
   <ItemGroup>
@@ -38,6 +37,13 @@
     <Compile Remove="ReadModel\BaseObject.cs" />
     <Compile Remove="Migrations\20180613102803_first.cs" />
     <Compile Remove="Migrations\20180613172842_first.cs" />
+    <Compile Remove="Mappings\LocationAddressMap.cs" />
+    <Compile Remove="Mappings\LocationContactMap.cs" />
+    <Compile Remove="Mappings\StaffLoginCredentialMap.cs" />
+    <Compile Remove="Migrations\20180615063239_first.cs" />
+    <Compile Remove="Migrations\20180616150123_first.cs" />
+    <Compile Remove="Migrations\20180616151021_first.cs" />
+    <Compile Remove="Migrations\20180616151401_first.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Business.Domain\Business.Domain.csproj" />

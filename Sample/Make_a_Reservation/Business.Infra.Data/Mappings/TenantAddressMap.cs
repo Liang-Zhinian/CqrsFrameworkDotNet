@@ -14,21 +14,18 @@ namespace Business.Infra.Data.Mappings
             builder.ToTable(Constants.DbConstants.TenantAddressTable);
 
             builder.Property<Guid>("Id").HasColumnType(Constants.DbConstants.KeyType);
-            //builder.Property<Guid>("AddressId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
             builder.Property<Guid>("TenantId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
-            builder.Property<string>("Street").IsRequired().HasColumnType(Constants.DbConstants.String255);
-            builder.Property<string>("Street2").HasColumnType(Constants.DbConstants.String255);
-            builder.Property<string>("City").IsRequired().HasColumnType(Constants.DbConstants.String255);
-            builder.Property<string>("State").IsRequired().HasColumnType(Constants.DbConstants.String255);
-            builder.Property<string>("Country").IsRequired().HasColumnType(Constants.DbConstants.String255);
-            builder.Property<string>("ForeignZip").HasColumnType(Constants.DbConstants.String255);
-            builder.Property<string>("PostalCode").HasColumnType(Constants.DbConstants.String255);
 
+            builder.OwnsOne(_ => _.PostalAddress, cb => {
+                cb.Property("TenantAddressId").HasColumnType(Constants.DbConstants.KeyType);
+                cb.Property<string>(e => e.StreetAddress).HasColumnName("StreetAddress").HasColumnType(Constants.DbConstants.String255);
+                cb.Property<string>(e => e.StreetAddress2).HasColumnName("StreetAddress2").HasColumnType(Constants.DbConstants.String255);
+                cb.Property<string>(e => e.City).HasColumnName("City").HasColumnType(Constants.DbConstants.String255);
+                cb.Property<string>(e => e.StateProvince).HasColumnName("StateProvince").HasColumnType(Constants.DbConstants.String255);
+                cb.Property<string>(e => e.CountryCode).HasColumnName("CountryCode").HasColumnType(Constants.DbConstants.String255);
+                cb.Property<string>(e => e.PostalCode).HasColumnName("PostalCode").HasColumnType(Constants.DbConstants.String255);
+            });
             builder.Ignore("Version");
-
-            builder.HasOne(p => p.Tenant)
-                   .WithOne(p => p.Address)
-                   .HasForeignKey<TenantAddress>(f => f.TenantId);
         }
     }
 }

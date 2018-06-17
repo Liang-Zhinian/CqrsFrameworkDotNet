@@ -15,6 +15,7 @@ namespace Business.Domain.UnitTests
 {
 	public class TenantTests
     {
+        /*
         private ITenantRepository repository;
         public TenantTests()
         {
@@ -190,5 +191,6 @@ namespace Business.Domain.UnitTests
             // Assert  
             Assert.Equal(expected.Count(), actual.Count());  
         }
+        */
     }
 }
