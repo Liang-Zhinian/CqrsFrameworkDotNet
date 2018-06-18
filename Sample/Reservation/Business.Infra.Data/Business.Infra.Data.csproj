@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+<TargetFramework>netcoreapp2.0</TargetFramework>
+<RuntimeFrameworkVersion>2.0.0</RuntimeFrameworkVersion>
+<AssemblyName>Business.Infra.Data</AssemblyName>
+<PackageId>Business.Infra.Data</PackageId>
+<AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
+<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+<GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Context\" />
+    <Folder Include="Mappings\" />
+    <Folder Include="Constants\" />
+    <Folder Include="Seeders\" />
+    <Folder Include="Mappings\" />
+    <Folder Include="Repositories\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="2.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.0.2" />
+    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.4.0" />
+    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.11" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Migrations\20180611175023_first.cs" />
+    <Compile Remove="Migrations\20180612133835_first.cs" />
+    <Compile Remove="Migrations\20180612144323_first.cs" />
+    <Compile Remove="ReadModel\BaseObject.cs" />
+    <Compile Remove="Migrations\20180613102803_first.cs" />
+    <Compile Remove="Migrations\20180613172842_first.cs" />
+    <Compile Remove="Mappings\LocationAddressMap.cs" />
+    <Compile Remove="Mappings\LocationContactMap.cs" />
+    <Compile Remove="Mappings\StaffLoginCredentialMap.cs" />
+    <Compile Remove="Migrations\20180615063239_first.cs" />
+    <Compile Remove="Migrations\20180616150123_first.cs" />
+    <Compile Remove="Migrations\20180616151021_first.cs" />
+    <Compile Remove="Migrations\20180616151401_first.cs" />
+    <Compile Remove="Repositories\TenantRepository.cs" />
+    <Compile Remove="Migrations\20180616151522_first.cs" />
+    <Compile Remove="Migrations\20180618070615_first.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Business.Domain\Business.Domain.csproj" />
+  </ItemGroup>
+</Project>

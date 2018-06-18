@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols></DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " />
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="System.Data.Common" Version="4.3.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.4.3" />
+    <PackageReference Include="FluentValidation" Version="7.6.100" />
+    <PackageReference Include="RabbitMQ.Client" Version="5.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Framework\CqrsFramework\CqrsFramework.csproj" />
+    <ProjectReference Include="..\..\..\Framework\CqrsFramework.Extensions\CqrsFramework.Extensions.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\..\SaaSEqt\Common\SaaSEqt.Common.csproj" />
+    <ProjectReference Include="..\..\SaaSEqt\IdentityAccess\IdentityAccess\SaaSEqt.IdentityAccess.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\Services\" />
+    <Folder Include="Models\Security\" />
+    <Folder Include="Repositories\" />
+    <Folder Include="Bus\" />
+    <Folder Include="Events\ServiceCategory\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Models\Resource\Resource.cs" />
+    <Compile Remove="Models\Resource\ResourceStatus.cs" />
+    <Compile Remove="Models\ServiceCategory\ReservationStatus.cs" />
+    <Compile Remove="CommandHandlers\CommandHandler.cs" />
+    <Compile Remove="Commands\BaseCommand.cs" />
+    <Compile Remove="Commands\Security\Locations\CreateLocationCommand.cs" />
+    <Compile Remove="Models\Security\StaffAddress.cs" />
+  </ItemGroup>
+</Project>
