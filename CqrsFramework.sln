@@ -63,6 +63,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SaaSEqt.IdentityAccess.Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reservation.ClientWebApi", "Sample\Reservation\Reservation.ClientWebApi\Reservation.ClientWebApi.csproj", "{5F235465-52D6-4154-99BA-F53D76938827}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{653B9F3C-44DF-48CA-BDD2-B3EC336B749B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQTest", "Sample\RabbitMQTest\RabbitMQTest.csproj", "{695284A9-B46C-4F85-8271-A561FC2D2200}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -157,6 +161,14 @@ Global
 		{5F235465-52D6-4154-99BA-F53D76938827}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F235465-52D6-4154-99BA-F53D76938827}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F235465-52D6-4154-99BA-F53D76938827}.Release|Any CPU.Build.0 = Release|Any CPU
+		{653B9F3C-44DF-48CA-BDD2-B3EC336B749B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{653B9F3C-44DF-48CA-BDD2-B3EC336B749B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{653B9F3C-44DF-48CA-BDD2-B3EC336B749B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{653B9F3C-44DF-48CA-BDD2-B3EC336B749B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{695284A9-B46C-4F85-8271-A561FC2D2200}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{695284A9-B46C-4F85-8271-A561FC2D2200}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{695284A9-B46C-4F85-8271-A561FC2D2200}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{695284A9-B46C-4F85-8271-A561FC2D2200}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -190,5 +202,6 @@ Global
 		{A7FA695C-CE1E-4861-8768-37B5E3FF93B6} = {9A938A86-5B6C-4978-A59B-7CA71B9F73E7}
 		{51A82810-CB40-4948-ADFB-0D3E95F83514} = {9A938A86-5B6C-4978-A59B-7CA71B9F73E7}
 		{5F235465-52D6-4154-99BA-F53D76938827} = {20D3287F-2612-41AC-90DD-8A91450FBC7A}
+		{695284A9-B46C-4F85-8271-A561FC2D2200} = {FBB18596-DF87-4833-A852-C0730D77B93C}
 	EndGlobalSection
 EndGlobal

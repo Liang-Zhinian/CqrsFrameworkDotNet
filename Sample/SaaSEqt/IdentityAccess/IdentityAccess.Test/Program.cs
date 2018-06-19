@@ -97,7 +97,7 @@ namespace SaaSEqt.IdentityAccess.Test
 
                 ProvisionTenantCommand command = new ProvisionTenantCommand(
                     "abc"+Guid.NewGuid().ToString().Replace("-", ""),
-                    "描述",
+                    "description",
                     "Jack"+ Guid.NewGuid().ToString(),
                     "Leung"+ Guid.NewGuid().ToString(),
                     "abc"+Guid.NewGuid().ToString().Replace("-","")+"lzhinian@me.com",

@@ -27,7 +27,7 @@ namespace Business.Domain.Bus
 
         public void Publish<T>(T @event) where T : IEvent
         {
-            string message = JsonConvert.SerializeObject(@event);
+            string message = JsonConvert.SerializeObject(@event, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All });
             SendMessage(message);
         }
 
@@ -39,7 +39,6 @@ namespace Business.Domain.Bus
             {
                 using (var channel = connection.CreateModel())
                 {
-
                     var body = Encoding.UTF8.GetBytes(message);
 
                     var properties = new BasicProperties();
