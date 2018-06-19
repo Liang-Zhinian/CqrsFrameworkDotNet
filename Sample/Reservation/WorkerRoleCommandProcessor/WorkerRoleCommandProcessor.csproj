@@ -8,12 +8,18 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="2.1.0" />
-    <PackageReference Include="RabbitMQ.Client" Version="5.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Framework\CqrsFramework\CqrsFramework.csproj" />
     <ProjectReference Include="..\Registration.Domain\Registration.Domain.csproj" />
     <ProjectReference Include="..\Registration.Infra.Data\Registration.Infra.Data.csproj" />
+    <ProjectReference Include="..\Business.Contracts\Business.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\Framework\CqrsFramework.Bus.RabbitMQ\CqrsFramework.Bus.RabbitMQ.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="DelegateAdjuster.cs" />
+    <Compile Remove="HandlerRegistrar.cs" />
+    <Compile Remove="TestEventHandler.cs" />
   </ItemGroup>
 </Project>

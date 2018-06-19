@@ -1,7 +1,7 @@
 ﻿using System;
 using CqrsFramework.Events;
 
-namespace Business.Domain.Events.ServiceCategory
+namespace Business.Contracts.Events.ServiceCategory
 {
     public class ServiceCreatedEvent :ServiceEvent, IEvent
     {

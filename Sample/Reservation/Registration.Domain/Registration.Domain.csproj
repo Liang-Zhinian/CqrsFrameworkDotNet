@@ -30,23 +30,23 @@
     <Compile Remove="ReadModel\Security\TenantAddress.cs" />
     <Compile Remove="ReadModel\Security\LocationAddress.cs" />
     <Compile Remove="ReadModel\Security\Branding.cs" />
+    <Compile Remove="Commands\BaseCommand.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.4.3" />
-    <PackageReference Include="FluentValidation" Version="7.6.100" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Framework\CqrsFramework\CqrsFramework.csproj" />
     <ProjectReference Include="..\..\..\Framework\CqrsFramework.Extensions\CqrsFramework.Extensions.csproj" />
-    <ProjectReference Include="..\Business.Domain\Business.Domain.csproj" />
+    <ProjectReference Include="..\Business.Contracts\Business.Contracts.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\Registration.Contracts\Registration.Contracts.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Commands\" />
-    <Folder Include="Events\" />
     <Folder Include="CommandHandlers\" />
     <Folder Include="EventHandlers\" />
     <Folder Include="Validations\" />

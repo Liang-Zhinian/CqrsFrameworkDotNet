@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Business.Domain.Events.Security.Staffs;
 using SaaSEqt.IdentityAccess.Domain.Models;
 
 namespace Business.Domain.Models.Security

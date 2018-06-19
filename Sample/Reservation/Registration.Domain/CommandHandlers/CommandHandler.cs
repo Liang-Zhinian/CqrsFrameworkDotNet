@@ -2,7 +2,7 @@
 using CqrsFramework.Commands;
 using CqrsFramework.Domain;
 using CqrsFramework.Events;
-using Registration.Domain.Commands;
+using Registration.Contracts.Commands;
 using MediatR;
 
 namespace Registration.Domain.CommandHandlers

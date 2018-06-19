@@ -1,7 +1,7 @@
 ﻿using CqrsFramework.Events;
 using System;
 
-namespace Registration.Domain.Events
+namespace Registration.Contracts.Events
 {
     public class BaseEvent : IEvent
     {

@@ -18,7 +18,7 @@ namespace RabbitMQTest
 
         static void Main(string[] args)
         {
-            //Timer timer = new Timer(HandleTimerCallback, null, 1000, 2000);
+            Timer timer = new Timer(HandleTimerCallback, null, 1000, 2000);
 
             try
             {
@@ -27,8 +27,8 @@ namespace RabbitMQTest
                 Console.WriteLine("Hello World!");
 
                 var factory = new ConnectionFactory() { HostName = "localhost" };
-                using (var connection = factory.CreateConnection())
-                using (var channel = connection.CreateModel())
+                var connection = factory.CreateConnection();
+                var channel = connection.CreateModel();
                 {
                     channel.ExchangeDeclare(exchange: "book2", type: "fanout", durable: true, autoDelete: false);
 
@@ -48,7 +48,7 @@ namespace RabbitMQTest
 
                         Console.WriteLine(" [x] {0}", message);
 
-                        channel.BasicAck(ea.DeliveryTag, false);
+                        //channel.BasicAck(ea.DeliveryTag, false);
 
                     };
                     channel.BasicConsume(queue: queueName,

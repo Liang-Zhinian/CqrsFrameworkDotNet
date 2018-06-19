@@ -29,7 +29,6 @@
     <Folder Include="Models\Security\" />
     <Folder Include="Repositories\" />
     <Folder Include="Bus\" />
-    <Folder Include="Events\ServiceCategory\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\Resource\Resource.cs" />
@@ -39,5 +38,7 @@
     <Compile Remove="Commands\BaseCommand.cs" />
     <Compile Remove="Commands\Security\Locations\CreateLocationCommand.cs" />
     <Compile Remove="Models\Security\StaffAddress.cs" />
+    <Compile Remove="Events\BaseEvent.cs" />
+    <Compile Remove="EventHandlers\ServiceCategoryEventHandler.cs" />
   </ItemGroup>
 </Project>

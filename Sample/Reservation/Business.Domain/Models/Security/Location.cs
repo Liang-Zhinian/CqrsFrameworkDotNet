@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using CqrsFramework.Domain;
-using Business.Domain.Events.Security.Locations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Infrastructure.Utils;
 using Business.Domain.Models.ValueObjects;

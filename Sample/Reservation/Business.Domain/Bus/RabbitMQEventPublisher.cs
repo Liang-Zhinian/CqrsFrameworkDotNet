@@ -20,7 +20,7 @@ namespace Business.Domain.Bus
 
         public RabbitMQEventPublisher(string host)
         {
-            this.busName = "InterProcessBus";
+            this.busName = "book2";
 
             this.connectionString = host;
         }
@@ -48,7 +48,7 @@ namespace Business.Domain.Bus
                     };
 
                     channel.ExchangeDeclare(busName, "fanout", true, false);
-                    channel.QueueDeclare("TestQueue", true, false, false, null);
+                    channel.QueueDeclare("book2events", true, false, false, null);
                     channel.BasicPublish(exchange: busName,
                                          routingKey: "",
                                          basicProperties: properties,

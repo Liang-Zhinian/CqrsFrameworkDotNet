@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Business.Domain.Events.Security.Tenants
+namespace Business.Contracts.Events.Security.Tenants
 {
     public class TenantEvent : BaseEvent
     {

@@ -1,19 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using Business.Application.EventSourcedNormalizers;
+using System.Linq;
+using AutoMapper;
 using Business.Application.Interfaces;
 using Business.Application.ViewModels;
-using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using Business.Domain.Repositories.Interfaces;
-using Business.Domain.Models.Security;
-using CqrsFramework.Domain;
-using SaaSEqt.IdentityAccess.Application;
-using System.Linq;
-using SaaSEqt.IdentityAccess.Application.Commands;
+using Business.Contracts.Events.ServiceCategory;
 using Business.Domain.Models;
+using Business.Domain.Repositories.Interfaces;
+using CqrsFramework.Domain;
 using CqrsFramework.Events;
-using Business.Domain.Events.ServiceCategory;
 
 namespace Business.Application.Services
 {

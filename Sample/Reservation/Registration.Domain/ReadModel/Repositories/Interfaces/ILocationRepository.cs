@@ -1,9 +1,9 @@
 ﻿using System;
-using Registration.Domain.ReadModel;
+using Registration.Domain.ReadModel.Security;
 
 namespace Registration.Domain.Repositories.Interfaces
 {
-    public interface IServiceRepository: IReadDbRepository<Service>
+    public interface ILocationRepository: IReadDbRepository<Location>
     {
         //Staff GetByEmail(string email);
     }

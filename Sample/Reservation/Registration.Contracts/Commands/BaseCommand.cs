@@ -1,11 +1,11 @@
 ﻿using CqrsFramework.Commands;
 using System;
 using FluentValidation.Results;
-using MediatR;
+//using MediatR;
 
-namespace Registration.Domain.Commands
+namespace Registration.Contracts.Commands
 {
-    public abstract class BaseCommand : ICommand, IRequest
+    public abstract class BaseCommand : ICommand//, IRequest
     {
         /// <summary>
         /// The Aggregate ID of the Aggregate Root being changed

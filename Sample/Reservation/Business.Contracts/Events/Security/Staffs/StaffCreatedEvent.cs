@@ -1,7 +1,6 @@
 ﻿using System;
-using Business.Domain.Models.ValueObjects;
 
-namespace Business.Domain.Events.Security.Staffs
+namespace Business.Contracts.Events.Security.Staffs
 {
     public class StaffCreatedEvent : BaseEvent
     {

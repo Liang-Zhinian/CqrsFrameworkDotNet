@@ -1,9 +1,9 @@
 ﻿using CqrsFramework.Events;
 using System;
 
-namespace Business.Domain.Events
+namespace Business.Contracts.Events
 {
-    public class BaseEvent : IEvent
+    public class BaseEvent
     {
         /// <summary>
         /// The ID of the Aggregate being affected by this event

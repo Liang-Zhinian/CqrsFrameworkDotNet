@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Business.Domain.Events.ServiceCategory
+namespace Business.Contracts.Events.ServiceCategory
 {
     public class ServiceEvent
     {

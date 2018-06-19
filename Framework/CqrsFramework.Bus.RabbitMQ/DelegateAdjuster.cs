@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace WorkerRoleCommandProcessor
+namespace CqrsFramework.Bus.RabbitMQ
 {
     public static class DelegateAdjuster
     {
