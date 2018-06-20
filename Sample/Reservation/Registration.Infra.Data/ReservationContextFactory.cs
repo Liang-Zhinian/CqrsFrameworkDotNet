@@ -10,7 +10,7 @@ namespace Registration.Infra.Data
         public ReservationDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<ReservationDbContext>();
-            optionsBuilder.UseMySql("Server=localhost;database=IdentityAccess;uid=root;pwd=P@ssword;charset=utf8;port=3306;SslMode=None");
+            optionsBuilder.UseMySql("Server=localhost;database=book2;uid=root;pwd=P@ssword;charset=utf8;port=3306;SslMode=None;old guids=true");
 
             return new ReservationDbContext(optionsBuilder.Options);
         }

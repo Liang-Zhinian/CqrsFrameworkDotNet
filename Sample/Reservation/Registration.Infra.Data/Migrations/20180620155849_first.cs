@@ -25,10 +25,33 @@ namespace Registration.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ServiceCategoryView",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "binary(16)", nullable: false),
+                    CancelOffset = table.Column<int>(nullable: false),
+                    Description = table.Column<string>(type: "varchar(2000)", nullable: false),
+                    IsInternal = table.Column<bool>(nullable: false),
+                    Name = table.Column<string>(type: "varchar(255)", nullable: false),
+                    ParentCategoryId = table.Column<Guid>(type: "binary(16)", nullable: false),
+                    ScheduleTypeValue = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ServiceCategoryView", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ServiceCategoryView_ServiceCategoryView_ParentCategoryId",
+                        column: x => x.ParentCategoryId,
+                        principalTable: "ServiceCategoryView",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TenantView",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<Guid>(type: "binary(16)", nullable: false),
                     Description = table.Column<string>(maxLength: 2000, nullable: true),
                     DisplayName = table.Column<string>(type: "varchar(2000)", nullable: true),
                     Email = table.Column<string>(type: "varchar(255)", nullable: false),
@@ -40,7 +63,7 @@ namespace Registration.Infra.Data.Migrations
                     PageColor4 = table.Column<string>(type: "varchar(10)", nullable: true),
                     PrimaryTelephone = table.Column<string>(type: "varchar(255)", maxLength: 100, nullable: false),
                     SecondaryTelephone = table.Column<string>(type: "varchar(255)", maxLength: 100, nullable: true),
-                    TenantId = table.Column<Guid>(nullable: false),
+                    TenantId = table.Column<Guid>(type: "binary(16)", nullable: false),
                     PostalAddress_City = table.Column<string>(type: "varchar(255)", nullable: true),
                     PostalAddress_CountryCode = table.Column<string>(type: "varchar(255)", nullable: true),
                     PostalAddress_PostalCode = table.Column<string>(type: "varchar(255)", nullable: true),
@@ -69,16 +92,68 @@ namespace Registration.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "HomePageImageView",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    CategoryId = table.Column<Guid>(type: "binary(16)", nullable: false),
+                    CategoryName = table.Column<string>(type: "varchar(255)", nullable: false),
+                    Data = table.Column<string>(type: "mediumtext", nullable: false),
+                    Name = table.Column<string>(type: "varchar(255)", nullable: false),
+                    ParentCategoryId = table.Column<Guid>(type: "binary(16)", nullable: false),
+                    ParentCategoryName = table.Column<string>(type: "varchar(255)", nullable: false),
+                    Version = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HomePageImageView", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_HomePageImageView_ServiceCategoryView_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "ServiceCategoryView",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_HomePageImageView_ServiceCategoryView_ParentCategoryId",
+                        column: x => x.ParentCategoryId,
+                        principalTable: "ServiceCategoryView",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ServiceView",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "binary(16)", nullable: false),
+                    CategoryId = table.Column<Guid>(type: "binary(16)", nullable: false),
+                    Description = table.Column<string>(type: "varchar(2000)", nullable: false),
+                    Name = table.Column<string>(type: "varchar(255)", nullable: false),
+                    TenantId = table.Column<Guid>(type: "binary(16)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ServiceView", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ServiceView_ServiceCategoryView_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "ServiceCategoryView",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "LocationView",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<Guid>(type: "binary(16)", nullable: false),
                     Description = table.Column<string>(type: "varchar(2000)", nullable: true),
                     Email = table.Column<string>(type: "varchar(255)", nullable: false),
                     Name = table.Column<string>(type: "varchar(255)", nullable: false),
                     PrimaryTelephone = table.Column<string>(type: "varchar(255)", nullable: false),
                     SecondaryTelephone = table.Column<string>(type: "varchar(255)", nullable: true),
-                    TenantId = table.Column<Guid>(nullable: false),
+                    TenantId = table.Column<Guid>(type: "binary(16)", nullable: false),
                     PostalAddress_City = table.Column<string>(type: "varchar(255)", nullable: true),
                     PostalAddress_CountryCode = table.Column<string>(type: "varchar(255)", nullable: true),
                     PostalAddress_PostalCode = table.Column<string>(type: "varchar(255)", nullable: true),
@@ -101,13 +176,13 @@ namespace Registration.Infra.Data.Migrations
                 name: "StaffView",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<Guid>(type: "binary(16)", nullable: false),
                     Bio = table.Column<string>(type: "varchar(2000)", nullable: true),
                     ImageUrl = table.Column<string>(type: "varchar(255)", nullable: true),
                     IsEnabled = table.Column<bool>(nullable: false),
                     IsMale = table.Column<bool>(nullable: false),
                     Password = table.Column<string>(nullable: true),
-                    TenantId = table.Column<Guid>(nullable: false),
+                    TenantId = table.Column<Guid>(type: "binary(16)", nullable: false),
                     Username = table.Column<string>(nullable: true),
                     Enablement_Enabled = table.Column<bool>(nullable: false),
                     Enablement_EndDate = table.Column<DateTime>(nullable: false),
@@ -139,10 +214,10 @@ namespace Registration.Infra.Data.Migrations
                 name: "LocationImageView",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<Guid>(type: "binary(16)", nullable: false),
                     ImageUrl = table.Column<string>(type: "varchar(255)", nullable: false),
-                    LocationId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    TenantId = table.Column<Guid>(nullable: false)
+                    LocationId = table.Column<Guid>(type: "binary(16)", nullable: false),
+                    TenantId = table.Column<Guid>(type: "binary(16)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -165,10 +240,10 @@ namespace Registration.Infra.Data.Migrations
                 name: "StaffLoginLocationView",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
-                    StaffId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    LocationId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    TenantId = table.Column<Guid>(type: "char(36)", nullable: false)
+                    Id = table.Column<Guid>(type: "binary(16)", nullable: false),
+                    StaffId = table.Column<Guid>(type: "binary(16)", nullable: false),
+                    LocationId = table.Column<Guid>(type: "binary(16)", nullable: false),
+                    TenantId = table.Column<Guid>(type: "binary(16)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -195,6 +270,16 @@ namespace Registration.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_HomePageImageView_CategoryId",
+                table: "HomePageImageView",
+                column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HomePageImageView_ParentCategoryId",
+                table: "HomePageImageView",
+                column: "ParentCategoryId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_LocationImageView_LocationId",
                 table: "LocationImageView",
                 column: "LocationId");
@@ -208,6 +293,16 @@ namespace Registration.Infra.Data.Migrations
                 name: "IX_LocationView_TenantId",
                 table: "LocationView",
                 column: "TenantId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ServiceCategoryView_ParentCategoryId",
+                table: "ServiceCategoryView",
+                column: "ParentCategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ServiceView_CategoryId",
+                table: "ServiceView",
+                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_StaffLoginLocationView_LocationId",
@@ -233,16 +328,25 @@ namespace Registration.Infra.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "HomePageImageView");
+
+            migrationBuilder.DropTable(
                 name: "LocationImageView");
 
             migrationBuilder.DropTable(
                 name: "RegionView");
 
             migrationBuilder.DropTable(
+                name: "ServiceView");
+
+            migrationBuilder.DropTable(
                 name: "StaffLoginLocationView");
 
             migrationBuilder.DropTable(
                 name: "TimeZoneView");
+
+            migrationBuilder.DropTable(
+                name: "ServiceCategoryView");
 
             migrationBuilder.DropTable(
                 name: "LocationView");

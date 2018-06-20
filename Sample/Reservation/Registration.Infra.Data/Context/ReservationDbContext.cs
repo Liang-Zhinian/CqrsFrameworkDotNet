@@ -28,6 +28,7 @@ namespace Registration.Infra.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ForMySqlUseIdentityColumns();
             modelBuilder.ApplyConfiguration(new HomePageImageMap());
             modelBuilder.ApplyConfiguration(new TenantMap());
             modelBuilder.ApplyConfiguration(new LocationMap());

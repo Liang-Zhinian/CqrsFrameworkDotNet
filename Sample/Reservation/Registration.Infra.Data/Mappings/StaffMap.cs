@@ -29,11 +29,13 @@ namespace Registration.Infra.Data.Mappings
             //builder.Property<string>("SecondaryTelephone").HasColumnType(Constants.DbConstants.String255);
 
             builder.OwnsOne(_ => _.Enablement, et => {
+                et.Property("StaffId").HasColumnType(Constants.DbConstants.KeyType);
                 et.Property<bool>(_ => _.Enabled).IsRequired();
                 et.Property<DateTime>("StartDate");
                 et.Property<DateTime>("EndDate");
             });
             builder.OwnsOne(_ => _.PersonalInfo, pi=>{
+                pi.Property("StaffId").HasColumnType(Constants.DbConstants.KeyType);
                 pi.Property<string>("Email").HasColumnType(Constants.DbConstants.String255);
                 pi.Property<string>("FirstName").HasColumnType(Constants.DbConstants.String255);
                 pi.Property<string>("LastName").HasColumnType(Constants.DbConstants.String255);
@@ -41,6 +43,7 @@ namespace Registration.Infra.Data.Mappings
                 pi.Property<string>("SecondaryTelephone").HasColumnType(Constants.DbConstants.String255);
             });
             builder.OwnsOne(_ => _.PostalAddress, address => {
+                address.Property("StaffId").HasColumnType(Constants.DbConstants.KeyType);
                 address.Property("City").HasColumnType(Constants.DbConstants.String255);
                 address.Property("CountryCode").HasColumnType(Constants.DbConstants.String255);
                 address.Property("PostalCode").HasColumnType(Constants.DbConstants.String255);

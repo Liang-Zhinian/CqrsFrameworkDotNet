@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using Business.Domain.Bus;
+//using Business.Domain.Bus;
 using CqrsFramework.Bus;
 using CqrsFramework.Cache;
 using CqrsFramework.Commands;
@@ -54,11 +54,11 @@ namespace Reservation.ClientWebApi.Configurations
                 .AddJsonFile("appsettings.json")
                 .Build();
             string connectionString = config.GetConnectionString("RabbitMqHost");
-            services.AddSingleton<RabbitMQEventPublisher>(new RabbitMQEventPublisher(connectionString));
+            //services.AddSingleton<RabbitMQEventPublisher>(new RabbitMQEventPublisher(connectionString));
             services.AddSingleton<InProcessBus>(new InProcessBus());
             services.AddSingleton<ICommandSender>(y => y.GetService<InProcessBus>());
             //services.AddSingleton<IEventPublisher>(y => y.GetService<InProcessBus>());
-            services.AddSingleton<IEventPublisher>(y => y.GetService<RabbitMQEventPublisher>());
+            //services.AddSingleton<IEventPublisher>(y => y.GetService<RabbitMQEventPublisher>());
             services.AddSingleton<IHandlerRegistrar>(y => y.GetService<InProcessBus>());
             services.AddScoped<ISession, Session>();
 

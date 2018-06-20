@@ -26,6 +26,7 @@ namespace Registration.Infra.Data.Mappings
 
 
             builder.OwnsOne(_ => _.PostalAddress, address => {
+                address.Property("LocationId").HasColumnType(Constants.DbConstants.KeyType);
                 address.Property("City").HasColumnType(Constants.DbConstants.String255);
                 address.Property("CountryCode").HasColumnType(Constants.DbConstants.String255);
                 address.Property("PostalCode").HasColumnType(Constants.DbConstants.String255);

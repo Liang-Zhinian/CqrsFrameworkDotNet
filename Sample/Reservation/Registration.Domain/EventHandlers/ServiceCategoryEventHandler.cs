@@ -23,9 +23,15 @@ namespace Registration.Domain.EventHandlers
                                            @event.CategoryId,
                                            @event.Name,
                                            @event.Description); //_mapper.Map<LocationRM>(message);
-
-            _serviceRepository.Add(service);
-            _serviceRepository.SaveChanges();
+            try
+            {
+                _serviceRepository.Add(service);
+                _serviceRepository.SaveChanges();
+            }catch(Exception e){
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.InnerException.Message);
+                throw e;
+            }
 
         }
     }

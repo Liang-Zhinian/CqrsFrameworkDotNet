@@ -14,9 +14,9 @@ namespace Registration.Infra.Data.Mappings
             builder.ToTable("HomePageImageView");
             builder.Property<string>("Name").IsRequired().HasColumnType(Constants.DbConstants.String255);
             builder.Property<string>("Data").IsRequired().HasColumnType(Constants.DbConstants.MediumBlob);
-            builder.Property<Guid>("CategoryId").IsRequired();
+            builder.Property<Guid>("CategoryId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
             builder.Property<string>("CategoryName").IsRequired().HasColumnType(Constants.DbConstants.String255);
-            builder.Property<Guid>("ParentCategoryId").IsRequired();
+            builder.Property<Guid>("ParentCategoryId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
             builder.Property<string>("ParentCategoryName").IsRequired().HasColumnType(Constants.DbConstants.String255);
             builder.Property<int>("Version").IsRequired();
 

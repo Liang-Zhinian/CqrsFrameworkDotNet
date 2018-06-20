@@ -14,11 +14,11 @@ namespace Registration.Infra.Data.Mappings
             //builder.HasKey(o => o.Id);
             //builder.ToTable(Constants.DbConstants.ServiceCategoryTable);
 
-            //builder.Property<Guid>("Id").HasColumnType(Constants.DbConstants.KeyType);
+            //builder.Property<Guid>("Id");
             builder.Property<string>("Name").IsRequired().HasColumnType(Constants.DbConstants.String255);
             builder.Property<string>("Description").IsRequired().HasColumnType(Constants.DbConstants.String2000);
             builder.Property<int>("CancelOffset").IsRequired();
-            builder.Property<Guid>("ParentCategoryId");
+            builder.Property<Guid>("ParentCategoryId").HasColumnType(Constants.DbConstants.KeyType);
             builder.Property<bool>("IsInternal");
             builder.Property<int>("ScheduleTypeValue").IsRequired();
 

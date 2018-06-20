@@ -14,13 +14,13 @@ namespace Registration.Infra.Data.Mappings
             builder.ForMySQLHasCollation("utf8_general_ci");
             builder.HasKey("Id");
             builder.ToTable(tableName);
-            builder.Property<Guid>("Id")
-                   .ForMySQLHasCollation("utf8_general_ci");
+            builder.Property<Guid>("Id").HasColumnType(Constants.DbConstants.KeyType);
+            //.ForMySQLHasCollation("utf8_general_ci");
             builder.Property<Guid>("TenantId")
             .IsRequired()
-            //.HasColumnType(Constants.DbConstants.KeyType)
-            .HasColumnName("TenantId")
-            .ForMySQLHasCollation("utf8_general_ci");
+            //
+                   .HasColumnName("TenantId").HasColumnType(Constants.DbConstants.KeyType);
+            //.ForMySQLHasCollation("utf8_general_ci");
         }
 
         public virtual void MapToTenant(EntityTypeBuilder<TEntity> builder)

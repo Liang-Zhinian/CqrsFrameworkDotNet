@@ -1,4 +1,4 @@
-﻿using Business.Infra.Data.Context;
+﻿using Registration.Infra.Data.Context;
 using Reservation.ClientWebApi.Configurations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,7 +24,7 @@ namespace Reservation.ClientWebApi
         public void ConfigureServices(IServiceCollection services)
         {
             var connection = Configuration.GetConnectionString("MySqlConnectionString");
-            services.AddDbContext<BusinessDbContext>(options => options.UseMySql(connection));
+            services.AddDbContext<ReservationDbContext>(options => options.UseMySql(connection));
 
             var identityAccessConnection = Configuration.GetConnectionString("MySqlConnectionString");
             services.AddDbContext<IdentityAccessDbContext>(options => options.UseMySql(identityAccessConnection));

@@ -1,8 +1,12 @@
 ﻿using System;
+using System.IO;
 using CqrsFramework.Bus;
 using CqrsFramework.Bus.RabbitMQ;
 using CqrsFramework.Config;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Registration.Domain.EventHandlers;
 using Registration.Domain.Repositories.Interfaces;
@@ -11,6 +15,29 @@ using Registration.Infra.Data.Repositories;
 
 namespace WorkerRoleCommandProcessor
 {
+    public class TemporaryDbContextFactory : IDesignTimeDbContextFactory<ReservationDbContext>
+    {
+        public ReservationDbContext CreateDbContext(string[] args)
+        {
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .Build();
+
+            var builder = new DbContextOptionsBuilder<ReservationDbContext>();
+
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
+
+            builder.UseSqlServer(connectionString);
+
+            // Stop client query evaluation
+            builder.ConfigureWarnings(w =>
+                w.Throw(RelationalEventId.QueryClientEvaluationWarning));
+
+            return new ReservationDbContext(builder.Options);
+        }
+    }
+
     public class ReservationCommandProcessor : IDisposable
     {
         private ServiceProvider serviceProvider;
@@ -50,16 +77,21 @@ namespace WorkerRoleCommandProcessor
 
         private ServiceProvider CreateServiceProvider()
         {
-            var optionsBuilder = new DbContextOptionsBuilder<ReservationDbContext>();
-            optionsBuilder.UseMySql("Server=localhost;database=IdentityAccess;uid=root;pwd=P@ssword;oldguids=true;SslMode=None");
+            //var optionsBuilder = new DbContextOptionsBuilder<ReservationDbContext>();
+            //optionsBuilder.UseMySql("Server=localhost;database=IdentityAccess;uid=root;pwd=P@ssword;oldguids=true;SslMode=None");
 
-            ReservationDbContext context = new ReservationDbContext(optionsBuilder.Options);
+            //ReservationDbContext context = new ReservationDbContext(optionsBuilder.Options);
 
+            //(DbContextOptionsBuilder obj) => new DbContextOptionsBuilder<ReservationDbContext>()
+            //.UseMySql("Server=localhost;database=IdentityAccess;uid=root;pwd=P@ssword;oldguids=true;SslMode=None")
             //setup our DI
             var _serviceProvider = new ServiceCollection()
-                .AddDbContext<ReservationDbContext>(ServiceLifetime.Scoped)
+                .AddDbContext<ReservationDbContext>(config =>
+                    {
+                config.UseMySql("Server=localhost;database=book2;uid=root;pwd=P@ssword;oldguids=true;SslMode=None");
+                    }, ServiceLifetime.Scoped)
                 .AddLogging()
-                .AddScoped<IReadDbRepository, ReadDbRepository>()
+                .AddScoped(typeof(IReadDbRepository<>), typeof(ReadDbRepository<>))
                 .AddScoped<ILocationRepository, LocationRepository>()
                 .AddScoped<IServiceRepository, ServiceRepository>()
                 .AddScoped<LocationEventHandler>(y => new LocationEventHandler(y.GetService<ILocationRepository>()))

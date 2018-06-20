@@ -54,6 +54,17 @@
     <Compile Remove="Migrations\20180615064044_first.cs" />
     <Compile Remove="Mappings\StaffLoginCredentialMap.cs" />
     <Compile Remove="Migrations\20180615064545_first.cs" />
+    <Compile Remove="Migrations\20180618130308_first.cs" />
+    <Compile Remove="Migrations\20180620130110_first.cs" />
+    <Compile Remove="Migrations\20180620143413_first.cs" />
+    <Compile Remove="Migrations\20180620145624_first.cs" />
+    <Compile Remove="Migrations\20180620150807_first.cs" />
+    <Compile Remove="Migrations\20180620151548_first.cs" />
+    <Compile Remove="Migrations\20180620152055_first.cs" />
+    <Compile Remove="Migrations\20180620152714_first.cs" />
+    <Compile Remove="Migrations\20180620152845_first.cs" />
+    <Compile Remove="Migrations\20180620153645_first.cs" />
+    <Compile Remove="Migrations\20180620154613_first.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="appsettings.json" />

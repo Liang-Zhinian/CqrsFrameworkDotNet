@@ -73,6 +73,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registration.Contracts", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CqrsFramework.Bus.RabbitMQ", "Framework\CqrsFramework.Bus.RabbitMQ\CqrsFramework.Bus.RabbitMQ.csproj", "{0E80C14B-E6E2-44AD-B307-8B44A14009D8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registration.Application", "Sample\Reservation\Registration.Application\Registration.Application.csproj", "{EFBFD5E2-3965-4111-9EA0-0F30C0E16674}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -187,6 +189,10 @@ Global
 		{0E80C14B-E6E2-44AD-B307-8B44A14009D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E80C14B-E6E2-44AD-B307-8B44A14009D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E80C14B-E6E2-44AD-B307-8B44A14009D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFBFD5E2-3965-4111-9EA0-0F30C0E16674}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFBFD5E2-3965-4111-9EA0-0F30C0E16674}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFBFD5E2-3965-4111-9EA0-0F30C0E16674}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFBFD5E2-3965-4111-9EA0-0F30C0E16674}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -224,5 +230,6 @@ Global
 		{C5918B01-AC8F-47AE-BE70-F3A645B959AA} = {D84826F2-FCF7-457C-9FAA-C7B7E209113B}
 		{A9A485CF-BE53-491D-B2C5-50CACF957FF6} = {20D3287F-2612-41AC-90DD-8A91450FBC7A}
 		{0E80C14B-E6E2-44AD-B307-8B44A14009D8} = {CCDA44F7-DC3F-4337-8D2B-005AE17A5B73}
+		{EFBFD5E2-3965-4111-9EA0-0F30C0E16674} = {20D3287F-2612-41AC-90DD-8A91450FBC7A}
 	EndGlobalSection
 EndGlobal

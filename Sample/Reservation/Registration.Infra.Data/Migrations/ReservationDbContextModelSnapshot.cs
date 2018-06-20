@@ -25,7 +25,8 @@ namespace Registration.Infra.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid>("CategoryId");
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("binary(16)");
 
                     b.Property<string>("CategoryName")
                         .IsRequired()
@@ -39,7 +40,8 @@ namespace Registration.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
-                    b.Property<Guid>("ParentCategoryId");
+                    b.Property<Guid>("ParentCategoryId")
+                        .HasColumnType("binary(16)");
 
                     b.Property<string>("ParentCategoryName")
                         .IsRequired()
@@ -82,7 +84,7 @@ namespace Registration.Infra.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("MySQL:Collation", "utf8_general_ci");
+                        .HasColumnType("binary(16)");
 
                     b.Property<string>("Description")
                         .HasColumnType("varchar(2000)");
@@ -104,7 +106,7 @@ namespace Registration.Infra.Data.Migrations
 
                     b.Property<Guid>("TenantId")
                         .HasColumnName("TenantId")
-                        .HasAnnotation("MySQL:Collation", "utf8_general_ci");
+                        .HasColumnType("binary(16)");
 
                     b.HasKey("Id");
 
@@ -121,18 +123,18 @@ namespace Registration.Infra.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("MySQL:Collation", "utf8_general_ci");
+                        .HasColumnType("binary(16)");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<Guid>("LocationId")
-                        .HasColumnType("char(36)");
+                        .HasColumnType("binary(16)");
 
                     b.Property<Guid>("TenantId")
                         .HasColumnName("TenantId")
-                        .HasAnnotation("MySQL:Collation", "utf8_general_ci");
+                        .HasColumnType("binary(16)");
 
                     b.HasKey("Id");
 
@@ -151,7 +153,7 @@ namespace Registration.Infra.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("MySQL:Collation", "utf8_general_ci");
+                        .HasColumnType("binary(16)");
 
                     b.Property<string>("Bio")
                         .HasColumnType("varchar(2000)");
@@ -167,7 +169,7 @@ namespace Registration.Infra.Data.Migrations
 
                     b.Property<Guid>("TenantId")
                         .HasColumnName("TenantId")
-                        .HasAnnotation("MySQL:Collation", "utf8_general_ci");
+                        .HasColumnType("binary(16)");
 
                     b.Property<string>("Username");
 
@@ -185,16 +187,16 @@ namespace Registration.Infra.Data.Migrations
             modelBuilder.Entity("Registration.Domain.ReadModel.Security.StaffLoginLocation", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("char(36)");
+                        .HasColumnType("binary(16)");
 
                     b.Property<Guid>("StaffId")
-                        .HasColumnType("char(36)");
+                        .HasColumnType("binary(16)");
 
                     b.Property<Guid>("LocationId")
-                        .HasColumnType("char(36)");
+                        .HasColumnType("binary(16)");
 
                     b.Property<Guid>("TenantId")
-                        .HasColumnType("char(36)");
+                        .HasColumnType("binary(16)");
 
                     b.HasKey("Id", "StaffId", "LocationId");
 
@@ -213,7 +215,7 @@ namespace Registration.Infra.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("MySQL:Collation", "utf8_general_ci");
+                        .HasColumnType("binary(16)");
 
                     b.Property<string>("Description")
                         .HasMaxLength(2000);
@@ -256,7 +258,7 @@ namespace Registration.Infra.Data.Migrations
 
                     b.Property<Guid>("TenantId")
                         .HasColumnName("TenantId")
-                        .HasAnnotation("MySQL:Collation", "utf8_general_ci");
+                        .HasColumnType("binary(16)");
 
                     b.HasKey("Id");
 
@@ -271,10 +273,10 @@ namespace Registration.Infra.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                        .HasColumnType("binary(16)");
 
                     b.Property<Guid>("CategoryId")
-                        .HasColumnType("char(36)");
+                        .HasColumnType("binary(16)");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -285,7 +287,7 @@ namespace Registration.Infra.Data.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<Guid>("TenantId")
-                        .HasColumnType("char(36)");
+                        .HasColumnType("binary(16)");
 
                     b.HasKey("Id");
 
@@ -298,7 +300,7 @@ namespace Registration.Infra.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasAnnotation("MySQL:Collation", "utf8_general_ci");
+                        .HasColumnType("binary(16)");
 
                     b.Property<int>("CancelOffset");
 
@@ -312,7 +314,8 @@ namespace Registration.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
-                    b.Property<Guid>("ParentCategoryId");
+                    b.Property<Guid>("ParentCategoryId")
+                        .HasColumnType("binary(16)");
 
                     b.Property<int>("ScheduleTypeValue");
 
@@ -367,7 +370,8 @@ namespace Registration.Infra.Data.Migrations
 
                     b.OwnsOne("Registration.Domain.ReadModel.PostalAddress", "PostalAddress", b1 =>
                         {
-                            b1.Property<Guid>("LocationId");
+                            b1.Property<Guid>("LocationId")
+                                .HasColumnType("binary(16)");
 
                             b1.Property<string>("City")
                                 .HasColumnType("varchar(255)");
@@ -419,7 +423,8 @@ namespace Registration.Infra.Data.Migrations
 
                     b.OwnsOne("Registration.Domain.ReadModel.Enablement", "Enablement", b1 =>
                         {
-                            b1.Property<Guid>("StaffId");
+                            b1.Property<Guid>("StaffId")
+                                .HasColumnType("binary(16)");
 
                             b1.Property<bool>("Enabled");
 
@@ -437,7 +442,8 @@ namespace Registration.Infra.Data.Migrations
 
                     b.OwnsOne("Registration.Domain.ReadModel.PersonalInfo", "PersonalInfo", b1 =>
                         {
-                            b1.Property<Guid>("StaffId");
+                            b1.Property<Guid>("StaffId")
+                                .HasColumnType("binary(16)");
 
                             b1.Property<string>("Email")
                                 .HasColumnType("varchar(255)");
@@ -464,7 +470,8 @@ namespace Registration.Infra.Data.Migrations
 
                     b.OwnsOne("Registration.Domain.ReadModel.PostalAddress", "PostalAddress", b1 =>
                         {
-                            b1.Property<Guid>("StaffId");
+                            b1.Property<Guid>("StaffId")
+                                .HasColumnType("binary(16)");
 
                             b1.Property<string>("City")
                                 .HasColumnType("varchar(255)");
@@ -515,7 +522,8 @@ namespace Registration.Infra.Data.Migrations
                 {
                     b.OwnsOne("Registration.Domain.ReadModel.PostalAddress", "PostalAddress", b1 =>
                         {
-                            b1.Property<Guid>("TenantId");
+                            b1.Property<Guid>("TenantId")
+                                .HasColumnType("binary(16)");
 
                             b1.Property<string>("City")
                                 .HasColumnType("varchar(255)");

@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Business.Application.Interfaces;
+using Registration.Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
