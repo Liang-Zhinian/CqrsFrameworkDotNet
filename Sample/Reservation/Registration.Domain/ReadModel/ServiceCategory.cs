@@ -11,11 +11,16 @@ namespace Registration.Domain.ReadModel
         public string Name { get; set; }
         public string Description { get; set; }
         public int CancelOffset { get; set; }
+        public Guid ParentCategoryId { get; set; }
+        public bool IsInternal { get; set; }
+
+        public virtual ServiceCategory ParentCategory { get; set; }
 
         public int ScheduleTypeValue { get; set; }
         //public virtual ScheduleType ScheduleType { get; set; }
 
         public virtual ICollection<Service> Services { get; set; }
+        public virtual ICollection<ServiceCategory> SubCategories { get; set; }
 
 
         public ServiceCategory(string name, string description)

@@ -18,6 +18,7 @@ namespace Registration.Infra.Data.Constants
         public static string String1000 = "NVarchar(1000)";
         public static string String2000 = "NVarchar(2000)";
         public static string String4000 = "NVarchar(4000)";
+        public static string MediumBlob = "text";
 
         public static string AddressTable { get; set; }
         public static string ContactTable { get; set; }
@@ -111,6 +112,7 @@ namespace Registration.Infra.Data.Constants
                 String1000 = "varchar(1000)";
                 String2000 = "varchar(2000)";
                 String4000 = "varchar(4000)";
+                MediumBlob = "mediumtext";
             }
             else
             {

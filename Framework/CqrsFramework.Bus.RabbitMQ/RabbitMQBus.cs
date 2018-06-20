@@ -151,7 +151,7 @@ namespace CqrsFramework.Bus.RabbitMQ
 
                 var message = Encoding.UTF8.GetString(body);
 
-                //Console.WriteLine(" [x] {0}", message);
+                Console.WriteLine(" [x] {0}", message);
 
                 var jsonObj = JsonConvert.DeserializeObject(message, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All });
                 var @event = (IEvent)jsonObj;

@@ -11,9 +11,10 @@ using System;
 namespace Registration.Infra.Data.Migrations
 {
     [DbContext(typeof(ReservationDbContext))]
-    partial class ReservationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180620082800_addServices")]
+    partial class addServices
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,7 +26,7 @@ namespace Registration.Infra.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid>("CategoryId");
+                    b.Property<int>("CategoryId");
 
                     b.Property<string>("CategoryName")
                         .IsRequired()
@@ -39,7 +40,7 @@ namespace Registration.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
-                    b.Property<Guid>("ParentCategoryId");
+                    b.Property<int>("ParentCategoryId");
 
                     b.Property<string>("ParentCategoryName")
                         .IsRequired()
@@ -273,8 +274,7 @@ namespace Registration.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("CategoryId")
-                        .HasColumnType("char(36)");
+                    b.Property<int>("CategoryId");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -296,9 +296,8 @@ namespace Registration.Infra.Data.Migrations
 
             modelBuilder.Entity("Registration.Domain.ReadModel.ServiceCategory", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("MySQL:Collation", "utf8_general_ci");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("CancelOffset");
 
@@ -312,7 +311,7 @@ namespace Registration.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
-                    b.Property<Guid>("ParentCategoryId");
+                    b.Property<int>("ParentCategoryId");
 
                     b.Property<int>("ScheduleTypeValue");
 
@@ -321,10 +320,6 @@ namespace Registration.Infra.Data.Migrations
                     b.HasIndex("ParentCategoryId");
 
                     b.ToTable("ServiceCategoryView");
-
-                    b.HasAnnotation("MySQL:Charset", "utf8");
-
-                    b.HasAnnotation("MySQL:Collation", "utf8_general_ci");
                 });
 
             modelBuilder.Entity("Registration.Domain.ReadModel.TimeZone", b =>
