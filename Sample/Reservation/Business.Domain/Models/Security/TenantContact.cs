@@ -13,12 +13,6 @@ namespace Business.Domain.Models.Security
         [RegularExpression(@"[\w-]+(\.?[\w-])*\@[\w-]+(\.[\w-]+)+")]
         public string Email { get; set; }
 
-        //[EmailAddress(ErrorMessage = "The Email field is not a valid email address.")]
-        //[Display(Name = "Email")]
-        //[RegularExpression(@"[\w-]+(\.?[\w-])*\@[\w-]+(\.[\w-]+)+")]
-        //public string Email2 { get; set; }
-
-
         public string PrimaryTelephone { get; set; }
 
         public string SecondaryTelephone { get; set; }

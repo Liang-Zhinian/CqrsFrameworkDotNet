@@ -23,9 +23,19 @@ namespace Registration.Domain.ReadModel.Security
 
         public string Email { get; private set; }
 
-        public PostalAddress PostalAddress { get; private set; }
+        public string City { get; set; }
 
-        [Required(ErrorMessage = "The PrimaryTelephone is Required")]
+        public string CountryCode { get; set; }
+
+        public string PostalCode { get; set; }
+
+        public string StateProvince { get; set; }
+
+        public string StreetAddress { get; set; }
+
+        public string StreetAddress2 { get; set; }
+
+        //[Required(ErrorMessage = "The PrimaryTelephone is Required")]
         [MinLength(2)]
         [MaxLength(100)]
         [DisplayName("PrimaryTelephone")]
@@ -49,5 +59,12 @@ namespace Registration.Domain.ReadModel.Security
         public ICollection<Location> Locations { get; private set; }
 
         public ICollection<Staff> Staffs { get; private set; }
+
+        public Tenant(Guid id, string name, string description)
+        {
+            Id = id;
+            Name = name;
+            Description = description;
+        }
     }
 }

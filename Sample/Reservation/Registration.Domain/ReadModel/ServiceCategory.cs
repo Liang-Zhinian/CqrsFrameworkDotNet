@@ -26,10 +26,21 @@ namespace Registration.Domain.ReadModel
         public virtual ICollection<ServiceCategory> SubCategories { get; set; }
 
 
-        public ServiceCategory(string name, string description)
+        public ServiceCategory(Guid id,
+                               string name, 
+                               string description, 
+                               int cancelOffset, 
+                               int scheduleType, 
+                               Guid parentCategoryId, 
+                               bool isInternal=false)
         {
+            Id = id;
             Name = name;
             Description = description;
+            CancelOffset = cancelOffset;
+            ScheduleTypeValue = scheduleType;
+            ParentCategoryId = parentCategoryId;
+            IsInternal = isInternal;
         }
     }
 }

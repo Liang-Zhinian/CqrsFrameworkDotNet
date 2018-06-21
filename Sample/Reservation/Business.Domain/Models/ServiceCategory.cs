@@ -21,6 +21,8 @@ namespace Business.Domain.Models
         {
             Name = name;
             Description = description;
+            CancelOffset = 0;
+            ScheduleTypeValue = 1;
         }
     }
 }

@@ -1,49 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-using Business.Application.EventSourcedNormalizers;
+using System.Linq;
+using AutoMapper;
 using Business.Application.Interfaces;
 using Business.Application.ViewModels;
-using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using Business.Domain.Repositories.Interfaces;
 using Business.Domain.Models.Security;
-using CqrsFramework.Domain;
-using SaaSEqt.IdentityAccess.Application;
-using System.Linq;
-using SaaSEqt.IdentityAccess.Application.Commands;
-using Business.Domain.Models;
 using Business.Domain.Models.ValueObjects;
+using Business.Domain.Repositories.Interfaces;
+using CqrsFramework.Domain;
 
 namespace Business.Application.Services
 {
     public class LocationService : ILocationService
     {
         private readonly ISession _session;
-        //private readonly ITenantAddressRepository _tenantAddressRepository;
-        //private readonly ITenantContactRepository _tenantContactRepository;
-        //private readonly IdentityApplicationService _identityApplicationService;
         private readonly ILocationRepository _locationRepository;
-        //private readonly IServiceCategoryRepository _serviceCategoryRepository;
-        //private readonly IServiceRepository _serviceRepository;
         private readonly IMapper _mapper;
 
         public LocationService(ISession session, 
                              IMapper mapper,
-                             //ITenantAddressRepository tenantAddressRepository,
-                             //ITenantContactRepository tenantContactRepository,
-                          //IServiceCategoryRepository serviceCategoryRepository,
-                          //IServiceRepository serviceRepository,
                           ILocationRepository locationRepository
-                             //IdentityApplicationService identityApplicationService
                               )
         {
             _session = session;
             _mapper = mapper;
-            //_tenantAddressRepository = tenantAddressRepository;
-            //_tenantContactRepository = tenantContactRepository;
-            //_identityApplicationService = identityApplicationService;
-            //_serviceCategoryRepository = serviceCategoryRepository;
-            //_serviceRepository = serviceRepository;
             _locationRepository = locationRepository;
         }
 

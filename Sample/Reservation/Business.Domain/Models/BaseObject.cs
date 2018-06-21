@@ -11,7 +11,7 @@ namespace Business.Domain.Models
     public abstract class BaseObject : AggregateRoot
 	{
         public Guid TenantId { get; set; }
-        [NotMapped]
+
         public virtual Tenant Tenant { get; set; }
 
         protected BaseObject()

@@ -17,7 +17,7 @@ namespace Business.Domain.Models.Security
         public bool CanLoginAllLocations { get; set; }
 
         public Guid UserId { get; set; }
-        [NotMapped]
+
         public virtual User User { get; set; }
 
         public virtual ICollection<StaffLoginLocation> StaffLoginLocations { get; set; }

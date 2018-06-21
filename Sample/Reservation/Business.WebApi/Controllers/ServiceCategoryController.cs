@@ -66,5 +66,23 @@ namespace Business.WebApi.Controllers
 
             return Ok(request);
         }
+
+        [HttpPost]
+        //[Authorize(Policy = "CanWriteTenantData")]
+        [Route("AddServiceCategory")]
+        public ActionResult AddServiceCategory([FromBody]
+                                   ServiceCategoryViewModel request
+                                  )
+        {
+            if (!ModelState.IsValid)
+            {
+                //NotifyModelStateErrors();
+                return Ok(request);
+            }
+
+            _serviceCategoryService.AddServiceCategory(request);
+
+            return Ok(request);
+        }
     }
 }

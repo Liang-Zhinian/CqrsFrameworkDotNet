@@ -52,29 +52,27 @@ namespace Registration.Infra.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "binary(16)", nullable: false),
+                    City = table.Column<string>(type: "varchar(255)", nullable: true),
+                    CountryCode = table.Column<string>(type: "varchar(255)", nullable: true),
                     Description = table.Column<string>(maxLength: 2000, nullable: true),
                     DisplayName = table.Column<string>(type: "varchar(2000)", nullable: true),
-                    Email = table.Column<string>(type: "varchar(255)", nullable: false),
+                    Email = table.Column<string>(type: "varchar(255)", nullable: true),
                     LogoURL = table.Column<string>(type: "varchar(255)", nullable: true),
                     Name = table.Column<string>(type: "varchar(255)", maxLength: 100, nullable: false),
                     PageColor1 = table.Column<string>(type: "varchar(10)", nullable: true),
                     PageColor2 = table.Column<string>(type: "varchar(10)", nullable: true),
                     PageColor3 = table.Column<string>(type: "varchar(10)", nullable: true),
                     PageColor4 = table.Column<string>(type: "varchar(10)", nullable: true),
-                    PrimaryTelephone = table.Column<string>(type: "varchar(255)", maxLength: 100, nullable: false),
+                    PostalCode = table.Column<string>(type: "varchar(255)", nullable: true),
+                    PrimaryTelephone = table.Column<string>(type: "varchar(255)", maxLength: 100, nullable: true),
                     SecondaryTelephone = table.Column<string>(type: "varchar(255)", maxLength: 100, nullable: true),
-                    TenantId = table.Column<Guid>(type: "binary(16)", nullable: false),
-                    PostalAddress_City = table.Column<string>(type: "varchar(255)", nullable: true),
-                    PostalAddress_CountryCode = table.Column<string>(type: "varchar(255)", nullable: true),
-                    PostalAddress_PostalCode = table.Column<string>(type: "varchar(255)", nullable: true),
-                    PostalAddress_StateProvince = table.Column<string>(type: "varchar(255)", nullable: true),
-                    PostalAddress_StreetAddress = table.Column<string>(type: "varchar(255)", nullable: true),
-                    PostalAddress_StreetAddress2 = table.Column<string>(type: "varchar(255)", nullable: true)
+                    StateProvince = table.Column<string>(type: "varchar(255)", nullable: true),
+                    StreetAddress = table.Column<string>(type: "varchar(255)", nullable: true),
+                    StreetAddress2 = table.Column<string>(type: "varchar(255)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TenantView", x => x.Id);
-                    table.UniqueConstraint("AK_TenantView_TenantId", x => x.TenantId);
                 });
 
             migrationBuilder.CreateTable(
@@ -148,18 +146,18 @@ namespace Registration.Infra.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "binary(16)", nullable: false),
+                    City = table.Column<string>(type: "varchar(255)", nullable: true),
+                    CountryCode = table.Column<string>(type: "varchar(255)", nullable: true),
                     Description = table.Column<string>(type: "varchar(2000)", nullable: true),
                     Email = table.Column<string>(type: "varchar(255)", nullable: false),
                     Name = table.Column<string>(type: "varchar(255)", nullable: false),
+                    PostalCode = table.Column<string>(type: "varchar(255)", nullable: true),
                     PrimaryTelephone = table.Column<string>(type: "varchar(255)", nullable: false),
                     SecondaryTelephone = table.Column<string>(type: "varchar(255)", nullable: true),
-                    TenantId = table.Column<Guid>(type: "binary(16)", nullable: false),
-                    PostalAddress_City = table.Column<string>(type: "varchar(255)", nullable: true),
-                    PostalAddress_CountryCode = table.Column<string>(type: "varchar(255)", nullable: true),
-                    PostalAddress_PostalCode = table.Column<string>(type: "varchar(255)", nullable: true),
-                    PostalAddress_StateProvince = table.Column<string>(type: "varchar(255)", nullable: true),
-                    PostalAddress_StreetAddress = table.Column<string>(type: "varchar(255)", nullable: true),
-                    PostalAddress_StreetAddress2 = table.Column<string>(type: "varchar(255)", nullable: true)
+                    StateProvince = table.Column<string>(type: "varchar(255)", nullable: true),
+                    StreetAddress = table.Column<string>(type: "varchar(255)", nullable: true),
+                    StreetAddress2 = table.Column<string>(type: "varchar(255)", nullable: true),
+                    TenantId = table.Column<Guid>(type: "binary(16)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -178,26 +176,25 @@ namespace Registration.Infra.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "binary(16)", nullable: false),
                     Bio = table.Column<string>(type: "varchar(2000)", nullable: true),
+                    City = table.Column<string>(type: "varchar(255)", nullable: true),
+                    CountryCode = table.Column<string>(type: "varchar(255)", nullable: true),
+                    Email = table.Column<string>(type: "varchar(255)", nullable: true),
+                    EndDate = table.Column<DateTime>(nullable: false),
+                    FirstName = table.Column<string>(type: "varchar(255)", nullable: true),
                     ImageUrl = table.Column<string>(type: "varchar(255)", nullable: true),
                     IsEnabled = table.Column<bool>(nullable: false),
                     IsMale = table.Column<bool>(nullable: false),
+                    LastName = table.Column<string>(type: "varchar(255)", nullable: true),
                     Password = table.Column<string>(nullable: true),
+                    PostalCode = table.Column<string>(type: "varchar(255)", nullable: true),
+                    PrimaryTelephone = table.Column<string>(type: "varchar(255)", nullable: true),
+                    SecondaryTelephone = table.Column<string>(type: "varchar(255)", nullable: true),
+                    StartDate = table.Column<DateTime>(nullable: false),
+                    StateProvince = table.Column<string>(type: "varchar(255)", nullable: true),
+                    StreetAddress = table.Column<string>(type: "varchar(255)", nullable: true),
+                    StreetAddress2 = table.Column<string>(type: "varchar(255)", nullable: true),
                     TenantId = table.Column<Guid>(type: "binary(16)", nullable: false),
-                    Username = table.Column<string>(nullable: true),
-                    Enablement_Enabled = table.Column<bool>(nullable: false),
-                    Enablement_EndDate = table.Column<DateTime>(nullable: false),
-                    Enablement_StartDate = table.Column<DateTime>(nullable: false),
-                    PersonalInfo_Email = table.Column<string>(type: "varchar(255)", nullable: true),
-                    PersonalInfo_FirstName = table.Column<string>(type: "varchar(255)", nullable: true),
-                    PersonalInfo_LastName = table.Column<string>(type: "varchar(255)", nullable: true),
-                    PersonalInfo_PrimaryTelephone = table.Column<string>(type: "varchar(255)", nullable: true),
-                    PersonalInfo_SecondaryTelephone = table.Column<string>(type: "varchar(255)", nullable: true),
-                    PostalAddress_City = table.Column<string>(type: "varchar(255)", nullable: true),
-                    PostalAddress_CountryCode = table.Column<string>(type: "varchar(255)", nullable: true),
-                    PostalAddress_PostalCode = table.Column<string>(type: "varchar(255)", nullable: true),
-                    PostalAddress_StateProvince = table.Column<string>(type: "varchar(255)", nullable: true),
-                    PostalAddress_StreetAddress = table.Column<string>(type: "varchar(255)", nullable: true),
-                    PostalAddress_StreetAddress2 = table.Column<string>(type: "varchar(255)", nullable: true)
+                    Username = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -232,7 +229,7 @@ namespace Registration.Infra.Data.Migrations
                         name: "FK_LocationImageView_TenantView_TenantId",
                         column: x => x.TenantId,
                         principalTable: "TenantView",
-                        principalColumn: "TenantId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 

@@ -92,10 +92,14 @@ namespace WorkerRoleCommandProcessor
                     }, ServiceLifetime.Scoped)
                 .AddLogging()
                 .AddScoped(typeof(IReadDbRepository<>), typeof(ReadDbRepository<>))
+                .AddScoped<ITenantRepository, TenantRepository>()
                 .AddScoped<ILocationRepository, LocationRepository>()
+                .AddScoped<IServiceCategoryRepository, ServiceCategoryRepository>()
                 .AddScoped<IServiceRepository, ServiceRepository>()
+                .AddScoped<TenantEventHandler>(y => new TenantEventHandler(y.GetService<ITenantRepository>()))
                 .AddScoped<LocationEventHandler>(y => new LocationEventHandler(y.GetService<ILocationRepository>()))
-                .AddScoped<ServiceCategoryEventHandler>(y => new ServiceCategoryEventHandler(y.GetService<IServiceRepository>()))
+                .AddScoped<ServiceCategoryEventHandler>(y => new ServiceCategoryEventHandler(y.GetService<IServiceCategoryRepository>(),
+                                                                                             y.GetService<IServiceRepository>()))
                 .AddSingleton(new TestEventHandler())
 
                 .AddSingleton<RabbitMQBus>(new RabbitMQBus("localhost", "book2", "fanout", "book2events", true))

@@ -22,14 +22,14 @@ namespace Business.WebApi.Controllers
             _locationService = locationService;
         }
 
-        [HttpGet]
-        [AllowAnonymous]
-        public JsonResult Get()
-        {
-            var list = _locationService.FindLocations()
-                                    .ToList();
-            return Json(list);
-        }
+        //[HttpGet]
+        //[AllowAnonymous]
+        //public JsonResult Get()
+        //{
+        //    var list = _locationService.()
+        //                            .ToList();
+        //    return Json(list);
+        //}
 
         [HttpGet]
         //[Authorize(Policy = "CanWriteTenantData")]

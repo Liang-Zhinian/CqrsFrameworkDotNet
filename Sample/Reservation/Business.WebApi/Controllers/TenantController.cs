@@ -13,13 +13,11 @@ namespace Business.WebApi.Controllers
     [Route("api/tenants")]
     public class TenantController: Controller
     {
-        private readonly ISecurityService _bizService;
-        //private readonly ITenantRepository _tenantRepository;
+        private readonly ITenantService _tenantService;
 
-        public TenantController(ISecurityService bizService)
+        public TenantController(ITenantService tenantService)
         {
-            //_tenantRepository = tenantRepository;
-            _bizService = bizService;
+            _tenantService = tenantService;
         }
 
         [HttpGet]
@@ -44,19 +42,20 @@ namespace Business.WebApi.Controllers
         //[Authorize(Policy = "CanWriteTenantData")]
         [Route("register")]
         public ActionResult Create([FromBody]
-                                   TenantViewModel request
+                                   TenantViewModel tenant,
+                                   StaffViewModel administrator
                                   )
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
             if (!ModelState.IsValid)
             {
                 //NotifyModelStateErrors();
-                return Ok(request);
+                return Ok();
             }
 
-            //_tenantAppService.Register(request);
+            _tenantService.ProvisionTenant(tenant, administrator);
 
-            return Ok(request);
+            return Ok();
         }
     }
 }

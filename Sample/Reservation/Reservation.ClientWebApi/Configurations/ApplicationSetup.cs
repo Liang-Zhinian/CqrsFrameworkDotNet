@@ -4,13 +4,13 @@ using Registration.Domain.Repositories.Interfaces;
 using Registration.Infra.Data.Context;
 using Registration.Infra.Data.Repositories;
 using Microsoft.Extensions.DependencyInjection;
-//using SaaSEqt.IdentityAccess;
-//using SaaSEqt.IdentityAccess.Application;
-//using SaaSEqt.IdentityAccess.Domain.Repositories;
-//using SaaSEqt.IdentityAccess.Domain.Services;
-//using SaaSEqt.IdentityAccess.Infra.Data.Context;
-//using SaaSEqt.IdentityAccess.Infra.Data.Repositories;
-//using SaaSEqt.IdentityAccess.Infrastructure.Services;
+using SaaSEqt.IdentityAccess.Infra.Data.Context;
+using SaaSEqt.IdentityAccess.Domain.Services;
+using SaaSEqt.IdentityAccess.Domain.Repositories;
+using SaaSEqt.IdentityAccess;
+using SaaSEqt.IdentityAccess.Infra.Data.Repositories;
+using SaaSEqt.IdentityAccess.Infrastructure.Services;
+using SaaSEqt.IdentityAccess.Application;
 
 namespace Reservation.ClientWebApi.Configurations
 {
@@ -34,45 +34,45 @@ namespace Reservation.ClientWebApi.Configurations
             services.AddScoped<ReservationDbContext>();
             //services.AddScoped<IdentityAccessDbContext>();
             //services.AddScoped<ITenantAddressRepository, TenantAddressRepository>();
+            services.AddScoped<Registration.Domain.Repositories.Interfaces.ITenantRepository, Registration.Infra.Data.Repositories.TenantRepository>();
             services.AddScoped<ILocationRepository, LocationRepository>();
             services.AddScoped<IServiceRepository, ServiceRepository>();
-            //services.AddScoped<IServiceCategoryRepository, ServiceCategoryRepository>();
+            services.AddScoped<IServiceCategoryRepository, ServiceCategoryRepository>();
         }
 
         private static void RegisterAppService(IServiceCollection services)
         {
             // App service
-            //services.AddScoped<ISecurityService, SecurityService>();
             services.AddScoped<ILocationService, LocationService>();
             services.AddScoped<IServiceCategoryService, ServiceCategoryService>();
         }
 
         private static void RegisterIdentityAccessServices(IServiceCollection services){
-            //services
-                //.AddSingleton<AuthenticationService>(_ => new AuthenticationService(
-                //_.GetService<ITenantRepository>(),
-                //_.GetService<IUserRepository>(),
-                //_.GetService<IEncryptionService>()))
-                //.AddSingleton<GroupMemberService>(_ => new GroupMemberService(
-                    //_.GetService<IUserRepository>(),
-                    //_.GetService<IGroupRepository>()))
-                //.AddSingleton<TenantProvisioningService>(_ => new TenantProvisioningService(
-                //_.GetService<ITenantRepository>(),
-                //_.GetService<IUserRepository>(),
-                //_.GetService<IRoleRepository>()))
-                //.AddSingleton<ITenantRepository, TenantRepository>()
-                //.AddSingleton<IUserRepository, UserRepository>()
-                //.AddSingleton<IRoleRepository, RoleRepository>()
-                //.AddSingleton<IGroupRepository, GroupRepository>()
-                //.AddSingleton<IEncryptionService, MD5EncryptionService>();
-                //.AddSingleton<IdentityApplicationService>(s => new IdentityApplicationService(
-                //    s.GetService<AuthenticationService>(),
-                //    s.GetService<GroupMemberService>(),
-                //    s.GetService<IGroupRepository>(),
-                //    s.GetService<TenantProvisioningService>(),
-                //    s.GetService<ITenantRepository>(),
-                //    s.GetService<IUserRepository>()
-                //));
+            services
+                .AddSingleton<AuthenticationService>(_ => new AuthenticationService(
+                _.GetService<SaaSEqt.IdentityAccess.Domain.Repositories.ITenantRepository>(),
+                _.GetService<IUserRepository>(),
+                _.GetService<IEncryptionService>()))
+                .AddSingleton<GroupMemberService>(_ => new GroupMemberService(
+                    _.GetService<IUserRepository>(),
+                    _.GetService<IGroupRepository>()))
+                .AddSingleton<TenantProvisioningService>(_ => new TenantProvisioningService(
+                _.GetService<SaaSEqt.IdentityAccess.Domain.Repositories.ITenantRepository>(),
+                _.GetService<IUserRepository>(),
+                _.GetService<IRoleRepository>()))
+                .AddSingleton<SaaSEqt.IdentityAccess.Domain.Repositories.ITenantRepository, SaaSEqt.IdentityAccess.Infra.Data.Repositories.TenantRepository>()
+                .AddSingleton<IUserRepository, UserRepository>()
+                .AddSingleton<IRoleRepository, RoleRepository>()
+                .AddSingleton<IGroupRepository, GroupRepository>()
+                .AddSingleton<IEncryptionService, MD5EncryptionService>()
+                .AddSingleton<IdentityApplicationService>(s => new IdentityApplicationService(
+                    s.GetService<AuthenticationService>(),
+                    s.GetService<GroupMemberService>(),
+                    s.GetService<IGroupRepository>(),
+                    s.GetService<TenantProvisioningService>(),
+                    s.GetService<SaaSEqt.IdentityAccess.Domain.Repositories.ITenantRepository>(),
+                    s.GetService<IUserRepository>()
+                ));
         }
     }
 }

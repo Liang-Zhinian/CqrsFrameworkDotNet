@@ -11,7 +11,7 @@ using System;
 namespace Registration.Infra.Data.Migrations
 {
     [DbContext(typeof(ReservationDbContext))]
-    [Migration("20180620155849_first")]
+    [Migration("20180621095246_first")]
     partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -87,6 +87,12 @@ namespace Registration.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("binary(16)");
 
+                    b.Property<string>("City")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("CountryCode")
+                        .HasColumnType("varchar(255)");
+
                     b.Property<string>("Description")
                         .HasColumnType("varchar(2000)");
 
@@ -98,11 +104,23 @@ namespace Registration.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
+                    b.Property<string>("PostalCode")
+                        .HasColumnType("varchar(255)");
+
                     b.Property<string>("PrimaryTelephone")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("SecondaryTelephone")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("StateProvince")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("StreetAddress")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("StreetAddress2")
                         .HasColumnType("varchar(255)");
 
                     b.Property<Guid>("TenantId")
@@ -159,6 +177,20 @@ namespace Registration.Infra.Data.Migrations
                     b.Property<string>("Bio")
                         .HasColumnType("varchar(2000)");
 
+                    b.Property<string>("City")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("CountryCode")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime>("EndDate");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("varchar(255)");
+
                     b.Property<string>("ImageUrl")
                         .HasColumnType("varchar(255)");
 
@@ -166,7 +198,30 @@ namespace Registration.Infra.Data.Migrations
 
                     b.Property<bool>("IsMale");
 
+                    b.Property<string>("LastName")
+                        .HasColumnType("varchar(255)");
+
                     b.Property<string>("Password");
+
+                    b.Property<string>("PostalCode")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("PrimaryTelephone")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("SecondaryTelephone")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime>("StartDate");
+
+                    b.Property<string>("StateProvince")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("StreetAddress")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("StreetAddress2")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<Guid>("TenantId")
                         .HasColumnName("TenantId")
@@ -218,6 +273,12 @@ namespace Registration.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("binary(16)");
 
+                    b.Property<string>("City")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("CountryCode")
+                        .HasColumnType("varchar(255)");
+
                     b.Property<string>("Description")
                         .HasMaxLength(2000);
 
@@ -225,7 +286,6 @@ namespace Registration.Infra.Data.Migrations
                         .HasColumnType("varchar(2000)");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("LogoURL")
@@ -248,8 +308,10 @@ namespace Registration.Infra.Data.Migrations
                     b.Property<string>("PageColor4")
                         .HasColumnType("varchar(10)");
 
+                    b.Property<string>("PostalCode")
+                        .HasColumnType("varchar(255)");
+
                     b.Property<string>("PrimaryTelephone")
-                        .IsRequired()
                         .HasColumnType("varchar(255)")
                         .HasMaxLength(100);
 
@@ -257,9 +319,14 @@ namespace Registration.Infra.Data.Migrations
                         .HasColumnType("varchar(255)")
                         .HasMaxLength(100);
 
-                    b.Property<Guid>("TenantId")
-                        .HasColumnName("TenantId")
-                        .HasColumnType("binary(16)");
+                    b.Property<string>("StateProvince")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("StreetAddress")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("StreetAddress2")
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
@@ -368,37 +435,6 @@ namespace Registration.Infra.Data.Migrations
                         .WithMany("Locations")
                         .HasForeignKey("TenantId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.OwnsOne("Registration.Domain.ReadModel.PostalAddress", "PostalAddress", b1 =>
-                        {
-                            b1.Property<Guid>("LocationId")
-                                .HasColumnType("binary(16)");
-
-                            b1.Property<string>("City")
-                                .HasColumnType("varchar(255)");
-
-                            b1.Property<string>("CountryCode")
-                                .HasColumnType("varchar(255)");
-
-                            b1.Property<string>("PostalCode")
-                                .HasColumnType("varchar(255)");
-
-                            b1.Property<string>("StateProvince")
-                                .HasColumnType("varchar(255)");
-
-                            b1.Property<string>("StreetAddress")
-                                .HasColumnType("varchar(255)");
-
-                            b1.Property<string>("StreetAddress2")
-                                .HasColumnType("varchar(255)");
-
-                            b1.ToTable("LocationView");
-
-                            b1.HasOne("Registration.Domain.ReadModel.Security.Location")
-                                .WithOne("PostalAddress")
-                                .HasForeignKey("Registration.Domain.ReadModel.PostalAddress", "LocationId")
-                                .OnDelete(DeleteBehavior.Cascade);
-                        });
                 });
 
             modelBuilder.Entity("Registration.Domain.ReadModel.Security.LocationImage", b =>
@@ -411,7 +447,6 @@ namespace Registration.Infra.Data.Migrations
                     b.HasOne("Registration.Domain.ReadModel.Security.Tenant", "Tenant")
                         .WithMany()
                         .HasForeignKey("TenantId")
-                        .HasPrincipalKey("TenantId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -421,84 +456,6 @@ namespace Registration.Infra.Data.Migrations
                         .WithMany("Staffs")
                         .HasForeignKey("TenantId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.OwnsOne("Registration.Domain.ReadModel.Enablement", "Enablement", b1 =>
-                        {
-                            b1.Property<Guid>("StaffId")
-                                .HasColumnType("binary(16)");
-
-                            b1.Property<bool>("Enabled");
-
-                            b1.Property<DateTime>("EndDate");
-
-                            b1.Property<DateTime>("StartDate");
-
-                            b1.ToTable("StaffView");
-
-                            b1.HasOne("Registration.Domain.ReadModel.Security.Staff")
-                                .WithOne("Enablement")
-                                .HasForeignKey("Registration.Domain.ReadModel.Enablement", "StaffId")
-                                .OnDelete(DeleteBehavior.Cascade);
-                        });
-
-                    b.OwnsOne("Registration.Domain.ReadModel.PersonalInfo", "PersonalInfo", b1 =>
-                        {
-                            b1.Property<Guid>("StaffId")
-                                .HasColumnType("binary(16)");
-
-                            b1.Property<string>("Email")
-                                .HasColumnType("varchar(255)");
-
-                            b1.Property<string>("FirstName")
-                                .HasColumnType("varchar(255)");
-
-                            b1.Property<string>("LastName")
-                                .HasColumnType("varchar(255)");
-
-                            b1.Property<string>("PrimaryTelephone")
-                                .HasColumnType("varchar(255)");
-
-                            b1.Property<string>("SecondaryTelephone")
-                                .HasColumnType("varchar(255)");
-
-                            b1.ToTable("StaffView");
-
-                            b1.HasOne("Registration.Domain.ReadModel.Security.Staff")
-                                .WithOne("PersonalInfo")
-                                .HasForeignKey("Registration.Domain.ReadModel.PersonalInfo", "StaffId")
-                                .OnDelete(DeleteBehavior.Cascade);
-                        });
-
-                    b.OwnsOne("Registration.Domain.ReadModel.PostalAddress", "PostalAddress", b1 =>
-                        {
-                            b1.Property<Guid>("StaffId")
-                                .HasColumnType("binary(16)");
-
-                            b1.Property<string>("City")
-                                .HasColumnType("varchar(255)");
-
-                            b1.Property<string>("CountryCode")
-                                .HasColumnType("varchar(255)");
-
-                            b1.Property<string>("PostalCode")
-                                .HasColumnType("varchar(255)");
-
-                            b1.Property<string>("StateProvince")
-                                .HasColumnType("varchar(255)");
-
-                            b1.Property<string>("StreetAddress")
-                                .HasColumnType("varchar(255)");
-
-                            b1.Property<string>("StreetAddress2")
-                                .HasColumnType("varchar(255)");
-
-                            b1.ToTable("StaffView");
-
-                            b1.HasOne("Registration.Domain.ReadModel.Security.Staff")
-                                .WithOne("PostalAddress")
-                                .HasForeignKey("Registration.Domain.ReadModel.PostalAddress", "StaffId")
-                                .OnDelete(DeleteBehavior.Cascade);
-                        });
                 });
 
             modelBuilder.Entity("Registration.Domain.ReadModel.Security.StaffLoginLocation", b =>
@@ -517,40 +474,6 @@ namespace Registration.Infra.Data.Migrations
                         .WithMany()
                         .HasForeignKey("TenantId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Registration.Domain.ReadModel.Security.Tenant", b =>
-                {
-                    b.OwnsOne("Registration.Domain.ReadModel.PostalAddress", "PostalAddress", b1 =>
-                        {
-                            b1.Property<Guid>("TenantId")
-                                .HasColumnType("binary(16)");
-
-                            b1.Property<string>("City")
-                                .HasColumnType("varchar(255)");
-
-                            b1.Property<string>("CountryCode")
-                                .HasColumnType("varchar(255)");
-
-                            b1.Property<string>("PostalCode")
-                                .HasColumnType("varchar(255)");
-
-                            b1.Property<string>("StateProvince")
-                                .HasColumnType("varchar(255)");
-
-                            b1.Property<string>("StreetAddress")
-                                .HasColumnType("varchar(255)");
-
-                            b1.Property<string>("StreetAddress2")
-                                .HasColumnType("varchar(255)");
-
-                            b1.ToTable("TenantView");
-
-                            b1.HasOne("Registration.Domain.ReadModel.Security.Tenant")
-                                .WithOne("PostalAddress")
-                                .HasForeignKey("Registration.Domain.ReadModel.PostalAddress", "TenantId")
-                                .OnDelete(DeleteBehavior.Cascade);
-                        });
                 });
 
             modelBuilder.Entity("Registration.Domain.ReadModel.Service", b =>

@@ -17,6 +17,8 @@
     <Compile Remove="ReadModel\ApplicationDbContext.cs" />
     <Compile Remove="Commands\CreateTenantCommand.cs" />
     <Compile Remove="Services\Security\TenantService.cs" />
+    <Compile Remove="Services\SecurityService.cs" />
+    <Compile Remove="Interfaces\ISecurityService.cs" />
   </ItemGroup>
 
   <ItemGroup>

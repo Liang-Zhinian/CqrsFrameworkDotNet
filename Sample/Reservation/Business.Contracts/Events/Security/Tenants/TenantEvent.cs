@@ -1,21 +1,19 @@
 ﻿using System;
 namespace Business.Contracts.Events.Security.Tenants
 {
-    public class TenantEvent : BaseEvent
+    public class TenantEvent
     {
+        public Guid Id { get; set; }
+
         public string Name { get; set; }
 
-        public string DisplayName { get; set; }
+        public string Description { get; set; }
 
         public string Email { get; set; }
 
-        public string Email2 { get; set; }
+        public string PrimaryTelephone { get; set; }
 
-        public string Phone { get; set; }
-
-        public string Phone2 { get; set; }
-
-        public string Phone3 { get; set; }
+        public string SecondaryTelephone { get; set; }
 
         public string Street { get; set; }
 
@@ -29,11 +27,14 @@ namespace Business.Contracts.Events.Security.Tenants
 
         public string PostalCode { get; set; }
 
-        public string ForeignZip { get; set; }
         public string LogoURL { get; set; }
+
         public string PageColor1 { get; set; }
+
         public string PageColor2 { get; set; }
+
         public string PageColor3 { get; set; }
+
         public string PageColor4 { get; set; }
     }
 }

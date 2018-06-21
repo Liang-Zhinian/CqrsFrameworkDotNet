@@ -8,45 +8,28 @@ using Registration.Domain.ReadModel;
 using Registration.Domain.Repositories.Interfaces;
 using CqrsFramework.Domain;
 using CqrsFramework.Events;
+using Microsoft.EntityFrameworkCore;
 
 namespace Registration.Application.Services
 {
     public class ServiceCategoryService : IServiceCategoryService
     {
         private readonly ISession _session;
-        //private readonly IServiceCategoryRepository _serviceCategoryRepository;
+        private readonly IServiceCategoryRepository _serviceCategoryRepository;
         private readonly IServiceRepository _serviceRepository;
         private readonly IMapper _mapper;
         private readonly IEventPublisher _eventPublisher;
 
         public ServiceCategoryService(
+            IServiceCategoryRepository serviceCategoryRepository,
                                         IServiceRepository serviceRepository
                                      )
         {
             //_eventPublisher = eventPublisher;
             //_session = session;
             //_mapper = mapper;
-            //_serviceCategoryRepository = serviceCategoryRepository;
+            _serviceCategoryRepository = serviceCategoryRepository;
             _serviceRepository = serviceRepository;
-        }
-
-        public void AddService(ServiceViewModel service)
-        {
-            var domainservice = new Service(
-                service.TenantId,
-                service.ServiceCategoryId,
-                service.Name,
-                service.Description
-            );
-            _serviceRepository.Add(domainservice);
-            _serviceRepository.SaveChanges();
-
-            //_eventPublisher.Publish<ServiceCreatedEvent>(new ServiceCreatedEvent(Guid.NewGuid(),
-                                                                                // service.Name,
-                                                                                // service.Description,
-                                                                                // service.ServiceCategoryId,
-                                                                                // service.TenantId
-                                                                                //));
         }
 
         public void Dispose()
@@ -54,10 +37,13 @@ namespace Registration.Application.Services
             GC.SuppressFinalize(this);
         }
 
+        #region Services
+
         public ServiceViewModel FindService(Guid serviceId)
         {
             var service =
             _serviceRepository.Find(serviceId);
+            var serviceCategory = this.FindServiceCategory(service.CategoryId);
 
             return new ServiceViewModel
             {
@@ -65,48 +51,17 @@ namespace Registration.Application.Services
                 TenantId = service.TenantId,
                 Name = service.Name,
                 Description = service.Description,
-
+                ServiceCategoryId = serviceCategory.Id,
+                ServiceCategoryName = serviceCategory.Name
             };
         }
-
-        //public IEnumerable<ServiceCategoryViewModel> FindServiceCategories()
-        //{
-
-        //    var categories =
-        //        _serviceCategoryRepository.Find(_ => true);
-
-        //    return from category in categories
-        //           select new ServiceCategoryViewModel
-        //           {
-        //               Id = category.Id,
-        //               //TenantId = category.,
-        //               Name = category.Name,
-        //               Description = category.Description,
-
-        //           };
-        //}
-
-        //public ServiceCategoryViewModel FindServiceCategory(Guid serviceCategoryId)
-        //{
-
-        //    var categoriy =
-        //        _serviceCategoryRepository.Find(serviceCategoryId);
-
-        //    return new ServiceCategoryViewModel
-        //    {
-        //        Id = categoriy.Id,
-        //        //TenantId = category.,
-        //        Name = categoriy.Name,
-        //        Description = categoriy.Description,
-
-        //    };
-        //}
 
         public IEnumerable<ServiceViewModel> FindServices()
         {
 
             var services =
-            _serviceRepository.Find(_ => true);
+                _serviceRepository.Find(_ => true)
+                                  .Include(_=>_.Category);
 
             return from service in services
                    select new ServiceViewModel
@@ -114,8 +69,9 @@ namespace Registration.Application.Services
                        Id = service.Id,
                        TenantId = service.TenantId,
                        Name = service.Name,
-                       Description = service.Description,
-
+                        Description = service.Description,
+                        ServiceCategoryId = service.Category.Id,
+                        ServiceCategoryName = service.Category.Name,
                    };
         }
 
@@ -134,5 +90,45 @@ namespace Registration.Application.Services
                        ServiceCategoryName = service.Category.Name
                    };
         }
+
+        #endregion
+
+        #region ServiceCategories
+
+        public IEnumerable<ServiceCategoryViewModel> FindServiceCategories()
+        {
+
+            var categories =
+                _serviceCategoryRepository.Find(_ => true);
+
+            return from category in categories
+                   select new ServiceCategoryViewModel
+                   {
+                       Id = category.Id,
+                       //TenantId = category.,
+                       Name = category.Name,
+                       Description = category.Description,
+                       
+                   };
+        }
+
+        public ServiceCategoryViewModel FindServiceCategory(Guid serviceCategoryId)
+        {
+
+            var categoriy =
+                _serviceCategoryRepository.Find(serviceCategoryId);
+
+            return new ServiceCategoryViewModel
+            {
+                Id = categoriy.Id,
+                //TenantId = category.,
+                Name = categoriy.Name,
+                Description = categoriy.Description,
+
+            };
+        }
+
+        #endregion
+
     }
 }

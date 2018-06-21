@@ -6,8 +6,6 @@ namespace Registration.Domain.ReadModel.Security
 {
     public class Location
     {
-        private object tenantId;
-
         public Location(Guid id, string name, string description, Guid tenantId)
         {
             Id = id;
@@ -18,11 +16,24 @@ namespace Registration.Domain.ReadModel.Security
 
         [Key]
         public Guid Id { get; private set; }
+
         public string Name { get; private set; }
+
         public string Description { get; private set; }
+
         public string Email { get; private set; }
 
-        public PostalAddress PostalAddress { get; private set; }
+        public string City { get; set; }
+
+        public string CountryCode { get; set; }
+
+        public string PostalCode { get; set; }
+
+        public string StateProvince { get; set; }
+
+        public string StreetAddress { get; set; }
+
+        public string StreetAddress2 { get; set; }
 
         public string PrimaryTelephone { get; private set; }
 

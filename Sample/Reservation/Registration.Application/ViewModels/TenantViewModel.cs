@@ -10,18 +10,18 @@ namespace Registration.Application.ViewModels
         {
         }
 
-        public TenantViewModel(Guid id, 
-                               string name, 
-                               string description, 
+        public TenantViewModel(Guid id,
+                               string name,
+                               string description,
                                string email,
-                               string primaryTelephone, 
+                               string primaryTelephone,
                                string secondaryTelephone,
                                string street,
                                string street2,
-                               string city, 
+                               string city,
                                string state,
                                string country,
-                               string postalCode )
+                               string postalCode)
         {
             Id = id;
             Name = name;

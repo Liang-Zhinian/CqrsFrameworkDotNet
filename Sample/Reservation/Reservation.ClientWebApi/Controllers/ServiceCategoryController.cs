@@ -17,9 +17,12 @@ namespace Reservation.ClientWebApi.Controllers
             _serviceCategoryService = serviceCategoryService;
         }
 
+        #region Services
+
         [HttpGet]
         [AllowAnonymous]
-        public JsonResult Get()
+        [Route("Services")]
+        public JsonResult Services()
         {
             var list = _serviceCategoryService.FindServices()
                                     .ToList();
@@ -36,6 +39,30 @@ namespace Reservation.ClientWebApi.Controllers
             return Json(list);
         }
 
+        #endregion
+
+        #region Categories
+
+        [HttpGet]
+        //[Authorize(Policy = "CanWriteTenantData")]
+        [Route("ServiceCategories")]
+        public ActionResult GetServiceCategories()
+        {
+            var list = _serviceCategoryService.FindServiceCategories()
+                                    .ToList();
+            return Json(list);
+        }
+
+        [HttpGet]
+        //[Authorize(Policy = "CanWriteTenantData")]
+        [Route("ServiceCategories/{id}")]
+        public ActionResult GetServiceCategory(Guid id)
+        {
+            var item = _serviceCategoryService.FindServiceCategory(id);
+            return Json(item);
+        }
+
+        #endregion
         [HttpGet]
         //[Authorize(Policy = "CanWriteTenantData")]
         [Route("test")]

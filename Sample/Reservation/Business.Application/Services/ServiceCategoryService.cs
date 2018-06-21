@@ -102,7 +102,8 @@ namespace Business.Application.Services
                 //TenantId = category.,
                 Name = categoriy.Name,
                 Description = categoriy.Description,
-
+                ScheduleType = categoriy.ScheduleTypeValue,
+                CancelOffset = categoriy.CancelOffset
             };
         }
 
@@ -137,6 +138,22 @@ namespace Business.Application.Services
                        Description = service.Description,
                        ServiceCategoryName = service.Category.Name
                    };
+        }
+
+        public void AddServiceCategory(ServiceCategoryViewModel serviceCategory) {
+            var domainServiceCategory = new ServiceCategory(
+                serviceCategory.Name,
+                serviceCategory.Description
+            );
+            _serviceCategoryRepository.Add(domainServiceCategory);
+            _serviceCategoryRepository.SaveChanges();
+
+            _eventPublisher.Publish<ServiceCategoryCreatedEvent>(new ServiceCategoryCreatedEvent(domainServiceCategory.Id,
+                                                                                         serviceCategory.Name,
+                                                                                         serviceCategory.Description,
+                                                                                                 serviceCategory.CancelOffset,
+                                                                                                 serviceCategory.ScheduleType
+                                                                                ));
         }
     }
 }

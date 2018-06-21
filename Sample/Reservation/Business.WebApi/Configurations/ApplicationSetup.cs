@@ -36,6 +36,7 @@ namespace Business.WebApi.Configurations
             services.AddScoped<BusinessDbContext>();
             services.AddScoped<IdentityAccessDbContext>();
             services.AddScoped<ITenantAddressRepository, TenantAddressRepository>();
+            services.AddScoped<ITenantContactRepository, TenantContactRepository>();
             services.AddScoped<ILocationRepository, LocationRepository>();
             services.AddScoped<IServiceRepository, ServiceRepository>();
             services.AddScoped<IServiceCategoryRepository, ServiceCategoryRepository>();
@@ -44,30 +45,30 @@ namespace Business.WebApi.Configurations
         private static void RegisterAppService(IServiceCollection services)
         {
             // App service
-            services.AddScoped<ISecurityService, SecurityService>();
+            services.AddScoped<ITenantService, TenantService>();
             services.AddScoped<ILocationService, LocationService>();
             services.AddScoped<IServiceCategoryService, ServiceCategoryService>();
         }
 
         private static void RegisterIdentityAccessServices(IServiceCollection services){
             services
-                .AddSingleton<AuthenticationService>(_ => new AuthenticationService(
+                .AddScoped<AuthenticationService>(_ => new AuthenticationService(
                     _.GetService<ITenantRepository>(),
                     _.GetService<IUserRepository>(),
                     _.GetService<IEncryptionService>()))
-                .AddSingleton<GroupMemberService>(_ => new GroupMemberService(
+                .AddScoped<GroupMemberService>(_ => new GroupMemberService(
                     _.GetService<IUserRepository>(),
                     _.GetService<IGroupRepository>()))
-                .AddSingleton<TenantProvisioningService>(_ => new TenantProvisioningService(
+                .AddScoped<TenantProvisioningService>(_ => new TenantProvisioningService(
                     _.GetService<ITenantRepository>(),
                     _.GetService<IUserRepository>(),
                     _.GetService<IRoleRepository>()))
-                .AddSingleton<ITenantRepository, TenantRepository>()
-                .AddSingleton<IUserRepository, UserRepository>()
-                .AddSingleton<IRoleRepository, RoleRepository>()
-                .AddSingleton<IGroupRepository, GroupRepository>()
-                .AddSingleton<IEncryptionService, MD5EncryptionService>()
-                .AddSingleton<IdentityApplicationService>(s => new IdentityApplicationService(
+                .AddScoped<ITenantRepository, TenantRepository>()
+                .AddScoped<IUserRepository, UserRepository>()
+                .AddScoped<IRoleRepository, RoleRepository>()
+                .AddScoped<IGroupRepository, GroupRepository>()
+                .AddScoped<IEncryptionService, MD5EncryptionService>()
+                .AddScoped<IdentityApplicationService>(s => new IdentityApplicationService(
                     s.GetService<AuthenticationService>(),
                     s.GetService<GroupMemberService>(),
                     s.GetService<IGroupRepository>(),

@@ -11,6 +11,6 @@ namespace Business.Application.ViewModels
         public string Name { get; set; }
         public string Description { get; set; }
         public int CancelOffset { get; set; }
-        public Guid TenantId { get; set; }
+        public int ScheduleType { get; set; }
     }
 }
