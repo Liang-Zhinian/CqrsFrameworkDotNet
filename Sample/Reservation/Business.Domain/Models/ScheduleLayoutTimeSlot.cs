@@ -1,8 +1,9 @@
 ﻿using System;
 namespace Business.Domain.Models
 {
-    public class ScheduleLayoutTimeSlot : BaseObject
+    public class ScheduleLayoutTimeSlot
     {
+        public Guid Id { get; private set; }
         public string Label { get; set; }
         public string EndLabel { get; set; }
 

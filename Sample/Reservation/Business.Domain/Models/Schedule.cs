@@ -3,24 +3,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Business.Domain.Models
 {
-    public class Schedule : BaseObject
+    public class Schedule
     {
-        //public enum ScheduleType{
-        //    All=0,
-        //    DropIn,
-        //    Enrollment,
-        //    Appointment,
-        //    Resource,
-        //    Media,
-        //    Arrival
-        //}
-
+        public Guid Id { get; private set; }
         public string Name { get; set; }
         public bool IsDefault { get; set; }
         public int WeekdayStart { get; set; }
         public int DaysVisible { get; set; }
         public DateTime StartDateTime { get; set; }
         public DateTime EndDateTime { get; set; }
+
+        public TenantId TenantId { get; private set; }
 
         public Guid LayoutId { get; set; }
         public virtual ScheduleLayout Layout { get; set; }

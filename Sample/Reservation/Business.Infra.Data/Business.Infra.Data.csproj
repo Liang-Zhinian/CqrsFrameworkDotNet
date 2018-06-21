@@ -47,6 +47,7 @@
     <Compile Remove="Repositories\TenantRepository.cs" />
     <Compile Remove="Migrations\20180616151522_first.cs" />
     <Compile Remove="Migrations\20180618070615_first.cs" />
+    <Compile Remove="Migrations\20180618070920_first.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Business.Domain\Business.Domain.csproj" />

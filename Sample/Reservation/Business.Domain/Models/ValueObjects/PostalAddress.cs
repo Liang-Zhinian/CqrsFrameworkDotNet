@@ -3,9 +3,22 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Business.Domain.Models.ValueObjects
 {
-    [NotMapped]
     public class PostalAddress
     {
+        public PostalAddress(string streetAddress, 
+                             string streetAddress2, 
+                             string city, 
+                             string stateProvince, 
+                             string postalCode, 
+                             string countryCode)
+        {
+            this.StreetAddress = streetAddress;
+            this.StreetAddress2 = streetAddress2;
+            this.City = city;
+            this.StateProvince = stateProvince;
+            this.PostalCode = postalCode;
+            this.CountryCode = countryCode;
+        }
 
         public string City { get; set; }
 

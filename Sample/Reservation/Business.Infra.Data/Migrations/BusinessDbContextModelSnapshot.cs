@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
 namespace Business.Infra.Data.Migrations
@@ -65,7 +66,8 @@ namespace Business.Infra.Data.Migrations
 
                     b.Property<int>("StatusId");
 
-                    b.Property<Guid>("TenantId")
+                    b.Property<string>("TenantId_Id")
+                        .IsRequired()
                         .HasColumnType("char(36)");
 
                     b.HasKey("Id");
@@ -88,9 +90,6 @@ namespace Business.Infra.Data.Migrations
                         .HasColumnType("char(36)");
 
                     b.Property<Guid>("LocationId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("TenantId")
                         .HasColumnType("char(36)");
 
                     b.HasKey("Id", "ResourceId", "LocationId");
@@ -129,7 +128,8 @@ namespace Business.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
-                    b.Property<Guid>("TenantId")
+                    b.Property<string>("TenantId_Id")
+                        .IsRequired()
                         .HasColumnType("char(36)");
 
                     b.HasKey("Id");
@@ -160,7 +160,8 @@ namespace Business.Infra.Data.Migrations
 
                     b.Property<DateTime>("StartDateTime");
 
-                    b.Property<Guid>("TenantId")
+                    b.Property<string>("TenantId_Id")
+                        .IsRequired()
                         .HasColumnType("char(36)");
 
                     b.Property<int>("WeekdayStart");
@@ -178,7 +179,8 @@ namespace Business.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("TenantId")
+                    b.Property<string>("TenantId_Id")
+                        .IsRequired()
                         .HasColumnType("char(36)");
 
                     b.Property<int>("TimeZoneId");
@@ -219,9 +221,6 @@ namespace Business.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(10)");
 
-                    b.Property<Guid>("TenantId")
-                        .HasColumnType("char(36)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("LayoutId");
@@ -234,6 +233,8 @@ namespace Business.Infra.Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
+
+                    b.Property<string>("Logo");
 
                     b.Property<string>("LogoURL")
                         .HasColumnType("varchar(255)");
@@ -250,7 +251,8 @@ namespace Business.Infra.Data.Migrations
                     b.Property<string>("PageColor4")
                         .HasColumnType("varchar(10)");
 
-                    b.Property<Guid>("TenantId")
+                    b.Property<string>("TenantId_Id")
+                        .IsRequired()
                         .HasColumnType("char(36)");
 
                     b.HasKey("Id");
@@ -274,6 +276,8 @@ namespace Business.Infra.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("varchar(2000)");
 
+                    b.Property<string>("Image");
+
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
@@ -293,7 +297,8 @@ namespace Business.Infra.Data.Migrations
                     b.Property<string>("SecondaryTelephone")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<Guid>("TenantId")
+                    b.Property<string>("TenantId_Id")
+                        .IsRequired()
                         .HasColumnType("char(36)");
 
                     b.HasKey("Id");
@@ -307,14 +312,13 @@ namespace Business.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<string>("Image");
+
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<Guid>("LocationId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("TenantId")
                         .HasColumnType("char(36)");
 
                     b.HasKey("Id");
@@ -340,12 +344,15 @@ namespace Business.Infra.Data.Migrations
 
                     b.Property<bool>("IsMale");
 
-                    b.Property<Guid>("TenantId")
+                    b.Property<string>("TenantId_Id")
+                        .IsRequired()
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("UserId");
+                    b.Property<Guid?>("UserId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Staff");
                 });
@@ -359,9 +366,6 @@ namespace Business.Infra.Data.Migrations
                         .HasColumnType("char(36)");
 
                     b.Property<Guid>("LocationId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("TenantId")
                         .HasColumnType("char(36)");
 
                     b.HasKey("Id", "StaffId", "LocationId");
@@ -379,7 +383,8 @@ namespace Business.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("TenantId")
+                    b.Property<string>("TenantId_Id")
+                        .IsRequired()
                         .HasColumnType("char(36)");
 
                     b.HasKey("Id");
@@ -403,7 +408,8 @@ namespace Business.Infra.Data.Migrations
                     b.Property<string>("SecondaryTelephone")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<Guid>("TenantId")
+                    b.Property<string>("TenantId_Id")
+                        .IsRequired()
                         .HasColumnType("char(36)");
 
                     b.HasKey("Id");
@@ -428,7 +434,8 @@ namespace Business.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
-                    b.Property<Guid>("TenantId")
+                    b.Property<string>("TenantId_Id")
+                        .IsRequired()
                         .HasColumnType("char(36)");
 
                     b.HasKey("Id");
@@ -458,9 +465,6 @@ namespace Business.Infra.Data.Migrations
 
                     b.Property<int>("ScheduleTypeValue");
 
-                    b.Property<Guid>("TenantId")
-                        .HasColumnType("char(36)");
-
                     b.HasKey("Id");
 
                     b.ToTable("ServiceCategory");
@@ -482,6 +486,39 @@ namespace Business.Infra.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TimeZone");
+                });
+
+            modelBuilder.Entity("SaaSEqt.IdentityAccess.Domain.Models.Person", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("TenantId_Id");
+
+                    b.Property<Guid>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Person");
+                });
+
+            modelBuilder.Entity("SaaSEqt.IdentityAccess.Domain.Models.User", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Password");
+
+                    b.Property<string>("TenantId_Id");
+
+                    b.Property<string>("Username");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("Business.Domain.Models.Resource", b =>
@@ -587,6 +624,13 @@ namespace Business.Infra.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("Business.Domain.Models.Security.Staff", b =>
+                {
+                    b.HasOne("SaaSEqt.IdentityAccess.Domain.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
             modelBuilder.Entity("Business.Domain.Models.Security.StaffLoginLocation", b =>
                 {
                     b.HasOne("Business.Domain.Models.Security.Location", "Location")
@@ -645,6 +689,14 @@ namespace Business.Infra.Data.Migrations
                     b.HasOne("Business.Domain.Models.ServiceCategory", "Category")
                         .WithMany("Services")
                         .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("SaaSEqt.IdentityAccess.Domain.Models.Person", b =>
+                {
+                    b.HasOne("SaaSEqt.IdentityAccess.Domain.Models.User", "User")
+                        .WithOne("Person")
+                        .HasForeignKey("SaaSEqt.IdentityAccess.Domain.Models.Person", "UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

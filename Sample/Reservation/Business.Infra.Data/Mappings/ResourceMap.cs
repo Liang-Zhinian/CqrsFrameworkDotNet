@@ -20,7 +20,7 @@ namespace Business.Infra.Data.Mappings
             builder.Property<int>("StatusId").IsRequired();
             builder.Property<Guid>("ResourceTypeId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
             builder.Property<Guid>("ScheduleId").HasColumnType(Constants.DbConstants.KeyType);
-            builder.Property<Guid>("TenantId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<string>("TenantId_Id").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
 
             builder.Ignore("Version");
 

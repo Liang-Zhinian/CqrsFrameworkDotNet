@@ -53,7 +53,7 @@ namespace CqrsFramework.Domain
 
                 // The domain repository is responsible for publishing the events, this would normally be inside a single transaction together with storing the events in the event store.
                 // http://stackoverflow.com/questions/12677926/why-is-the-cqrs-repository-publishing-events-not-the-event-store
-                // The domain model is unaware of the storing mechanism.On the other hand it must make sure that the appropriate events will be published, no matter if you use an event store, a classical SQL store, or any other means of persistence.
+                // The domain model is unaware of the storing mechanism. On the other hand it must make sure that the appropriate events will be published, no matter if you use an event store, a classical SQL store, or any other means of persistence.
                 // If you rely on the event store to publish the events you'd have a tight coupling to the storage mechanism.
                 if (_publisher != null) _publisher.Publish(@event);
             }

@@ -7,7 +7,7 @@ namespace Business.Domain.Models.Services.Appointment
 {
     public class AppointmentService : Service
     {
-        public AppointmentService(Guid tenantId, Guid categoryId, string name, string description) : base (tenantId, categoryId, name, description)
+        public AppointmentService(TenantId tenantId, Guid categoryId, string name, string description) : base (tenantId, categoryId, name, description)
         {
         }
         public bool SellOnline { get; set; }

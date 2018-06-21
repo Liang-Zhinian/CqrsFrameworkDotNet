@@ -6,18 +6,19 @@ using Infrastructure.Utils;
 
 namespace Business.Domain.Models.Security
 {
-    public class TenantAddress : BaseObject
+    public class TenantAddress
     {
-        public PostalAddress PostalAddress { get; set; }
+        public Guid Id { get; private set; }
 
-        public TenantAddress()
+        public PostalAddress PostalAddress { get; private set; }
+
+        public TenantId TenantId { get; private set; }
+
+        public TenantAddress(TenantId tenantId, PostalAddress postalAddress)
         {
             Id = GuidUtil.NewSequentialId();
-        }
-
-        public TenantAddress(Guid tenantId) : base(tenantId)
-        {
-            Id = GuidUtil.NewSequentialId();
+            this.TenantId = tenantId;
+            this.PostalAddress = postalAddress;
         }
     }
 }

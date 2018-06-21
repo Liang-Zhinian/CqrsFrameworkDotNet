@@ -14,7 +14,7 @@ namespace Business.Infra.Data.Mappings
             builder.ToTable(Constants.DbConstants.TenantAddressTable);
 
             builder.Property<Guid>("Id").HasColumnType(Constants.DbConstants.KeyType);
-            builder.Property<Guid>("TenantId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<string>("TenantId_Id").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
 
             builder.OwnsOne(_ => _.PostalAddress, cb => {
                 cb.Property("TenantAddressId").HasColumnType(Constants.DbConstants.KeyType);

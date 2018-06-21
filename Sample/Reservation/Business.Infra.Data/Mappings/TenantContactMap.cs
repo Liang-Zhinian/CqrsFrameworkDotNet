@@ -14,7 +14,7 @@ namespace Business.Infra.Data.Mappings
             builder.ToTable(Constants.DbConstants.TenantContactTable);
 
             builder.Property<Guid>("Id").HasColumnType(Constants.DbConstants.KeyType);
-            builder.Property<Guid>("TenantId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<string>("TenantId_Id").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
             builder.Property<string>("Email").IsRequired().HasColumnType(Constants.DbConstants.String255);
             builder.Property<string>("PrimaryTelephone").HasColumnType(Constants.DbConstants.String255);
             builder.Property<string>("SecondaryTelephone").HasColumnType(Constants.DbConstants.String255);

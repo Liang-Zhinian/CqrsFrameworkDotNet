@@ -2,23 +2,23 @@
 using System.ComponentModel.DataAnnotations;
 namespace Business.Domain.Models.Security
 {
-    public class StaffLoginLocation : BaseObject
+    public class StaffLoginLocation
     {
-        public Guid StaffId { get; set; }
-        public virtual Staff Staff { get; set; }
+        public Guid Id { get; private set; }
 
-        public Guid LocationId { get; set; }
-        public virtual Location Location { get; set; }
+        public Guid StaffId { get; private set; }
+        public virtual Staff Staff { get; private set; }
 
-        public StaffLoginLocation()
+        public Guid LocationId { get; private set; }
+        public virtual Location Location { get; private set; }
+
+        public StaffLoginLocation(Staff staff, Location location)
         {
-
-        }
-
-        public StaffLoginLocation(Guid staffId, Guid locationId, Guid tenantId) : base(tenantId)
-        {
-            StaffId = staffId;
-            LocationId = locationId;
+            Id = Guid.NewGuid();
+            StaffId = staff.Id;
+            LocationId = location.Id;
+            Staff = staff;
+            Location = location;
         }
     }
 }

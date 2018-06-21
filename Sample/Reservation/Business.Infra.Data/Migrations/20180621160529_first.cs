@@ -14,12 +14,13 @@ namespace Business.Infra.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Logo = table.Column<string>(nullable: true),
                     LogoURL = table.Column<string>(type: "varchar(255)", nullable: true),
                     PageColor1 = table.Column<string>(type: "varchar(10)", nullable: true),
                     PageColor2 = table.Column<string>(type: "varchar(10)", nullable: true),
                     PageColor3 = table.Column<string>(type: "varchar(10)", nullable: true),
                     PageColor4 = table.Column<string>(type: "varchar(10)", nullable: true),
-                    TenantId = table.Column<Guid>(type: "char(36)", nullable: false)
+                    TenantId_Id = table.Column<string>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -34,13 +35,14 @@ namespace Business.Infra.Data.Migrations
                     BusinessDescription = table.Column<string>(type: "varchar(2000)", nullable: false),
                     BusinessID = table.Column<Guid>(type: "char(36)", nullable: false),
                     Description = table.Column<string>(type: "varchar(2000)", nullable: true),
+                    Image = table.Column<string>(nullable: true),
                     ImageUrl = table.Column<string>(type: "varchar(255)", nullable: false),
                     Latitude = table.Column<double>(nullable: false),
                     Longitude = table.Column<double>(nullable: false),
                     Name = table.Column<string>(type: "varchar(255)", nullable: false),
                     PrimaryTelephone = table.Column<string>(type: "varchar(255)", nullable: false),
                     SecondaryTelephone = table.Column<string>(type: "varchar(255)", nullable: true),
-                    TenantId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    TenantId_Id = table.Column<string>(type: "char(36)", nullable: false),
                     City = table.Column<string>(type: "varchar(255)", nullable: true),
                     CountryCode = table.Column<string>(type: "varchar(255)", nullable: true),
                     PostalCode = table.Column<string>(type: "varchar(255)", nullable: true),
@@ -88,7 +90,7 @@ namespace Business.Infra.Data.Migrations
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
                     Description = table.Column<string>(type: "varchar(2000)", nullable: true),
                     Name = table.Column<string>(type: "varchar(255)", nullable: false),
-                    TenantId = table.Column<Guid>(type: "char(36)", nullable: false)
+                    TenantId_Id = table.Column<string>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -104,8 +106,7 @@ namespace Business.Infra.Data.Migrations
                     Description = table.Column<string>(type: "varchar(2000)", nullable: false),
                     Name = table.Column<string>(type: "varchar(255)", nullable: false),
                     ScheduleType = table.Column<int>(nullable: false),
-                    ScheduleTypeValue = table.Column<int>(nullable: false),
-                    TenantId = table.Column<Guid>(type: "char(36)", nullable: false)
+                    ScheduleTypeValue = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -113,28 +114,11 @@ namespace Business.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Staff",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
-                    Bio = table.Column<string>(type: "varchar(2000)", nullable: true),
-                    CanLoginAllLocations = table.Column<bool>(nullable: false),
-                    ImageUrl = table.Column<string>(type: "varchar(255)", nullable: true),
-                    IsMale = table.Column<bool>(nullable: false),
-                    TenantId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    UserId = table.Column<Guid>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Staff", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "TenantAddress",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
-                    TenantId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    TenantId_Id = table.Column<string>(type: "char(36)", nullable: false),
                     City = table.Column<string>(type: "varchar(255)", nullable: true),
                     CountryCode = table.Column<string>(type: "varchar(255)", nullable: true),
                     PostalCode = table.Column<string>(type: "varchar(255)", nullable: true),
@@ -155,7 +139,7 @@ namespace Business.Infra.Data.Migrations
                     Email = table.Column<string>(type: "varchar(255)", nullable: false),
                     PrimaryTelephone = table.Column<string>(type: "varchar(255)", nullable: true),
                     SecondaryTelephone = table.Column<string>(type: "varchar(255)", nullable: true),
-                    TenantId = table.Column<Guid>(type: "char(36)", nullable: false)
+                    TenantId_Id = table.Column<string>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -177,13 +161,27 @@ namespace Business.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "User",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Password = table.Column<string>(nullable: true),
+                    TenantId_Id = table.Column<string>(nullable: true),
+                    Username = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_User", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "LocationImage",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Image = table.Column<string>(nullable: true),
                     ImageUrl = table.Column<string>(type: "varchar(255)", nullable: false),
-                    LocationId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    TenantId = table.Column<Guid>(type: "char(36)", nullable: false)
+                    LocationId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -204,7 +202,7 @@ namespace Business.Infra.Data.Migrations
                     CategoryId = table.Column<Guid>(type: "char(36)", nullable: false),
                     Description = table.Column<string>(type: "varchar(2000)", nullable: false),
                     Name = table.Column<string>(type: "varchar(255)", nullable: false),
-                    TenantId = table.Column<Guid>(type: "char(36)", nullable: false)
+                    TenantId_Id = table.Column<string>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -218,37 +216,11 @@ namespace Business.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "StaffLoginLocation",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
-                    StaffId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    LocationId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    TenantId = table.Column<Guid>(type: "char(36)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_StaffLoginLocation", x => new { x.Id, x.StaffId, x.LocationId });
-                    table.ForeignKey(
-                        name: "FK_StaffLoginLocation_Location_LocationId",
-                        column: x => x.LocationId,
-                        principalTable: "Location",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_StaffLoginLocation_Staff_StaffId",
-                        column: x => x.StaffId,
-                        principalTable: "Staff",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ScheduleLayout",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
-                    TenantId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    TenantId_Id = table.Column<string>(type: "char(36)", nullable: false),
                     TimeZoneId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -263,6 +235,48 @@ namespace Business.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Person",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    TenantId_Id = table.Column<string>(nullable: true),
+                    UserId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Person", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Person_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Staff",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Bio = table.Column<string>(type: "varchar(2000)", nullable: true),
+                    CanLoginAllLocations = table.Column<bool>(nullable: false),
+                    ImageUrl = table.Column<string>(type: "varchar(255)", nullable: true),
+                    IsMale = table.Column<bool>(nullable: false),
+                    TenantId_Id = table.Column<string>(type: "char(36)", nullable: false),
+                    UserId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Staff", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Staff_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Schedule",
                 columns: table => new
                 {
@@ -274,7 +288,7 @@ namespace Business.Infra.Data.Migrations
                     LayoutId = table.Column<Guid>(type: "char(36)", nullable: false),
                     Name = table.Column<string>(type: "varchar(255)", nullable: false),
                     StartDateTime = table.Column<DateTime>(nullable: false),
-                    TenantId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    TenantId_Id = table.Column<string>(type: "char(36)", nullable: false),
                     WeekdayStart = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -300,8 +314,7 @@ namespace Business.Infra.Data.Migrations
                     IsEnabled = table.Column<bool>(nullable: false),
                     Label = table.Column<string>(type: "varchar(255)", nullable: true),
                     LayoutId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    StartTime = table.Column<string>(type: "varchar(10)", nullable: false),
-                    TenantId = table.Column<Guid>(type: "char(36)", nullable: false)
+                    StartTime = table.Column<string>(type: "varchar(10)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -310,6 +323,31 @@ namespace Business.Infra.Data.Migrations
                         name: "FK_ScheduleLayoutTimeSlot_ScheduleLayout_LayoutId",
                         column: x => x.LayoutId,
                         principalTable: "ScheduleLayout",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StaffLoginLocation",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
+                    StaffId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    LocationId = table.Column<Guid>(type: "char(36)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StaffLoginLocation", x => new { x.Id, x.StaffId, x.LocationId });
+                    table.ForeignKey(
+                        name: "FK_StaffLoginLocation_Location_LocationId",
+                        column: x => x.LocationId,
+                        principalTable: "Location",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_StaffLoginLocation_Staff_StaffId",
+                        column: x => x.StaffId,
+                        principalTable: "Staff",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -325,7 +363,7 @@ namespace Business.Infra.Data.Migrations
                     ResourceTypeId = table.Column<Guid>(type: "char(36)", nullable: false),
                     ScheduleId = table.Column<Guid>(type: "char(36)", nullable: false),
                     StatusId = table.Column<int>(nullable: false),
-                    TenantId = table.Column<Guid>(type: "char(36)", nullable: false)
+                    TenantId_Id = table.Column<string>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -356,8 +394,7 @@ namespace Business.Infra.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
                     ResourceId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    LocationId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    TenantId = table.Column<Guid>(type: "char(36)", nullable: false)
+                    LocationId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -380,6 +417,12 @@ namespace Business.Infra.Data.Migrations
                 name: "IX_LocationImage_LocationId",
                 table: "LocationImage",
                 column: "LocationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Person_UserId",
+                table: "Person",
+                column: "UserId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Resource_ResourceTypeId",
@@ -427,6 +470,11 @@ namespace Business.Infra.Data.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Staff_UserId",
+                table: "Staff",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_StaffLoginLocation_LocationId",
                 table: "StaffLoginLocation",
                 column: "LocationId");
@@ -444,6 +492,9 @@ namespace Business.Infra.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "LocationImage");
+
+            migrationBuilder.DropTable(
+                name: "Person");
 
             migrationBuilder.DropTable(
                 name: "Region");
@@ -486,6 +537,9 @@ namespace Business.Infra.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "ResourceStatus");
+
+            migrationBuilder.DropTable(
+                name: "User");
 
             migrationBuilder.DropTable(
                 name: "ScheduleLayout");

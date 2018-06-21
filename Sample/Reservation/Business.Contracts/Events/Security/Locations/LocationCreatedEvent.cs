@@ -3,19 +3,41 @@ using CqrsFramework.Events;
 
 namespace Business.Contracts.Events.Security.Locations
 {
-    public class LocationCreatedEvent : BaseEvent, IEvent
+    public class LocationCreatedEvent : LocationEvent, IEvent
     {
-        public string Name { get; private set; }
-        public string Description { get; private set; }
-        public Guid TenantId { get; private set; }
-
-        public LocationCreatedEvent(Guid id, string name, string description, Guid tenantId)
+        public LocationCreatedEvent(
+            Guid id,
+            Guid tenantId,
+            Guid businessId,
+            string businessDescription,
+            string name,
+            string description,
+            string image,
+            string primaryTelephone,
+            string secondaryTelephone,
+            string streetAddress,
+            string streetAddress2,
+            string city,
+            string stateProvince,
+            string postalCode,
+            string countryCode)
+            :base(
+                id,
+                tenantId,
+                businessId,
+                businessDescription,
+                name,
+                description,
+                image,
+                primaryTelephone,
+                secondaryTelephone,
+                streetAddress,
+                streetAddress2,
+                city,
+                stateProvince,
+                postalCode,
+                countryCode)
         {
-            Id = id;
-            Name = name;
-            Description = description;
-            TenantId = tenantId;
-
             Version = 1;
             TimeStamp = DateTimeOffset.Now;
         }

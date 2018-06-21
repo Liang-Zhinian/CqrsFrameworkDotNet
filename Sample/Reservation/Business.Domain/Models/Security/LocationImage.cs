@@ -5,22 +5,19 @@ using Infrastructure.Utils;
 
 namespace Business.Domain.Models.Security
 {
-    public class LocationImage : BaseObject
+    public class LocationImage
     {
-        public string ImageUrl { get; set; }
+        public Guid Id { get; private set; }
+        public string Image { get; private set; }
 
-        public Guid LocationId { get; set; }
-        public virtual Location Location { get; set; }
+        public Guid LocationId { get; private set; }
+        public virtual Location Location { get; private set; }
 
-        public LocationImage()
+        public LocationImage(Guid locationId, Guid tenantId, string image)
         {
             Id = GuidUtil.NewSequentialId();
-        }
-
-        public LocationImage(Guid locationId, Guid tenantId, string imageUrl) : base(tenantId)
-        {
             LocationId = locationId;
-            ImageUrl = imageUrl;
+            Image = image;
         }
     }
 }

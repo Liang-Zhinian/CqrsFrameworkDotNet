@@ -5,8 +5,9 @@ using CqrsFramework.Domain;
 
 namespace Business.Domain.Models
 {
-    public class ServiceCategory : AggregateRoot
+    public class ServiceCategory
     {
+        public Guid Id { get; private set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public int CancelOffset { get; set; }

@@ -18,7 +18,7 @@ namespace Business.Infra.Data.Mappings
             builder.Property<string>("Description").IsRequired().HasColumnType(Constants.DbConstants.String2000);
             builder.Property<int>("CancelOffset").IsRequired();
             builder.Property<int>("ScheduleTypeValue").IsRequired();
-            builder.Property<Guid>("TenantId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
+            //builder.Property<Guid>("TenantId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
 
             builder.Ignore("Version");
 

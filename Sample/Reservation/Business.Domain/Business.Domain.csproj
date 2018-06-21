@@ -23,6 +23,7 @@
     <ProjectReference Include="..\..\Infrastructure\Infrastructure.csproj" />
     <ProjectReference Include="..\..\SaaSEqt\Common\SaaSEqt.Common.csproj" />
     <ProjectReference Include="..\..\SaaSEqt\IdentityAccess\IdentityAccess\SaaSEqt.IdentityAccess.csproj" />
+    <ProjectReference Include="..\Business.Contracts\Business.Contracts.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Services\" />
@@ -40,5 +41,6 @@
     <Compile Remove="Models\Security\StaffAddress.cs" />
     <Compile Remove="Events\BaseEvent.cs" />
     <Compile Remove="EventHandlers\ServiceCategoryEventHandler.cs" />
+    <Compile Remove="Models\BaseObject.cs" />
   </ItemGroup>
 </Project>

@@ -3,11 +3,14 @@ using System.Collections.Generic;
 
 namespace Business.Domain.Models
 {
-    public class Resource: BaseObject
+    public class Resource
     {
+        public Guid Id { get; private set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public bool IsLocatedAtAllLocations { get; set; }
+
+        public TenantId TenantId { get; private set; }
 
         public int StatusId { get; set; }
         public virtual ResourceStatus Status { get; set; }

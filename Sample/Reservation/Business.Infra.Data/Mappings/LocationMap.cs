@@ -23,8 +23,7 @@ namespace Business.Infra.Data.Mappings
             builder.Property<double>("Longitude");
             builder.Property<string>("PrimaryTelephone").IsRequired().HasColumnType(Constants.DbConstants.String255);
             builder.Property<string>("SecondaryTelephone").HasColumnType(Constants.DbConstants.String255);
-
-            builder.Property<Guid>("TenantId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<string>("TenantId_Id").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
 
             builder.Ignore("Version");
 
