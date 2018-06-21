@@ -33,7 +33,6 @@ namespace Business.Domain.Models.Security
 
         public string SecondaryTelephone { get; set; }
 
-        [NotMapped]
         public PostalAddress PostalAddress { get; set; }
 
         public virtual ICollection<LocationImage> AdditionalLocationImages { get; set; }

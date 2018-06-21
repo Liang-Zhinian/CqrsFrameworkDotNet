@@ -8,7 +8,6 @@ namespace Business.Domain.Models.Security
 {
     public class TenantAddress : BaseObject
     {
-        [NotMapped]
         public PostalAddress PostalAddress { get; set; }
 
         public TenantAddress()
