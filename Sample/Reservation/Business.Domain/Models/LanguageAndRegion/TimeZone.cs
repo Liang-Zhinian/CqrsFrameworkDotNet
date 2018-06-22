@@ -10,6 +10,6 @@ namespace Business.Domain.Models
         public string DisplayName { get; set; }
         public string StandardName { get; set; }
 
-        public virtual ICollection<ScheduleLayout> ScheduleLayouts { get; set; }
+        //public virtual ICollection<ScheduleLayout> ScheduleLayouts { get; set; }
     }
 }

@@ -10,19 +10,19 @@ namespace Business.Domain.Models.Security
 {
     public class Staff : AggregateRoot
     {
-        public Staff(Guid tenantId, Guid userId, bool isMale, string image, string bio, bool canLoginAllLocations)
+
+        private Staff() { }
+
+        public Staff(TenantId tenantId, Guid siteId, Guid userId, bool isMale, string image, string bio, bool canLoginAllLocations)
         {
-            Id = Guid.NewGuid();
+            Id = userId;
             this.TenantId = tenantId;
-            this.UserId = userId;
+            this.SiteId = siteId;
             this.IsMale = isMale;
             this.Image = image;
             this.Bio = bio;
             this.CanLoginAllLocations = canLoginAllLocations;
         }
-
-        public Guid UserId { get; private set; }
-        //public virtual User User { get; private set; }
 
         public bool IsMale { get; private set; }
 
@@ -32,8 +32,9 @@ namespace Business.Domain.Models.Security
 
         public bool CanLoginAllLocations { get; private set; }
 
-        public Guid TenantId { get; private set; }
-        public string TenantId_Id { get; private set; }
+        public TenantId TenantId { get; private set; }
+        public Guid SiteId { get; private set; }
+        public virtual Site Site { get; private set; }
 
         public virtual ICollection<StaffLoginLocation> StaffLoginLocations { get; private set; }
 

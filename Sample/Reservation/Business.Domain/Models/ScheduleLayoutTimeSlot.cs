@@ -19,5 +19,7 @@ namespace Business.Domain.Models
         public int DayOfWeek { get; set; }
 
         public bool IsEnabled { get; set; }
+
+        public TenantId TenantId { get; private set; }
     }
 }

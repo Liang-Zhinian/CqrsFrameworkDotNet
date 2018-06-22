@@ -21,5 +21,7 @@ namespace Business.Domain.Models
         public Guid LocationId { get; set; }
         public virtual Location Location { get; set; }
 
+        public TenantId TenantId { get; private set; }
+
     }
 }

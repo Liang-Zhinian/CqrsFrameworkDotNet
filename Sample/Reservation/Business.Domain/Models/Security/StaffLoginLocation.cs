@@ -12,13 +12,18 @@ namespace Business.Domain.Models.Security
         public Guid LocationId { get; private set; }
         public virtual Location Location { get; private set; }
 
-        public StaffLoginLocation(Staff staff, Location location)
+        public TenantId TenantId { get; private set; }
+        public Guid SiteId { get; private set; }
+        public virtual Site Site { get; private set; }
+
+        public StaffLoginLocation(TenantId tenantId, Guid siteId, Guid staffId, Guid locationId)
         {
             Id = Guid.NewGuid();
-            StaffId = staff.Id;
-            LocationId = location.Id;
-            Staff = staff;
-            Location = location;
+            StaffId = staffId;
+            LocationId = locationId;
+
+            this.TenantId = tenantId;
+            this.SiteId = siteId;
         }
     }
 }

@@ -39,7 +39,7 @@ namespace Business.Application.Services
             var view = new LocationViewModel
             {
                 Id = domainLocation.Id,
-                TenantId = domainLocation.TenantId,
+                TenantId =Guid.Parse( domainLocation.TenantId.Id),
                 BusinessID = domainLocation.BusinessID,
 
                 BusinessDescription = domainLocation.BusinessDescription,
@@ -81,7 +81,7 @@ namespace Business.Application.Services
                    select new LocationViewModel
                    {
                        Id = domainLocation.Id,
-                TenantId = domainLocation.TenantId,
+                TenantId = Guid.Parse(domainLocation.TenantId.Id),
                        BusinessID = domainLocation.BusinessID,
 
                        BusinessDescription = domainLocation.BusinessDescription,
@@ -125,7 +125,7 @@ namespace Business.Application.Services
                 location.CountryCode
             );
 
-            var domainLocation = new Location(location.TenantId,
+            var domainLocation = new Location(new TenantId(location.TenantId.ToString()),
                                               location.TenantId,
                                               location.BusinessDescription,
                                               location.Name,
@@ -139,7 +139,7 @@ namespace Business.Application.Services
 
             List<LocationImage> additionalLocationImages = (from img in location.AdditionalLocationImages
                                                             select 
-                                                            new LocationImage(domainLocation.Id, domainLocation.TenantId, img)
+                                                            new LocationImage(domainLocation.Id, Guid.Parse(domainLocation.TenantId.Id), img)
                                                            ).ToList();
             
             domainLocation.AdditionalLocationImages = additionalLocationImages;

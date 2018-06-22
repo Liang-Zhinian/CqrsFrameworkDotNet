@@ -13,11 +13,18 @@ namespace Business.Domain.Models.Security
         public Guid LocationId { get; private set; }
         public virtual Location Location { get; private set; }
 
-        public LocationImage(Guid locationId, Guid tenantId, string image)
+        public TenantId TenantId { get; private set; }
+        public Guid SiteId { get; private set; }
+        public virtual Site Site { get; private set; }
+
+        public LocationImage(TenantId tenantId, Guid siteId, Guid locationId, string image)
         {
             Id = GuidUtil.NewSequentialId();
             LocationId = locationId;
             Image = image;
+
+            SiteId = siteId;
+            TenantId = tenantId;
         }
     }
 }

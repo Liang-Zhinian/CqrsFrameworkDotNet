@@ -3,13 +3,13 @@ using System.Linq;
 using Business.Application.Interfaces;
 using Business.Application.ViewModels;
 using Business.Contracts.Events.Security.Tenants;
+using Business.Domain.Models;
 using Business.Domain.Models.Security;
 using Business.Domain.Repositories.Interfaces;
 using CqrsFramework.Domain;
 using CqrsFramework.Events;
 using SaaSEqt.IdentityAccess.Application;
 using SaaSEqt.IdentityAccess.Application.Commands;
-using SaaSEqt.IdentityAccess.Domain.Models;
 
 namespace Business.Application.Services
 {
@@ -51,7 +51,7 @@ namespace Business.Application.Services
                         administrator.AddressCountryCode
                     );
 
-            SaaSEqt.IdentityAccess.Domain.Models.Tenant _tenant = _identityApplicationService.ProvisionTenant(command);
+            var _tenant = _identityApplicationService.ProvisionTenant(command);
 
             TenantCreatedEvent tenantCreatedEvent = new TenantCreatedEvent(
                 Guid.Parse(_tenant.TenantId_Id),
@@ -82,7 +82,7 @@ namespace Business.Application.Services
         public void AddTenantAddress(TenantAddressViewModel addressViewModel)
         {
             TenantAddress address = new TenantAddress(
-                addressViewModel.TenantId,
+                new TenantId(addressViewModel.TenantId.ToString()),
                 addressViewModel.StreetAddress,
                 addressViewModel.StreetAddress2,
                 addressViewModel.City,

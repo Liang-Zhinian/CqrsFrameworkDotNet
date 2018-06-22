@@ -11,7 +11,9 @@ namespace Business.Domain.Models.Security
 {
     public class Location : AggregateRoot
     {
-        public Location(Guid tenantId,
+        private Location(){}
+        
+        public Location(TenantId tenantId,
                        Guid businessId, string businessDescription,
                        string name, string description, string image, string primaryTelephone,
                         string secondaryTelephone, PostalAddress postalAddress)
@@ -29,7 +31,7 @@ namespace Business.Domain.Models.Security
 
             ApplyChange(new LocationCreatedEvent(
                                 this.Id,
-                                this.TenantId,
+                                Guid.Parse(this.TenantId.Id),
                                 businessId,
                                 businessDescription,
                                 name,
@@ -61,16 +63,17 @@ namespace Business.Domain.Models.Security
 
         public string SecondaryTelephone { get; private set; }
 
-        public PostalAddress PostalAddress { get; private set; }
+        public LocationAddress Address { get; private set; }
 
-        public Guid TenantId { get; private set; }
-        public string TenantId_Id { get; private set; }
+        public TenantId TenantId { get; private set; }
+        public Guid SiteId { get; private set; }
+        public virtual Site Site { get; private set; }
 
         public virtual ICollection<LocationImage> AdditionalLocationImages { get; set; }
 
         public virtual ICollection<StaffLoginLocation> StaffLoginLocations { get; set; }
 
-        public virtual ICollection<ResourceLocation> ResourceLocations { get; set; }
+        //public virtual ICollection<ResourceLocation> ResourceLocations { get; set; }
 
 
         public void AddImage(LocationImage image){
@@ -102,7 +105,7 @@ namespace Business.Domain.Models.Security
 
         public void Apply(LocationCreatedEvent message){
             this.Id = message.Id;
-            this.TenantId = message.TenantId;
+            this.TenantId = new TenantId(message.TenantId.ToString());
             this.BusinessID = message.BusinessID;
             this.BusinessDescription = message.BusinessDescription;
             this.Name = message.Name;

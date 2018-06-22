@@ -26,10 +26,13 @@
     <ProjectReference Include="..\Business.Contracts\Business.Contracts.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\Services\" />
     <Folder Include="Models\Security\" />
     <Folder Include="Repositories\" />
     <Folder Include="Bus\" />
+    <Folder Include="Services\" />
+    <Folder Include="Models\Resource\" />
+    <Folder Include="Models\Calendar\" />
+    <Folder Include="Models\LanguageAndRegion\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\Resource\Resource.cs" />
@@ -42,5 +45,9 @@
     <Compile Remove="Events\BaseEvent.cs" />
     <Compile Remove="EventHandlers\ServiceCategoryEventHandler.cs" />
     <Compile Remove="Models\BaseObject.cs" />
+    <Compile Remove="Models\TenantId.cs" />
+    <Compile Remove="Models\Services\Appointment\AppointmentService.cs" />
+    <Compile Remove="Models\ValueObjects\Address.cs" />
+    <Compile Remove="Models\ValueObjects\PersonName.cs" />
   </ItemGroup>
 </Project>
