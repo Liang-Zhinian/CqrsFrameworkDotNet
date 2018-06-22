@@ -10,27 +10,30 @@ namespace Business.Domain.Models.Security
 {
     public class Staff : AggregateRoot
     {
-        public Staff(TenantId tenantId, bool isMale, string image, string bio, bool canLoginAllLocations)
+        public Staff(Guid tenantId, Guid userId, bool isMale, string image, string bio, bool canLoginAllLocations)
         {
-            Id = GuidUtil.NewSequentialId();
+            Id = Guid.NewGuid();
             this.TenantId = tenantId;
+            this.UserId = userId;
             this.IsMale = isMale;
-            this.ImageUrl = image;
+            this.Image = image;
             this.Bio = bio;
             this.CanLoginAllLocations = canLoginAllLocations;
         }
+
+        public Guid UserId { get; private set; }
+        //public virtual User User { get; private set; }
 
         public bool IsMale { get; private set; }
 
         public string Bio { get; private set; }
 
-        public string ImageUrl { get; private set; }
+        public string Image { get; private set; }
 
         public bool CanLoginAllLocations { get; private set; }
 
-        public TenantId TenantId { get; private set; }
-
-        public virtual User User { get; private set; }
+        public Guid TenantId { get; private set; }
+        public string TenantId_Id { get; private set; }
 
         public virtual ICollection<StaffLoginLocation> StaffLoginLocations { get; private set; }
 

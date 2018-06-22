@@ -11,7 +11,7 @@ namespace Business.Domain.Models.Security
 {
     public class Location : AggregateRoot
     {
-        public Location(TenantId tenantId,
+        public Location(Guid tenantId,
                        Guid businessId, string businessDescription,
                        string name, string description, string image, string primaryTelephone,
                         string secondaryTelephone, PostalAddress postalAddress)
@@ -29,7 +29,7 @@ namespace Business.Domain.Models.Security
 
             ApplyChange(new LocationCreatedEvent(
                                 this.Id,
-                                Guid.Parse(this.TenantId.Id),
+                                this.TenantId,
                                 businessId,
                                 businessDescription,
                                 name,
@@ -63,7 +63,8 @@ namespace Business.Domain.Models.Security
 
         public PostalAddress PostalAddress { get; private set; }
 
-        public TenantId TenantId { get; private set; }
+        public Guid TenantId { get; private set; }
+        public string TenantId_Id { get; private set; }
 
         public virtual ICollection<LocationImage> AdditionalLocationImages { get; set; }
 
@@ -101,7 +102,7 @@ namespace Business.Domain.Models.Security
 
         public void Apply(LocationCreatedEvent message){
             this.Id = message.Id;
-            this.TenantId = new TenantId( message.TenantId.ToString());
+            this.TenantId = message.TenantId;
             this.BusinessID = message.BusinessID;
             this.BusinessDescription = message.BusinessDescription;
             this.Name = message.Name;

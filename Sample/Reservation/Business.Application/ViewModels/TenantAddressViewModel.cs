@@ -21,11 +21,11 @@ namespace Business.Application.ViewModels
         {
             Id = id;
             TenantId = tenantId;
-            State = state;
+            StateProvince = state;
             City = city;
-            Street = address;
-            Street2 = address2;
-            Country = country;
+            StreetAddress = address;
+            StreetAddress2 = address2;
+            CountryCode = country;
             PostalCode = postalCode;
         }
 
@@ -36,12 +36,12 @@ namespace Business.Application.ViewModels
         [MinLength(2)]
         [MaxLength(100)]
         [DisplayName("Address")]
-        public string Street { get; set; }
+        public string StreetAddress { get; set; }
 
         [MinLength(2)]
         [MaxLength(100)]
         [DisplayName("Address (line 2)")]
-        public string Street2 { get; set; }
+        public string StreetAddress2 { get; set; }
 
         [Required(ErrorMessage = "The City is Required")]
         [MinLength(2)]
@@ -53,13 +53,13 @@ namespace Business.Application.ViewModels
         [MinLength(2)]
         [MaxLength(100)]
         [DisplayName("State")]
-        public string State { get; set; }
+        public string StateProvince { get; set; }
 
         [Required(ErrorMessage = "The Country is Required")]
         [MinLength(2)]
         [MaxLength(100)]
         [DisplayName("Country")]
-        public string Country { get; set; }
+        public string CountryCode { get; set; }
 
         [MinLength(2)]
         [MaxLength(100)]

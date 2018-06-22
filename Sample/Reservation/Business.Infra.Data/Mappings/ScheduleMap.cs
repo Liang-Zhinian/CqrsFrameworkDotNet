@@ -22,13 +22,20 @@ namespace Business.Infra.Data.Mappings
             builder.Property<DateTime>("EndDateTime").IsRequired();
             builder.Property<Guid>("LayoutId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
             builder.Property<bool>("IsCalendarSubscriptionAllowed").IsRequired();
-            builder.Property<string>("TenantId_Id").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<Guid>("TenantId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
 
-            builder.Ignore("Version");
+            //builder.Ignore("Version");
 
             builder.HasOne(_ => _.Layout)
                    .WithMany(_=>_.Schedules)
                    .HasForeignKey(_=>_.LayoutId);
+
+            //builder.OwnsOne(_ => _.TenantId, cb =>
+            //{
+            //    cb.Property<string>(tenant => tenant.Id).IsRequired()
+            //      .HasColumnType(Constants.DbConstants.String36)
+            //    .HasColumnName("TenantId_Id");
+            //});
         }
     }
 }

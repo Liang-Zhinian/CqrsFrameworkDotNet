@@ -9,7 +9,7 @@ namespace Business.Domain.Models
         public Guid Id { get; private set; }
         public int TimeZoneId { get; set; }
 
-        public TenantId TenantId { get; private set; }
+        public Guid TenantId { get; private set; }
 
         public virtual TimeZone TimeZone { get; set; }
 

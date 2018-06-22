@@ -1,14 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Business.Domain.Models.ValueObjects;
+using CqrsFramework.Domain;
 using Infrastructure.Utils;
 
 namespace Business.Domain.Models.Security
 {
-    public class TenantContact
+    public class TenantContact : AggregateRoot
     {
-        public Guid Id { get; private set; }
-
         [Display(Name = "Email")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "The Email field is required.")]
         [EmailAddress(ErrorMessage = "The Email field is not a valid email address.")]
@@ -19,9 +18,10 @@ namespace Business.Domain.Models.Security
 
         public string SecondaryTelephone { get; private set; }
 
-        public TenantId TenantId { get; private set; }
+        public Guid TenantId { get; private set; }
+        //public string TenantId_Id { get; private set; }
 
-        public TenantContact(TenantId tenantId,
+        public TenantContact(Guid tenantId,
                              string email,
                              string primaryTelephone,
                              string secondaryTelephone)

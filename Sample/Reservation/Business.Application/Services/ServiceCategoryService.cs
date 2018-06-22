@@ -37,7 +37,7 @@ namespace Business.Application.Services
         public void AddService(ServiceViewModel service)
         {
             var domainservice = new Service(
-                new TenantId(service.TenantId.ToString()),
+                service.TenantId,
                 service.ServiceCategoryId,
                 service.Name,
                 service.Description
@@ -66,7 +66,7 @@ namespace Business.Application.Services
             return new ServiceViewModel
             {
                 Id = service.Id,
-                TenantId = Guid.Parse(service.TenantId.Id),
+                TenantId = service.TenantId,
                 Name = service.Name,
                 Description = service.Description,
 
@@ -117,10 +117,11 @@ namespace Business.Application.Services
                    select new ServiceViewModel
                    {
                        Id = service.Id,
-                TenantId = Guid.Parse(service.TenantId.Id),
+                        TenantId = service.TenantId,
                        Name = service.Name,
                        Description = service.Description,
-
+                ServiceCategoryId = service.CategoryId,
+                ServiceCategoryName = service.Category.Name
                    };
         }
 
@@ -133,7 +134,7 @@ namespace Business.Application.Services
                    select new ServiceViewModel
                    {
                        Id = service.Id,
-                TenantId = Guid.Parse(service.TenantId.Id),
+                TenantId = service.TenantId,
                        Name = service.Name,
                        Description = service.Description,
                        ServiceCategoryName = service.Category.Name

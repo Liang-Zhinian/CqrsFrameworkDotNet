@@ -19,7 +19,7 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Mappings
                    .ForMySQLHasCollation("utf8_general_ci");
             builder.Property<string>("TenantId_Id")
             .IsRequired()
-            .HasColumnType(Constants.DbConstants.KeyType)
+                   .HasColumnType(Constants.DbConstants.String36)
             .HasColumnName("TenantId_Id")
             .ForMySQLHasCollation("utf8_general_ci");
             //builder.OwnsOne(typeof(TenantId), "TenantId", 

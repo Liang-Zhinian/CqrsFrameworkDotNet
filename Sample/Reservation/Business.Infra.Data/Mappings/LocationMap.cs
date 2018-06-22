@@ -18,14 +18,14 @@ namespace Business.Infra.Data.Mappings
             builder.Property<string>("BusinessDescription").IsRequired().HasColumnType(Constants.DbConstants.String2000);
             builder.Property<string>("Name").IsRequired().HasColumnType(Constants.DbConstants.String255);
             builder.Property<string>("Description").HasColumnType(Constants.DbConstants.String2000);
-            builder.Property<string>("ImageUrl").IsRequired().HasColumnType(Constants.DbConstants.String255);
+            builder.Property<string>("Image").IsRequired().HasColumnType(Constants.DbConstants.String4000);
             builder.Property<double>("Latitude");
             builder.Property<double>("Longitude");
             builder.Property<string>("PrimaryTelephone").IsRequired().HasColumnType(Constants.DbConstants.String255);
             builder.Property<string>("SecondaryTelephone").HasColumnType(Constants.DbConstants.String255);
-            builder.Property<string>("TenantId_Id").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<Guid>("TenantId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
 
-            builder.Ignore("Version");
+            //builder.Ignore("Version");
 
             builder.OwnsOne(_ => _.PostalAddress, cb => {
                 cb.Property("LocationId").HasColumnType(Constants.DbConstants.KeyType);
@@ -36,6 +36,13 @@ namespace Business.Infra.Data.Mappings
                 cb.Property<string>(e => e.CountryCode).HasColumnName("CountryCode").HasColumnType(Constants.DbConstants.String255);
                 cb.Property<string>(e => e.PostalCode).HasColumnName("PostalCode").HasColumnType(Constants.DbConstants.String255);
             });
+
+            //builder.OwnsOne(_=>_.TenantId, cb =>
+            //{
+            //    cb.Property<string>(tenant=>tenant.Id).IsRequired()
+            //      .HasColumnType(Constants.DbConstants.String36)
+            //    .HasColumnName("TenantId_Id");
+            //});
             
         }
     }

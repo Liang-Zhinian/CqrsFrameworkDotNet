@@ -14,7 +14,7 @@ namespace Business.Infra.Data.Mappings
             builder.ToTable(Constants.DbConstants.TenantAddressTable);
 
             builder.Property<Guid>("Id").HasColumnType(Constants.DbConstants.KeyType);
-            builder.Property<string>("TenantId_Id").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<Guid>("TenantId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
 
             builder.OwnsOne(_ => _.PostalAddress, cb => {
                 cb.Property("TenantAddressId").HasColumnType(Constants.DbConstants.KeyType);
@@ -25,7 +25,14 @@ namespace Business.Infra.Data.Mappings
                 cb.Property<string>(e => e.CountryCode).HasColumnName("CountryCode").HasColumnType(Constants.DbConstants.String255);
                 cb.Property<string>(e => e.PostalCode).HasColumnName("PostalCode").HasColumnType(Constants.DbConstants.String255);
             });
-            builder.Ignore("Version");
+            //builder.Ignore("Version");
+
+            //builder.OwnsOne(_ => _.TenantId, cb =>
+            //{
+            //    cb.Property<string>(tenant => tenant.Id).IsRequired()
+            //      .HasColumnType(Constants.DbConstants.String36)
+            //    .HasColumnName("TenantId_Id");
+            //});
         }
     }
 }

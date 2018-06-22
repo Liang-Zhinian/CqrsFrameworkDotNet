@@ -10,7 +10,7 @@ namespace Business.Domain.Models
         public string Description { get; set; }
         public bool IsLocatedAtAllLocations { get; set; }
 
-        public TenantId TenantId { get; private set; }
+        public Guid TenantId { get; private set; }
 
         public int StatusId { get; set; }
         public virtual ResourceStatus Status { get; set; }

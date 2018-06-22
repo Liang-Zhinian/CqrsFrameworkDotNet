@@ -20,7 +20,7 @@ namespace Business.Infra.Data.Mappings
             builder.Property<int>("ScheduleTypeValue").IsRequired();
             //builder.Property<Guid>("TenantId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
 
-            builder.Ignore("Version");
+            //builder.Ignore("Version");
 
         }
     }

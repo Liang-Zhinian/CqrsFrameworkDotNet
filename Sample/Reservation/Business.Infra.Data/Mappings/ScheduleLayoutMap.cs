@@ -15,7 +15,7 @@ namespace Business.Infra.Data.Mappings
 
             builder.Property<Guid>("Id").HasColumnType(Constants.DbConstants.KeyType);
             builder.Property<int>("TimeZoneId").IsRequired();
-            builder.Property<string>("TenantId_Id").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<Guid>("TenantId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
 
             builder.Ignore("Version");
 
@@ -24,6 +24,12 @@ namespace Business.Infra.Data.Mappings
                    .HasForeignKey(_=>_.TimeZoneId);
             
 
+            //builder.OwnsOne(_ => _.TenantId, cb =>
+            //{
+            //    cb.Property<string>(tenant => tenant.Id).IsRequired()
+            //      .HasColumnType(Constants.DbConstants.String36)
+            //    .HasColumnName("TenantId_Id");
+            //});
         }
     }
 }

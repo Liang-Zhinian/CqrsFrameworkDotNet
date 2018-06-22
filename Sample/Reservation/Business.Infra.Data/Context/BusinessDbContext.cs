@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using Business.Domain.Models;
 using Business.Domain.Models.Security;
 using Business.Infra.Data.Mappings;
@@ -33,6 +34,7 @@ namespace Business.Infra.Data.Context
 
         public BusinessDbContext(DbContextOptions<BusinessDbContext> options) : base(options)
         {
+            //Database.SetInitializer<BusinessDbContext>(null);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -62,6 +64,24 @@ namespace Business.Infra.Data.Context
             modelBuilder.ApplyConfiguration(new ServiceMap());
             modelBuilder.ApplyConfiguration(new ServiceCategoryMap());
 
+            //foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            //{
+            //    modelBuilder.Entity(entityType.Name).Property<DateTime>
+            //      ("LastModified");
+            //    modelBuilder.Entity(entityType.Name).Ignore("IsDirty");
+            //}
         }
+
+        //public override int SaveChanges()
+        //{
+        //    foreach (var entry in ChangeTracker.Entries()
+        //      .Where(e => e.State == EntityState.Added ||
+        //       e.State == EntityState.Modified))
+        //    {
+        //        if (!(entry.Entity is PersonFullName))
+        //            entry.Property("LastModified").CurrentValue = DateTime.Now;
+        //    }
+        //    return base.SaveChanges();
+        //}
     }
 }

@@ -48,6 +48,9 @@
     <Compile Remove="Migrations\20180616151522_first.cs" />
     <Compile Remove="Migrations\20180618070615_first.cs" />
     <Compile Remove="Migrations\20180618070920_first.cs" />
+    <Compile Remove="Migrations\20180621160529_first.cs" />
+    <Compile Remove="Migrations\20180622033011_first.cs" />
+    <Compile Remove="Migrations\20180622072823_first.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Business.Domain\Business.Domain.csproj" />

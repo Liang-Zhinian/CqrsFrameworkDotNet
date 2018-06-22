@@ -13,9 +13,10 @@ namespace Business.Domain.Models.Security
         public string PageColor3 { get; private set; }
         public string PageColor4 { get; private set; }
 
-        public TenantId TenantId { get; private set; }
+        public Guid TenantId { get; private set; }
+        public string TenantId_Id { get; private set; }
 
-        public Branding(TenantId tenantId, string logo, string pageColor1, string pageColor2, string pageColor3, string pageColor4)
+        public Branding(Guid tenantId, string logo, string pageColor1, string pageColor2, string pageColor3, string pageColor4)
         {
             Id = GuidUtil.NewSequentialId();
             this.TenantId = tenantId;

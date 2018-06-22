@@ -13,7 +13,7 @@ namespace Business.Domain.Models
         public DateTime StartDateTime { get; set; }
         public DateTime EndDateTime { get; set; }
 
-        public TenantId TenantId { get; private set; }
+        public Guid TenantId { get; private set; }
 
         public Guid LayoutId { get; set; }
         public virtual ScheduleLayout Layout { get; set; }

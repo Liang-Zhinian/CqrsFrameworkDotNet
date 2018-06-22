@@ -6,6 +6,7 @@ using Business.Application.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Business.Domain.Repositories.Interfaces;
+using Microsoft.AspNetCore.Http;
 
 namespace Business.WebApi.Controllers
 {
@@ -56,6 +57,30 @@ namespace Business.WebApi.Controllers
             _tenantService.ProvisionTenant(tenant, administrator);
 
             return Ok();
+        }
+
+        [HttpPost]
+        [HttpPut]
+        //[Authorize(Policy = "CanWriteTenantData")]
+        [Route("TenantAddress")]
+        public ActionResult AddOrUpdateTenantAddress([FromBody]
+                                   TenantAddressViewModel tenantAddress
+                                  )
+        {
+            //throw new NotImplementedException();
+            if (!ModelState.IsValid)
+            {
+                //NotifyModelStateErrors();
+                return Ok();
+            }
+
+            if (Request.Method.ToUpper() == "POST")
+                _tenantService.AddTenantAddress(tenantAddress);
+            
+            if (Request.Method.ToUpper() == "PUT")
+                _tenantService.ModifyTenantAddress(tenantAddress);
+
+            return Ok(tenantAddress);
         }
     }
 }

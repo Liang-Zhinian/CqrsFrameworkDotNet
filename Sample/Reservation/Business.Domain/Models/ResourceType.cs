@@ -9,7 +9,7 @@ namespace Business.Domain.Models
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public TenantId TenantId { get; private set; }
+        public Guid TenantId { get; private set; }
 
         public virtual ICollection<Resource> Resources { get; set; }
     }
