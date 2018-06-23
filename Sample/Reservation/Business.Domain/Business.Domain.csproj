@@ -26,13 +26,9 @@
     <ProjectReference Include="..\Business.Contracts\Business.Contracts.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\Security\" />
     <Folder Include="Repositories\" />
     <Folder Include="Bus\" />
     <Folder Include="Services\" />
-    <Folder Include="Models\Resource\" />
-    <Folder Include="Models\Calendar\" />
-    <Folder Include="Models\LanguageAndRegion\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\Resource\Resource.cs" />
@@ -49,5 +45,6 @@
     <Compile Remove="Models\Services\Appointment\AppointmentService.cs" />
     <Compile Remove="Models\ValueObjects\Address.cs" />
     <Compile Remove="Models\ValueObjects\PersonName.cs" />
+    <Compile Remove="Repositories\Interfaces\IServiceCategoryRepository.cs" />
   </ItemGroup>
 </Project>

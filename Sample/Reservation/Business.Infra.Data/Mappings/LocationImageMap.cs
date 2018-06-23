@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using Business.Domain.Models.Security;
+using Business.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -15,10 +15,19 @@ namespace Business.Infra.Data.Mappings
 
             builder.Property<Guid>("Id").HasColumnType(Constants.DbConstants.KeyType);
             builder.Property<Guid>("LocationId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
-            //builder.Property<Guid>("TenantId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
-            builder.Property<string>("ImageUrl").IsRequired().HasColumnType(Constants.DbConstants.String255);
+            builder.Property<Guid>("SiteId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<string>("Image").IsRequired().HasColumnType(Constants.DbConstants.String255);
 
-            //builder.Ignore("Version");
+            builder.OwnsOne(_ => _.TenantId, cb =>
+            {
+                cb.Property<string>(tenant => tenant.Id).IsRequired()
+                  .HasColumnType(Constants.DbConstants.String36)
+                .HasColumnName("TenantId_Id");
+            });
+
+            builder.HasOne(_ => _.Site)
+                   .WithMany()
+                   .HasForeignKey(_ => _.SiteId);
 
             builder.HasOne(p => p.Location)
                    .WithMany(p => p.AdditionalLocationImages)

@@ -1,5 +1,5 @@
 ﻿using System;
-using Business.Domain.Models.Security;
+using Business.Domain.Models;
 
 namespace Business.Domain.Repositories.Interfaces
 {

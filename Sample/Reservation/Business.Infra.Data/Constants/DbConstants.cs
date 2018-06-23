@@ -20,6 +20,8 @@ namespace Business.Infra.Data.Constants
         public static string String2000 = "NVarchar(2000)";
         public static string String4000 = "NVarchar(4000)";
 
+        public static string SiteTable { get; set; }
+
         public static string AddressTable { get; set; }
         public static string ContactTable { get; set; }
         public static string BrandingTable { get; private set; }
@@ -58,6 +60,7 @@ namespace Business.Infra.Data.Constants
 
         static DbConstants()
         {
+            SiteTable = "Site";
             ContactTable = "Contact";
             AddressTable = "Address";
             BrandingTable = "Branding";

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Business.Domain.Models.Security;
+using Business.Domain.Models;
 using Business.Domain.Repositories.Interfaces;
 using Business.Infra.Data.Context;
 

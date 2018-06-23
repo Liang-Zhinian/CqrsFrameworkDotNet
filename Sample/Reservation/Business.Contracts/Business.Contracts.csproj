@@ -6,6 +6,8 @@
 
   <ItemGroup>
     <Folder Include="Events\" />
+    <Folder Include="Events\Locations\" />
+    <Folder Include="Events\Staffs\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Framework\CqrsFramework\CqrsFramework.csproj" />
@@ -13,5 +15,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Class1.cs" />
+    <Compile Remove="Events\ServiceCategory\ServiceCategoryCreatedEvent.cs" />
+    <Compile Remove="Events\Tenants\TenantAddressCreatedEvent.cs" />
   </ItemGroup>
 </Project>

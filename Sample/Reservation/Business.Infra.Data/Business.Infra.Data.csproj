@@ -31,28 +31,6 @@
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="Migrations\20180611175023_first.cs" />
-    <Compile Remove="Migrations\20180612133835_first.cs" />
-    <Compile Remove="Migrations\20180612144323_first.cs" />
-    <Compile Remove="ReadModel\BaseObject.cs" />
-    <Compile Remove="Migrations\20180613102803_first.cs" />
-    <Compile Remove="Migrations\20180613172842_first.cs" />
-    <Compile Remove="Mappings\LocationAddressMap.cs" />
-    <Compile Remove="Mappings\LocationContactMap.cs" />
-    <Compile Remove="Mappings\StaffLoginCredentialMap.cs" />
-    <Compile Remove="Migrations\20180615063239_first.cs" />
-    <Compile Remove="Migrations\20180616150123_first.cs" />
-    <Compile Remove="Migrations\20180616151021_first.cs" />
-    <Compile Remove="Migrations\20180616151401_first.cs" />
-    <Compile Remove="Repositories\TenantRepository.cs" />
-    <Compile Remove="Migrations\20180616151522_first.cs" />
-    <Compile Remove="Migrations\20180618070615_first.cs" />
-    <Compile Remove="Migrations\20180618070920_first.cs" />
-    <Compile Remove="Migrations\20180621160529_first.cs" />
-    <Compile Remove="Migrations\20180622033011_first.cs" />
-    <Compile Remove="Migrations\20180622072823_first.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Business.Domain\Business.Domain.csproj" />
   </ItemGroup>
 </Project>
