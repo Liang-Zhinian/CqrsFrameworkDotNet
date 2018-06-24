@@ -12,6 +12,8 @@
     <Folder Include="Configurations\" />
     <Folder Include="Code\" />
     <Folder Include="Controllers\" />
+    <Folder Include="Requests\" />
+    <Folder Include="Responses\" />
   </ItemGroup>
 
   <ItemGroup>

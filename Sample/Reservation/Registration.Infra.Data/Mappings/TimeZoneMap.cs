@@ -13,8 +13,8 @@ namespace Registration.Infra.Data.Mappings
             builder.HasKey(o => o.Id);
             builder.ToTable(Constants.DbConstants.TimeZoneTable);
 
-            builder.Property<string>("DisplayName").IsRequired().HasColumnType(Constants.DbConstants.String255);
-            builder.Property<string>("StandardName").IsRequired().HasColumnType(Constants.DbConstants.String255);
+            builder.Property(_ => _.DisplayName).IsRequired().HasColumnType(Constants.DbConstants.String255);
+            builder.Property(_ => _.StandardName).IsRequired().HasColumnType(Constants.DbConstants.String255);
 
         }
     }

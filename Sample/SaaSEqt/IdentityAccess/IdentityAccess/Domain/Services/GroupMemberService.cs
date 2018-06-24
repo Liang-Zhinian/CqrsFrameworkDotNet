@@ -4,7 +4,7 @@ namespace SaaSEqt.IdentityAccess.Domain.Services
 	using System;
 
     using System.Linq;
-    using SaaSEqt.IdentityAccess.Domain.Models;
+    using SaaSEqt.IdentityAccess.Domain.Entities;
     using SaaSEqt.IdentityAccess.Domain.Repositories;
 
 	/// <summary>

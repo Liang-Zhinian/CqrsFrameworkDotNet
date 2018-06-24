@@ -17,6 +17,10 @@ namespace Registration.Infra.Data.Mappings
                     .IsRequired()
                    .HasColumnName("TenantId").HasColumnType(Constants.DbConstants.KeyType);
             //.ForMySQLHasCollation("utf8_general_ci");
+
+            builder.Property<Guid>("SiteId")
+                    .IsRequired()
+                   .HasColumnName("SiteId").HasColumnType(Constants.DbConstants.KeyType);
         }
 
         public virtual void BuildPrimary(EntityTypeBuilder<TEntity> builder, string tableName){
@@ -33,7 +37,19 @@ namespace Registration.Infra.Data.Mappings
                 .HasOne(typeof(Tenant).FullName, "Tenant")
                         .WithMany()
                    .HasForeignKey("TenantId")
+                .IsRequired()
                 //.HasPrincipalKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade);
+        }
+
+        public virtual void MapToSite(EntityTypeBuilder<TEntity> builder)
+        {
+            builder
+                .HasOne(typeof(Site).FullName, "Site")
+                        .WithMany()
+                .HasForeignKey("SiteId")
+                .IsRequired()
+                        //.HasPrincipalKey("Id")
                         .OnDelete(DeleteBehavior.Cascade);
         }
     }

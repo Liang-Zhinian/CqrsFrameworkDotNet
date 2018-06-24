@@ -2,7 +2,7 @@
 namespace SaaSEqt.IdentityAccess.Domain.Repositories
 {
     using System;
-    using SaaSEqt.IdentityAccess.Domain.Models;
+    using SaaSEqt.IdentityAccess.Domain.Entities;
 
 	/// <summary>
 	/// Contract for a collection-oriented repository of <see cref="User"/> entities.

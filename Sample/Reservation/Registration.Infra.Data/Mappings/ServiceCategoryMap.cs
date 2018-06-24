@@ -22,7 +22,7 @@ namespace Registration.Infra.Data.Mappings
             builder.Property<bool>("IsInternal");
             builder.Property<int>("ScheduleTypeValue").IsRequired();
 
-            builder.Ignore("TenantId");
+            //builder.Ignore("TenantId");
         }
     }
 }

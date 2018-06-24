@@ -12,9 +12,6 @@ namespace Registration.Infra.Data.Mappings
         {
             base.Configure(builder, Constants.DbConstants.StaffTable);
 
-            builder.Property<bool>("IsMale").IsRequired();
-            builder.Property<string>("Bio").HasColumnType(Constants.DbConstants.String2000);
-            builder.Property<string>("ImageUrl").HasColumnType(Constants.DbConstants.String255);
             builder.Property<bool>(_ => _.IsEnabled).IsRequired();
             builder.Property<DateTime>("StartDate");
             builder.Property<DateTime>("EndDate");
@@ -29,12 +26,12 @@ namespace Registration.Infra.Data.Mappings
             builder.Property<string>("StateProvince").HasColumnType(Constants.DbConstants.String255);
             builder.Property<string>("StreetAddress").HasColumnType(Constants.DbConstants.String255);
             builder.Property<string>("StreetAddress2").HasColumnType(Constants.DbConstants.String255);
+            builder.Property(_ => _.IsMale).IsRequired();
+            builder.Property(_ => _.Bio).HasColumnType(Constants.DbConstants.String2000);
+            builder.Property(_ => _.Image).HasColumnType(Constants.DbConstants.String4000);
 
-            builder
-                .HasOne(b => b.Tenant)
-                .WithMany(p => p.Staffs)
-                .HasForeignKey(p => p.TenantId);
-            
+            MapToSite(builder);
+            //MapToTenant(builder);
         }
     }
 }

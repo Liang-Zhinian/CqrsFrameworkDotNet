@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using Business.Domain.Models;
+using Business.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -46,9 +46,9 @@ namespace Business.Infra.Data.Mappings
                    .WithMany()
                    .HasForeignKey(_ => _.SiteId);
             
-            builder.HasOne(_ => _.Location)
-                   .WithOne(_=>_.Address)
-                   .HasForeignKey<LocationAddress>(_ => _.LocationId);
+            //builder.HasOne(_ => _.Location)
+                   //.WithOne(_=>_.Address)
+                   //.HasForeignKey<LocationAddress>(_ => _.LocationId);
         }
     }
 }

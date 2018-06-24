@@ -29,6 +29,7 @@
     <Folder Include="Repositories\" />
     <Folder Include="Bus\" />
     <Folder Include="Services\" />
+    <Folder Include="Entities\Services\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\Resource\Resource.cs" />

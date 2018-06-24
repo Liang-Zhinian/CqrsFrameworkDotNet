@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using Business.Domain.Repositories.Interfaces;
+using Business.Domain.Repositories;
 using Business.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 

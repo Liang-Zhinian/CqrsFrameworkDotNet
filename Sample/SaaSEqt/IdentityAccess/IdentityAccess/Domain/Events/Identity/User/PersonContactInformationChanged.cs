@@ -3,7 +3,7 @@ namespace SaaSEqt.IdentityAccess.Domain.Events.Identity.User
 {
     using System;
     using SaaSEqt.Common.Domain.Model;
-    using SaaSEqt.IdentityAccess.Domain.Models;
+    using SaaSEqt.IdentityAccess.Domain.Entities;
     using CqrsFramework.Events;
 
     public class PersonContactInformationChanged : IEvent

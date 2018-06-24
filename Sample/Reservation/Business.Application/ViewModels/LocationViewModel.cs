@@ -10,15 +10,13 @@ namespace Business.Application.ViewModels
     {
         public Guid Id { get; set; }
 
-        public Guid BusinessID { get; set; }
-
-        public string BusinessDescription { get; set; }
-
         public string Name { get; set; }
 
         public string Description { get; set; }
 
-        public string Image { get; set; }
+        public byte[] Image { get; set; }
+
+        public string ContactName { get; set; }
 
         public string PrimaryTelephone { get; set; }
 
@@ -36,10 +34,14 @@ namespace Business.Application.ViewModels
 
         public string StreetAddress2 { get; set; }
 
-        public ICollection<string> AdditionalLocationImages { get; set; }
+        public double? Latitude { get; set; }
 
+        public double? Longitude { get; set; }
 
-        public Guid TenantId { get; set; }
+        public ICollection<byte[]> AdditionalLocationImages { get; set; }
+
+        public Guid SiteId { get; set; }
+        public string TenantId { get; set; }
 
     }
 }

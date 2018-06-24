@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using CqrsFramework.Bus;
 using CqrsFramework.Commands;
 using CqrsFramework.Events;
@@ -12,20 +14,22 @@ using RabbitMQ.Client.Framing;
 
 namespace CqrsFramework.Bus.RabbitMQ
 {
-    public class RabbitMQBus : IDisposable, IHandlerRegistrar, ICommandSender, IEventPublisher
+    public class RabbitMQBus : IDisposable, IHandlerRegistrar, ICommandSender, IEventPublisher/*, IMessageReceiver*/
     {
         private readonly IConnectionFactory connectionFactory;
         private readonly IConnection connection;
         private readonly IModel channel;
         private readonly string exchangeName;
         private readonly string exchangeType;
-        private readonly string queueName;
+        private string queueName;
         private readonly bool autoAck;
         //private readonly ILogger logger;
         private bool disposed;
         private bool disposing = false;
 
         private readonly Dictionary<Type, List<Action<IMessage>>> _routes = new Dictionary<Type, List<Action<IMessage>>>();
+
+        //public event EventHandler<MessageReceivedEventArgs> MessageReceived;
 
 
         //private NLog.Logger logger = NLog.LogManager.GetLogger("BusEventPublisher");
@@ -55,28 +59,19 @@ namespace CqrsFramework.Bus.RabbitMQ
             this.exchangeType = exchangeType;
             this.exchangeName = exchangeName;
             this.autoAck = autoAck;
+            this.queueName = queueName;
 
             this.channel.ExchangeDeclare(this.exchangeName, this.exchangeType, true, false);
 
-            this.queueName = this.InitializeConsumer(queueName);
+            //this.queueName = this.ReceiveMessages(queueName);
         }
 
         #region public methods
+
         public void Dispose()
         {
-            if (!disposed)
-            {
-                if (disposing)
-                {
-                    this.channel.Dispose();
-                    this.connection.Dispose();
-
-                    //logger.LogInformation($"RabbitMQBus has been disposed. Hash Code:{this.GetHashCode()}.");
-                }
-
-                disposed = true;
-                disposing = false;
-            }
+            this.Stop();
+            GC.SuppressFinalize(this);
         }
 
         public void RegisterHandler<T>(Action<T> handler) where T : IMessage
@@ -115,6 +110,29 @@ namespace CqrsFramework.Bus.RabbitMQ
 
             SendMessage(message, @event.GetType().FullName, properties);
         }
+
+        public void Start()
+        {
+            this.queueName = this.ReceiveMessages(this.queueName);
+        }
+
+        public void Stop()
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    this.channel.Dispose();
+                    this.connection.Dispose();
+
+                    //logger.LogInformation($"RabbitMQBus has been disposed. Hash Code:{this.GetHashCode()}.");
+                }
+
+                disposed = true;
+                disposing = false;
+            }
+        }
+
         #endregion
 
         #region private methods
@@ -122,9 +140,6 @@ namespace CqrsFramework.Bus.RabbitMQ
         {
             var body = Encoding.UTF8.GetBytes(message);
 
-
-            //channel.ExchangeDeclare(exchangeName, "fanout", true, false);
-            //channel.QueueDeclare(queueName, true, false, false, null);
             channel.BasicPublish(exchange: exchangeName,
                                  routingKey: routingKey,
                                  basicProperties: basicProperties,
@@ -132,7 +147,7 @@ namespace CqrsFramework.Bus.RabbitMQ
 
         }
 
-        private string InitializeConsumer(string queue)
+        private string ReceiveMessages(string queue)
         {
             var localQueueName = queue;
             if (string.IsNullOrEmpty(localQueueName))
@@ -152,6 +167,8 @@ namespace CqrsFramework.Bus.RabbitMQ
                 var message = Encoding.UTF8.GetString(body);
 
                 Console.WriteLine(" [x] {0}", message);
+
+                //this.MessageReceived(this, new MessageReceivedEventArgs(message));
 
                 var jsonObj = JsonConvert.DeserializeObject(message, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All });
                 var @event = (IEvent)jsonObj;

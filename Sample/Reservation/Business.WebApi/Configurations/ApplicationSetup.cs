@@ -2,7 +2,8 @@
 using System.Configuration;
 using Business.Application.Interfaces;
 using Business.Application.Services;
-using Business.Domain.Repositories.Interfaces;
+using Business.Domain.Repositories;
+using Business.Domain.Services;
 using Business.Infra.Data.Context;
 using Business.Infra.Data.Repositories;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,6 +36,7 @@ namespace Business.WebApi.Configurations
         {
             services.AddScoped<BusinessDbContext>();
             services.AddScoped<IdentityAccessDbContext>();
+            services.AddScoped<ISiteRepository, SiteRepository>();
             services.AddScoped<ITenantAddressRepository, TenantAddressRepository>();
             services.AddScoped<ITenantContactRepository, TenantContactRepository>();
             services.AddScoped<ILocationRepository, LocationRepository>();
@@ -46,7 +48,8 @@ namespace Business.WebApi.Configurations
         {
             // App service
             services.AddScoped<ITenantService, TenantService>();
-            services.AddScoped<ILocationService, LocationService>();
+            services.AddScoped<SiteProvisioningService>();
+            services.AddScoped<IBusinessInformationService, BusinessInformationService>();
             services.AddScoped<IServiceCategoryService, ServiceCategoryService>();
         }
 

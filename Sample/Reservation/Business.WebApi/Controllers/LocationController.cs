@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Business.Application.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using Business.Domain.Repositories.Interfaces;
+using Business.Domain.Repositories;
 
 namespace Business.WebApi.Controllers
 {
@@ -13,13 +13,13 @@ namespace Business.WebApi.Controllers
     [Route("api/locations")]
     public class LocationController: Controller
     {
-        private readonly ILocationService _locationService;
+        private readonly IBusinessInformationService _businessInformationService;
         //private readonly ITenantRepository _tenantRepository;
 
-        public LocationController(ILocationService locationService)
+        public LocationController(IBusinessInformationService businessInformationService)
         {
             //_tenantRepository = tenantRepository;
-            _locationService = locationService;
+            _businessInformationService = businessInformationService;
         }
 
         //[HttpGet]
@@ -52,9 +52,9 @@ namespace Business.WebApi.Controllers
                 return Ok(request);
             }
 
-            _locationService.AddLocation(request);
+            var location = _businessInformationService.ProvisionLocation(request);
 
-            return Ok(request);
+            return Ok(location);
         }
     }
 }

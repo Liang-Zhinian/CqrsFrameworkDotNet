@@ -1,8 +1,7 @@
 ﻿using System;
 using AutoMapper;
 using Business.Application.ViewModels;
-using Business.Domain.Models.Security;
-using Business.Domain.Models.ValueObjects;
+using Business.Domain.Entities;
 
 namespace Business.Application.AutoMapper
 {

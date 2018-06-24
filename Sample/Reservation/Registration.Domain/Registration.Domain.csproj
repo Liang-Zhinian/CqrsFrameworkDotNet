@@ -31,6 +31,7 @@
     <Compile Remove="ReadModel\Security\LocationAddress.cs" />
     <Compile Remove="ReadModel\Security\Branding.cs" />
     <Compile Remove="Commands\BaseCommand.cs" />
+    <Compile Remove="ReadModel\MemberTypes.cs" />
   </ItemGroup>
 
   <ItemGroup>

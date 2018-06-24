@@ -13,12 +13,12 @@ namespace Registration.Infra.Data.Mappings
             base.BuildPrimary(builder, Constants.DbConstants.TenantTable);
 
             builder.Property<string>("Name").IsRequired().HasColumnType(Constants.DbConstants.String255);
-            builder.Property<string>("DisplayName").HasColumnType(Constants.DbConstants.String2000);
+            builder.Property<string>("Description").HasColumnType(Constants.DbConstants.String2000);
 
             builder.Property<string>("Email").HasColumnType(Constants.DbConstants.String255);
             builder.Property<string>("PrimaryTelephone").HasColumnType(Constants.DbConstants.String255);
             builder.Property<string>("SecondaryTelephone").HasColumnType(Constants.DbConstants.String255);
-            builder.Property<string>("LogoURL").HasColumnType(Constants.DbConstants.String255);
+            builder.Property<byte[]>("Logo").HasColumnType(Constants.DbConstants.String255);
             builder.Property<string>("PageColor1").HasColumnType(Constants.DbConstants.String10);
             builder.Property<string>("PageColor1").HasColumnType(Constants.DbConstants.String10);
             builder.Property<string>("PageColor2").HasColumnType(Constants.DbConstants.String10);

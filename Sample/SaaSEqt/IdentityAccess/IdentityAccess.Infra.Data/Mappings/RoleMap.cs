@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using SaaSEqt.IdentityAccess.Domain.Models;
+using SaaSEqt.IdentityAccess.Domain.Entities;
 using SaaSEqt.IdentityAccess.Infra.Data.Mappings.Constants;
 
 namespace SaaSEqt.IdentityAccess.Infra.Data.Mappings

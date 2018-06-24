@@ -8,13 +8,27 @@ namespace Business.Contracts.Events.Locations
         public LocationCreatedEvent(
             Guid id,
             Guid tenantId,
-            Guid businessId,
-            string businessDescription,
             string name,
             string description,
-            string image,
+            byte[] image,
             string primaryTelephone,
-            string secondaryTelephone,
+            string secondaryTelephone)
+            : base(
+                id,
+                tenantId,
+                name,
+                description,
+                image,
+                primaryTelephone,
+                secondaryTelephone)
+        {
+            Version = 1;
+            TimeStamp = DateTimeOffset.Now;
+        }
+
+        public LocationCreatedEvent(
+            Guid id,
+            Guid tenantId,
             string streetAddress,
             string streetAddress2,
             string city,
@@ -24,13 +38,6 @@ namespace Business.Contracts.Events.Locations
             :base(
                 id,
                 tenantId,
-                businessId,
-                businessDescription,
-                name,
-                description,
-                image,
-                primaryTelephone,
-                secondaryTelephone,
                 streetAddress,
                 streetAddress2,
                 city,

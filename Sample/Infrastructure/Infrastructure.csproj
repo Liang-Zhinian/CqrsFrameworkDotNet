@@ -7,8 +7,12 @@
   <ItemGroup>
     <Folder Include="Utils\" />
     <Folder Include="Tasks\" />
+    <Folder Include="Messaging\Implementation\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Messaging\Handling\CommandProcessor.cs" />
   </ItemGroup>
 </Project>

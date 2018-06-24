@@ -5,7 +5,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Domain\" />
-    <Folder Include="Domain\Models\" />
+    <Folder Include="Domain\Entities\" />
     <Folder Include="Domain\Events\" />
     <Folder Include="Domain\Services\" />
     <Folder Include="Domain\Repositories\" />

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using SaaSEqt.IdentityAccess.Domain.Models;
+using SaaSEqt.IdentityAccess.Domain.Entities;
 using CqrsFramework.Events;
 
 namespace SaaSEqt.IdentityAccess.Domain.Events.Access

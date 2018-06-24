@@ -46,7 +46,7 @@ namespace Registration.Domain.ReadModel.Security
         [DisplayName("SecondaryTelephone")]
         public string SecondaryTelephone { get; private set; }
 
-        public string LogoURL { get; private set; }
+        public byte[] Logo { get; private set; }
 
         public string PageColor1 { get; private set; }
 

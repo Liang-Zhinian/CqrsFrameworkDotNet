@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Registration.Domain.ReadModel;
+using Registration.Infra.Data.Constants;
 
 namespace Registration.Infra.Data.Mappings
 {
@@ -11,7 +12,7 @@ namespace Registration.Infra.Data.Mappings
         {
             //base.Configure(builder, Constants.DbConstants.LocationImageTable);
             builder.HasKey("Id");
-            builder.ToTable("HomePageImageView");
+            builder.ToTable(DbConstants.HomePageImageTable);
             builder.Property<string>("Name").IsRequired().HasColumnType(Constants.DbConstants.String255);
             builder.Property<string>("Data").IsRequired().HasColumnType(Constants.DbConstants.MediumBlob);
             builder.Property<Guid>("CategoryId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);

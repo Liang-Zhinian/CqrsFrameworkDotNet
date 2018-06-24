@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using Business.Domain.Models;
+using Business.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -13,9 +13,11 @@ namespace Business.Infra.Data.Mappings
             builder.HasKey(o => o.Id);
             builder.ToTable(Constants.DbConstants.SiteTable);
 
-            builder.Property<Guid>("Id").HasColumnType(Constants.DbConstants.KeyType);
-            builder.Property<string>("Name").IsRequired().HasColumnType(Constants.DbConstants.String255);
-            builder.Property<string>("Description").HasColumnType(Constants.DbConstants.String2000);
+            builder.Property(_ => _.Id).HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property(_ => _.Name).IsRequired().HasColumnType(Constants.DbConstants.String255);
+            builder.Property(_ => _.Description).HasColumnType(Constants.DbConstants.String2000);
+            //builder.Property(_ => _.BrandingId).IsRequired(false).HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property(_ => _.Active).IsRequired();
 
             builder.OwnsOne(_ => _.ContactInformation, cb => {
                 cb.Property("SiteId").HasColumnType(Constants.DbConstants.KeyType);
@@ -26,9 +28,9 @@ namespace Business.Infra.Data.Mappings
 
             builder.OwnsOne(_ => _.TenantId, cb =>
             {
-                cb.Property<string>(tenant => tenant.Id).IsRequired()
-                  .HasColumnType(Constants.DbConstants.String36)
-                .HasColumnName("TenantId_Id");
+                cb.Property(_ => _.Id)
+                  .IsRequired()
+                  .HasColumnType(Constants.DbConstants.String36);
             });
         }
     }

@@ -12,19 +12,25 @@ namespace Registration.Infra.Data.Constants
 
     public class DbConstants
     {
+        public static string Schema = "book2";
+
         public static string KeyType = "uniqueidentifier";
         public static string String10 = "NVarchar(10)";
+        public static string String36 = "NVarchar(36)";
         public static string String255 = "NVarchar(255)";
         public static string String1000 = "NVarchar(1000)";
         public static string String2000 = "NVarchar(2000)";
         public static string String4000 = "NVarchar(4000)";
         public static string MediumBlob = "text";
 
+        public static string HomePageImageTable { get; set; }
+
         public static string AddressTable { get; set; }
         public static string ContactTable { get; set; }
         public static string BrandingTable { get; private set; }
         public static string ImageTable { get; private set; }
 
+        public static string SiteTable { get; private set; }
         public static string TenantTable { get; private set; }
         public static string TenantAddressTable { get; private set; }
         public static string TenantContactTable { get; private set; }
@@ -58,34 +64,37 @@ namespace Registration.Infra.Data.Constants
 
         static DbConstants()
         {
-            ContactTable = "ContactView";
-            AddressTable = "AddressView";
-            BrandingTable = "BrandingView";
-            ImageTable = "ImageView";
+            HomePageImageTable = "V_HomePageImage";
 
-            TenantTable = "TenantView";
+            ContactTable = "V_Contact";
+            AddressTable = "V_Address";
+            BrandingTable = "V_Branding";
+            ImageTable = "V_Image";
 
-            LocationTable = "LocationView";
-            LocationImageTable = "LocationImageView";
+            TenantTable = "V_Tenant";
+            SiteTable = "V_Site";
 
-            StaffTable = "StaffView";
-            StaffLoginLocationTable = "StaffLoginLocationView";
-            StaffLoginCredentialTable = "StaffLoginCredentialView";
+            LocationTable = "V_Location";
+            LocationImageTable = "V_LocationImage";
 
-            TimeZoneTable = "TimeZoneView";
-            RegionTable = "RegionView";
+            StaffTable = "V_Staff";
+            StaffLoginLocationTable = "V_StaffLoginLocation";
+            StaffLoginCredentialTable = "V_StaffLoginCredential";
 
-            ResourceTable = "ResourceView";
-            ResourceLocationTable = "ResourceLocationView";
-            ResourceStatusTable = "ResourceStatusView";
-            ResourceTypeTable = "ResourceTypeView";
+            TimeZoneTable = "V_TimeZone";
+            RegionTable = "V_Region";
 
-            ScheduleTable = "ScheduleView";
-            ScheduleLayoutTable = "ScheduleLayoutView";
-            ScheduleLayoutTimeSlotTable = "ScheduleLayoutTimeSlotView";
+            ResourceTable = "V_Resource";
+            ResourceLocationTable = "V_ResourceLocation";
+            ResourceStatusTable = "V_ResourceStatus";
+            ResourceTypeTable = "V_ResourceType";
 
-            ServiceTable = "ServiceView";
-            ServiceCategoryTable = "ServiceCategoryView";
+            ScheduleTable = "V_Schedule";
+            ScheduleLayoutTable = "V_ScheduleLayout";
+            ScheduleLayoutTimeSlotTable = "V_ScheduleLayoutTimeSlot";
+
+            ServiceTable = "V_Service";
+            ServiceCategoryTable = "V_ServiceCategory";
 
 
             var config = new ConfigurationBuilder()
@@ -99,6 +108,7 @@ namespace Registration.Infra.Data.Constants
             {
                 KeyType = "uniqueidentifier";
                 String10 = "NVarchar(10)";
+                String36 = "nvarchar(36)";
                 String255 = "NVarchar(255)";
                 String1000 = "NVarchar(1000)";
                 String2000 = "NVarchar(2000)";
@@ -108,6 +118,7 @@ namespace Registration.Infra.Data.Constants
             {
                 KeyType = "binary(16)";
                 String10 = "varchar(10)";
+                String36 = "varchar(36)";
                 String255 = "varchar(255)";
                 String1000 = "varchar(1000)";
                 String2000 = "varchar(2000)";

@@ -12,22 +12,22 @@ namespace Registration.Infra.Data.Mappings
         {
             base.Configure(builder, Constants.DbConstants.LocationTable);
 
-            builder.Property<string>("Name").IsRequired().HasColumnType(Constants.DbConstants.String255);
-            builder.Property<string>("Description").HasColumnType(Constants.DbConstants.String2000);
-            builder.Property<string>("Email").IsRequired().HasColumnType(Constants.DbConstants.String255);
-            builder.Property<string>("PrimaryTelephone").IsRequired().HasColumnType(Constants.DbConstants.String255);
-            builder.Property<string>("SecondaryTelephone").HasColumnType(Constants.DbConstants.String255);
-            builder.Property<string>("City").HasColumnType(Constants.DbConstants.String255);
-            builder.Property<string>("CountryCode").HasColumnType(Constants.DbConstants.String255);
-            builder.Property<string>("PostalCode").HasColumnType(Constants.DbConstants.String255);
-            builder.Property<string>("StateProvince").HasColumnType(Constants.DbConstants.String255);
-            builder.Property<string>("StreetAddress").HasColumnType(Constants.DbConstants.String255);
-            builder.Property<string>("StreetAddress2").HasColumnType(Constants.DbConstants.String255);
+            builder.Property(_ => _.Name).IsRequired().HasColumnType(Constants.DbConstants.String255);
+            builder.Property(_ => _.Description).IsRequired(false).HasColumnType(Constants.DbConstants.String2000);
+            builder.Property(_ => _.Image).IsRequired(false);
+            builder.Property<string>(_ => _.Email).IsRequired(false).HasColumnType(Constants.DbConstants.String255);
+            builder.Property<string>(_ => _.PrimaryTelephone).HasColumnType(Constants.DbConstants.String255);
+            builder.Property<string>(_ => _.SecondaryTelephone).HasColumnType(Constants.DbConstants.String255); builder.Property<string>("City").IsRequired(false).HasColumnType(Constants.DbConstants.String255);
+            builder.Property<string>(_ => _.CountryCode).IsRequired(false).HasColumnType(Constants.DbConstants.String255);
+            builder.Property<string>(_ => _.PostalCode).IsRequired(false).HasColumnType(Constants.DbConstants.String255);
+            builder.Property<string>(_ => _.StateProvince).IsRequired(false).HasColumnType(Constants.DbConstants.String255);
+            builder.Property<string>(_ => _.StreetAddress).IsRequired(false).HasColumnType(Constants.DbConstants.String255);
+            builder.Property<string>(_ => _.StreetAddress2).IsRequired(false).HasColumnType(Constants.DbConstants.String255);
+            builder.Property(_ => _.Latitude).IsRequired(false);
+            builder.Property(_ => _.Longitude).IsRequired(false);
 
-            builder
-                .HasOne(b => b.Tenant)
-                .WithMany(p => p.Locations)
-                .HasForeignKey(p => p.TenantId);
+            MapToSite(builder);
+            //MapToTenant(builder);
         }
     }
 }

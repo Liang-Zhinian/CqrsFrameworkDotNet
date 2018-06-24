@@ -17,6 +17,7 @@ namespace Registration.Infra.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("book2")
                 .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
                 .HasAnnotation("ProductVersion", "2.0.3-rtm-10026");
 
@@ -35,6 +36,8 @@ namespace Registration.Infra.Data.Migrations
                     b.Property<string>("Data")
                         .IsRequired()
                         .HasColumnType("mediumtext");
+
+                    b.Property<DateTime>("LastModified");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -55,7 +58,7 @@ namespace Registration.Infra.Data.Migrations
 
                     b.HasIndex("ParentCategoryId");
 
-                    b.ToTable("HomePageImageView");
+                    b.ToTable("V_HomePageImage");
                 });
 
             modelBuilder.Entity("Registration.Domain.ReadModel.Region", b =>
@@ -71,13 +74,15 @@ namespace Registration.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
+                    b.Property<DateTime>("LastModified");
+
                     b.Property<string>("RegionString")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("RegionView");
+                    b.ToTable("V_Region");
                 });
 
             modelBuilder.Entity("Registration.Domain.ReadModel.Security.Location", b =>
@@ -96,8 +101,15 @@ namespace Registration.Infra.Data.Migrations
                         .HasColumnType("varchar(2000)");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("varchar(255)");
+
+                    b.Property<byte[]>("Image");
+
+                    b.Property<DateTime>("LastModified");
+
+                    b.Property<double?>("Latitude");
+
+                    b.Property<double?>("Longitude");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -107,11 +119,14 @@ namespace Registration.Infra.Data.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("PrimaryTelephone")
-                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("SecondaryTelephone")
                         .HasColumnType("varchar(255)");
+
+                    b.Property<Guid>("SiteId")
+                        .HasColumnName("SiteId")
+                        .HasColumnType("binary(16)");
 
                     b.Property<string>("StateProvince")
                         .HasColumnType("varchar(255)");
@@ -128,9 +143,11 @@ namespace Registration.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("SiteId");
+
                     b.HasIndex("TenantId");
 
-                    b.ToTable("LocationView");
+                    b.ToTable("V_Location");
 
                     b.HasAnnotation("MySQL:Charset", "utf8");
 
@@ -143,11 +160,17 @@ namespace Registration.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("binary(16)");
 
-                    b.Property<string>("ImageUrl")
+                    b.Property<byte[]>("Image")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
+                    b.Property<DateTime>("LastModified");
+
                     b.Property<Guid>("LocationId")
+                        .HasColumnType("binary(16)");
+
+                    b.Property<Guid>("SiteId")
+                        .HasColumnName("SiteId")
                         .HasColumnType("binary(16)");
 
                     b.Property<Guid>("TenantId")
@@ -158,13 +181,71 @@ namespace Registration.Infra.Data.Migrations
 
                     b.HasIndex("LocationId");
 
+                    b.HasIndex("SiteId");
+
                     b.HasIndex("TenantId");
 
-                    b.ToTable("LocationImageView");
+                    b.ToTable("V_LocationImage");
 
                     b.HasAnnotation("MySQL:Charset", "utf8");
 
                     b.HasAnnotation("MySQL:Collation", "utf8_general_ci");
+                });
+
+            modelBuilder.Entity("Registration.Domain.ReadModel.Security.Site", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("binary(16)");
+
+                    b.Property<bool>("Active");
+
+                    b.Property<string>("ContactName")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("varchar(2000)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<DateTime>("LastModified");
+
+                    b.Property<byte[]>("Logo");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("PageColor1")
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<string>("PageColor2")
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<string>("PageColor3")
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<string>("PageColor4")
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<string>("PrimaryTelephone")
+                        .HasColumnType("varchar(255)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("SecondaryTelephone")
+                        .HasColumnType("varchar(255)")
+                        .HasMaxLength(100);
+
+                    b.Property<Guid>("TenantId")
+                        .HasColumnType("binary(16)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TenantId");
+
+                    b.ToTable("V_Site");
                 });
 
             modelBuilder.Entity("Registration.Domain.ReadModel.Security.Staff", b =>
@@ -175,6 +256,8 @@ namespace Registration.Infra.Data.Migrations
 
                     b.Property<string>("Bio")
                         .HasColumnType("varchar(2000)");
+
+                    b.Property<bool>("CanLoginAllLocations");
 
                     b.Property<string>("City")
                         .HasColumnType("varchar(255)");
@@ -190,12 +273,14 @@ namespace Registration.Infra.Data.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("varchar(255)");
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("varchar(4000)");
 
                     b.Property<bool>("IsEnabled");
 
                     b.Property<bool>("IsMale");
+
+                    b.Property<DateTime>("LastModified");
 
                     b.Property<string>("LastName")
                         .HasColumnType("varchar(255)");
@@ -210,6 +295,10 @@ namespace Registration.Infra.Data.Migrations
 
                     b.Property<string>("SecondaryTelephone")
                         .HasColumnType("varchar(255)");
+
+                    b.Property<Guid>("SiteId")
+                        .HasColumnName("SiteId")
+                        .HasColumnType("binary(16)");
 
                     b.Property<DateTime>("StartDate");
 
@@ -230,9 +319,11 @@ namespace Registration.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("SiteId");
+
                     b.HasIndex("TenantId");
 
-                    b.ToTable("StaffView");
+                    b.ToTable("V_Staff");
 
                     b.HasAnnotation("MySQL:Charset", "utf8");
 
@@ -250,8 +341,11 @@ namespace Registration.Infra.Data.Migrations
                     b.Property<Guid>("LocationId")
                         .HasColumnType("binary(16)");
 
-                    b.Property<Guid>("TenantId")
-                        .HasColumnType("binary(16)");
+                    b.Property<DateTime>("LastModified");
+
+                    b.Property<Guid>("SiteId");
+
+                    b.Property<Guid>("TenantId");
 
                     b.HasKey("Id", "StaffId", "LocationId");
 
@@ -259,11 +353,13 @@ namespace Registration.Infra.Data.Migrations
 
                     b.HasIndex("LocationId");
 
+                    b.HasIndex("SiteId");
+
                     b.HasIndex("StaffId");
 
                     b.HasIndex("TenantId");
 
-                    b.ToTable("StaffLoginLocationView");
+                    b.ToTable("V_StaffLoginLocation");
                 });
 
             modelBuilder.Entity("Registration.Domain.ReadModel.Security.Tenant", b =>
@@ -279,15 +375,15 @@ namespace Registration.Infra.Data.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("Description")
+                        .HasColumnType("varchar(2000)")
                         .HasMaxLength(2000);
-
-                    b.Property<string>("DisplayName")
-                        .HasColumnType("varchar(2000)");
 
                     b.Property<string>("Email")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("LogoURL")
+                    b.Property<DateTime>("LastModified");
+
+                    b.Property<byte[]>("Logo")
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("Name")
@@ -329,7 +425,7 @@ namespace Registration.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TenantView");
+                    b.ToTable("V_Tenant");
 
                     b.HasAnnotation("MySQL:Charset", "utf8");
 
@@ -349,18 +445,33 @@ namespace Registration.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(2000)");
 
+                    b.Property<DateTime>("LastModified");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
+                    b.Property<Guid>("SiteId")
+                        .HasColumnName("SiteId")
+                        .HasColumnType("binary(16)");
+
                     b.Property<Guid>("TenantId")
+                        .HasColumnName("TenantId")
                         .HasColumnType("binary(16)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("ServiceView");
+                    b.HasIndex("SiteId");
+
+                    b.HasIndex("TenantId");
+
+                    b.ToTable("V_Service");
+
+                    b.HasAnnotation("MySQL:Charset", "utf8");
+
+                    b.HasAnnotation("MySQL:Collation", "utf8_general_ci");
                 });
 
             modelBuilder.Entity("Registration.Domain.ReadModel.ServiceCategory", b =>
@@ -377,6 +488,8 @@ namespace Registration.Infra.Data.Migrations
 
                     b.Property<bool>("IsInternal");
 
+                    b.Property<DateTime>("LastModified");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
@@ -386,11 +499,19 @@ namespace Registration.Infra.Data.Migrations
 
                     b.Property<int>("ScheduleTypeValue");
 
+                    b.Property<Guid>("SiteId")
+                        .HasColumnName("SiteId")
+                        .HasColumnType("binary(16)");
+
+                    b.Property<Guid>("TenantId")
+                        .HasColumnName("TenantId")
+                        .HasColumnType("binary(16)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ParentCategoryId");
 
-                    b.ToTable("ServiceCategoryView");
+                    b.ToTable("V_ServiceCategory");
 
                     b.HasAnnotation("MySQL:Charset", "utf8");
 
@@ -406,13 +527,15 @@ namespace Registration.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
+                    b.Property<DateTime>("LastModified");
+
                     b.Property<string>("StandardName")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("TimeZoneView");
+                    b.ToTable("V_TimeZone");
                 });
 
             modelBuilder.Entity("Registration.Domain.ReadModel.HomePageImage", b =>
@@ -430,6 +553,11 @@ namespace Registration.Infra.Data.Migrations
 
             modelBuilder.Entity("Registration.Domain.ReadModel.Security.Location", b =>
                 {
+                    b.HasOne("Registration.Domain.ReadModel.Security.Site", "Site")
+                        .WithMany()
+                        .HasForeignKey("SiteId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("Registration.Domain.ReadModel.Security.Tenant", "Tenant")
                         .WithMany("Locations")
                         .HasForeignKey("TenantId")
@@ -443,6 +571,19 @@ namespace Registration.Infra.Data.Migrations
                         .HasForeignKey("LocationId")
                         .OnDelete(DeleteBehavior.Cascade);
 
+                    b.HasOne("Registration.Domain.ReadModel.Security.Site", "Site")
+                        .WithMany()
+                        .HasForeignKey("SiteId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Registration.Domain.ReadModel.Security.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Registration.Domain.ReadModel.Security.Site", b =>
+                {
                     b.HasOne("Registration.Domain.ReadModel.Security.Tenant", "Tenant")
                         .WithMany()
                         .HasForeignKey("TenantId")
@@ -451,6 +592,11 @@ namespace Registration.Infra.Data.Migrations
 
             modelBuilder.Entity("Registration.Domain.ReadModel.Security.Staff", b =>
                 {
+                    b.HasOne("Registration.Domain.ReadModel.Security.Site", "Site")
+                        .WithMany()
+                        .HasForeignKey("SiteId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("Registration.Domain.ReadModel.Security.Tenant", "Tenant")
                         .WithMany("Staffs")
                         .HasForeignKey("TenantId")
@@ -462,6 +608,11 @@ namespace Registration.Infra.Data.Migrations
                     b.HasOne("Registration.Domain.ReadModel.Security.Location", "Location")
                         .WithMany("StaffLoginLocations")
                         .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Registration.Domain.ReadModel.Security.Site", "Site")
+                        .WithMany()
+                        .HasForeignKey("SiteId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Registration.Domain.ReadModel.Security.Staff", "Staff")
@@ -480,6 +631,16 @@ namespace Registration.Infra.Data.Migrations
                     b.HasOne("Registration.Domain.ReadModel.ServiceCategory", "Category")
                         .WithMany("Services")
                         .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Registration.Domain.ReadModel.Security.Site", "Site")
+                        .WithMany()
+                        .HasForeignKey("SiteId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Registration.Domain.ReadModel.Security.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

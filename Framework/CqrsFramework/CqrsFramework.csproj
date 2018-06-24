@@ -34,4 +34,7 @@
   <ItemGroup>
     <None Include="Cache\CacheRepository.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Messages\IMessageSender.cs" />
+  </ItemGroup>
 </Project>

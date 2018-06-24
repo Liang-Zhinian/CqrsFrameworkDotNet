@@ -3,7 +3,7 @@ namespace SaaSEqt.IdentityAccess
 {
 	using System;
 
-	using SaaSEqt.IdentityAccess.Domain.Models;
+	using SaaSEqt.IdentityAccess.Domain.Entities;
     using SaaSEqt.IdentityAccess.Domain.Services;
 
 	/// <summary>

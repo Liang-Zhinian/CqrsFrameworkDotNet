@@ -12,6 +12,8 @@ namespace Business.Infra.Data.Constants
 
     public class DbConstants
     {
+        public static string Schema = "book2";
+
         public static string KeyType = "uniqueidentifier";
         public static string String10 = "NVarchar(10)";
         public static string String36 = "NVarchar(36)";

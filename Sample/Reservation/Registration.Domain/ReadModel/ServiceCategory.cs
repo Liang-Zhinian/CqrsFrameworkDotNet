@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using CqrsFramework.Domain;
-//using Business.Domain.Models.Service.PaymentOption;
+//using Business.Domain.Entities.Service.PaymentOption;
 
 namespace Registration.Domain.ReadModel
 {

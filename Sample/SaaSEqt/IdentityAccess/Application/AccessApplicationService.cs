@@ -3,7 +3,7 @@
 	using System;
 
 	using SaaSEqt.IdentityAccess.Application.Commands;
-    using SaaSEqt.IdentityAccess.Domain.Models;
+    using SaaSEqt.IdentityAccess.Domain.Entities;
     using SaaSEqt.IdentityAccess.Domain.Services;
     using SaaSEqt.IdentityAccess.Domain.Repositories;
 

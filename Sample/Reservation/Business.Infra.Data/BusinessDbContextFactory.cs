@@ -10,7 +10,7 @@ namespace Business.Infra.Data.Repositories
         public BusinessDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<BusinessDbContext>();
-            optionsBuilder.UseMySql("Server=localhost;database=book2site;uid=root;pwd=P@ssword;charset=utf8;port=3306;SslMode=None");
+            optionsBuilder.UseMySql("Server=localhost;database=book2;uid=root;pwd=P@ssword;charset=utf8;port=3306;SslMode=None");
 
             return new BusinessDbContext(optionsBuilder.Options);
         }

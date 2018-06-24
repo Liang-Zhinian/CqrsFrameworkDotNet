@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CqrsFramework.Domain;
-//using Business.Domain.Models.Service.PaymentOption;
+//using Business.Domain.Entities.Service.PaymentOption;
 
 namespace Registration.Application.ViewModels
 {

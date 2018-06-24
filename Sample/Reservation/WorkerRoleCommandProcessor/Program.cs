@@ -6,7 +6,7 @@ namespace WorkerRoleCommandProcessor
     {
         static void Main(string[] args)
         {
-            using (var processor = new ReservationCommandProcessor())
+            using (var processor = new ReservationProcessor())
             {
                 processor.Start();
 

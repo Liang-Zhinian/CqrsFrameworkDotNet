@@ -17,10 +17,10 @@ namespace Business.Infra.Data.Seeders
             //ReadOnlyCollection<TimeZoneInfo> timeZones = TimeZoneInfo.GetSystemTimeZones();
 
             //int i = 1;
-            //List<Business.Domain.Models.TimeZone> tzList = new List<Business.Domain.Models.TimeZone>();
+            //List<Business.Domain.Entities.TimeZone> tzList = new List<Business.Domain.Entities.TimeZone>();
             //foreach (TimeZoneInfo timeZone in timeZones)
             //{
-            //    tzList.Add(new Business.Domain.Models.TimeZone(){
+            //    tzList.Add(new Business.Domain.Entities.TimeZone(){
             //        Id=i++,
             //        DisplayName = timeZone.DisplayName,
             //        StandardName = timeZone.StandardName

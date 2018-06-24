@@ -12,9 +12,12 @@ namespace Registration.Infra.Data.Mappings
         {
             base.Configure(builder, Constants.DbConstants.LocationImageTable);
 
-            builder.Property<Guid>("LocationId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
-            builder.Property<string>("ImageUrl").IsRequired().HasColumnType(Constants.DbConstants.String255);
+            builder.Property<Guid>(_ => _.LocationId).IsRequired().HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property(_ => _.Image).IsRequired().HasColumnType(Constants.DbConstants.String255);
+            //builder.Property<Guid>("SiteId").HasColumnType(Constants.DbConstants.KeyType);
+            //builder.Property<Guid>("TenantId").HasColumnType(Constants.DbConstants.String36);
 
+            MapToSite(builder);
             MapToTenant(builder);
 
             builder

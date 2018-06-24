@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Business.Domain.Models;
+using Business.Domain.Entities;
 
 namespace Business.Infra.Data.Mappings
 {
@@ -13,20 +13,21 @@ namespace Business.Infra.Data.Mappings
             builder.HasKey(o => o.Id);
             builder.ToTable(Constants.DbConstants.BrandingTable);
 
-            builder.Property<Guid>("Id").HasColumnType(Constants.DbConstants.KeyType);
-            builder.Property<Guid>("SiteId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
-            builder.Property<string>("Logo").HasColumnType(Constants.DbConstants.String4000);
-            builder.Property<string>("PageColor1").HasColumnType(Constants.DbConstants.String10);
-            builder.Property<string>("PageColor1").HasColumnType(Constants.DbConstants.String10);
-            builder.Property<string>("PageColor2").HasColumnType(Constants.DbConstants.String10);
-            builder.Property<string>("PageColor3").HasColumnType(Constants.DbConstants.String10);
-            builder.Property<string>("PageColor4").HasColumnType(Constants.DbConstants.String10);
+            builder.Property(_ => _.Id).HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property(_ => _.SiteId).IsRequired().HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property(_ => _.Logo).HasColumnType(Constants.DbConstants.String4000);
+            builder.Property(_ => _.PageColor1).HasColumnType(Constants.DbConstants.String10);
+            builder.Property(_ => _.PageColor1).HasColumnType(Constants.DbConstants.String10);
+            builder.Property(_ => _.PageColor2).HasColumnType(Constants.DbConstants.String10);
+            builder.Property(_ => _.PageColor3).HasColumnType(Constants.DbConstants.String10);
+            builder.Property(_ => _.PageColor4).HasColumnType(Constants.DbConstants.String10);
+
 
             builder.OwnsOne(_ => _.TenantId, cb =>
             {
-                cb.Property<string>(tenant => tenant.Id).IsRequired()
-                  .HasColumnType(Constants.DbConstants.String36)
-                .HasColumnName("TenantId_Id");
+                cb.Property(_ => _.Id)
+                  .IsRequired()
+                  .HasColumnType(Constants.DbConstants.String36);
             });
 
             builder.HasOne(_ => _.Site)

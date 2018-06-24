@@ -1,5 +1,5 @@
 ﻿using System;
-using Business.Contracts.Events.Security.Locations;
+using Business.Contracts.Events.Locations;
 using CqrsFramework.Events;
 using Registration.Domain.ReadModel.Security;
 using Registration.Domain.Repositories.Interfaces;

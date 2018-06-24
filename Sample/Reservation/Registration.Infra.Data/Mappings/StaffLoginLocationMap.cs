@@ -19,9 +19,7 @@ namespace Registration.Infra.Data.Mappings
             builder.Property<Guid>("Id").HasColumnType(Constants.DbConstants.KeyType);
             builder.Property<Guid>("StaffId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
             builder.Property<Guid>("LocationId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
-            builder.Property<Guid>("TenantId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
 
-            
             builder
                 .HasOne(sl => sl.Staff)
                 .WithMany(p => p.StaffLoginLocations)
@@ -32,10 +30,8 @@ namespace Registration.Infra.Data.Mappings
                 .WithMany(p => p.StaffLoginLocations)
                 .HasForeignKey(sl => sl.LocationId);
 
-            builder
-                .HasOne(b => b.Tenant)
-                .WithMany()
-                .HasForeignKey(p => p.TenantId);
+            MapToSite(builder);
+            MapToTenant(builder);
         }
     }
 }

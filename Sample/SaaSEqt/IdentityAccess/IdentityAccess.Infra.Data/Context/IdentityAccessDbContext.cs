@@ -2,7 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using SaaSEqt.IdentityAccess.Infra.Data.Mappings;
 using System.ComponentModel.DataAnnotations;
-using SaaSEqt.IdentityAccess.Domain.Models;
+using SaaSEqt.IdentityAccess.Domain.Entities;
+using SaaSEqt.IdentityAccess.Infra.Data.Mappings.Constants;
 
 namespace SaaSEqt.IdentityAccess.Infra.Data.Context
 {
@@ -21,6 +22,8 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.HasDefaultSchema(DbConstants.Schema);
+            
             modelBuilder.ApplyConfiguration(new TenantMap());
             modelBuilder.ApplyConfiguration(new UserMap());
             modelBuilder.ApplyConfiguration(new PersonMap());

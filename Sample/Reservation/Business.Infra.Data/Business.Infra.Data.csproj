@@ -33,4 +33,35 @@
   <ItemGroup>
     <ProjectReference Include="..\Business.Domain\Business.Domain.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Migrations\20180623114744_first.cs" />
+    <Compile Remove="Migrations\20180623115402_first.cs" />
+    <Compile Remove="Migrations\20180623115604_first.cs" />
+    <Compile Remove="Migrations\20180623115712_first.cs" />
+    <Compile Remove="Migrations\20180623121914_first.cs" />
+    <Compile Remove="Migrations\20180623122141_first.cs" />
+    <Compile Remove="Migrations\20180623122141_first.Designer.cs" />
+    <Compile Remove="Migrations\20180623122628_first.cs" />
+    <Compile Remove="Migrations\20180623123431_first.cs" />
+    <Compile Remove="Migrations\20180623123431_first.Designer.cs" />
+    <Compile Remove="Migrations\20180623124257_first.cs" />
+    <Compile Remove="Migrations\20180623125312_first.cs" />
+    <Compile Remove="Migrations\20180623125824_first.cs" />
+    <Compile Remove="Migrations\20180623130223_first.cs" />
+    <Compile Remove="Migrations\20180623130829_first.cs" />
+    <Compile Remove="Migrations\20180623131352_first.cs" />
+    <Compile Remove="Migrations\20180623133119_first.cs" />
+    <Compile Remove="Migrations\20180623135657_first.cs" />
+    <Compile Remove="Migrations\20180623140234_first.cs" />
+    <Compile Remove="Migrations\20180623140834_first.cs" />
+    <Compile Remove="Migrations\20180623141212_first.cs" />
+    <Compile Remove="Migrations\20180624024027_first.cs" />
+    <Compile Remove="Migrations\20180624040052_first.cs" />
+    <Compile Remove="Migrations\20180624054700_first.cs" />
+    <Compile Remove="Migrations\20180624062329_first.cs" />
+    <Compile Remove="Migrations\20180624062510_first.cs" />
+    <Compile Remove="Migrations\20180624062735_first.cs" />
+    <Compile Remove="Migrations\20180624063345_first.cs" />
+    <Compile Remove="Migrations\20180624064140_first.cs" />
+  </ItemGroup>
 </Project>

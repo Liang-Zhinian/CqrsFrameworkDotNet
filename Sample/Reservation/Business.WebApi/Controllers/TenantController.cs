@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Business.Application.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using Business.Domain.Repositories.Interfaces;
+using Business.Domain.Repositories;
 using Microsoft.AspNetCore.Http;
 
 namespace Business.WebApi.Controllers

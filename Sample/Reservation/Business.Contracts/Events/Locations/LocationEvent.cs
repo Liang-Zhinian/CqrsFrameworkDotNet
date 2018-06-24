@@ -6,13 +6,6 @@ namespace Business.Contracts.Events.Locations
         public LocationEvent(
             Guid id,
             Guid tenantId,
-            Guid businessId,
-            string businessDescription,
-            string name,
-            string description,
-            string image,
-            string primaryTelephone,
-            string secondaryTelephone,
             string streetAddress,
             string streetAddress2,
             string city,
@@ -22,13 +15,6 @@ namespace Business.Contracts.Events.Locations
         {
             this.Id = id;
             this.TenantId = tenantId;
-            this.BusinessID = businessId;
-            this.BusinessDescription = businessDescription;
-            this.Name = name;
-            this.Description = description;
-            this.Image = image;
-            this.PrimaryTelephone = primaryTelephone;
-            this.SecondaryTelephone = secondaryTelephone;
             this.StreetAddress = streetAddress;
             this.StreetAddress2 = streetAddress2;
             this.City = city;
@@ -37,17 +23,36 @@ namespace Business.Contracts.Events.Locations
             this.CountryCode = countryCode;
         }
 
+
+        public LocationEvent(
+            Guid id,
+            Guid tenantId,
+            string name,
+            string description,
+            byte[] image,
+            string primaryTelephone,
+            string secondaryTelephone)
+        {
+            this.Id = id;
+            this.TenantId = tenantId;
+            this.Name = name;
+            this.Description = description;
+            this.Image = image;
+            this.PrimaryTelephone = primaryTelephone;
+            this.SecondaryTelephone = secondaryTelephone;
+        }
+
         //public Guid Id { get; protected set; }
 
-        public Guid BusinessID { get; protected set; }
+        //public Guid BusinessID { get; protected set; }
 
-        public string BusinessDescription { get; protected set; }
+        //public string BusinessDescription { get; protected set; }
 
         public string Name { get; protected set; }
 
         public string Description { get; protected set; }
 
-        public string Image { get; protected set; }
+        public byte[] Image { get; protected set; }
 
         public string PrimaryTelephone { get; protected set; }
 

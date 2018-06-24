@@ -5,8 +5,8 @@ using AutoMapper;
 using Business.Application.Interfaces;
 using Business.Application.ViewModels;
 using Business.Contracts.Events.ServiceCategory;
-using Business.Domain.Models;
-using Business.Domain.Repositories.Interfaces;
+using Business.Domain.Entities;
+using Business.Domain.Repositories;
 using CqrsFramework.Domain;
 using CqrsFramework.Events;
 
@@ -149,12 +149,13 @@ namespace Business.Application.Services
             _serviceCategoryRepository.Add(domainServiceCategory);
             _serviceCategoryRepository.SaveChanges();
 
-            _eventPublisher.Publish<ServiceCategoryCreatedEvent>(new ServiceCategoryCreatedEvent(domainServiceCategory.Id,
-                                                                                         serviceCategory.Name,
-                                                                                         serviceCategory.Description,
-                                                                                                 serviceCategory.CancelOffset,
-                                                                                                 serviceCategory.ScheduleType
-                                                                                ));
+            _eventPublisher.Publish<ServiceCategoryCreatedEvent>(
+                new ServiceCategoryCreatedEvent(domainServiceCategory.Id,
+                           serviceCategory.Name,
+                                                serviceCategory.Description,
+                                                serviceCategory.CancelOffset,
+                                                serviceCategory.ScheduleType
+                                                                              ));
         }
     }
 }

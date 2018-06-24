@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CqrsFramework.Events;
-using SaaSEqt.IdentityAccess.Domain.Models;
+using SaaSEqt.IdentityAccess.Domain.Entities;
 
 namespace SaaSEqt.IdentityAccess.Domain.Events.Identity.Tenant
 {

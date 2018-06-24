@@ -69,6 +69,14 @@
     <Compile Remove="Migrations\20180621092115_first.cs" />
     <Compile Remove="Migrations\20180621092549_first.cs" />
     <Compile Remove="Migrations\20180621093842_first.cs" />
+    <Compile Remove="Migrations\20180621095246_first.cs" />
+    <Compile Remove="Migrations\20180624064159_first.cs" />
+    <Compile Remove="Migrations\20180624064959_first.cs" />
+    <Compile Remove="Migrations\20180624114557_first.cs" />
+    <Compile Remove="Migrations\20180624115104_first.cs" />
+    <Compile Remove="Migrations\20180624120057_first.cs" />
+    <Compile Remove="Migrations\20180624120529_first.cs" />
+    <Compile Remove="Migrations\20180624121330_first.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="appsettings.json" />

@@ -5,23 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Code\**" />
-    <Compile Remove="Models\**" />
-    <EmbeddedResource Remove="Code\**" />
-    <EmbeddedResource Remove="Models\**" />
-    <None Remove="Code\**" />
-    <None Remove="Models\**" />
-    <Compile Remove="ReadModel\Dtos\EmployeeDto.cs" />
-    <Compile Remove="CommandHandlers\EmployeeCommandHandler.cs" />
-    <Compile Remove="EventHandlers\EmployeeEventHandler.cs" />
-    <Compile Remove="ReadModel\ApplicationDbContext.cs" />
-    <Compile Remove="Commands\CreateTenantCommand.cs" />
-    <Compile Remove="Services\Security\TenantService.cs" />
-    <Compile Remove="Services\SecurityService.cs" />
-    <Compile Remove="Interfaces\ISecurityService.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
     <PackageReference Include="AutoMapper" Version="6.2.2" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.2.0" />

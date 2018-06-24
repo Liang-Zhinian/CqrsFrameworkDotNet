@@ -46,7 +46,18 @@ namespace Registration.Domain.ReadModel.Security
 
         public string StreetAddress2 { get; set; }
 
+        public bool IsMale { get; private set; }
+
+        public string Bio { get; private set; }
+
+        public byte[] Image { get; private set; }
+
+        public bool CanLoginAllLocations { get; private set; }
+
         public ICollection<StaffLoginLocation> StaffLoginLocations { get; private set; }
+
+        public Guid SiteId { get; private set; }
+        public virtual Site Site { get; private set; }
 
         public Guid TenantId { get; private set; }
         public virtual Tenant Tenant { get; private set; }

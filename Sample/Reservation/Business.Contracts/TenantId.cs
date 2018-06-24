@@ -1,5 +1,5 @@
 ﻿
-namespace Business.Domain.Models
+namespace Business.Domain.Entities
 {
 	using System;
     using System.ComponentModel.DataAnnotations.Schema;

@@ -1,5 +1,5 @@
 ﻿
-using DomainModels = SaaSEqt.IdentityAccess.Domain.Models;
+using DomainModels = SaaSEqt.IdentityAccess.Domain.Entities;
 using SaaSEqt.IdentityAccess.Domain.Repositories;
 using SaaSEqt.IdentityAccess.Infra.Data.Context;
 //using ReadModels = SaaSEqt.IdentityAccess.Infra.Data.Models;
