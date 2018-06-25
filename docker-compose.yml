@@ -6,3 +6,10 @@ services:
     build:
       context: .
       dockerfile: Sample/Reservation/Business.WebApi/Dockerfile
+
+  registration.clientwebapi:
+    image: registration
+    build:
+      context: .
+      dockerfile: Sample/Reservation/Registration.ClientWebApi/Dockerfile
+
