@@ -10,9 +10,8 @@ namespace Business.Domain.Entities
 
         }
 
-        public Branding(TenantId tenantId, Guid siteId, byte[] logo, string pageColor1, string pageColor2, string pageColor3, string pageColor4)
+        public Branding(Guid siteId, byte[] logo, string pageColor1, string pageColor2, string pageColor3, string pageColor4)
         {
-            this.TenantId = tenantId;
             this.SiteId = siteId;
             //this.Site = site;
             this.Id = Guid.NewGuid();
@@ -35,8 +34,6 @@ namespace Business.Domain.Entities
         public string PageColor3 { get; private set; }
         /// Page color
         public string PageColor4 { get; private set; }
-
-        public TenantId TenantId { get; private set; }
 
         public Guid SiteId { get; private set; }
         public virtual Site Site { get; private set; }

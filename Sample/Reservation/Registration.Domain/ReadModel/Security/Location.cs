@@ -6,12 +6,11 @@ namespace Registration.Domain.ReadModel.Security
 {
     public class Location
     {
-        public Location(Guid id, string name, string description, Guid siteId, Guid tenantId)
+        public Location(Guid id, string name, string description, Guid siteId)
         {
             Id = id;
             Name = name;
             Description = description;
-            TenantId = tenantId;
             SiteId = siteId;
         }
 
@@ -46,9 +45,6 @@ namespace Registration.Domain.ReadModel.Security
         public byte[] Image { get; private set; }
 
         public ICollection<LocationImage> AdditionalLocationImages { get; private set; }
-
-        public Guid TenantId { get; set; }
-        public virtual Tenant Tenant { get; set; }
 
         public Guid SiteId { get; private set; }
         public virtual Site Site { get; private set; }

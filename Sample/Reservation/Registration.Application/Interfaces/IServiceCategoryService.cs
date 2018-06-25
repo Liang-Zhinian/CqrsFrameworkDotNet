@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using Registration.Application.EventSourcedNormalizers;
-using Registration.Application.ViewModels;
+using Registration.Domain.ReadModel;
 
 namespace Registration.Application.Interfaces
 {
     public interface IServiceCategoryService : IDisposable
     {
         // service category service
-        IEnumerable<ServiceCategoryViewModel> FindServiceCategories();
-        ServiceCategoryViewModel FindServiceCategory(Guid serviceCategoryId);
-        IEnumerable<ServiceViewModel> FindServices();
-        IEnumerable<ServiceViewModel> FindServicesByTenant(Guid tenantId);
-        ServiceViewModel FindService(Guid serviceId);
+        IEnumerable<ServiceCategory> FindServiceCategories();
+        ServiceCategory FindServiceCategory(Guid serviceCategoryId);
+        IEnumerable<Service> FindServices();
+        Service FindService(Guid serviceId);
         //void AddService(ServiceViewModel service);
 
     }

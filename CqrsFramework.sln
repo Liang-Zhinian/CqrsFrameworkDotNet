@@ -83,6 +83,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EfTestTest", "Sample\EfTest
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registration.ClientWebApi", "Sample\Reservation\Registration.ClientWebApi\Registration.ClientWebApi.csproj", "{B4DEC2AC-F564-4C79-A62B-8CD42DEF2249}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DockerDemo", "Sample\DockerDemo\DockerDemo.csproj", "{B86C5737-1DCE-44F3-ADE4-3211D80131AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -213,6 +215,10 @@ Global
 		{B4DEC2AC-F564-4C79-A62B-8CD42DEF2249}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4DEC2AC-F564-4C79-A62B-8CD42DEF2249}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4DEC2AC-F564-4C79-A62B-8CD42DEF2249}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B86C5737-1DCE-44F3-ADE4-3211D80131AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B86C5737-1DCE-44F3-ADE4-3211D80131AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B86C5737-1DCE-44F3-ADE4-3211D80131AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B86C5737-1DCE-44F3-ADE4-3211D80131AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -255,5 +261,6 @@ Global
 		{E78EFC1D-D539-4A29-993A-9AEAE70D1BFC} = {5D87B629-87CD-4F0D-AE32-D2C4D52E48B1}
 		{9015D8F9-DE2D-4FC1-9570-F8E7063A7004} = {5D87B629-87CD-4F0D-AE32-D2C4D52E48B1}
 		{B4DEC2AC-F564-4C79-A62B-8CD42DEF2249} = {20D3287F-2612-41AC-90DD-8A91450FBC7A}
+		{B86C5737-1DCE-44F3-ADE4-3211D80131AF} = {C26B01E4-52DF-4FF2-8B4F-ECB41998FE23}
 	EndGlobalSection
 EndGlobal

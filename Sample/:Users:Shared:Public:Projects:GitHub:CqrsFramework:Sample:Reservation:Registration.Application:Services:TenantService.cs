@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Registration.Application.Interfaces;
-using Registration.Application.ViewModels;
 using Registration.Domain.Repositories.Interfaces;
 
 namespace Registration.Application.Services
@@ -17,12 +16,12 @@ namespace Registration.Application.Services
             _tenantRepository = tenantRepository;
         }
 
-        public IEnumerable<TenantViewModel> GetTenants()
+        public IEnumerable<Tenant> GetTenants()
         {
             var list = _tenantRepository.Find(_ => true);
 
             return from t in list
-                   select new TenantViewModel
+                   select new Tenant
                    {
                        Id = t.Id,
                        Name = t.Name,

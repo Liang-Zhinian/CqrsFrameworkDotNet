@@ -13,17 +13,15 @@ namespace Business.Domain.Entities
         public Guid LocationId { get; private set; }
         public virtual Location Location { get; private set; }
 
-        public TenantId TenantId { get; private set; }
         public Guid SiteId { get; private set; }
         public virtual Site Site { get; private set; }
 
-        public StaffLoginLocation(TenantId tenantId, Guid siteId, Guid staffId, Guid locationId)
+        public StaffLoginLocation(Guid siteId, Guid staffId, Guid locationId)
         {
             Id = Guid.NewGuid();
             StaffId = staffId;
             LocationId = locationId;
 
-            this.TenantId = tenantId;
             this.SiteId = siteId;
         }
     }

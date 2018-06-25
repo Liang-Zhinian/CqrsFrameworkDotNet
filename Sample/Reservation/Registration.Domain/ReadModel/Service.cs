@@ -17,22 +17,18 @@ namespace Registration.Domain.ReadModel
         //[Column(TypeName = "char(40)")]
         public Guid CategoryId { get; set; }
 
-        public Guid TenantId { get; set; }
-        public virtual Tenant Tenant { get; private set; }
-
-        public Guid SiteId { get; private set; }
-        public virtual Site Site { get; private set; }
+        public Guid SiteId { get; set; }
+        public virtual Site Site { get; set; }
 
         public virtual ServiceCategory Category { get; set; }
 
 
-        public Service(Guid tenantId, Guid categoryId, string name, string description)
+        public Service(Guid categoryId, string name, string description)
         {
             Id = GuidUtil.NewSequentialId(); 
             Name = name;
             Description = description;
             CategoryId = categoryId;
-            TenantId = tenantId;
         }
     }
 }

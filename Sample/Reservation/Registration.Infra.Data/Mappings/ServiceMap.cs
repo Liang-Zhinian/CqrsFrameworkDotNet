@@ -27,7 +27,6 @@ namespace Registration.Infra.Data.Mappings
 
 
             MapToSite(builder);
-            MapToTenant(builder);
         }
     }
 }

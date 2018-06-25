@@ -13,10 +13,9 @@ namespace Business.Domain.Entities
 
         private Staff() { }
 
-        public Staff(TenantId tenantId, Guid siteId, Guid userId, bool isMale, string image, string bio, bool canLoginAllLocations)
+        public Staff(Guid siteId, Guid userId, bool isMale, string image, string bio, bool canLoginAllLocations)
         {
             Id = userId;
-            this.TenantId = tenantId;
             this.SiteId = siteId;
             this.IsMale = isMale;
             this.Image = image;
@@ -32,7 +31,6 @@ namespace Business.Domain.Entities
 
         public bool CanLoginAllLocations { get; private set; }
 
-        public TenantId TenantId { get; private set; }
         public Guid SiteId { get; private set; }
         public virtual Site Site { get; private set; }
 

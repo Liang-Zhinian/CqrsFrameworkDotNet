@@ -37,7 +37,6 @@ namespace Business.Application.Services
         public void AddService(ServiceViewModel service)
         {
             var domainservice = new Service(
-                new TenantId(service.TenantId.ToString()),
                 service.ServiceCategoryId,
                 service.Name,
                 service.Description
@@ -48,8 +47,7 @@ namespace Business.Application.Services
             _eventPublisher.Publish<ServiceCreatedEvent>(new ServiceCreatedEvent(Guid.NewGuid(),
                                                                                  service.Name,
                                                                                  service.Description,
-                                                                                 service.ServiceCategoryId,
-                                                                                 service.TenantId
+                                                                                 service.ServiceCategoryId
                                                                                 ));
         }
 
@@ -66,7 +64,6 @@ namespace Business.Application.Services
             return new ServiceViewModel
             {
                 Id = service.Id,
-                TenantId = Guid.Parse(service.TenantId.Id),
                 Name = service.Name,
                 Description = service.Description,
 
@@ -83,7 +80,6 @@ namespace Business.Application.Services
                    select new ServiceCategoryViewModel
                    {
                        Id = category.Id,
-                       //TenantId = category.,
                        Name = category.Name,
                        Description = category.Description,
 
@@ -99,7 +95,6 @@ namespace Business.Application.Services
             return new ServiceCategoryViewModel
             {
                 Id = categoriy.Id,
-                //TenantId = category.,
                 Name = categoriy.Name,
                 Description = categoriy.Description,
                 ScheduleType = categoriy.ScheduleTypeValue,
@@ -117,27 +112,10 @@ namespace Business.Application.Services
                    select new ServiceViewModel
                    {
                        Id = service.Id,
-                TenantId = Guid.Parse(service.TenantId.Id),
                        Name = service.Name,
                        Description = service.Description,
                 ServiceCategoryId = service.CategoryId,
                 ServiceCategoryName = service.Category.Name
-                   };
-        }
-
-        public IEnumerable<ServiceViewModel> FindServicesByTenant(Guid tenantId)
-        {
-            var services =
-                _serviceRepository.Find(_ => _.TenantId.Equals(tenantId));
-
-            return from service in services
-                   select new ServiceViewModel
-                   {
-                       Id = service.Id,
-                TenantId = Guid.Parse(service.TenantId.Id),
-                       Name = service.Name,
-                       Description = service.Description,
-                       ServiceCategoryName = service.Category.Name
                    };
         }
 

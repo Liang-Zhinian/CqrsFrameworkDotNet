@@ -24,10 +24,9 @@ namespace Registration.Domain.EventHandlers
                     @event.Id,
                     @event.Name,
                     @event.Description,
-                    @event.SiteId,
-                    @event.TenantId
+                    @event.SiteId
                 );
-
+            
             try
             {
                 _locationRepository.Add(location);

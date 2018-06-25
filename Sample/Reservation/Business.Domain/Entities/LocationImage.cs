@@ -12,18 +12,16 @@ namespace Business.Domain.Entities
         public Guid LocationId { get; private set; }
         public virtual Location Location { get; private set; }
 
-        public TenantId TenantId { get; private set; }
         public Guid SiteId { get; private set; }
         public virtual Site Site { get; private set; }
 
-        public LocationImage(TenantId tenantId, Guid siteId, Guid locationId, byte[] image)
+        public LocationImage(Guid siteId, Guid locationId, byte[] image)
         {
             Id = GuidUtil.NewSequentialId();
             LocationId = locationId;
             Image = image;
 
             SiteId = siteId;
-            TenantId = tenantId;
         }
     }
 }

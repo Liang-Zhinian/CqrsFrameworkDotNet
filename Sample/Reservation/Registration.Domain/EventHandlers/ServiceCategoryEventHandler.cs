@@ -23,8 +23,7 @@ namespace Registration.Domain.EventHandlers
         {
             Console.WriteLine("Handling ServiceCreatedEvent.");
             // save to ReadDB
-            Service service = new Service(@event.TenantId,
-                                           @event.CategoryId,
+            Service service = new Service(@event.CategoryId,
                                            @event.Name,
                                            @event.Description); //_mapper.Map<LocationRM>(message);
             try

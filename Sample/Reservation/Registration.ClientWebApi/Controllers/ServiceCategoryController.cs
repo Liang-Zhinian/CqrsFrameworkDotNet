@@ -29,16 +29,6 @@ namespace Registration.ClientWebApi.Controllers
             return Json(list);
         }
 
-        [HttpGet]
-        [AllowAnonymous]
-        [Route("FindByTenant")]
-        public JsonResult FindByTenant(Guid tenantId)
-        {
-            var list = _serviceCategoryService.FindServicesByTenant(tenantId)
-                                    .ToList();
-            return Json(list);
-        }
-
         #endregion
 
         #region Categories

@@ -22,14 +22,6 @@ namespace Business.Infra.Data.Mappings
             builder.Property(_ => _.PageColor3).HasColumnType(Constants.DbConstants.String10);
             builder.Property(_ => _.PageColor4).HasColumnType(Constants.DbConstants.String10);
 
-
-            builder.OwnsOne(_ => _.TenantId, cb =>
-            {
-                cb.Property(_ => _.Id)
-                  .IsRequired()
-                  .HasColumnType(Constants.DbConstants.String36);
-            });
-
             builder.HasOne(_ => _.Site)
                    .WithOne(_ => _.Branding)
                    .HasForeignKey<Branding>(_ => _.SiteId);

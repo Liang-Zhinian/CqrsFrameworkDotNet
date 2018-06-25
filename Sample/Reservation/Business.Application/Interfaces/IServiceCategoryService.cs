@@ -11,7 +11,6 @@ namespace Business.Application.Interfaces
         IEnumerable<ServiceCategoryViewModel> FindServiceCategories();
         ServiceCategoryViewModel FindServiceCategory(Guid serviceCategoryId);
         IEnumerable<ServiceViewModel> FindServices();
-        IEnumerable<ServiceViewModel> FindServicesByTenant(Guid tenantId);
         ServiceViewModel FindService(Guid serviceId);
         void AddService(ServiceViewModel service);
         void AddServiceCategory(ServiceCategoryViewModel serviceCategory);

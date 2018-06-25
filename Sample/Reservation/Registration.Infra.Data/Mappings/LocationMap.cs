@@ -27,7 +27,6 @@ namespace Registration.Infra.Data.Mappings
             builder.Property(_ => _.Longitude).IsRequired(false);
 
             MapToSite(builder);
-            //MapToTenant(builder);
         }
     }
 }

@@ -28,13 +28,6 @@ namespace Business.Infra.Data.Mappings
                 cb.Property<string>(e => e.SecondaryTelephone).HasColumnType(Constants.DbConstants.String255);
             });
 
-            builder.OwnsOne(_ => _.TenantId, cb =>
-            {
-                cb.Property<string>(tenant => tenant.Id).IsRequired()
-                  .HasColumnType(Constants.DbConstants.String36)
-                .HasColumnName("TenantId_Id");
-            });
-
             builder.OwnsOne(ci => ci.PostalAddress, address => {
                 address.Property("LocationId").HasColumnType(Constants.DbConstants.KeyType);
                 address.Property("City").IsRequired(false).HasColumnType(Constants.DbConstants.String255);

@@ -15,15 +15,13 @@ namespace Business.Domain.Entities
 
         private Location(){}
 
-        public Location(TenantId tenantId,
-                        Guid siteId,
+        public Location(Guid siteId,
                         string name, 
                         string description, 
                         byte[] image, 
                         ContactInformation contactInformation)
         {
             this.Id = GuidUtil.NewSequentialId();
-            this.TenantId = tenantId;
             this.SiteId = siteId;
             this.Name = name;
             this.Description = description;
@@ -35,7 +33,6 @@ namespace Business.Domain.Entities
 
             ApplyChange(new LocationCreatedEvent(
                                 this.Id,
-                                Guid.Parse(this.TenantId.Id),
                                 siteId,
                                 name,
                                 description,
@@ -63,8 +60,6 @@ namespace Business.Domain.Entities
 
         public Geolocation Geolocation { get; set; }
 
-        public TenantId TenantId { get; private set; }
-
         public Guid SiteId { get; private set; }
         public virtual Site Site { get; private set; }
 
@@ -88,7 +83,7 @@ namespace Business.Domain.Entities
             if (StaffLoginLocations == null)
                 StaffLoginLocations = new List<StaffLoginLocation>();
 
-            StaffLoginLocation staffLoginLocation = new StaffLoginLocation(this.TenantId, this.SiteId, staff.Id, this.Id);
+            StaffLoginLocation staffLoginLocation = new StaffLoginLocation(this.SiteId, staff.Id, this.Id);
 
             this.StaffLoginLocations.Add(staffLoginLocation);
         }
@@ -96,7 +91,7 @@ namespace Business.Domain.Entities
         public void ChangeAddress(PostalAddress postalAddress){
             this.PostalAddress = postalAddress;
 
-            ApplyChange(new LocationAddressChangedEvent(this.Id, Guid.Parse(this.TenantId.Id), this.SiteId, postalAddress.StreetAddress,
+            ApplyChange(new LocationAddressChangedEvent(this.Id, this.SiteId, postalAddress.StreetAddress,
                                                         postalAddress.StreetAddress2, postalAddress.City,
                                                         postalAddress.StateProvince, postalAddress.PostalCode,
                                                         postalAddress.CountryCode));

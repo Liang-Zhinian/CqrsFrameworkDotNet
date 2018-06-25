@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Registration.Application.EventSourcedNormalizers;
 using Registration.Application.Interfaces;
-using Registration.Application.ViewModels;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Registration.Domain.Repositories.Interfaces;

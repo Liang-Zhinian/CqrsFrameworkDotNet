@@ -12,7 +12,6 @@ namespace Business.Contracts.Events.Locations
 
         public LocationCreatedEvent(
             Guid id,
-            Guid tenantId,
             Guid siteId,
             string name,
             string description,
@@ -21,7 +20,6 @@ namespace Business.Contracts.Events.Locations
             string secondaryTelephone)
             : base(
                 id,
-                tenantId,
                 siteId,
                 name,
                 description,
@@ -35,7 +33,6 @@ namespace Business.Contracts.Events.Locations
 
         public LocationCreatedEvent(
             Guid id,
-            Guid tenantId,
             Guid siteId,
             string streetAddress,
             string streetAddress2,
@@ -45,7 +42,6 @@ namespace Business.Contracts.Events.Locations
             string countryCode)
             :base(
                 id,
-                tenantId,
                 siteId,
                 streetAddress,
                 streetAddress2,

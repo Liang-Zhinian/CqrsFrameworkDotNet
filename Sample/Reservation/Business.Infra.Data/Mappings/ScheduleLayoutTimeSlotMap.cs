@@ -22,7 +22,6 @@ namespace Business.Infra.Data.Mappings
             builder.Property<string>("EndTime").IsRequired().HasColumnType(Constants.DbConstants.String10);
             builder.Property<int>("DayOfWeek").IsRequired();
             builder.Property<bool>("IsEnabled").IsRequired();
-            //builder.Property<Guid>("TenantId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
 
             builder.Ignore("Version");
 

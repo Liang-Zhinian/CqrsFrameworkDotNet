@@ -22,7 +22,6 @@ namespace Business.Infra.Data.Mappings
             builder.Property<DateTime>("EndDateTime").IsRequired();
             builder.Property<Guid>("LayoutId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
             builder.Property<bool>("IsCalendarSubscriptionAllowed").IsRequired();
-            builder.Property<string>("TenantId_Id").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
 
             builder.Ignore("Version");
 

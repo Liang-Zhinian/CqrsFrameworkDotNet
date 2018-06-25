@@ -11,6 +11,5 @@ namespace Business.Application.ViewModels
 
         public Guid ServiceCategoryId { get; set; }
         public string ServiceCategoryName { get; set; }
-        public Guid TenantId { get; set; }
     }
 }

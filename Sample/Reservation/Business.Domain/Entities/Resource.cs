@@ -10,8 +10,6 @@ namespace Business.Domain.Entities
         public string Description { get; set; }
         public bool IsLocatedAtAllLocations { get; set; }
 
-        public TenantId TenantId { get; private set; }
-
         public int StatusId { get; set; }
         public virtual ResourceStatus Status { get; set; }
 
@@ -22,5 +20,16 @@ namespace Business.Domain.Entities
         public virtual Schedule Schedule { get; set; }
 
         public virtual ICollection<ResourceLocation> ResourceLocations { get; set; }
+
+
+        /*
+        // MB version:
+        public Guid Id { get; private set; }
+        public string Name { get; set; }
+        public ActionCode Action { get; private set; }
+        public Guid SiteId { get; private set; }
+        public TenantId TenantId { get; private set; }
+    
+        */
     }
 }

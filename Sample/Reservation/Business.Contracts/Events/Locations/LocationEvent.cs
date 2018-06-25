@@ -10,7 +10,6 @@ namespace Business.Contracts.Events.Locations
 
         public LocationEvent(
             Guid id,
-            Guid tenantId,
             Guid siteId,
             string streetAddress,
             string streetAddress2,
@@ -20,7 +19,6 @@ namespace Business.Contracts.Events.Locations
             string countryCode)
         {
             this.Id = id;
-            this.TenantId = tenantId;
             this.SiteId = siteId;
             this.StreetAddress = streetAddress;
             this.StreetAddress2 = streetAddress2;
@@ -33,7 +31,6 @@ namespace Business.Contracts.Events.Locations
 
         public LocationEvent(
             Guid id,
-            Guid tenantId,
             Guid siteId,
             string name,
             string description,
@@ -42,7 +39,6 @@ namespace Business.Contracts.Events.Locations
             string secondaryTelephone)
         {
             this.Id = id;
-            this.TenantId = tenantId;
             this.SiteId = siteId;
             this.Name = name;
             this.Description = description;
@@ -80,6 +76,5 @@ namespace Business.Contracts.Events.Locations
         public string StreetAddress2 { get; set; }
 
         public Guid SiteId { get; set; }
-        public Guid TenantId { get; set; }
     }
 }

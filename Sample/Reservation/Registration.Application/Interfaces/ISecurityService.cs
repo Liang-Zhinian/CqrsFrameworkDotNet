@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using Registration.Application.EventSourcedNormalizers;
-using Registration.Application.ViewModels;
+using Registration.Domain.ReadModel.Security;
 
 namespace Registration.Application.Interfaces
 {
     public interface ISecurityService : IDisposable
     {
-        void RegisterTenant(TenantViewModel tenantViewModel, StaffViewModel administratorViewModel);
+        void RegisterTenant(Tenant tenant, Staff administrator);
         //IEnumerable<TenantViewModel> GetAllTenants();
-        TenantViewModel GetTenantById(Guid id);
-        void UpdateTenant(TenantViewModel tenantViewModel);
+        Tenant GetTenantById(Guid id);
+        void UpdateTenant(Tenant tenant);
         //void Remove(Guid id);
         //IList<TenantHistoryData> GetAllHistory(Guid id);
 

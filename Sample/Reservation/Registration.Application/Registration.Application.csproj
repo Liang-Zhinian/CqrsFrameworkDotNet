@@ -18,6 +18,9 @@
     <Compile Remove="Commands\CreateTenantCommand.cs" />
     <Compile Remove="Services\Security\TenantService.cs" />
     <Compile Remove="Services\SecurityService.cs" />
+    <Compile Remove="ViewModels\LocationViewModel.cs" />
+    <Compile Remove="Interfaces\ITenantService.cs" />
+    <Compile Remove="Services\TenantService.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,7 +36,6 @@
     <ProjectReference Include="..\Registration.Domain\Registration.Domain.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewModels\" />
     <Folder Include="Services\" />
     <Folder Include="Interfaces\" />
     <Folder Include="EventSourcedNormalizers\" />

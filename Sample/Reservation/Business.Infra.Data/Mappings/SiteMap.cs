@@ -16,7 +16,6 @@ namespace Business.Infra.Data.Mappings
             builder.Property(_ => _.Id).HasColumnType(Constants.DbConstants.KeyType);
             builder.Property(_ => _.Name).IsRequired().HasColumnType(Constants.DbConstants.String255);
             builder.Property(_ => _.Description).HasColumnType(Constants.DbConstants.String2000);
-            //builder.Property(_ => _.BrandingId).IsRequired(false).HasColumnType(Constants.DbConstants.KeyType);
             builder.Property(_ => _.Active).IsRequired();
 
             builder.OwnsOne(_ => _.ContactInformation, cb => {

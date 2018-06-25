@@ -11,12 +11,6 @@ namespace Registration.Infra.Data.Mappings
         public virtual void Configure(EntityTypeBuilder<TEntity> builder, string tableName)
         {
             this.BuildPrimary(builder, tableName);
-            
-            //.ForMySQLHasCollation("utf8_general_ci");
-            builder.Property<Guid>("TenantId")
-                    .IsRequired()
-                   .HasColumnName("TenantId").HasColumnType(Constants.DbConstants.KeyType);
-            //.ForMySQLHasCollation("utf8_general_ci");
 
             builder.Property<Guid>("SiteId")
                     .IsRequired()
@@ -29,17 +23,6 @@ namespace Registration.Infra.Data.Mappings
             builder.HasKey("Id");
             builder.ToTable(tableName);
             builder.Property<Guid>("Id").HasColumnType(Constants.DbConstants.KeyType);
-        }
-
-        public virtual void MapToTenant(EntityTypeBuilder<TEntity> builder)
-        {
-            builder
-                .HasOne(typeof(Tenant).FullName, "Tenant")
-                        .WithMany()
-                   .HasForeignKey("TenantId")
-                .IsRequired()
-                //.HasPrincipalKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade);
         }
 
         public virtual void MapToSite(EntityTypeBuilder<TEntity> builder)

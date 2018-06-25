@@ -31,7 +31,6 @@ namespace Registration.Infra.Data.Mappings
                 .HasForeignKey(sl => sl.LocationId);
 
             MapToSite(builder);
-            MapToTenant(builder);
         }
     }
 }

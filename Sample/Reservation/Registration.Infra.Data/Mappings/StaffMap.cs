@@ -31,7 +31,6 @@ namespace Registration.Infra.Data.Mappings
             builder.Property(_ => _.Image).HasColumnType(Constants.DbConstants.String4000);
 
             MapToSite(builder);
-            //MapToTenant(builder);
         }
     }
 }

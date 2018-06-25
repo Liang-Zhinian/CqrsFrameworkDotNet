@@ -10,15 +10,13 @@ namespace Business.Domain.Entities
 {
     public class LocationAddress
     {
-        public LocationAddress(TenantId tenantId, 
-                               Guid siteId,
+        public LocationAddress(Guid siteId,
                                Guid locationId, 
                                PostalAddress postalAddress, 
                                Geolocation geolocation,
                               int timezoneId)
         {
             this.LocationId = locationId;
-            this.TenantId = tenantId;
             this.SiteId = siteId;
             this.PostalAddress = postalAddress;
             this.Geolocation = geolocation;
@@ -36,8 +34,6 @@ namespace Business.Domain.Entities
 
         public int TimeZoneId { get; private set; }
         public virtual TimeZone TimeZone { get; private set; }
-
-        public TenantId TenantId { get; private set; }
 
         public Guid SiteId { get; private set; }
         public virtual Site Site { get; private set; }

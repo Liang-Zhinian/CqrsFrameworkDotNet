@@ -5,13 +5,12 @@ namespace Business.Contracts.Events.ServiceCategory
 {
     public class ServiceCreatedEvent :ServiceEvent, IEvent
     {
-        public ServiceCreatedEvent(Guid id, string name, string description, Guid serviceCategoryId, Guid tenantId)
+        public ServiceCreatedEvent(Guid id, string name, string description, Guid serviceCategoryId)
         {
             Id = id;
             Name = name;
             Description = description;
             CategoryId = serviceCategoryId;
-            TenantId = tenantId;
             Version = 1;
             TimeStamp = DateTimeOffset.Now;
             //MessageType = "DomainEvent";

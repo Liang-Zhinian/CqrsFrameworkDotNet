@@ -35,13 +35,6 @@ namespace Business.Infra.Data.Mappings
                 cb.Property(e => e.Longitude);
             });
 
-            builder.OwnsOne(_ => _.TenantId, cb =>
-            {
-                cb.Property<string>(tenant => tenant.Id).IsRequired()
-                  .HasColumnType(Constants.DbConstants.String36)
-                .HasColumnName("TenantId_Id");
-            });
-
             builder.HasOne(_ => _.Site)
                    .WithMany()
                    .HasForeignKey(_ => _.SiteId);

@@ -18,7 +18,6 @@ namespace Registration.Infra.Data.Mappings
             //builder.Property<Guid>("TenantId").HasColumnType(Constants.DbConstants.String36);
 
             MapToSite(builder);
-            MapToTenant(builder);
 
             builder
                 .HasOne(b => b.Location)

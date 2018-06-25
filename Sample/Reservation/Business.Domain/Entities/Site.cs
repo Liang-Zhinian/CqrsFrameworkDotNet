@@ -58,7 +58,7 @@ namespace Business.Domain.Entities
                         string description,
                         byte[] image,
                         ContactInformation contactInformation){
-            Location location = new Location(this.TenantId, this.Id, name, description, image, contactInformation);
+            Location location = new Location(this.Id, name, description, image, contactInformation);
 
             // To Do: send event
             if (Locations == null) Locations = new ObservableCollection<Location>();
@@ -68,7 +68,7 @@ namespace Business.Domain.Entities
         }
 
         public void CreateBranding(byte[] logo, string pageColor1, string pageColor2, string pageColor3, string pageColor4){
-            this.Branding = new Branding(this.TenantId, this.Id, logo, pageColor1, pageColor2, pageColor3, pageColor4);
+            this.Branding = new Branding(this.Id, logo, pageColor1, pageColor2, pageColor3, pageColor4);
             //return 
             // To Do: send event
         }

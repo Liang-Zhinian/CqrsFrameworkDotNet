@@ -1,6 +1,5 @@
 ﻿using System;
 using AutoMapper;
-using Registration.Application.ViewModels;
 using Registration.Domain.ReadModel;
 
 namespace Registration.Application.AutoMapper

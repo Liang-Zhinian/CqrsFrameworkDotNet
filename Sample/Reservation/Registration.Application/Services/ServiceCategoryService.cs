@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using Registration.Application.Interfaces;
-using Registration.Application.ViewModels;
 using Registration.Domain.ReadModel;
 using Registration.Domain.Repositories.Interfaces;
 using CqrsFramework.Domain;
@@ -39,93 +38,49 @@ namespace Registration.Application.Services
 
         #region Services
 
-        public ServiceViewModel FindService(Guid serviceId)
+        public Service FindService(Guid serviceId)
         {
             var service =
             _serviceRepository.Find(serviceId);
             var serviceCategory = this.FindServiceCategory(service.CategoryId);
 
-            return new ServiceViewModel
-            {
-                Id = service.Id,
-                TenantId = service.TenantId,
-                Name = service.Name,
-                Description = service.Description,
-                ServiceCategoryId = serviceCategory.Id,
-                ServiceCategoryName = serviceCategory.Name
-            };
+            return new Service(
+                serviceCategory.Id,
+                service.Name,
+                service.Description
+            );
         }
 
-        public IEnumerable<ServiceViewModel> FindServices()
+        public IEnumerable<Service> FindServices()
         {
 
             var services =
                 _serviceRepository.Find(_ => true)
                                   .Include(_=>_.Category);
 
-            return from service in services
-                   select new ServiceViewModel
-                   {
-                       Id = service.Id,
-                       TenantId = service.TenantId,
-                       Name = service.Name,
-                        Description = service.Description,
-                        ServiceCategoryId = service.Category.Id,
-                        ServiceCategoryName = service.Category.Name,
-                   };
-        }
-
-        public IEnumerable<ServiceViewModel> FindServicesByTenant(Guid tenantId)
-        {
-            var services =
-                _serviceRepository.Find(_ => _.TenantId.Equals(tenantId));
-
-            return from service in services
-                   select new ServiceViewModel
-                   {
-                       Id = service.Id,
-                       TenantId = service.TenantId,
-                       Name = service.Name,
-                       Description = service.Description,
-                       ServiceCategoryName = service.Category.Name
-                   };
+            return services;
         }
 
         #endregion
 
         #region ServiceCategories
 
-        public IEnumerable<ServiceCategoryViewModel> FindServiceCategories()
+        public IEnumerable<ServiceCategory> FindServiceCategories()
         {
 
             var categories =
                 _serviceCategoryRepository.Find(_ => true);
 
-            return from category in categories
-                   select new ServiceCategoryViewModel
-                   {
-                       Id = category.Id,
-                       //TenantId = category.,
-                       Name = category.Name,
-                       Description = category.Description,
-                       
-                   };
+            return categories;
         }
 
-        public ServiceCategoryViewModel FindServiceCategory(Guid serviceCategoryId)
+        public ServiceCategory FindServiceCategory(Guid serviceCategoryId)
         {
-
+            
             var categoriy =
                 _serviceCategoryRepository.Find(serviceCategoryId);
 
-            return new ServiceCategoryViewModel
-            {
-                Id = categoriy.Id,
-                //TenantId = category.,
-                Name = categoriy.Name,
-                Description = categoriy.Description,
-
-            };
+            return categoriy;
         }
 
         #endregion

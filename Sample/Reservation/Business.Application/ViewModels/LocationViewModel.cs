@@ -41,7 +41,6 @@ namespace Business.Application.ViewModels
         public ICollection<byte[]> AdditionalLocationImages { get; set; }
 
         public Guid SiteId { get; set; }
-        public string TenantId { get; set; }
 
     }
 }

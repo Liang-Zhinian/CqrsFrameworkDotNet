@@ -19,13 +19,6 @@ namespace Business.Infra.Data.Mappings
             builder.Property(_ => _.Bio).HasColumnType(Constants.DbConstants.String2000);
             builder.Property(_ => _.Image).HasColumnType(Constants.DbConstants.String4000);
 
-            builder.OwnsOne(_ => _.TenantId, cb =>
-            {
-                cb.Property<string>(tenant => tenant.Id).IsRequired()
-                  .HasColumnType(Constants.DbConstants.String36)
-                .HasColumnName("TenantId_Id");
-            });
-
             //builder.HasOne(_ => _.Site)
                    //.WithMany()
                    //.HasForeignKey(_ => _.SiteId);

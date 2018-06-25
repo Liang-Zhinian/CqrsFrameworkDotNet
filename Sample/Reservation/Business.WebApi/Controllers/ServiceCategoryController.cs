@@ -32,16 +32,6 @@ namespace Business.WebApi.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
-        [Route("FindByTenant")]
-        public JsonResult FindByTenant(Guid tenantId)
-        {
-            var list = _serviceCategoryService.FindServicesByTenant(tenantId)
-                                    .ToList();
-            return Json(list);
-        }
-
-        [HttpGet]
         //[Authorize(Policy = "CanWriteTenantData")]
         [Route("test")]
         public ActionResult Test()

@@ -12,7 +12,6 @@ namespace Business.Contracts.Events.Locations
 
         public LocationAddressChangedEvent(
             Guid id,
-            Guid tenantId,
             Guid siteId,
             string streetAddress,
             string streetAddress2,
@@ -22,7 +21,6 @@ namespace Business.Contracts.Events.Locations
             string countryCode)
             :base(
                 id,
-                tenantId,
                 siteId,
                 streetAddress,
                 streetAddress2,

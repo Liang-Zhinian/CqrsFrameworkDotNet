@@ -14,7 +14,7 @@ namespace Business.Domain.Entities
         public int ScheduleTypeValue { get; set; }
         public virtual ScheduleType ScheduleType { get; set; }
 
-        public virtual ICollection<Service> Services { get; set; }
+        //public virtual ICollection<Service> Services { get; set; }
 
 
         public ServiceCategory(string name, string description)
