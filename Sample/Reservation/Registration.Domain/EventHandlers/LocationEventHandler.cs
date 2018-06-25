@@ -17,18 +17,28 @@ namespace Registration.Domain.EventHandlers
 
         public void Handle(LocationCreatedEvent @event)
         {
+            Console.WriteLine("Handling LocationCreatedEvent.");
             // save to ReadDB
             Location location = new Location
                 (
                     @event.Id,
                     @event.Name,
                     @event.Description,
+                    @event.SiteId,
                     @event.TenantId
                 );
 
-            _locationRepository.Add(location);
-            _locationRepository.SaveChanges();
-
+            try
+            {
+                _locationRepository.Add(location);
+                _locationRepository.SaveChanges();
+                Console.WriteLine("LocationCreatedEvent handled.");
+            }
+            catch(Exception e){
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.InnerException.Message);
+                throw e;
+            }
         }
     }
 }

@@ -12,7 +12,7 @@ using SaaSEqt.IdentityAccess.Infra.Data.Repositories;
 using SaaSEqt.IdentityAccess.Infrastructure.Services;
 using SaaSEqt.IdentityAccess.Application;
 
-namespace Reservation.ClientWebApi.Configurations
+namespace Registration.ClientWebApi.Configurations
 {
     public static class ApplicationSetup
     {
@@ -35,6 +35,7 @@ namespace Reservation.ClientWebApi.Configurations
             //services.AddScoped<IdentityAccessDbContext>();
             //services.AddScoped<ITenantAddressRepository, TenantAddressRepository>();
             services.AddScoped<Registration.Domain.Repositories.Interfaces.ITenantRepository, Registration.Infra.Data.Repositories.TenantRepository>();
+            services.AddScoped<ISiteRepository, SiteRepository>();
             services.AddScoped<ILocationRepository, LocationRepository>();
             services.AddScoped<IServiceRepository, ServiceRepository>();
             services.AddScoped<IServiceCategoryRepository, ServiceCategoryRepository>();
@@ -43,6 +44,7 @@ namespace Reservation.ClientWebApi.Configurations
         private static void RegisterAppService(IServiceCollection services)
         {
             // App service
+            services.AddScoped<ISiteService, SiteService>();
             services.AddScoped<ILocationService, LocationService>();
             services.AddScoped<IServiceCategoryService, ServiceCategoryService>();
         }

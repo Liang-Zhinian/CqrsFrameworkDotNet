@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
-namespace Reservation.ClientWebApi.Controllers
+namespace Registration.ClientWebApi.Controllers
 {
     //[Authorize]
     [Route("api/locations")]

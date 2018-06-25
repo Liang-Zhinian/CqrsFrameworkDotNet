@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
 using Swashbuckle.AspNetCore.Swagger;
 
-namespace Reservation.ClientWebApi.Configurations
+namespace Registration.ClientWebApi.Configurations
 {
     public static class SwaggerSupport
     {

@@ -39,6 +39,7 @@
     <ProjectReference Include="..\Registration.Domain\Registration.Domain.csproj" />
     <ProjectReference Include="..\..\SaaSEqt\IdentityAccess\IdentityAccess\SaaSEqt.IdentityAccess.csproj" />
     <ProjectReference Include="..\..\SaaSEqt\IdentityAccess\IdentityAccess.Infra.Data\SaaSEqt.IdentityAccess.Infra.Data.csproj" />
+    <ProjectReference Include="..\..\..\Framework\CqrsFramework.Bus.RabbitMQ\CqrsFramework.Bus.RabbitMQ.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Remove=".DS_Store" />

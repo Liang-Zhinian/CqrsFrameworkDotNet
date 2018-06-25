@@ -6,12 +6,13 @@ namespace Registration.Domain.ReadModel.Security
 {
     public class Location
     {
-        public Location(Guid id, string name, string description, Guid tenantId)
+        public Location(Guid id, string name, string description, Guid siteId, Guid tenantId)
         {
             Id = id;
             Name = name;
             Description = description;
             TenantId = tenantId;
+            SiteId = siteId;
         }
 
         [Key]

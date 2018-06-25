@@ -5,9 +5,15 @@ namespace Business.Contracts.Events.Locations
 {
     public class LocationAddressChangedEvent : LocationEvent, IEvent
     {
+        protected LocationAddressChangedEvent()
+        {
+
+        }
+
         public LocationAddressChangedEvent(
             Guid id,
             Guid tenantId,
+            Guid siteId,
             string streetAddress,
             string streetAddress2,
             string city,
@@ -17,6 +23,7 @@ namespace Business.Contracts.Events.Locations
             :base(
                 id,
                 tenantId,
+                siteId,
                 streetAddress,
                 streetAddress2,
                 city,

@@ -5,39 +5,43 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Registration.Application.Interfaces;
-using Reservation.ClientWebApi.Requests;
+using Registration.ClientWebApi.Requests;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 /*
  * Site Services:
-    GetLocations
-    GetPrograms
-    GetResourceSchedule
-    GetResources
-    GetSites
+    FindLocations
+    FindPrograms
+    FindResourceSchedule
+    FindResources
+    FindSites
     ReserveResource
 */
-namespace Reservation.ClientWebApi.Controllers
+namespace Registration.ClientWebApi.Controllers
 {
     [Route("api/[controller]")]
     public class SiteController : Controller
     {
+        private readonly ISiteService _siteService;
         private readonly ILocationService _locationService;
 
-        public SiteController(ILocationService locationService)
+        public SiteController(ILocationService locationService,
+                              ISiteService siteService
+                             )
         {
             _locationService = locationService;
+            _siteService = siteService;
         }
 
         /// <summary>
-        /// Gets the locations.
+        /// Finds the locations.
         /// </summary>
         /// <returns>The locations.</returns>
         /// <param name="request">Request.</param>
         [HttpGet]
         [AllowAnonymous]
-        [Route("GetLocations")]
-        public JsonResult GetLocations(GetLocationsRequest request)
+        [Route("FindLocations")]
+        public JsonResult FindLocations(GetLocationsRequest request)
         {
             var list = _locationService.FindLocations()
                                     .ToList();
@@ -45,29 +49,29 @@ namespace Reservation.ClientWebApi.Controllers
         }
 
         /// <summary>
-        /// Gets the sites.
+        /// Finds the sites.
         /// </summary>
         /// <returns>The sites.</returns>
         /// <param name="request">Request.</param>
         [HttpGet]
         [AllowAnonymous]
-        [Route("GetSites")]
-        public JsonResult GetSites(GetSitesRequest request)
+        [Route("FindSites")]
+        public JsonResult FindSites(GetSitesRequest request)
         {
-            var list = _locationService.FindLocations()
+            var list = _siteService.FindSites()
                                     .ToList();
             return Json(list);
         }
 
         /// <summary>
-        /// Gets the programs.
+        /// Finds the programs.
         /// </summary>
         /// <returns>The programs.</returns>
         /// <param name="request">Request.</param>
         [HttpGet]
         [AllowAnonymous]
-        [Route("GetPrograms")]
-        public JsonResult GetPrograms(GetProgramsRequest request)
+        [Route("FindPrograms")]
+        public JsonResult FindPrograms(GetProgramsRequest request)
         {
             var list = _locationService.FindLocations()
                                     .ToList();

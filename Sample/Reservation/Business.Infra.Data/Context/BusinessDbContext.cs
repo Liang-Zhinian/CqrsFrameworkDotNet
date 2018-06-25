@@ -81,20 +81,20 @@ namespace Business.Infra.Data.Context
             //}
         }
 
-        public override int SaveChanges()
-        {
-            foreach (var entry in ChangeTracker.Entries()
-              .Where(e => e.State == EntityState.Added ||
-               e.State == EntityState.Modified))
-            {
-                if (!(entry.Entity is ContactInformation) &&
-                    !(entry.Entity is PostalAddress) &&
-                    !(entry.Entity is DateTimeSlot) &&
-                    !(entry.Entity is Geolocation) &&
-                    !(entry.Entity is Gender))
-                    entry.Property("LastModified").CurrentValue = DateTime.Now;
-            }
-            return base.SaveChanges();
-        }
+        //public override int SaveChanges()
+        //{
+        //    foreach (var entry in ChangeTracker.Entries()
+        //      .Where(e => e.State == EntityState.Added ||
+        //       e.State == EntityState.Modified))
+        //    {
+        //        if (!(entry.Entity is ContactInformation) &&
+        //            !(entry.Entity is PostalAddress) &&
+        //            !(entry.Entity is DateTimeSlot) &&
+        //            !(entry.Entity is Geolocation) &&
+        //            !(entry.Entity is Gender))
+        //            entry.Property("LastModified").CurrentValue = DateTime.Now;
+        //    }
+        //    return base.SaveChanges();
+        //}
     }
 }

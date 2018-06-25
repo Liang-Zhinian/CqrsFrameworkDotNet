@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Reservation.ClientWebApi.Responses
+namespace Registration.ClientWebApi.Responses
 {
     public enum StatusCode
     {

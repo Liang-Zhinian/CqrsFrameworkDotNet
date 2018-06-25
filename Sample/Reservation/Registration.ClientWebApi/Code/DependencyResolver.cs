@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Reservation.ClientWebApi.Code
+namespace Registration.ClientWebApi.Code
 {
     public class DependencyResolver : IServiceLocator
     {

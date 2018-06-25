@@ -18,7 +18,7 @@ namespace Registration.Application.ViewModels
 
         public string Description { get; set; }
 
-        public string ImageUrl { get; set; }
+        public byte[] Image { get; set; }
 
         public string PrimaryTelephone { get; set; }
 
@@ -36,8 +36,9 @@ namespace Registration.Application.ViewModels
 
         public string StreetAddress2 { get; set; }
 
-        public ICollection<string> AdditionalLocationImages { get; set; }
+        public ICollection<byte[]> AdditionalLocationImages { get; set; }
 
+        public Guid SiteId { get; set; }
 
         public Guid TenantId { get; set; }
 

@@ -3,7 +3,7 @@ using AutoMapper;
 using Registration.Application.AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Reservation.ClientWebApi.Configurations
+namespace Registration.ClientWebApi.Configurations
 {
     public static class AutoMapperSetup
     {
@@ -11,7 +11,7 @@ namespace Reservation.ClientWebApi.Configurations
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            //services.AddAutoMapper();
+            services.AddAutoMapper();
 
             // Registering Mappings automatically only works if the 
             // Automapper Profile classes are in ASP.NET project

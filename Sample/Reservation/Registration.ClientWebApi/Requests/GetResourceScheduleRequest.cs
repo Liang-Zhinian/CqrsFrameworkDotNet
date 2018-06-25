@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Reservation.ClientWebApi.Requests
+namespace Registration.ClientWebApi.Requests
 {
     public class GetResourceScheduleRequest: BaseRequest
     {

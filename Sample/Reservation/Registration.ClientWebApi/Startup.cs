@@ -1,5 +1,5 @@
 ﻿using Registration.Infra.Data.Context;
-using Reservation.ClientWebApi.Configurations;
+using Registration.ClientWebApi.Configurations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using SaaSEqt.IdentityAccess.Infra.Data.Context;
 
-namespace Reservation.ClientWebApi
+namespace Registration.ClientWebApi
 {
     public class Startup
     {

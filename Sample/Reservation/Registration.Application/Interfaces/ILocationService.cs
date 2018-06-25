@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-//using Registration.Application.EventSourcedNormalizers;
-using Registration.Application.ViewModels;
+using Registration.Domain.ReadModel.Security;
 
 namespace Registration.Application.Interfaces
 {
     public interface ILocationService : IDisposable
     {
         // location service
-        IEnumerable<LocationViewModel> FindLocations();
-        LocationViewModel FindLocation(Guid locationId);
-        void AddLocation(LocationViewModel location);
+        IEnumerable<Location> FindLocations();
+        Location FindLocation(Guid locationId);
     }
 }

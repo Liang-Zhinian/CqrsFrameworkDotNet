@@ -5,9 +5,15 @@ namespace Business.Contracts.Events.Locations
 {
     public class LocationCreatedEvent : LocationEvent, IEvent
     {
+        protected LocationCreatedEvent()
+        {
+
+        }
+
         public LocationCreatedEvent(
             Guid id,
             Guid tenantId,
+            Guid siteId,
             string name,
             string description,
             byte[] image,
@@ -16,6 +22,7 @@ namespace Business.Contracts.Events.Locations
             : base(
                 id,
                 tenantId,
+                siteId,
                 name,
                 description,
                 image,
@@ -29,6 +36,7 @@ namespace Business.Contracts.Events.Locations
         public LocationCreatedEvent(
             Guid id,
             Guid tenantId,
+            Guid siteId,
             string streetAddress,
             string streetAddress2,
             string city,
@@ -38,6 +46,7 @@ namespace Business.Contracts.Events.Locations
             :base(
                 id,
                 tenantId,
+                siteId,
                 streetAddress,
                 streetAddress2,
                 city,

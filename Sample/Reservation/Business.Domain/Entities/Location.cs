@@ -36,6 +36,7 @@ namespace Business.Domain.Entities
             ApplyChange(new LocationCreatedEvent(
                                 this.Id,
                                 Guid.Parse(this.TenantId.Id),
+                                siteId,
                                 name,
                                 description,
                                 image,
@@ -95,7 +96,7 @@ namespace Business.Domain.Entities
         public void ChangeAddress(PostalAddress postalAddress){
             this.PostalAddress = postalAddress;
 
-            ApplyChange(new LocationAddressChangedEvent(this.Id, Guid.Parse(this.TenantId.Id), postalAddress.StreetAddress,
+            ApplyChange(new LocationAddressChangedEvent(this.Id, Guid.Parse(this.TenantId.Id), this.SiteId, postalAddress.StreetAddress,
                                                         postalAddress.StreetAddress2, postalAddress.City,
                                                         postalAddress.StateProvince, postalAddress.PostalCode,
                                                         postalAddress.CountryCode));

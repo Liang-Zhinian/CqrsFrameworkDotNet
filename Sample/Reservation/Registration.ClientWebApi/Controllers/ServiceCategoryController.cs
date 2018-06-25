@@ -4,7 +4,7 @@ using Registration.Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Reservation.ClientWebApi.Controllers
+namespace Registration.ClientWebApi.Controllers
 {
     //[Authorize]
     [Route("api/services")]

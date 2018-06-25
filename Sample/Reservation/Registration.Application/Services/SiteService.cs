@@ -10,23 +10,21 @@ using Registration.Domain.ReadModel;
 using CqrsFramework.Domain;
 using System.Linq;
 using Registration.Domain.ReadModel.Security;
+using Microsoft.EntityFrameworkCore;
 
 namespace Registration.Application.Services
 {
-    public class LocationService : ILocationService
+    public class SiteService : ISiteService
     {
         private readonly ISession _session;
-        private readonly ILocationRepository _locationRepository;
-        private readonly IMapper _mapper;
+        private readonly ISiteRepository _siteRepository;
 
-        public LocationService(ISession session, 
-                             IMapper mapper,
-                          ILocationRepository locationRepository
+        public SiteService(ISession session,
+                               ISiteRepository siteRepository
                               )
         {
             _session = session;
-            _mapper = mapper;
-            _locationRepository = locationRepository;
+            _siteRepository = siteRepository;
         }
 
         public void Dispose()
@@ -34,19 +32,9 @@ namespace Registration.Application.Services
             GC.SuppressFinalize(this);
         }
 
-        public Location FindLocation(Guid locationId)
+        public IEnumerable<Site> FindSites()
         {
-            var location = _locationRepository.Find(locationId);
-
-            return location;
+            return _siteRepository.Find(_ => true);
         }
-
-        public IEnumerable<Location> FindLocations()
-        {
-            var locations = _locationRepository.Find(_ => true);
-            return locations;
-
-        }
-
     }
 }

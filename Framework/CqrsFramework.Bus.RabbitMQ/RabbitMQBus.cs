@@ -169,13 +169,22 @@ namespace CqrsFramework.Bus.RabbitMQ
                 Console.WriteLine(" [x] {0}", message);
 
                 //this.MessageReceived(this, new MessageReceivedEventArgs(message));
+                try
+                {
+                    var jsonObj = JsonConvert.DeserializeObject(message, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All });
+                    var @event = (IEvent)jsonObj;
+                    List<Action<IMessage>> handlers;
+                    if (!_routes.TryGetValue(@event.GetType(), out handlers)) return;
+                    foreach (var handler in handlers)
+                        handler(@event);
 
-                var jsonObj = JsonConvert.DeserializeObject(message, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All });
-                var @event = (IEvent)jsonObj;
-                List<Action<IMessage>> handlers;
-                if (!_routes.TryGetValue(@event.GetType(), out handlers)) return;
-                foreach (var handler in handlers)
-                    handler(@event);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    if (e.InnerException != null) Console.WriteLine(e.InnerException.Message);
+                    throw e;
+                }
 
                 if (!autoAck)
                 {

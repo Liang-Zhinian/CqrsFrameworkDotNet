@@ -3,9 +3,15 @@ namespace Business.Contracts.Events.Locations
 {
     public class LocationEvent: BaseEvent
     {
+        protected LocationEvent()
+        {
+
+        }
+
         public LocationEvent(
             Guid id,
             Guid tenantId,
+            Guid siteId,
             string streetAddress,
             string streetAddress2,
             string city,
@@ -15,6 +21,7 @@ namespace Business.Contracts.Events.Locations
         {
             this.Id = id;
             this.TenantId = tenantId;
+            this.SiteId = siteId;
             this.StreetAddress = streetAddress;
             this.StreetAddress2 = streetAddress2;
             this.City = city;
@@ -27,6 +34,7 @@ namespace Business.Contracts.Events.Locations
         public LocationEvent(
             Guid id,
             Guid tenantId,
+            Guid siteId,
             string name,
             string description,
             byte[] image,
@@ -35,6 +43,7 @@ namespace Business.Contracts.Events.Locations
         {
             this.Id = id;
             this.TenantId = tenantId;
+            this.SiteId = siteId;
             this.Name = name;
             this.Description = description;
             this.Image = image;
@@ -48,28 +57,29 @@ namespace Business.Contracts.Events.Locations
 
         //public string BusinessDescription { get; protected set; }
 
-        public string Name { get; protected set; }
+        public string Name { get; set; }
 
-        public string Description { get; protected set; }
+        public string Description { get; set; }
 
-        public byte[] Image { get; protected set; }
+        public byte[] Image { get; set; }
 
-        public string PrimaryTelephone { get; protected set; }
+        public string PrimaryTelephone { get; set; }
 
-        public string SecondaryTelephone { get; protected set; }
+        public string SecondaryTelephone { get; set; }
 
-        public string City { get; protected set; }
+        public string City { get; set; }
 
-        public string CountryCode { get; protected set; }
+        public string CountryCode { get; set; }
 
-        public string PostalCode { get; protected set; }
+        public string PostalCode { get; set; }
 
-        public string StateProvince { get; protected set; }
+        public string StateProvince { get; set; }
 
-        public string StreetAddress { get; protected set; }
+        public string StreetAddress { get; set; }
 
-        public string StreetAddress2 { get; protected set; }
+        public string StreetAddress2 { get; set; }
 
-        public Guid TenantId { get; protected set; }
+        public Guid SiteId { get; set; }
+        public Guid TenantId { get; set; }
     }
 }

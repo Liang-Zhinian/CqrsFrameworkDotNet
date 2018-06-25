@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Reservation.ClientWebApi.Requests
+namespace Registration.ClientWebApi.Requests
 {
     public class BaseRequest
     {

@@ -1,6 +1,6 @@
 ﻿using System.IO;
-//using Business.Domain.Bus;
 using CqrsFramework.Bus;
+using CqrsFramework.Bus.RabbitMQ;
 using CqrsFramework.Cache;
 using CqrsFramework.Commands;
 using CqrsFramework.Domain;
@@ -8,7 +8,7 @@ using CqrsFramework.Events;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Reservation.ClientWebApi.Configurations
+namespace Registration.ClientWebApi.Configurations
 {
     public static class CqrsSetup
     {
@@ -54,14 +54,15 @@ namespace Reservation.ClientWebApi.Configurations
                 .AddJsonFile("appsettings.json")
                 .Build();
             string connectionString = config.GetConnectionString("RabbitMqHost");
-            //services.AddSingleton<RabbitMQEventPublisher>(new RabbitMQEventPublisher(connectionString));
-            services.AddSingleton<InProcessBus>(new InProcessBus());
-            services.AddSingleton<ICommandSender>(y => y.GetService<InProcessBus>());
-            //services.AddSingleton<IEventPublisher>(y => y.GetService<InProcessBus>());
-            //services.AddSingleton<IEventPublisher>(y => y.GetService<RabbitMQEventPublisher>());
-            services.AddSingleton<IHandlerRegistrar>(y => y.GetService<InProcessBus>());
-            services.AddScoped<ISession, Session>();
+            services.AddSingleton<RabbitMQBus>(new RabbitMQBus(connectionString, "book2", "fanout", "book2events", true));
+            services.AddSingleton<ICommandSender>(y => y.GetService<RabbitMQBus>());
+            services.AddSingleton<IEventPublisher>(y => y.GetService<RabbitMQBus>());
+            services.AddSingleton<IHandlerRegistrar>(y => y.GetService<RabbitMQBus>());
 
+            // for local
+            //services.AddSingleton<InProcessBus>(new InProcessBus());
+            //services.AddSingleton<IEventPublisher>(y => y.GetService<InProcessBus>());
+            //services.AddSingleton<IHandlerRegistrar>(y => y.GetService<InProcessBus>());
         }
 
         private static void RegisterEventHandlers(IServiceCollection services) { 
@@ -81,11 +82,13 @@ namespace Reservation.ClientWebApi.Configurations
         }
 
         private static void RegisterEventStore(IServiceCollection services){
+            services.AddScoped<ISession, Session>();
+            // InMemoryEventStore
+            services.AddSingleton<IEventStore>(y => new InMemoryEventStore(y.GetService<RabbitMQBus>()));
+            services.AddScoped<IRepository>(y => new CacheRepository(new Repository(y.GetService<IEventStore>(), y.GetService<IEventPublisher>()), y.GetService<IEventStore>()));
+
             //string connectionString = Configuration.GetConnectionString("SqlEventStore");
             //services.AddSingleton<IEventStore>(y => new SqlEventStore(y.GetService<InProcessBus>(), connectionString));
-
-            // InMemoryEventStore
-            services.AddSingleton<IEventStore>(y => new InMemoryEventStore(y.GetService<InProcessBus>()));
 
             // MongoDbEventStore
             //string connectionString = Configuration.GetConnectionString("MongoDbEventStore");
@@ -94,7 +97,6 @@ namespace Reservation.ClientWebApi.Configurations
             //string connectionString = Configuration.GetConnectionString("MongoDbEventStore");
             //services.AddSingleton<IEventStore>(y => new MongoDBEventStore(y.GetService<InProcessBus>(), connectionString));
 
-            services.AddScoped<IRepository>(y => new CacheRepository(new Repository(y.GetService<IEventStore>(), y.GetService<IEventPublisher>()), y.GetService<IEventStore>()));
 
         }
     }
