@@ -77,6 +77,7 @@
     <Compile Remove="Migrations\20180624120057_first.cs" />
     <Compile Remove="Migrations\20180624120529_first.cs" />
     <Compile Remove="Migrations\20180624121330_first.cs" />
+    <Compile Remove="Migrations\20180624121752_first.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="appsettings.json" />

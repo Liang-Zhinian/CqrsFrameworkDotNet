@@ -21,7 +21,7 @@ namespace Registration.ClientWebApi
         /// <param name="args">Arguments.</param>
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                   .UseUrls("http://localhost:60001")
+                   .UseUrls("http://*:60001")
                 .UseStartup<Startup>()
                 .Build();
     }

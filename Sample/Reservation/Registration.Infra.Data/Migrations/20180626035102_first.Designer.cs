@@ -11,7 +11,7 @@ using System;
 namespace Registration.Infra.Data.Migrations
 {
     [DbContext(typeof(ReservationDbContext))]
-    [Migration("20180624121752_first")]
+    [Migration("20180626035102_first")]
     partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -138,9 +138,7 @@ namespace Registration.Infra.Data.Migrations
                     b.Property<string>("StreetAddress2")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<Guid>("TenantId")
-                        .HasColumnName("TenantId")
-                        .HasColumnType("binary(16)");
+                    b.Property<Guid?>("TenantId");
 
                     b.HasKey("Id");
 
@@ -174,17 +172,11 @@ namespace Registration.Infra.Data.Migrations
                         .HasColumnName("SiteId")
                         .HasColumnType("binary(16)");
 
-                    b.Property<Guid>("TenantId")
-                        .HasColumnName("TenantId")
-                        .HasColumnType("binary(16)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("LocationId");
 
                     b.HasIndex("SiteId");
-
-                    b.HasIndex("TenantId");
 
                     b.ToTable("V_LocationImage");
 
@@ -312,9 +304,7 @@ namespace Registration.Infra.Data.Migrations
                     b.Property<string>("StreetAddress2")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<Guid>("TenantId")
-                        .HasColumnName("TenantId")
-                        .HasColumnType("binary(16)");
+                    b.Property<Guid?>("TenantId");
 
                     b.Property<string>("Username");
 
@@ -346,8 +336,6 @@ namespace Registration.Infra.Data.Migrations
 
                     b.Property<Guid>("SiteId");
 
-                    b.Property<Guid>("TenantId");
-
                     b.HasKey("Id", "StaffId", "LocationId");
 
                     b.HasAlternateKey("Id");
@@ -357,8 +345,6 @@ namespace Registration.Infra.Data.Migrations
                     b.HasIndex("SiteId");
 
                     b.HasIndex("StaffId");
-
-                    b.HasIndex("TenantId");
 
                     b.ToTable("V_StaffLoginLocation");
                 });
@@ -456,17 +442,11 @@ namespace Registration.Infra.Data.Migrations
                         .HasColumnName("SiteId")
                         .HasColumnType("binary(16)");
 
-                    b.Property<Guid>("TenantId")
-                        .HasColumnName("TenantId")
-                        .HasColumnType("binary(16)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("SiteId");
-
-                    b.HasIndex("TenantId");
 
                     b.ToTable("V_Service");
 
@@ -502,10 +482,6 @@ namespace Registration.Infra.Data.Migrations
 
                     b.Property<Guid>("SiteId")
                         .HasColumnName("SiteId")
-                        .HasColumnType("binary(16)");
-
-                    b.Property<Guid>("TenantId")
-                        .HasColumnName("TenantId")
                         .HasColumnType("binary(16)");
 
                     b.HasKey("Id");
@@ -559,10 +535,9 @@ namespace Registration.Infra.Data.Migrations
                         .HasForeignKey("SiteId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Registration.Domain.ReadModel.Security.Tenant", "Tenant")
+                    b.HasOne("Registration.Domain.ReadModel.Security.Tenant")
                         .WithMany("Locations")
-                        .HasForeignKey("TenantId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("TenantId");
                 });
 
             modelBuilder.Entity("Registration.Domain.ReadModel.Security.LocationImage", b =>
@@ -575,11 +550,6 @@ namespace Registration.Infra.Data.Migrations
                     b.HasOne("Registration.Domain.ReadModel.Security.Site", "Site")
                         .WithMany()
                         .HasForeignKey("SiteId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Registration.Domain.ReadModel.Security.Tenant", "Tenant")
-                        .WithMany()
-                        .HasForeignKey("TenantId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -598,10 +568,9 @@ namespace Registration.Infra.Data.Migrations
                         .HasForeignKey("SiteId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Registration.Domain.ReadModel.Security.Tenant", "Tenant")
+                    b.HasOne("Registration.Domain.ReadModel.Security.Tenant")
                         .WithMany("Staffs")
-                        .HasForeignKey("TenantId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("TenantId");
                 });
 
             modelBuilder.Entity("Registration.Domain.ReadModel.Security.StaffLoginLocation", b =>
@@ -620,11 +589,6 @@ namespace Registration.Infra.Data.Migrations
                         .WithMany("StaffLoginLocations")
                         .HasForeignKey("StaffId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Registration.Domain.ReadModel.Security.Tenant", "Tenant")
-                        .WithMany()
-                        .HasForeignKey("TenantId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Registration.Domain.ReadModel.Service", b =>
@@ -637,11 +601,6 @@ namespace Registration.Infra.Data.Migrations
                     b.HasOne("Registration.Domain.ReadModel.Security.Site", "Site")
                         .WithMany()
                         .HasForeignKey("SiteId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Registration.Domain.ReadModel.Security.Tenant", "Tenant")
-                        .WithMany()
-                        .HasForeignKey("TenantId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

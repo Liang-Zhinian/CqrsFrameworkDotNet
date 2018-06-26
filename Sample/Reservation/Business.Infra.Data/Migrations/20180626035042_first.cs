@@ -49,8 +49,7 @@ namespace Business.Infra.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
                     Description = table.Column<string>(type: "varchar(2000)", nullable: true),
-                    Name = table.Column<string>(type: "varchar(255)", nullable: false),
-                    TenantId_Id = table.Column<string>(type: "char(36)", nullable: false)
+                    Name = table.Column<string>(type: "varchar(255)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -117,8 +116,7 @@ namespace Business.Infra.Data.Migrations
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
                     CategoryId = table.Column<Guid>(type: "char(36)", nullable: false),
                     Description = table.Column<string>(type: "varchar(2000)", nullable: false),
-                    Name = table.Column<string>(type: "varchar(255)", nullable: false),
-                    TenantId_Id = table.Column<string>(type: "char(36)", nullable: false)
+                    Name = table.Column<string>(type: "varchar(255)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -143,8 +141,7 @@ namespace Business.Infra.Data.Migrations
                     PageColor2 = table.Column<string>(type: "varchar(10)", nullable: true),
                     PageColor3 = table.Column<string>(type: "varchar(10)", nullable: true),
                     PageColor4 = table.Column<string>(type: "varchar(10)", nullable: true),
-                    SiteId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    TenantId_Id = table.Column<string>(type: "varchar(36)", nullable: false)
+                    SiteId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -179,8 +176,7 @@ namespace Business.Infra.Data.Migrations
                     PostalAddress_PostalCode = table.Column<string>(type: "varchar(255)", nullable: true),
                     PostalAddress_StateProvince = table.Column<string>(type: "varchar(255)", nullable: true),
                     PostalAddress_StreetAddress = table.Column<string>(type: "varchar(255)", nullable: true),
-                    PostalAddress_StreetAddress2 = table.Column<string>(nullable: true),
-                    TenantId_Id = table.Column<string>(type: "varchar(36)", nullable: false)
+                    PostalAddress_StreetAddress2 = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -205,8 +201,7 @@ namespace Business.Infra.Data.Migrations
                     Image = table.Column<string>(type: "varchar(4000)", nullable: true),
                     IsMale = table.Column<bool>(nullable: false),
                     SiteId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    Version = table.Column<int>(nullable: false),
-                    TenantId_Id = table.Column<string>(type: "varchar(36)", nullable: false)
+                    Version = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -226,7 +221,6 @@ namespace Business.Infra.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
-                    TenantId_Id = table.Column<string>(type: "char(36)", nullable: false),
                     TimeZoneId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -249,8 +243,7 @@ namespace Business.Infra.Data.Migrations
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
                     Image = table.Column<byte[]>(nullable: true),
                     LocationId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    SiteId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    TenantId_Id = table.Column<string>(type: "varchar(36)", nullable: false)
+                    SiteId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -279,8 +272,7 @@ namespace Business.Infra.Data.Migrations
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
                     StaffId = table.Column<Guid>(nullable: false),
                     LocationId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    SiteId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    TenantId_Id = table.Column<string>(type: "varchar(36)", nullable: false)
+                    SiteId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -321,7 +313,6 @@ namespace Business.Infra.Data.Migrations
                     LayoutId = table.Column<Guid>(type: "char(36)", nullable: false),
                     Name = table.Column<string>(type: "varchar(255)", nullable: false),
                     StartDateTime = table.Column<DateTime>(nullable: false),
-                    TenantId_Id = table.Column<string>(type: "char(36)", nullable: false),
                     WeekdayStart = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -374,8 +365,7 @@ namespace Business.Infra.Data.Migrations
                     Name = table.Column<string>(type: "varchar(255)", nullable: false),
                     ResourceTypeId = table.Column<Guid>(type: "char(36)", nullable: false),
                     ScheduleId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    StatusId = table.Column<int>(nullable: false),
-                    TenantId_Id = table.Column<string>(type: "char(36)", nullable: false)
+                    StatusId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

@@ -149,10 +149,6 @@ namespace Business.Infra.Data.Migrations
 
                     b.Property<int>("StatusId");
 
-                    b.Property<string>("TenantId_Id")
-                        .IsRequired()
-                        .HasColumnType("char(36)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ResourceTypeId");
@@ -211,10 +207,6 @@ namespace Business.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("TenantId_Id")
-                        .IsRequired()
-                        .HasColumnType("char(36)");
-
                     b.HasKey("Id");
 
                     b.ToTable("ResourceType");
@@ -243,10 +235,6 @@ namespace Business.Infra.Data.Migrations
 
                     b.Property<DateTime>("StartDateTime");
 
-                    b.Property<string>("TenantId_Id")
-                        .IsRequired()
-                        .HasColumnType("char(36)");
-
                     b.Property<int>("WeekdayStart");
 
                     b.HasKey("Id");
@@ -260,10 +248,6 @@ namespace Business.Infra.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("TenantId_Id")
-                        .IsRequired()
                         .HasColumnType("char(36)");
 
                     b.Property<int>("TimeZoneId");
@@ -327,10 +311,6 @@ namespace Business.Infra.Data.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
-
-                    b.Property<string>("TenantId_Id")
-                        .IsRequired()
-                        .HasColumnType("char(36)");
 
                     b.HasKey("Id");
 
@@ -462,22 +442,6 @@ namespace Business.Infra.Data.Migrations
                         .WithOne("Branding")
                         .HasForeignKey("Business.Domain.Entities.Branding", "SiteId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.OwnsOne("Business.Domain.Entities.TenantId", "TenantId", b1 =>
-                        {
-                            b1.Property<Guid>("BrandingId");
-
-                            b1.Property<string>("Id")
-                                .IsRequired()
-                                .HasColumnType("varchar(36)");
-
-                            b1.ToTable("Branding","book2");
-
-                            b1.HasOne("Business.Domain.Entities.Branding")
-                                .WithOne("TenantId")
-                                .HasForeignKey("Business.Domain.Entities.TenantId", "BrandingId")
-                                .OnDelete(DeleteBehavior.Cascade);
-                        });
                 });
 
             modelBuilder.Entity("Business.Domain.Entities.Location", b =>
@@ -555,23 +519,6 @@ namespace Business.Infra.Data.Migrations
                                 .HasForeignKey("Business.Domain.Entities.PostalAddress", "LocationId")
                                 .OnDelete(DeleteBehavior.Cascade);
                         });
-
-                    b.OwnsOne("Business.Domain.Entities.TenantId", "TenantId", b1 =>
-                        {
-                            b1.Property<Guid>("LocationId");
-
-                            b1.Property<string>("Id")
-                                .IsRequired()
-                                .HasColumnName("TenantId_Id")
-                                .HasColumnType("varchar(36)");
-
-                            b1.ToTable("Location","book2");
-
-                            b1.HasOne("Business.Domain.Entities.Location")
-                                .WithOne("TenantId")
-                                .HasForeignKey("Business.Domain.Entities.TenantId", "LocationId")
-                                .OnDelete(DeleteBehavior.Cascade);
-                        });
                 });
 
             modelBuilder.Entity("Business.Domain.Entities.LocationImage", b =>
@@ -585,23 +532,6 @@ namespace Business.Infra.Data.Migrations
                         .WithMany()
                         .HasForeignKey("SiteId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.OwnsOne("Business.Domain.Entities.TenantId", "TenantId", b1 =>
-                        {
-                            b1.Property<Guid>("LocationImageId");
-
-                            b1.Property<string>("Id")
-                                .IsRequired()
-                                .HasColumnName("TenantId_Id")
-                                .HasColumnType("varchar(36)");
-
-                            b1.ToTable("LocationImage","book2");
-
-                            b1.HasOne("Business.Domain.Entities.LocationImage")
-                                .WithOne("TenantId")
-                                .HasForeignKey("Business.Domain.Entities.TenantId", "LocationImageId")
-                                .OnDelete(DeleteBehavior.Cascade);
-                        });
                 });
 
             modelBuilder.Entity("Business.Domain.Entities.Resource", b =>
@@ -662,7 +592,7 @@ namespace Business.Infra.Data.Migrations
             modelBuilder.Entity("Business.Domain.Entities.Service", b =>
                 {
                     b.HasOne("Business.Domain.Entities.ServiceCategory", "Category")
-                        .WithMany("Services")
+                        .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -714,23 +644,6 @@ namespace Business.Infra.Data.Migrations
                         .WithMany("Staffs")
                         .HasForeignKey("SiteId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.OwnsOne("Business.Domain.Entities.TenantId", "TenantId", b1 =>
-                        {
-                            b1.Property<Guid>("StaffId");
-
-                            b1.Property<string>("Id")
-                                .IsRequired()
-                                .HasColumnName("TenantId_Id")
-                                .HasColumnType("varchar(36)");
-
-                            b1.ToTable("Staff","book2");
-
-                            b1.HasOne("Business.Domain.Entities.Staff")
-                                .WithOne("TenantId")
-                                .HasForeignKey("Business.Domain.Entities.TenantId", "StaffId")
-                                .OnDelete(DeleteBehavior.Cascade);
-                        });
                 });
 
             modelBuilder.Entity("Business.Domain.Entities.StaffLoginLocation", b =>
@@ -749,27 +662,6 @@ namespace Business.Infra.Data.Migrations
                         .WithMany("StaffLoginLocations")
                         .HasForeignKey("StaffId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.OwnsOne("Business.Domain.Entities.TenantId", "TenantId", b1 =>
-                        {
-                            b1.Property<Guid>("StaffLoginLocationId");
-
-                            b1.Property<Guid>("StaffLoginLocationStaffId");
-
-                            b1.Property<Guid>("StaffLoginLocationLocationId");
-
-                            b1.Property<string>("Id")
-                                .IsRequired()
-                                .HasColumnName("TenantId_Id")
-                                .HasColumnType("varchar(36)");
-
-                            b1.ToTable("StaffLoginLocation","book2");
-
-                            b1.HasOne("Business.Domain.Entities.StaffLoginLocation")
-                                .WithOne("TenantId")
-                                .HasForeignKey("Business.Domain.Entities.TenantId", "StaffLoginLocationId", "StaffLoginLocationStaffId", "StaffLoginLocationLocationId")
-                                .OnDelete(DeleteBehavior.Cascade);
-                        });
                 });
 #pragma warning restore 612, 618
         }

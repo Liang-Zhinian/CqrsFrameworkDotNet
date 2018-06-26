@@ -63,5 +63,6 @@
     <Compile Remove="Migrations\20180624062735_first.cs" />
     <Compile Remove="Migrations\20180624063345_first.cs" />
     <Compile Remove="Migrations\20180624064140_first.cs" />
+    <Compile Remove="Migrations\20180624065002_first.cs" />
   </ItemGroup>
 </Project>

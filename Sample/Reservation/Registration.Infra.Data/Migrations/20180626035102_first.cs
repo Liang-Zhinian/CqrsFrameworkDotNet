@@ -42,8 +42,7 @@ namespace Registration.Infra.Data.Migrations
                     Name = table.Column<string>(type: "varchar(255)", nullable: false),
                     ParentCategoryId = table.Column<Guid>(type: "binary(16)", nullable: false),
                     ScheduleTypeValue = table.Column<int>(nullable: false),
-                    SiteId = table.Column<Guid>(type: "binary(16)", nullable: false),
-                    TenantId = table.Column<Guid>(type: "binary(16)", nullable: false)
+                    SiteId = table.Column<Guid>(type: "binary(16)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -192,7 +191,7 @@ namespace Registration.Infra.Data.Migrations
                     StateProvince = table.Column<string>(type: "varchar(255)", nullable: true),
                     StreetAddress = table.Column<string>(type: "varchar(255)", nullable: true),
                     StreetAddress2 = table.Column<string>(type: "varchar(255)", nullable: true),
-                    TenantId = table.Column<Guid>(type: "binary(16)", nullable: false)
+                    TenantId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -210,7 +209,7 @@ namespace Registration.Infra.Data.Migrations
                         principalSchema: "book2",
                         principalTable: "V_Tenant",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -223,8 +222,7 @@ namespace Registration.Infra.Data.Migrations
                     Description = table.Column<string>(type: "varchar(2000)", nullable: false),
                     LastModified = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(type: "varchar(255)", nullable: false),
-                    SiteId = table.Column<Guid>(type: "binary(16)", nullable: false),
-                    TenantId = table.Column<Guid>(type: "binary(16)", nullable: false)
+                    SiteId = table.Column<Guid>(type: "binary(16)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -241,13 +239,6 @@ namespace Registration.Infra.Data.Migrations
                         column: x => x.SiteId,
                         principalSchema: "book2",
                         principalTable: "V_Site",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_V_Service_V_Tenant_TenantId",
-                        column: x => x.TenantId,
-                        principalSchema: "book2",
-                        principalTable: "V_Tenant",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -279,7 +270,7 @@ namespace Registration.Infra.Data.Migrations
                     StateProvince = table.Column<string>(type: "varchar(255)", nullable: true),
                     StreetAddress = table.Column<string>(type: "varchar(255)", nullable: true),
                     StreetAddress2 = table.Column<string>(type: "varchar(255)", nullable: true),
-                    TenantId = table.Column<Guid>(type: "binary(16)", nullable: false),
+                    TenantId = table.Column<Guid>(nullable: true),
                     Username = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -298,7 +289,7 @@ namespace Registration.Infra.Data.Migrations
                         principalSchema: "book2",
                         principalTable: "V_Tenant",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -310,8 +301,7 @@ namespace Registration.Infra.Data.Migrations
                     Image = table.Column<byte[]>(type: "varchar(255)", nullable: false),
                     LastModified = table.Column<DateTime>(nullable: false),
                     LocationId = table.Column<Guid>(type: "binary(16)", nullable: false),
-                    SiteId = table.Column<Guid>(type: "binary(16)", nullable: false),
-                    TenantId = table.Column<Guid>(type: "binary(16)", nullable: false)
+                    SiteId = table.Column<Guid>(type: "binary(16)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -330,13 +320,6 @@ namespace Registration.Infra.Data.Migrations
                         principalTable: "V_Site",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_V_LocationImage_V_Tenant_TenantId",
-                        column: x => x.TenantId,
-                        principalSchema: "book2",
-                        principalTable: "V_Tenant",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -348,8 +331,7 @@ namespace Registration.Infra.Data.Migrations
                     StaffId = table.Column<Guid>(type: "binary(16)", nullable: false),
                     LocationId = table.Column<Guid>(type: "binary(16)", nullable: false),
                     LastModified = table.Column<DateTime>(nullable: false),
-                    SiteId = table.Column<Guid>(nullable: false),
-                    TenantId = table.Column<Guid>(nullable: false)
+                    SiteId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -374,13 +356,6 @@ namespace Registration.Infra.Data.Migrations
                         column: x => x.StaffId,
                         principalSchema: "book2",
                         principalTable: "V_Staff",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_V_StaffLoginLocation_V_Tenant_TenantId",
-                        column: x => x.TenantId,
-                        principalSchema: "book2",
-                        principalTable: "V_Tenant",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -422,12 +397,6 @@ namespace Registration.Infra.Data.Migrations
                 column: "SiteId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_V_LocationImage_TenantId",
-                schema: "book2",
-                table: "V_LocationImage",
-                column: "TenantId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_V_Service_CategoryId",
                 schema: "book2",
                 table: "V_Service",
@@ -438,12 +407,6 @@ namespace Registration.Infra.Data.Migrations
                 schema: "book2",
                 table: "V_Service",
                 column: "SiteId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_V_Service_TenantId",
-                schema: "book2",
-                table: "V_Service",
-                column: "TenantId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_V_ServiceCategory_ParentCategoryId",
@@ -486,12 +449,6 @@ namespace Registration.Infra.Data.Migrations
                 schema: "book2",
                 table: "V_StaffLoginLocation",
                 column: "StaffId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_V_StaffLoginLocation_TenantId",
-                schema: "book2",
-                table: "V_StaffLoginLocation",
-                column: "TenantId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
