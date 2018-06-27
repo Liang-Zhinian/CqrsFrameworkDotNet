@@ -8,6 +8,11 @@ namespace Business.Domain.Entities
         public double? Latitude { get; set; }
         public double? Longitude { get; set; }
 
+        private Geolocation()
+        {
+
+        }
+
         public Geolocation(double? latitude, double? longitude)
         {
             Latitude = latitude;

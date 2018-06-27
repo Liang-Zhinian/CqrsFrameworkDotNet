@@ -1,4 +1,6 @@
 ﻿using System;
+using Microsoft.AspNetCore.Http;
+
 namespace Business.WebApi.Requests.Locations
 {
     public class SetLocationImageRequest
@@ -7,6 +9,6 @@ namespace Business.WebApi.Requests.Locations
 
         public Guid SiteId { get; set; }
 
-        public byte[] Image { get; set; }
+        public IFormFile Image { get; set; }
     }
 }

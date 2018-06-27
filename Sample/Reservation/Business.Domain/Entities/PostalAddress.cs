@@ -6,6 +6,11 @@ namespace Business.Domain.Entities
 {
     public class PostalAddress: ValueObject<PostalAddress>
     {
+        private PostalAddress()
+        {
+
+        }
+
         public PostalAddress(string streetAddress, 
                              string streetAddress2, 
                              string city, 

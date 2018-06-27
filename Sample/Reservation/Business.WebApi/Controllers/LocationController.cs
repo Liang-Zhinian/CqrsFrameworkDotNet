@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Business.Domain.Repositories;
 using Business.WebApi.Requests.Locations;
+using System.IO;
 
 namespace Business.WebApi.Controllers
 {
@@ -84,7 +85,7 @@ namespace Business.WebApi.Controllers
 
         [HttpPost]
         [Route("SetLocationImage")]
-        public ActionResult SetLocationImage([FromForm]SetLocationImageRequest request)
+        public ActionResult SetLocationImage(SetLocationImageRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -93,8 +94,13 @@ namespace Business.WebApi.Controllers
             }
 
             Guid siteId = request.SiteId;
-            Guid locationId = request.SiteId;
-            byte[] image = request.Image;
+            Guid locationId = request.Id;
+            byte[] image;
+            using (var memoryStream = new MemoryStream())
+            {
+                request.Image.CopyTo(memoryStream);
+                image = memoryStream.ToArray();
+            }
 
             _businessInformationService.SetLocationImage(siteId, locationId, image);
             return Ok();

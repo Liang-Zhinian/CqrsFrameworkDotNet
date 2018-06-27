@@ -14,7 +14,7 @@ namespace WorkerRoleCommandProcessor
                 Console.WriteLine("Press enter to finish");
                 Console.ReadLine();
 
-                //processor.Stop();
+                processor.Stop();
             }
         }
     }

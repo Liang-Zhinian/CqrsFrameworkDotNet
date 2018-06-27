@@ -112,11 +112,14 @@ namespace Business.Application.Services
 
         public void SetLocationImage(Guid siteId, Guid locationId, byte[] image)
         {
-            var location = _locationRepository.Find(_ => _.SiteId.Equals(siteId) && _.Id.Equals(locationId)).FirstOrDefault();
+            var location = _eventStoreSession.Get<Location>(locationId); //_locationRepository.Find(_ => _.SiteId.Equals(siteId) && _.Id.Equals(locationId)).FirstOrDefault();
 
             location.SetLocationImage(image);
 
             _locationRepository.SaveChanges();
+
+            //_eventStoreSession.Get<Location>(locationId);
+            _eventStoreSession.Commit();
         }
     }
 }

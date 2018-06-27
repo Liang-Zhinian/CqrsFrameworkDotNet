@@ -15,6 +15,11 @@ namespace Business.Domain.Entities
         public Guid SiteId { get; private set; }
         public virtual Site Site { get; private set; }
 
+        private LocationImage()
+        {
+
+        }
+
         public LocationImage(Guid siteId, Guid locationId, byte[] image)
         {
             Id = GuidUtil.NewSequentialId();
