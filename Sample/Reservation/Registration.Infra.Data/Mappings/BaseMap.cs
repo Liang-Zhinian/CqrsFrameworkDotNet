@@ -18,8 +18,8 @@ namespace Registration.Infra.Data.Mappings
         }
 
         public virtual void BuildPrimary(EntityTypeBuilder<TEntity> builder, string tableName){
-            builder.ForMySQLHasCharset("utf8");
-            builder.ForMySQLHasCollation("utf8_general_ci");
+            //builder.ForMySQLHasCharset("utf8");
+            //builder.ForMySQLHasCollation("utf8_general_ci");
             builder.HasKey("Id");
             builder.ToTable(tableName);
             builder.Property<Guid>("Id").HasColumnType(Constants.DbConstants.KeyType);
@@ -31,7 +31,7 @@ namespace Registration.Infra.Data.Mappings
                 .HasOne(typeof(Site).FullName, "Site")
                         .WithMany()
                 .HasForeignKey("SiteId")
-                .IsRequired()
+                //.IsRequired()
                         //.HasPrincipalKey("Id")
                         .OnDelete(DeleteBehavior.Cascade);
         }

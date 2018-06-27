@@ -77,18 +77,16 @@ namespace WorkerRoleCommandProcessor
 
         private ServiceProvider CreateServiceProvider()
         {
-            //var optionsBuilder = new DbContextOptionsBuilder<ReservationDbContext>();
-            //optionsBuilder.UseMySql("Server=localhost;database=IdentityAccess;uid=root;pwd=P@ssword;oldguids=true;SslMode=None");
+            var configuration = new ConfigurationBuilder()
+               .SetBasePath(Directory.GetCurrentDirectory())
+               .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+               .Build();
 
-            //ReservationDbContext context = new ReservationDbContext(optionsBuilder.Options);
-
-            //(DbContextOptionsBuilder obj) => new DbContextOptionsBuilder<ReservationDbContext>()
-            //.UseMySql("Server=localhost;database=IdentityAccess;uid=root;pwd=P@ssword;oldguids=true;SslMode=None")
             //setup our DI
             var _serviceProvider = new ServiceCollection()
                 .AddDbContext<ReservationDbContext>(config =>
                     {
-                config.UseMySql("Server=localhost;database=book2;uid=root;pwd=P@ssword;oldguids=true;SslMode=None");
+                config.UseMySql(configuration.GetConnectionString("DefaultConnection"));
                     }, ServiceLifetime.Scoped)
                 .AddLogging()
                 .AddScoped(typeof(IReadDbRepository<>), typeof(ReadDbRepository<>))
@@ -104,7 +102,7 @@ namespace WorkerRoleCommandProcessor
                                                                                              y.GetService<IServiceRepository>()))
                 .AddSingleton(new TestEventHandler())
 
-                .AddSingleton<RabbitMQBus>(new RabbitMQBus("localhost", "book2", "fanout", "book2events", true))
+                .AddSingleton<RabbitMQBus>(new RabbitMQBus(configuration.GetConnectionString("RabbitMqHost"), "book2", "fanout", "book2events", true))
                 .AddSingleton<IHandlerRegistrar>(y => y.GetService<RabbitMQBus>())
 
                 .BuildServiceProvider();

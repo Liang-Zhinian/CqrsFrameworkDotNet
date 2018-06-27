@@ -13,6 +13,7 @@
     <Folder Include="Configurations\" />
     <Folder Include="Code\" />
     <Folder Include="Requests\" />
+    <Folder Include="Requests\Locations\" />
   </ItemGroup>
 
   <ItemGroup>

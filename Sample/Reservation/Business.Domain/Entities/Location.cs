@@ -97,6 +97,20 @@ namespace Business.Domain.Entities
                                                         postalAddress.CountryCode));
         }
 
+        public void SetGeolocation(Geolocation geolocation)
+        {
+            this.Geolocation = geolocation;
+
+            ApplyChange(new LocationGeolocationChangedEvent(this.Id, this.SiteId, geolocation.Latitude, geolocation.Longitude));
+        }
+
+        public void SetLocationImage(byte[] iamge)
+        {
+            this.Image = iamge;
+
+            ApplyChange(new LocationImageChangedEvent(this.Id, this.SiteId, iamge));
+        }
+
         //public void AssignResource(Resource resource)
         //{
         //    if (ResourceLocations == null)
@@ -108,19 +122,19 @@ namespace Business.Domain.Entities
         //}
 
         //public void Apply(LocationCreatedEvent message){
-            //this.Id = message.Id;
-            //this.TenantId = new TenantId(message.TenantId.ToString());
-            //this.Name = message.Name;
-            //this.Description = message.Description;
-            //this.Image = message.Image;
-            //this.Phone = message.PrimaryTelephone;
-            //this.SecondaryTelephone = message.SecondaryTelephone;
-            //this.PostalAddress = new PostalAddress(message.StreetAddress,
-                                                   //message.StreetAddress2,
-                                                   //message.City,
-                                                   //message.StateProvince,
-                                                   //message.PostalCode,
-                                                   //message.CountryCode);
+        //this.Id = message.Id;
+        //this.TenantId = new TenantId(message.TenantId.ToString());
+        //this.Name = message.Name;
+        //this.Description = message.Description;
+        //this.Image = message.Image;
+        //this.Phone = message.PrimaryTelephone;
+        //this.SecondaryTelephone = message.SecondaryTelephone;
+        //this.PostalAddress = new PostalAddress(message.StreetAddress,
+        //message.StreetAddress2,
+        //message.City,
+        //message.StateProvince,
+        //message.PostalCode,
+        //message.CountryCode);
         //}
     }
 }

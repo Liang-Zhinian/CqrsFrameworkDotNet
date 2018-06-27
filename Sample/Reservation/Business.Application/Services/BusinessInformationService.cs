@@ -77,5 +77,46 @@ namespace Business.Application.Services
                 select _mapper.Map<LocationViewModel>(location);
 
         }
+
+        public void SetLocationAddress(Guid siteId, Guid locationId, string streetAddress,
+                             string streetAddress2,
+                             string city,
+                             string stateProvince,
+                             string postalCode,
+                             string countryCode)
+        {
+            var location = _locationRepository.Find(_=>_.SiteId.Equals(siteId) && _.Id.Equals(locationId)).FirstOrDefault();
+
+            PostalAddress postalAddress = new PostalAddress( streetAddress,
+                              streetAddress2,
+                              city,
+                              stateProvince,
+                              postalCode,
+                                                             countryCode);
+
+            location.ChangeAddress(postalAddress);
+
+            _locationRepository.SaveChanges();
+
+        }
+
+        public void SetLocationGeolocation(Guid siteId, Guid locationId, double? latitude, double? longitude){
+            var location = _locationRepository.Find(_ => _.SiteId.Equals(siteId) && _.Id.Equals(locationId)).FirstOrDefault();
+
+            Geolocation geolocation = new Geolocation(latitude, longitude);
+
+            location.SetGeolocation(geolocation);
+
+            _locationRepository.SaveChanges();
+        }
+
+        public void SetLocationImage(Guid siteId, Guid locationId, byte[] image)
+        {
+            var location = _locationRepository.Find(_ => _.SiteId.Equals(siteId) && _.Id.Equals(locationId)).FirstOrDefault();
+
+            location.SetLocationImage(image);
+
+            _locationRepository.SaveChanges();
+        }
     }
 }

@@ -13,12 +13,15 @@ namespace Registration.Infra.Data.Mappings
             //base.Configure(builder, Constants.DbConstants.StaffLoginLocationTable);
 
             builder
-                .HasKey(t => new { t.Id, t.StaffId, t.LocationId });
+                .HasKey(t => new { t.Id, t.StaffId, t.LocationId, t.SiteId });
             builder.ToTable(Constants.DbConstants.StaffLoginLocationTable);
 
             builder.Property<Guid>("Id").HasColumnType(Constants.DbConstants.KeyType);
             builder.Property<Guid>("StaffId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
             builder.Property<Guid>("LocationId").IsRequired().HasColumnType(Constants.DbConstants.KeyType);
+            builder.Property<Guid>("SiteId")
+                    .IsRequired()
+                   .HasColumnName("SiteId").HasColumnType(Constants.DbConstants.KeyType);
 
             builder
                 .HasOne(sl => sl.Staff)

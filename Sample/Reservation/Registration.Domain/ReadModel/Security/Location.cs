@@ -6,6 +6,11 @@ namespace Registration.Domain.ReadModel.Security
 {
     public class Location
     {
+        private Location()
+        {
+
+        }
+
         public Location(Guid id, string name, string description, Guid siteId)
         {
             Id = id;
@@ -15,13 +20,13 @@ namespace Registration.Domain.ReadModel.Security
         }
 
         [Key]
-        public Guid Id { get; private set; }
+        public Guid Id { get; set; }
 
-        public string Name { get; private set; }
+        public string Name { get; set; }
 
-        public string Description { get; private set; }
+        public string Description { get; set; }
 
-        public string Email { get; private set; }
+        public string Email { get; set; }
 
         public string City { get; set; }
 
@@ -38,17 +43,17 @@ namespace Registration.Domain.ReadModel.Security
         public double? Latitude { get; set; }
         public double? Longitude { get; set; }
 
-        public string PrimaryTelephone { get; private set; }
+        public string PrimaryTelephone { get; set; }
 
-        public string SecondaryTelephone { get; private set; }
+        public string SecondaryTelephone { get; set; }
 
-        public byte[] Image { get; private set; }
+        public byte[] Image { get; set; }
 
-        public ICollection<LocationImage> AdditionalLocationImages { get; private set; }
+        public ICollection<LocationImage> AdditionalLocationImages { get; set; }
 
-        public Guid SiteId { get; private set; }
-        public virtual Site Site { get; private set; }
+        public Guid SiteId { get; set; }
+        public virtual Site Site { get; set; }
 
-        public ICollection<StaffLoginLocation> StaffLoginLocations { get; private set; }
+        public ICollection<StaffLoginLocation> StaffLoginLocations { get; set; }
     }
 }

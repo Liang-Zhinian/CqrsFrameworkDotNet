@@ -34,15 +34,15 @@ namespace Registration.Infra.Data.Migrations
                 schema: "book2",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "binary(16)", nullable: false),
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
                     CancelOffset = table.Column<int>(nullable: false),
                     Description = table.Column<string>(type: "varchar(2000)", nullable: false),
                     IsInternal = table.Column<bool>(nullable: false),
                     LastModified = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(type: "varchar(255)", nullable: false),
-                    ParentCategoryId = table.Column<Guid>(type: "binary(16)", nullable: false),
+                    ParentCategoryId = table.Column<Guid>(type: "char(36)", nullable: false),
                     ScheduleTypeValue = table.Column<int>(nullable: false),
-                    SiteId = table.Column<Guid>(type: "binary(16)", nullable: false)
+                    SiteId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -61,7 +61,7 @@ namespace Registration.Infra.Data.Migrations
                 schema: "book2",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "binary(16)", nullable: false),
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
                     City = table.Column<string>(type: "varchar(255)", nullable: true),
                     CountryCode = table.Column<string>(type: "varchar(255)", nullable: true),
                     Description = table.Column<string>(type: "varchar(2000)", maxLength: 2000, nullable: true),
@@ -108,12 +108,12 @@ namespace Registration.Infra.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    CategoryId = table.Column<Guid>(type: "binary(16)", nullable: false),
+                    CategoryId = table.Column<Guid>(type: "char(36)", nullable: false),
                     CategoryName = table.Column<string>(type: "varchar(255)", nullable: false),
                     Data = table.Column<string>(type: "mediumtext", nullable: false),
                     LastModified = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(type: "varchar(255)", nullable: false),
-                    ParentCategoryId = table.Column<Guid>(type: "binary(16)", nullable: false),
+                    ParentCategoryId = table.Column<Guid>(type: "char(36)", nullable: false),
                     ParentCategoryName = table.Column<string>(type: "varchar(255)", nullable: false),
                     Version = table.Column<int>(nullable: false)
                 },
@@ -141,7 +141,7 @@ namespace Registration.Infra.Data.Migrations
                 schema: "book2",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "binary(16)", nullable: false),
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
                     Active = table.Column<bool>(nullable: false),
                     ContactName = table.Column<string>(type: "varchar(255)", nullable: true),
                     Description = table.Column<string>(type: "varchar(2000)", nullable: true),
@@ -155,7 +155,7 @@ namespace Registration.Infra.Data.Migrations
                     PageColor4 = table.Column<string>(type: "varchar(10)", nullable: true),
                     PrimaryTelephone = table.Column<string>(type: "varchar(255)", maxLength: 100, nullable: true),
                     SecondaryTelephone = table.Column<string>(type: "varchar(255)", maxLength: 100, nullable: true),
-                    TenantId = table.Column<Guid>(type: "binary(16)", nullable: false)
+                    TenantId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -174,7 +174,7 @@ namespace Registration.Infra.Data.Migrations
                 schema: "book2",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "binary(16)", nullable: false),
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
                     City = table.Column<string>(type: "varchar(255)", nullable: true),
                     CountryCode = table.Column<string>(type: "varchar(255)", nullable: true),
                     Description = table.Column<string>(type: "varchar(2000)", nullable: true),
@@ -187,11 +187,10 @@ namespace Registration.Infra.Data.Migrations
                     PostalCode = table.Column<string>(type: "varchar(255)", nullable: true),
                     PrimaryTelephone = table.Column<string>(type: "varchar(255)", nullable: true),
                     SecondaryTelephone = table.Column<string>(type: "varchar(255)", nullable: true),
-                    SiteId = table.Column<Guid>(type: "binary(16)", nullable: false),
+                    SiteId = table.Column<Guid>(type: "char(36)", nullable: false),
                     StateProvince = table.Column<string>(type: "varchar(255)", nullable: true),
                     StreetAddress = table.Column<string>(type: "varchar(255)", nullable: true),
-                    StreetAddress2 = table.Column<string>(type: "varchar(255)", nullable: true),
-                    TenantId = table.Column<Guid>(nullable: true)
+                    StreetAddress2 = table.Column<string>(type: "varchar(255)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -203,13 +202,6 @@ namespace Registration.Infra.Data.Migrations
                         principalTable: "V_Site",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_V_Location_V_Tenant_TenantId",
-                        column: x => x.TenantId,
-                        principalSchema: "book2",
-                        principalTable: "V_Tenant",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -217,12 +209,12 @@ namespace Registration.Infra.Data.Migrations
                 schema: "book2",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "binary(16)", nullable: false),
-                    CategoryId = table.Column<Guid>(type: "binary(16)", nullable: false),
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
+                    CategoryId = table.Column<Guid>(type: "char(36)", nullable: false),
                     Description = table.Column<string>(type: "varchar(2000)", nullable: false),
                     LastModified = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(type: "varchar(255)", nullable: false),
-                    SiteId = table.Column<Guid>(type: "binary(16)", nullable: false)
+                    SiteId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -248,7 +240,7 @@ namespace Registration.Infra.Data.Migrations
                 schema: "book2",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "binary(16)", nullable: false),
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
                     Bio = table.Column<string>(type: "varchar(2000)", nullable: true),
                     CanLoginAllLocations = table.Column<bool>(nullable: false),
                     City = table.Column<string>(type: "varchar(255)", nullable: true),
@@ -265,12 +257,11 @@ namespace Registration.Infra.Data.Migrations
                     PostalCode = table.Column<string>(type: "varchar(255)", nullable: true),
                     PrimaryTelephone = table.Column<string>(type: "varchar(255)", nullable: true),
                     SecondaryTelephone = table.Column<string>(type: "varchar(255)", nullable: true),
-                    SiteId = table.Column<Guid>(type: "binary(16)", nullable: false),
+                    SiteId = table.Column<Guid>(type: "char(36)", nullable: false),
                     StartDate = table.Column<DateTime>(nullable: false),
                     StateProvince = table.Column<string>(type: "varchar(255)", nullable: true),
                     StreetAddress = table.Column<string>(type: "varchar(255)", nullable: true),
                     StreetAddress2 = table.Column<string>(type: "varchar(255)", nullable: true),
-                    TenantId = table.Column<Guid>(nullable: true),
                     Username = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -283,13 +274,6 @@ namespace Registration.Infra.Data.Migrations
                         principalTable: "V_Site",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_V_Staff_V_Tenant_TenantId",
-                        column: x => x.TenantId,
-                        principalSchema: "book2",
-                        principalTable: "V_Tenant",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -297,11 +281,11 @@ namespace Registration.Infra.Data.Migrations
                 schema: "book2",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "binary(16)", nullable: false),
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
                     Image = table.Column<byte[]>(type: "varchar(255)", nullable: false),
                     LastModified = table.Column<DateTime>(nullable: false),
-                    LocationId = table.Column<Guid>(type: "binary(16)", nullable: false),
-                    SiteId = table.Column<Guid>(type: "binary(16)", nullable: false)
+                    LocationId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    SiteId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -327,15 +311,15 @@ namespace Registration.Infra.Data.Migrations
                 schema: "book2",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "binary(16)", nullable: false),
-                    StaffId = table.Column<Guid>(type: "binary(16)", nullable: false),
-                    LocationId = table.Column<Guid>(type: "binary(16)", nullable: false),
-                    LastModified = table.Column<DateTime>(nullable: false),
-                    SiteId = table.Column<Guid>(nullable: false)
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
+                    StaffId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    LocationId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    SiteId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    LastModified = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_V_StaffLoginLocation", x => new { x.Id, x.StaffId, x.LocationId });
+                    table.PrimaryKey("PK_V_StaffLoginLocation", x => new { x.Id, x.StaffId, x.LocationId, x.SiteId });
                     table.UniqueConstraint("AK_V_StaffLoginLocation_Id", x => x.Id);
                     table.ForeignKey(
                         name: "FK_V_StaffLoginLocation_V_Location_LocationId",
@@ -379,12 +363,6 @@ namespace Registration.Infra.Data.Migrations
                 column: "SiteId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_V_Location_TenantId",
-                schema: "book2",
-                table: "V_Location",
-                column: "TenantId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_V_LocationImage_LocationId",
                 schema: "book2",
                 table: "V_LocationImage",
@@ -425,12 +403,6 @@ namespace Registration.Infra.Data.Migrations
                 schema: "book2",
                 table: "V_Staff",
                 column: "SiteId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_V_Staff_TenantId",
-                schema: "book2",
-                table: "V_Staff",
-                column: "TenantId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_V_StaffLoginLocation_LocationId",

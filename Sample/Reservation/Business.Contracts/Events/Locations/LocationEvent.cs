@@ -75,6 +75,10 @@ namespace Business.Contracts.Events.Locations
 
         public string StreetAddress2 { get; set; }
 
+        public double? Latitude { get; set; }
+
+        public double? Longitude { get; set; }
+
         public Guid SiteId { get; set; }
     }
 }

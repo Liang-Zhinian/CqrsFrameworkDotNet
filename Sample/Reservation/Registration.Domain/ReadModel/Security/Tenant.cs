@@ -56,9 +56,9 @@ namespace Registration.Domain.ReadModel.Security
 
         public string PageColor4 { get; private set; }
 
-        public ICollection<Location> Locations { get; private set; }
+        //public ICollection<Location> Locations { get; private set; }
 
-        public ICollection<Staff> Staffs { get; private set; }
+        //public ICollection<Staff> Staffs { get; private set; }
 
         public Tenant(Guid id, string name, string description)
         {

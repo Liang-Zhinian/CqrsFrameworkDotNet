@@ -116,7 +116,7 @@ namespace Registration.Infra.Data.Constants
             }
             else if (provider.Equals(DataBaseServer.MySql, StringComparison.InvariantCultureIgnoreCase))
             {
-                KeyType = "binary(16)";
+                KeyType = "char(36)";
                 String10 = "varchar(10)";
                 String36 = "varchar(36)";
                 String255 = "varchar(255)";

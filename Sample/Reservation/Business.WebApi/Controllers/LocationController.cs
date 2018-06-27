@@ -6,6 +6,7 @@ using Business.Application.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Business.Domain.Repositories;
+using Business.WebApi.Requests.Locations;
 
 namespace Business.WebApi.Controllers
 {
@@ -55,6 +56,67 @@ namespace Business.WebApi.Controllers
             var location = _businessInformationService.ProvisionLocation(request);
 
             return Ok(location);
+        }
+
+        [HttpPost]
+        [Route("SetLocationAddress")]
+        public ActionResult SetLocationAddress([FromBody]SetLocationAddressRequest request){
+            if (!ModelState.IsValid)
+            {
+                //NotifyModelStateErrors();
+                return Ok(false);
+            }
+
+            Guid siteId = request.SiteId;
+            Guid locationId = request.SiteId; 
+            string streetAddress = request.StreetAddress; 
+            string streetAddress2 = request.StreetAddress2; 
+            string city = request.City; 
+            string stateProvince = request.StateProvince; 
+            string postalCode = request.PostalCode; 
+            string countryCode = request.CountryCode; 
+
+            _businessInformationService.SetLocationAddress(siteId, locationId,
+                                                                          streetAddress, streetAddress2,
+                                                                          city, stateProvince, postalCode, countryCode);
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("SetLocationImage")]
+        public ActionResult SetLocationImage([FromForm]SetLocationImageRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                //NotifyModelStateErrors();
+                return Ok(false);
+            }
+
+            Guid siteId = request.SiteId;
+            Guid locationId = request.SiteId;
+            byte[] image = request.Image;
+
+            _businessInformationService.SetLocationImage(siteId, locationId, image);
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("SetLocationGeolocation")]
+        public ActionResult SetLocationGeolocation([FromBody]SetLocationGeolocationRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                //NotifyModelStateErrors();
+                return Ok(false);
+            }
+
+            Guid siteId = request.SiteId;
+            Guid locationId = request.SiteId;
+            double? latitude = request.Latitude;
+            double? longitude = request.Longitude;
+
+            _businessInformationService.SetLocationGeolocation(siteId, locationId, latitude, longitude);
+            return Ok();
         }
     }
 }
