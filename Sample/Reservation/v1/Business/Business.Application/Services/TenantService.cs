@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Linq;
 using Business.Application.Interfaces;
 using Business.Application.ViewModels;
 using Business.Contracts.Events.Security.Tenants;
 using Business.Domain.Entities;
 using Business.Domain.Repositories;
-using Business.Domain.Services;
-using CqrsFramework.Domain;
 using CqrsFramework.Events;
 using SaaSEqt.IdentityAccess.Application;
 using SaaSEqt.IdentityAccess.Application.Commands;
@@ -103,5 +100,6 @@ namespace Business.Application.Services
             _tenantAddressRepository.Add(address);
             _tenantAddressRepository.SaveChanges();
         }
+
     }
 }

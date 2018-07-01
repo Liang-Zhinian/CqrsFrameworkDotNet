@@ -33,6 +33,7 @@
     <ProjectReference Include="..\..\..\..\Infrastructure\WebHostCustomization\WebHost.Customization\WebHost.Customization.csproj" />
     <ProjectReference Include="..\..\..\..\..\Framework\CqrsFramework.EventStore.IntegrationEventLogEF\CqrsFramework.EventStore.IntegrationEventLogEF.csproj" />
     <ProjectReference Include="..\..\..\..\Infrastructure\HealthChecks\src\HealthChecks.MySQL\HealthChecks.MySQL.csproj" />
+    <ProjectReference Include="..\..\..\..\SaaSEqt\SaaSEqt.IdentityAccess.Infra.Services\SaaSEqt.IdentityAccess.Infra.Services.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Utils\MaintenanceModeAttribute.cs" />

@@ -6,6 +6,7 @@ using CqrsFramework.EventStore.IntegrationEventLogEF.Services;
 using CqrsFramework.EventStore.IntegrationEventLogEF.Utilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.EntityFrameworkCore.Storage;
 using Newtonsoft.Json;
 using SaaSEqt.Common.Domain.Model;
 using SaaSEqt.Common.Events;
@@ -13,7 +14,7 @@ using SaaSEqt.IdentityAccess.Infra.Data.Context;
 
 namespace SaaSEqt.IdentityAccess.Infra.Services
 {
-    public class MySqlEventStore : IEventStore
+    public class MySqlEventStore : Common.Events.IEventStore
     {
         private readonly IdentityAccessDbContext _context;
         private readonly IntegrationEventLogContext _integrationEventLogContext;
@@ -50,6 +51,7 @@ namespace SaaSEqt.IdentityAccess.Infra.Services
                                                                  domainEvent.TimeStamp.DateTime,
                                                                  JsonConvert.SerializeObject(domainEvent)
                                                                 );
+                
                                     eventLogEntry.TimesSent++;
                                     eventLogEntry.State = EventStateEnum.Published;
 
@@ -58,6 +60,7 @@ namespace SaaSEqt.IdentityAccess.Infra.Services
                                     
                                     return _integrationEventLogContext.SaveChanges();
                                 });
+            return new StoredEvent(domainEvent.GetType().FullName, domainEvent.TimeStamp.DateTime, JsonConvert.SerializeObject(domainEvent));
         }
 
         public void Close()

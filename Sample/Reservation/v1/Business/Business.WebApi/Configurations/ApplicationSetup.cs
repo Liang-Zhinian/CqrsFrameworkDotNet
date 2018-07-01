@@ -22,7 +22,8 @@ namespace Business.WebApi.Configurations
         public static void AddApplicationSetup(this IServiceCollection services)
         {
             RegisterIdentityAccessServices(services);
-
+            RegisterIdentityAccessEventProcessor(services);
+            ConfigureIdentityAccessEventProcessor(services);
 
             // Infra - Data
             RegisterWriteDb(services);
@@ -81,6 +82,17 @@ namespace Business.WebApi.Configurations
                     s.GetService<ITenantRepository>(),
                     s.GetService<IUserRepository>()
                 ));
+        }
+
+        private static void RegisterIdentityAccessEventProcessor(IServiceCollection services){
+            services
+                .AddScoped<SaaSEqt.Common.Events.IEventStore, SaaSEqt.IdentityAccess.Infra.Services.MySqlEventStore>()
+                .AddScoped<IdentityAccessEventProcessor>();
+            
+        }
+
+        private static void ConfigureIdentityAccessEventProcessor(IServiceCollection services){
+            services.BuildServiceProvider().GetService<IdentityAccessEventProcessor>().Listen();
         }
     }
 }
