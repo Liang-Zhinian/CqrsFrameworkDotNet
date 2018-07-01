@@ -33,7 +33,7 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Repositories
             //    TenantId = Guid.Parse(role.TenantId.Id)
             //};
             base.Add(role);
-            base.SaveChanges();
+            //base.SaveChanges();
         }
 
         public DomainModels.Role RoleNamed(DomainModels.TenantId tenantId, string roleName)

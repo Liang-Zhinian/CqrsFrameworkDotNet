@@ -6,13 +6,15 @@
     using SaaSEqt.IdentityAccess.Domain.Entities;
     using SaaSEqt.IdentityAccess.Domain.Services;
     using SaaSEqt.IdentityAccess.Domain.Repositories;
+    using SaaSEqt.Common.Domain.Model;
 
-	/// <summary>
-	/// Coordinates interactions among entities in the "Domain.Model.Identity" namespace.
-	/// </summary>
-	
+    /// <summary>
+    /// Coordinates interactions among entities in the "Domain.Model.Identity" namespace.
+    /// </summary>
+
     public class IdentityApplicationService
     {
+        readonly IUnitOfWork unitOfWork;
         readonly AuthenticationService authenticationService;
         readonly GroupMemberService groupMemberService;
         readonly IGroupRepository groupRepository;
@@ -21,6 +23,7 @@
         readonly IUserRepository userRepository;
 
 		public IdentityApplicationService (
+            IUnitOfWork unitOfWork,
 			AuthenticationService authenticationService,
 			GroupMemberService groupMemberService,
 			IGroupRepository groupRepository,
@@ -28,6 +31,7 @@
 			ITenantRepository tenantRepository,
 			IUserRepository userRepository
 		){
+            this.unitOfWork = unitOfWork;
 			this.authenticationService = authenticationService;
 			this.groupMemberService= groupMemberService;
 			this.groupRepository =groupRepository;
@@ -40,6 +44,7 @@
         {
             var tenant = GetExistingTenant(command.TenantId);
             tenant.Activate();
+            this.unitOfWork.Commit();
         }
 
         public void AddGroupToGroup(AddGroupToGroupCommand command)
@@ -47,6 +52,7 @@
             var parentGroup = GetExistingGroup(command.TenantId, command.ParentGroupName);
             var childGroup = GetExistingGroup(command.TenantId, command.ChildGroupName);
             parentGroup.AddGroup(childGroup, this.groupMemberService);
+            this.unitOfWork.Commit();
         }
 
         public void AddUserToGroup(AddUserToGroupCommand command)
@@ -54,6 +60,7 @@
             var group = GetExistingGroup(command.TenantId, command.GroupName);
             var user = GetExistingUser(command.TenantId, command.Username);
             group.AddUser(user);
+            this.unitOfWork.Commit();
         }
 
         public UserDescriptor AuthenticateUser(AuthenticateUserCommand command)
@@ -65,6 +72,7 @@
         {
             var tenant = GetExistingTenant(command.TenantId);
             tenant.Deactivate();
+            this.unitOfWork.Commit();
         }
 
         public void ChangeUserContactInformation(ChangeContactInfoCommand command)
@@ -81,12 +89,14 @@
                         command.AddressCountryCode),
                     new Telephone(command.PrimaryTelephone),
                     new Telephone(command.SecondaryTelephone)));
+            this.unitOfWork.Commit();
         }
 
         public void ChangeUserEmailAddress(ChangeEmailAddressCommand command)
         {
             var user = GetExistingUser(command.TenantId, command.Username);
             user.Person.ContactInformation.ChangeEmailAddress(new EmailAddress(command.EmailAddress));
+            this.unitOfWork.Commit();
         }
 
         public void ChangeUserPostalAddress(ChangePostalAddressCommand command)
@@ -99,6 +109,7 @@
                     command.AddressStateProvince,
                     command.AddressPostalCode,
                     command.AddressCountryCode));
+            this.unitOfWork.Commit();
         }
 
         public void ChangeUserPrimaryTelephone(ChangePrimaryTelephoneCommand command)
@@ -106,6 +117,7 @@
             var user = GetExistingUser(command.Telephone, command.Username);
             user.Person.ContactInformation.ChangePrimaryTelephone(
                 new Telephone(command.Telephone)); 
+            this.unitOfWork.Commit();
         }
 
         public void ChangeUserSecondaryTelephone(ChangeSecondaryTelephoneCommand command)
@@ -113,24 +125,28 @@
             var user = GetExistingUser(command.Telephone, command.Username);
             user.Person.ContactInformation.ChangeSecondaryTelephone(
                 new Telephone(command.Telephone));
+            this.unitOfWork.Commit();
         }
 
         public void ChangeUserPassword(ChangeUserPasswordCommand command)
         {
             var user = GetExistingUser(command.TenantId, command.Username);
             user.ChangePassword(command.CurrentPassword, command.ChangedPassword);
+            this.unitOfWork.Commit();
         }
 
         public void ChangeUserPersonalName(ChangeUserPersonalNameCommand command)
         {
             var user = GetExistingUser(command.TenantId, command.Username);
             user.ChangePersonalName(new FullName(command.FirstName, command.LastName));
+            this.unitOfWork.Commit();
         }
 
         public void DefineUserEnablement(DefineUserEnablementCommand command)
         {
             var user = GetExistingUser(command.TenantId, command.Username);
             user.DefineEnablement(new Enablement(command.Enabled, command.StartDate, command.EndDate));
+            this.unitOfWork.Commit();
         }
 
         public Group GetGroup(string tenantId, string groupName)
@@ -150,12 +166,13 @@
             var tenant = GetExistingTenant(command.TenantId);
             var group = tenant.ProvisionGroup(command.GroupName, command.Description);
             this.groupRepository.Add(group);
+            this.unitOfWork.Commit();
             return group;
         }
 
         public Tenant ProvisionTenant(ProvisionTenantCommand command)
         {
-            return this.tenantProvisioningService.ProvisionTenant(
+            Tenant tenant = this.tenantProvisioningService.ProvisionTenant(
                 command.TenantName,
                 command.TenantDescription,
                 new FullName(command.AdministorFirstName, command.AdministorLastName),
@@ -168,6 +185,9 @@
                     command.AddressCountryCode),
                 new Telephone(command.PrimaryTelephone),
                 new Telephone(command.SecondaryTelephone));
+
+            this.unitOfWork.Commit();
+            return tenant;
         }
 
         public User RegisterUser(RegisterUserCommand command)
@@ -196,6 +216,7 @@
                 throw new InvalidOperationException("User not registered.");
 
             this.userRepository.Add(user);
+            this.unitOfWork.Commit();
 
             return user;
         }
@@ -205,6 +226,7 @@
             var parentGroup = GetExistingGroup(command.TenantId, command.ParentGroupName);
             var childGroup = GetExistingGroup(command.TenantId, command.ChildGroupName);
             parentGroup.RemoveGroup(childGroup);
+            this.unitOfWork.Commit();
         }
 
         public void RemoveUserFromGroup(RemoveUserFromGroupCommand command)
@@ -212,6 +234,7 @@
             var group = GetExistingGroup(command.TenantId, command.GroupName);
             var user = GetExistingUser(command.TenantId, command.Username);
             group.RemoveUser(user);
+            this.unitOfWork.Commit();
         }
 
         public User GetUser(string tenantId, string userName)

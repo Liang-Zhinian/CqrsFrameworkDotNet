@@ -19,7 +19,7 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Repositories
             //t.Description = tenant.Description;
             //t.Active = tenant.Active;
             base.Add(tenant);
-            base.SaveChanges();
+            //base.SaveChanges();
         }
 
         public DomainModels.Tenant Get(DomainModels.TenantId tenantId)
@@ -54,7 +54,7 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Repositories
         public void Register(DomainModels.Tenant tenant)
         {
             base.Add(tenant);
-            base.SaveChanges();
+            //base.SaveChanges();
         }
 
         public void Remove(DomainModels.Tenant tenant)
@@ -62,7 +62,7 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Repositories
             //var t = this.Find(Guid.Parse(tenant.TenantId.Id));
             //tenant.Deactivate();
             base.Update(tenant);
-            base.SaveChanges();
+            //base.SaveChanges();
         }
     }
 }

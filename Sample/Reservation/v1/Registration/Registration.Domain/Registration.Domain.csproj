@@ -1,0 +1,65 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols></DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " />
+  <ItemGroup>
+    <Compile Remove="Code\**" />
+    <Compile Remove="Models\**" />
+    <EmbeddedResource Remove="Code\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <None Remove="Code\**" />
+    <None Remove="Models\**" />
+    <Compile Remove="Models\Security\SalesSettings.cs" />
+    <Compile Remove="Models\DateOfBirth.cs" />
+    <Compile Remove="Models\Business.cs" />
+    <Compile Remove="Models\ProfilePhoto.cs" />
+    <Compile Remove="Models\Reservation.cs" />
+    <Compile Remove="Models\Client.cs" />
+    <Compile Remove="Models\MARObject.cs" />
+    <Compile Remove="Events\Security\Employees\EmployeeSalesSettingsAppliedEvent.cs" />
+    <Compile Remove="Commands\Security\Staffs\CreateEmployeeCommand.cs" />
+    <Compile Remove="Repositories\IReadDbRepository.cs" />
+    <Compile Remove="ReadModel\Repositories\MARContext.cs" />
+    <Compile Remove="CommandHandlers\Security\StaffCommandHandler.cs" />
+    <Compile Remove="ReadModel\Security\TenantAddress.cs" />
+    <Compile Remove="ReadModel\Security\LocationAddress.cs" />
+    <Compile Remove="ReadModel\Security\Branding.cs" />
+    <Compile Remove="Commands\BaseCommand.cs" />
+    <Compile Remove="ReadModel\MemberTypes.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="System.Data.Common" Version="4.3.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.4.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="CommandHandlers\" />
+    <Folder Include="EventHandlers\" />
+    <Folder Include="Validations\" />
+    <Folder Include="CommandHandlers\Security\" />
+    <Folder Include="ReadModel\" />
+    <Folder Include="ReadModel\Security\" />
+    <Folder Include="ReadModel\Repositories\" />
+    <Folder Include="ReadModel\Repositories\Interfaces\" />
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Runtime">
+      <HintPath>..\..\..\..\..\..\..\..\usr\local\share\dotnet\sdk\NuGetFallbackFolder\microsoft.netcore.app\2.0.0\ref\netcoreapp2.0\System.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Registration.Contracts\Registration.Contracts.csproj" />
+    <ProjectReference Include="..\..\Business\Business.Contracts\Business.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Framework\CqrsFramework\CqrsFramework.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Framework\CqrsFramework.Extensions\CqrsFramework.Extensions.csproj" />
+  </ItemGroup>
+</Project>

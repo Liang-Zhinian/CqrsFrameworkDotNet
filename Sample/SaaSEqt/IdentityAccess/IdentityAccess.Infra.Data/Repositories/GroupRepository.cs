@@ -44,7 +44,7 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Repositories
             //    Description = group.Description,
             //};
             base.Add(group);
-            base.SaveChanges();
+            //base.SaveChanges();
         }
 
 		/// <summary>

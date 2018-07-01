@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using SaaSEqt.IdentityAccess.Domain.Repositories;
 using SaaSEqt.IdentityAccess.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
+using SaaSEqt.Common.Domain.Model;
 
 namespace SaaSEqt.IdentityAccess.Infra.Data.Repositories
 {
@@ -11,6 +12,14 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Repositories
     {
         protected readonly IdentityAccessDbContext Db;
         protected readonly DbSet<TEntity> DbSet;
+
+        //public IUnitOfWork UnitOfWork
+        //{
+        //    get
+        //    {
+        //        return Db;
+        //    }
+        //}
 
         public DomainRepository(IdentityAccessDbContext context)
         {

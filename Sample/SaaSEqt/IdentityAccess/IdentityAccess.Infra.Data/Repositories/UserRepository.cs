@@ -58,7 +58,7 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Repositories
             //};
 
             base.Add(user);
-            base.SaveChanges();
+            //base.SaveChanges();
         }
 
         public DomainModels.User UserFromAuthenticCredentials(DomainModels.TenantId tenantId, string username, string encryptedPassword)

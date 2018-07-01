@@ -13,14 +13,13 @@
     <Folder Include="Domain\Events\Identity\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Framework\CqrsFramework\CqrsFramework.csproj" />
-    <ProjectReference Include="..\..\Common\SaaSEqt.Common.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <None Remove="Domain\Context\.DS_Store" />
     <None Remove="Domain\Models\ReadModels\.DS_Store" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="IdentityAccessContextFactory.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\SaaSEqt.Common.csproj" />
   </ItemGroup>
 </Project>

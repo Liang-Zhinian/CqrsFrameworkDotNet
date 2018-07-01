@@ -5,13 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Framework\CqrsFramework\CqrsFramework.csproj" />
-    <ProjectReference Include="..\IdentityAccess\SaaSEqt.IdentityAccess.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <None Remove=".DS_Store" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Class1.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IdentityAccess\SaaSEqt.IdentityAccess.csproj" />
+    <ProjectReference Include="..\IdentityAccess.Infra.Data\SaaSEqt.IdentityAccess.Infra.Data.csproj" />
+    <ProjectReference Include="..\..\Common\SaaSEqt.Common.csproj" />
   </ItemGroup>
 </Project>

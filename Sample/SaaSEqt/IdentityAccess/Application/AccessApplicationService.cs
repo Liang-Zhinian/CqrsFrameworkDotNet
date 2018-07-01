@@ -6,21 +6,24 @@
     using SaaSEqt.IdentityAccess.Domain.Entities;
     using SaaSEqt.IdentityAccess.Domain.Services;
     using SaaSEqt.IdentityAccess.Domain.Repositories;
+    using SaaSEqt.Common.Domain.Model;
 
-	
-	public sealed class AccessApplicationService
+    public sealed class AccessApplicationService
 	{
+        private readonly IUnitOfWork unitOfWork;
 		private readonly IGroupRepository groupRepository;
 		private readonly IRoleRepository roleRepository;
 		private readonly ITenantRepository tenantRepository;
 		private readonly IUserRepository userRepository;
 
 		public AccessApplicationService(
+            IUnitOfWork unitOfWork,
 			IGroupRepository groupRepository,
 			IRoleRepository roleRepository,
 			ITenantRepository tenantRepository,
 			IUserRepository userRepository)
 		{
+            this.unitOfWork = unitOfWork;
 			this.groupRepository = groupRepository;
 			this.roleRepository = roleRepository;
 			this.tenantRepository = tenantRepository;
@@ -38,7 +41,8 @@
 				{
 					role.AssignUser(user);
 				}
-			}
+            }
+            this.unitOfWork.Commit();
 		}
 
 		public bool IsUserInRole(string tenantId, string userName, string roleName)
@@ -70,7 +74,8 @@
 			var tenantId = new TenantId(command.TenantId);
 			var tenant = this.tenantRepository.Get(tenantId);
 			var role = tenant.ProvisionRole(command.RoleName, command.Description, command.SupportsNesting);
-			this.roleRepository.Add(role);
+            this.roleRepository.Add(role);
+            this.unitOfWork.Commit();
 		}
 	}
 }
