@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Business.Contracts.Events.Sites;
 using CqrsFramework.Events;
 using Registration.Domain.ReadModel.Security;
@@ -15,7 +16,7 @@ namespace Registration.Domain.EventHandlers
             _siteRepository = siteRepository;
         }
 
-        public void Handle(SiteCreatedEvent message)
+        public Task Handle(SiteCreatedEvent message)
         {
             Console.WriteLine("Handling TenantCreatedEvent.");
 
@@ -30,6 +31,8 @@ namespace Registration.Domain.EventHandlers
                 _siteRepository.Add(site);
                 _siteRepository.SaveChanges();
                 Console.WriteLine("SiteCreatedEvent handled.");
+
+            return Task.CompletedTask;
             }
             catch (Exception e)
             {

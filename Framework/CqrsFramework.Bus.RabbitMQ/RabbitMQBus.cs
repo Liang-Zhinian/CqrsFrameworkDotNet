@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using Autofac;
 using CqrsFramework.Commands;
 using CqrsFramework.Events;
 using CqrsFramework.Messages;
+using CqrsFramework.Routing;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Polly;
-using Polly.Retry;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using RabbitMQ.Client.Exceptions;
-using RabbitMQ.Client.Framing;
 namespace CqrsFramework.Bus.RabbitMQ
 {
     public class RabbitMQBus : IDisposable, IHandlerRegistrar, ICommandSender, IEventPublisher/*, IMessageReceiver*/
@@ -36,8 +36,7 @@ namespace CqrsFramework.Bus.RabbitMQ
         private IModel _consumerChannel;
         private string _queueName;
 
-        private readonly Dictionary<Type, List<Action<IMessage>>> _routes = new Dictionary<Type, List<Action<IMessage>>>();
-
+        private readonly Dictionary<Type, List<Func<IMessage, CancellationToken, Task>>> _routes = new Dictionary<Type, List<Func<IMessage, CancellationToken, Task>>>();
 
         //public event EventHandler<MessageReceivedEventArgs> MessageReceived;
 
@@ -70,32 +69,33 @@ namespace CqrsFramework.Bus.RabbitMQ
             GC.SuppressFinalize(this);
         }
 
-        public void RegisterHandler<T>(Action<T> handler) where T : IMessage
+        public void RegisterHandler<T>(Func<T, CancellationToken, Task> handler) where T : class, IMessage
         {
-            List<Action<IMessage>> handlers;
-            if (!_routes.TryGetValue(typeof(T), out handlers))
+            if (!_routes.TryGetValue(typeof(T), out var handlers))
             {
-                handlers = new List<Action<IMessage>>();
+                handlers = new List<Func<IMessage, CancellationToken, Task>>();
                 _routes.Add(typeof(T), handlers);
             }
-            handlers.Add(DelegateAdjuster.CastArgument<IMessage, T>(x => handler(x)));
+            handlers.Add((message, token) => handler((T)message, token));
             DoInternalSubscription(typeof(T).Name);
         }
 
-        public void Send<T>(T command) where T : ICommand
+        public Task Send<T>(T command, CancellationToken cancellationToken = default(CancellationToken)) where T : class, ICommand
         {
             string message = JsonConvert.SerializeObject(command, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All });
             //byte[] body = Encoding.UTF8.GetBytes(message);
 
             SendMessage(message, command.GetType().Name);
+            return Task.CompletedTask;
         }
 
-        public void Publish<T>(T @event) where T : IEvent
+        public Task Publish<T>(T @event, CancellationToken cancellationToken = default(CancellationToken)) where T : class, IEvent
         {
             string message = JsonConvert.SerializeObject(@event, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All });
             //var body = Encoding.UTF8.GetBytes(message);
 
             SendMessage(message, @event.GetType().Name);
+            return Task.CompletedTask;
         }
 
         public void Start()
@@ -179,12 +179,12 @@ namespace CqrsFramework.Bus.RabbitMQ
 
 
             var consumer = new EventingBasicConsumer(channel);
-            consumer.Received += (model, ea) =>
+            consumer.Received += async (model, ea) =>
             {
                 
                 var message = Encoding.UTF8.GetString(ea.Body);
 
-                ProcessEvent(ea, message);
+                await ProcessEvent(ea, message);
 
                 //if (!_autoAck)
                 //{
@@ -209,7 +209,7 @@ namespace CqrsFramework.Bus.RabbitMQ
             return channel;
         }
 
-        private void ProcessEvent(BasicDeliverEventArgs ea, string message)
+        private Task ProcessEvent(BasicDeliverEventArgs ea, string message, CancellationToken cancellationToken = default(CancellationToken))
         {
             using (var scope = _autofac.BeginLifetimeScope(AUTOFAC_SCOPE_NAME))
             {
@@ -221,10 +221,27 @@ namespace CqrsFramework.Bus.RabbitMQ
                 {
                     dynamic eventData = JsonConvert.DeserializeObject(message, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All });
                     var @event = (IEvent)eventData;
-                    List<Action<IMessage>> handlers;
-                    if (!_routes.TryGetValue(@event.GetType(), out handlers)) return;
-                    foreach (var handler in handlers)
-                        handler(@event);
+                    //List<Func<IMessage, CancellationToken, Task>> handlers;
+                    //if (!_routes.TryGetValue(@event.GetType(), out handlers)) return;
+                    //foreach (var handler in handlers)
+                        //handler.(@event);
+
+                    if (!_routes.TryGetValue(@event.GetType(), out var handlers))
+                        return Task.FromResult(0);
+
+                    var tasks = new Task[handlers.Count];
+                    for (var index = 0; index < handlers.Count; index++)
+                    {
+                        tasks[index] = handlers[index](@event, cancellationToken);
+                    }
+
+                    if (!_autoAck)
+                    {
+                        _consumerChannel.BasicAck(ea.DeliveryTag, false);
+                        Console.WriteLine(" Ack sent: {0}", message);
+                        _logger.LogInformation($"Ack sent: \n" + message);
+                    }
+                    return Task.WhenAll(tasks);
 
                 }
                 catch (Exception e)
@@ -232,13 +249,6 @@ namespace CqrsFramework.Bus.RabbitMQ
                     Console.WriteLine(e.Message);
                     if (e.InnerException != null) Console.WriteLine(e.InnerException.Message);
                     throw e;
-                }
-
-                if (!_autoAck)
-                {
-                    _consumerChannel.BasicAck(ea.DeliveryTag, false);
-                    Console.WriteLine(" Ack sent: {0}", message);
-                    _logger.LogInformation($"Ack sent: \n" + message);
                 }
             }
         }

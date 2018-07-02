@@ -3,17 +3,21 @@ using CqrsFramework.Events;
 using CqrsFramework.Infrastructure;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CqrsFramework.Domain
 {
+    /// <summary>
+    /// Class to inherit all aggregates from
+    /// </summary>
     public abstract class AggregateRoot
     {
         private readonly List<IEvent> _changes = new List<IEvent>();
 
-        public Guid Id { get; protected internal set; }
-        public int Version { get; protected internal set; }
+        public Guid Id { get; protected set; }
+        public int Version { get; protected set; }
 
-        public IEnumerable<IEvent> GetUncommittedChanges()
+        public IEvent[] GetUncommittedChanges()
         {
             lock (_changes)
             {
@@ -21,48 +25,75 @@ namespace CqrsFramework.Domain
             }
         }
 
-        public void MarkChangesAsCommitted()
+        /// <summary>
+        /// Returns all uncommited changes and clears aggregate of them.
+        /// </summary>
+        /// <returns>Array of new uncommited events</returns>
+        public IEvent[] FlushUncommitedChanges()
         {
             lock (_changes)
             {
-                Version = Version + _changes.Count;
+                var changes = _changes.ToArray();
+                var i = 0;
+                foreach (var @event in changes)
+                {
+                    if (@event.Id == Guid.Empty && Id == Guid.Empty)
+                    {
+                        throw new AggregateOrEventMissingIdException(GetType(), @event.GetType());
+                    }
+                    if (@event.Id == Guid.Empty)
+                    {
+                        @event.Id = Id;
+                    }
+                    i++;
+                    @event.Version = Version + i;
+                    @event.TimeStamp = DateTimeOffset.UtcNow;
+                }
+                Version = Version + changes.Length;
                 _changes.Clear();
+                return changes;
             }
         }
 
+        /// <summary>
+        /// Load an aggregate from an enumerable of events.
+        /// </summary>
+        /// <param name="history">All events to be loaded.</param>
         public void LoadFromHistory(IEnumerable<IEvent> history)
         {
-            foreach (var e in history)
+            lock (_changes)
             {
-                if (e.Version != Version + 1)
-                    throw new EventsOutOfOrderException(e.Id);
-                ApplyChange(e, false);
+                foreach (var e in history.ToArray())
+                {
+                    if (e.Version != Version + 1)
+                    {
+                        throw new EventsOutOfOrderException(e.Id);
+                    }
+                    ApplyEvent(e);
+                    Id = e.Id;
+                    Version++;
+                }
             }
         }
 
         protected void ApplyChange(IEvent @event)
         {
-            ApplyChange(@event, true);
-        }
-
-        private void ApplyChange(IEvent @event, bool isNew)
-        {
             lock (_changes)
             {
-                this.AsDynamic().Apply(@event);
-                //dynamic d = this;
-
-                //d.Handle(Converter.ChangeTo(@event, @event.GetType()));
-                if (isNew)
-                {
-                    _changes.Add(@event);
-                }
-                else
-                {
-                    Id = @event.Id;
-                    Version++;
-                }
+                ApplyEvent(@event);
+                _changes.Add(@event);
             }
+        }
+
+        /// <summary>
+        /// Overrideable method for applying events on aggregate
+        /// This is called interally when rehydrating aggregates.
+        /// Can be overridden if you want custom handling.
+        /// </summary>
+        /// <param name="event">Event to apply</param>
+        protected virtual void ApplyEvent(IEvent @event)
+        {
+            this.Invoke("Apply", @event);
         }
     }
 }

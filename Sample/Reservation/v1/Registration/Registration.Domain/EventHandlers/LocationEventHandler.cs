@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Business.Contracts.Events.Locations;
 using CqrsFramework.Events;
 using Registration.Domain.ReadModel.Security;
@@ -18,7 +19,7 @@ namespace Registration.Domain.EventHandlers
             _locationRepository = locationRepository;
         }
 
-        public void Handle(LocationCreatedEvent @event)
+        public Task Handle(LocationCreatedEvent @event)
         {
             Console.WriteLine("Handling LocationCreatedEvent.");
             // save to ReadDB
@@ -35,6 +36,7 @@ namespace Registration.Domain.EventHandlers
                 _locationRepository.Add(location);
                 _locationRepository.SaveChanges();
                 Console.WriteLine("LocationCreatedEvent handled.");
+                return Task.CompletedTask;
             }
             catch(Exception e){
                 Console.WriteLine(e.Message);
@@ -43,22 +45,24 @@ namespace Registration.Domain.EventHandlers
             }
         }
 
-        public void Handle(LocationImageChangedEvent message)
+        public Task Handle(LocationImageChangedEvent message)
         {
             var location = _locationRepository.Find(message.Id);
             location.Image = message.Image;
             _locationRepository.SaveChanges();
+            return Task.CompletedTask;
         }
 
-        public void Handle(LocationGeolocationChangedEvent message)
+        public Task Handle(LocationGeolocationChangedEvent message)
         {
             var location = _locationRepository.Find(message.Id);
             location.Latitude = message.Latitude;
             location.Longitude = message.Longitude;
             _locationRepository.SaveChanges();
+            return Task.CompletedTask;
         }
 
-        public void Handle(LocationAddressChangedEvent message)
+        public Task Handle(LocationAddressChangedEvent message)
         {
             var location = _locationRepository.Find(message.Id);
 
@@ -70,6 +74,7 @@ namespace Registration.Domain.EventHandlers
             location.CountryCode = message.CountryCode;
 
             _locationRepository.SaveChanges();
+            return Task.CompletedTask;
         }
     }
 }

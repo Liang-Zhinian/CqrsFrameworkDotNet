@@ -1,14 +1,38 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace CqrsFramework.Domain
 {
     /// <summary>
-    /// The ISession object acts as a gateway into the data loaded into our Event Store. It is similar to Entity Framework's DataContext class.
+    /// Defines unit of work that handles several aggregates.
     /// </summary>
     public interface ISession
     {
-        void Add<T>(T aggregate) where T : AggregateRoot;
-        T Get<T>(Guid id, int? expectedVersion = null) where T : AggregateRoot;
-        void Commit();
+        /// <summary>
+        /// Add aggregate to session
+        /// </summary>
+        /// <typeparam name="T">Type of aggregate</typeparam>
+        /// <param name="aggregate">Aggregate object to be added</param>
+        /// <param name="cancellationToken">Optional cancellation token</param>
+        /// <returns></returns>
+        Task Add<T>(T aggregate, CancellationToken cancellationToken = default(CancellationToken)) where T : AggregateRoot;
+
+        /// <summary>
+        /// Get aggregate from session.
+        /// </summary>
+        /// <typeparam name="T">Type of aggregate</typeparam>
+        /// <param name="id">Id of aggregate</param>
+        /// <param name="expectedVersion">Expected saved version.</param>
+        /// <param name="cancellationToken">Optional cancellation token</param>
+        /// <returns></returns>
+        Task<T> Get<T>(Guid id, int? expectedVersion = null, CancellationToken cancellationToken = default(CancellationToken)) where T : AggregateRoot;
+
+        /// <summary>
+        /// Save changes in all aggregates in session
+        /// </summary>
+        /// <param name="cancellationToken">Optional cancellation token</param>
+        /// <returns></returns>
+        Task Commit(CancellationToken cancellationToken = default(CancellationToken));
     }
 }

@@ -4,9 +4,8 @@ namespace CqrsFramework.Domain.Exception
 {
     public class AggregateNotFoundException : System.Exception
     {
-        public AggregateNotFoundException(Guid id)
-            : base(string.Format("Aggregate {0} was not found", id))
-        {
-        }
+        public AggregateNotFoundException(Type t, Guid id)
+            : base($"Aggregate {id} of type {t.FullName} was not found")
+        { }
     }
 }

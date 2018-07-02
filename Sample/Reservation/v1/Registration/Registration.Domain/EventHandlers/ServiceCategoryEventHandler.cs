@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Business.Contracts.Events.ServiceCategory;
 using CqrsFramework.Events;
 using Registration.Domain.ReadModel;
@@ -19,7 +20,7 @@ namespace Registration.Domain.EventHandlers
             _serviceRepository = serviceRepository;
         }
 
-        public void Handle(ServiceItemCreatedEvent @event)
+        public Task Handle(ServiceItemCreatedEvent @event)
         {
             Console.WriteLine("Handling ServiceItemCreatedEvent.");
             // save to ReadDB
@@ -33,6 +34,7 @@ namespace Registration.Domain.EventHandlers
                 _serviceRepository.Add(serviceItem);
                 _serviceRepository.SaveChanges();
                 Console.WriteLine("ServiceItemCreatedEvent handled.");
+                return Task.CompletedTask;
             }catch(Exception e){
                 Console.WriteLine(e.Message);
                 Console.WriteLine(e.InnerException.Message);
@@ -41,7 +43,7 @@ namespace Registration.Domain.EventHandlers
 
         }
 
-        public void Handle(ServiceCategoryCreatedEvent message)
+        public Task Handle(ServiceCategoryCreatedEvent message)
         {
             
             Console.WriteLine("ServiceCategoryCreatedEvent handled.");
@@ -56,6 +58,7 @@ namespace Registration.Domain.EventHandlers
             {
                 _serviceCategoryRepository.Add(serviceCategory);
                 _serviceCategoryRepository.SaveChanges();
+                return Task.CompletedTask;
             }
             catch (Exception e)
             {

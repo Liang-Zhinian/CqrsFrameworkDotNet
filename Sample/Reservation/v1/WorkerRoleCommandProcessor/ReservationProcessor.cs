@@ -4,6 +4,7 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using CqrsFramework.Bus.RabbitMQ;
 using CqrsFramework.Config;
+using CqrsFramework.Routing;
 using Infrastructure.IoC;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
@@ -97,8 +98,8 @@ namespace WorkerRoleCommandProcessor
 
         private void RegisterHandlers(IServiceProvider provider)
         {
-            var registrar = new BusRegistrar(new DependencyResolver(provider));
-            registrar.Register(typeof(LocationEventHandler));
+            var registrar = new RouteRegistrar(provider);
+            registrar.RegisterInAssemblyOf(typeof(LocationEventHandler));
 
         }
     }

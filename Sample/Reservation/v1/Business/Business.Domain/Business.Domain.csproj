@@ -49,5 +49,6 @@
     <Compile Remove="Models\ValueObjects\Address.cs" />
     <Compile Remove="Models\ValueObjects\PersonName.cs" />
     <Compile Remove="Repositories\Interfaces\IServiceCategoryRepository.cs" />
+    <Compile Remove="Bus\BusEventPublisher.cs" />
   </ItemGroup>
 </Project>

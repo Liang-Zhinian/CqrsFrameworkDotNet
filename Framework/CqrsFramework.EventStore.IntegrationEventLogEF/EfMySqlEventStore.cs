@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using CqrsFramework.Events;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -25,7 +27,7 @@ namespace CqrsFramework.EventStore.IntegrationEventLogEF
                     .Options);
         }
 
-        public IEnumerable<IEvent> Get(Guid aggregateId, int fromVersion)
+        public Task<IEnumerable<IEvent>> Get(Guid aggregateId, int fromVersion, CancellationToken cancellationToken = default(CancellationToken))
         {
             IList<IEvent> events = new List<IEvent>();
             var evts = _integrationEventLogContext.IntegrationEventLogs.Where(_=>_.EventId.Equals(aggregateId));
@@ -38,15 +40,21 @@ namespace CqrsFramework.EventStore.IntegrationEventLogEF
                 events.Add((IEvent)@event);
             }
 
-            return events;
+            return Task.FromResult(events.AsEnumerable());
         }
 
-        public void Save(IEvent @event)
+        public Task Save(IEvent @event, CancellationToken cancellationToken = default(CancellationToken))
         {
             var eventLogEntry = new IntegrationEventLogEntry(@event);
 
             _integrationEventLogContext.IntegrationEventLogs.Add(eventLogEntry);
             _integrationEventLogContext.SaveChanges();
+            return Task.CompletedTask;
+        }
+
+        public Task Save(IEnumerable<IEvent> events, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Business.Contracts.Events.Security.Tenants;
 using CqrsFramework.Events;
 using Registration.Domain.ReadModel.Security;
@@ -15,7 +16,7 @@ namespace Registration.Domain.EventHandlers
             _tenantRepository = tenantRepository;
         }
 
-        public void Handle(TenantCreatedEvent message)
+        public Task Handle(TenantCreatedEvent message)
         {
             Console.WriteLine("Handling TenantCreatedEvent.");
             Tenant tenant = new Tenant (
@@ -28,6 +29,7 @@ namespace Registration.Domain.EventHandlers
                 _tenantRepository.Add(tenant);
                 _tenantRepository.SaveChanges();
                 Console.WriteLine("TenantCreatedEvent handled.");
+                return Task.CompletedTask;
             }
             catch (Exception e)
             {

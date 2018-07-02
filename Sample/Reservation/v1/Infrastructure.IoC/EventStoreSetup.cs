@@ -1,5 +1,5 @@
 ﻿using CqrsFramework.Bus.RabbitMQ;
-using CqrsFramework.Cache;
+using CqrsFramework.Caching;
 using CqrsFramework.Domain;
 using CqrsFramework.Events;
 using Microsoft.Extensions.Configuration;
@@ -37,8 +37,8 @@ namespace Infrastructure.IoC
         {
             services.AddScoped<ISession, Session>();
             // InMemoryEventStore
-            services.AddSingleton<IEventStore>(y => new InMemoryEventStore(y.GetService<RabbitMQBus>()));
-            services.AddScoped<IRepository>(y => new CacheRepository(new Repository(y.GetService<IEventStore>(), y.GetService<IEventPublisher>()), y.GetService<IEventStore>()));
+            //services.AddSingleton<IEventStore>(y => new InMemoryEventStore(y.GetService<RabbitMQBus>()));
+            //services.AddScoped<IRepository>(y => new CacheRepository(new Repository(y.GetService<IEventStore>(), y.GetService<IEventPublisher>()), y.GetService<IEventStore>()));
 
             //string connectionString = Configuration.GetConnectionString("SqlEventStore");
             //services.AddSingleton<IEventStore>(y => new SqlEventStore(y.GetService<InProcessBus>(), connectionString));

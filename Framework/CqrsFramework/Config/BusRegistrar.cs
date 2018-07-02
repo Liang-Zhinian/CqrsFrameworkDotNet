@@ -1,10 +1,10 @@
-﻿using CqrsFramework.Bus;
-using CqrsFramework.Commands;
-using CqrsFramework.Events;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using CqrsFramework.Commands;
+using CqrsFramework.Events;
+using CqrsFramework.Routing;
 
 namespace CqrsFramework.Config
 {

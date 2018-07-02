@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 using CqrsFramework.Domain.Exception;
 using CqrsFramework.Events;
 using MongoDB;
@@ -69,7 +71,7 @@ namespace CqrsFramework.EventStore.MongoDB
             }
         }
 
-        public IEnumerable<IEvent> Get(Guid aggregateId, int fromVersion)
+        public Task<IEnumerable<IEvent>> Get(Guid aggregateId, int fromVersion, CancellationToken cancellationToken = default(CancellationToken))
         {
             // SELECT EventType, BODY from EventWrappers WHERE StreamId = @StreamId AND Sequence >= @Sequence ORDER BY TimeStamp
             var db = this.client.GetDatabase("EventStore");
@@ -93,16 +95,17 @@ namespace CqrsFramework.EventStore.MongoDB
                 list.Add((IEvent)@event);
             }
 
-            return list;
+            return Task.FromResult(list.AsEnumerable());
 
         }
 
-        public void Save(IEvent @event)
+        public Task Save(IEvent @event, CancellationToken cancellationToken = default(CancellationToken))
         {
             IEnumerable<object> events = new IEvent[] { @event };
             Guid streamId = @event.Id;
             long expectedInitialVersion = @event.Version;
             SaveEvents(streamId, events, expectedInitialVersion);
+            return Task.CompletedTask;
         }
 
         public void SaveEvents(object streamId, IEnumerable<object> events, long expectedInitialVersion)
@@ -222,6 +225,11 @@ namespace CqrsFramework.EventStore.MongoDB
                 yield return JsonConvert.DeserializeObject(serializedBody, eventType);
             }
 
+        }
+
+        public Task Save(IEnumerable<IEvent> events, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            throw new NotImplementedException();
         }
     }
 }

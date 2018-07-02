@@ -3,10 +3,10 @@
 namespace CqrsFramework.Events
 {
     /// <summary>
-    /// Defines a handler for an event.
+    /// Defines a handler for an event with a cancellation token.
     /// </summary>
     /// <typeparam name="T">Event type being handled</typeparam>
-    public interface IEventHandler<in T> : IHandler<T> where T : IEvent
+    public interface ICancellableEventHandler<in T> : ICancellableHandler<T> where T : IEvent
     {
     }
 }
