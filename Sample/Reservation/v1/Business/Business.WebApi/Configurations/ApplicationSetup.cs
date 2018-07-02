@@ -41,8 +41,8 @@ namespace Business.WebApi.Configurations
             services.AddScoped<ITenantAddressRepository, TenantAddressRepository>();
             services.AddScoped<ITenantContactRepository, TenantContactRepository>();
             services.AddScoped<ILocationRepository, LocationRepository>();
-            //services.AddScoped<IServiceRepository, ServiceRepository>();
-            //services.AddScoped<IServiceCategoryRepository, ServiceCategoryRepository>();
+            services.AddScoped<IServiceItemRepository, ServiceItemRepository>();
+            services.AddScoped<IServiceCategoryRepository, ServiceCategoryRepository>();
         }
 
         private static void RegisterAppService(IServiceCollection services)
@@ -52,7 +52,7 @@ namespace Business.WebApi.Configurations
             services.AddScoped<ITenantService, TenantService>();
             services.AddScoped<SiteProvisioningService>();
             services.AddScoped<IBusinessInformationService, BusinessInformationService>();
-            //services.AddScoped<IServiceCategoryService, ServiceCategoryService>();
+            services.AddScoped<IServiceCategoryService, ServiceCategoryService>();
         }
 
         private static void RegisterIdentityAccessServices(IServiceCollection services){

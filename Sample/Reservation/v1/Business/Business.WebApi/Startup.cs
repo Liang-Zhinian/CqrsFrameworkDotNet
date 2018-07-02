@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Data.Common;
 using System.Reflection;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Business.Application.Services;
 using Business.Domain.Services;
 using Business.Infra.Data.Context;
@@ -34,7 +36,7 @@ namespace Business.WebApi
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<BusinessDbContext>(options =>
             {
@@ -129,6 +131,11 @@ namespace Business.WebApi
                     .AllowAnyHeader()
                     .AllowCredentials());
             });
+
+
+            var container = new ContainerBuilder();
+            container.Populate(services);
+            return new AutofacServiceProvider(container.Build());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

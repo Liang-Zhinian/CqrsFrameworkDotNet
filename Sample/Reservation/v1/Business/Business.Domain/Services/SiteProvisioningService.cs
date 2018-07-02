@@ -24,11 +24,11 @@ namespace Business.Domain.Services
         public Site ProvisionSite(TenantId tenantId, string siteName, string siteDescription, bool active){
             Site site = new Site(tenantId, siteName, siteDescription, active);
 
+            site.CreateBranding(new byte[] { 0 }, "#", "#", "#", "#");
             _siteRepository.Add(site);
-            site.CreateBranding(new byte[]{0}, "#", "#", "#", "#");
 
-            _integrationEventService.PublishThroughEventBusAsync(new SiteCreatedEvent(site.Id, siteName, siteDescription, active, tenantId.Id));
-
+            _integrationEventService.PublishThroughEventBus(new SiteCreatedEvent(site.Id, siteName, siteDescription, active, tenantId.Id));
+            //_siteRepository.UnitOfWork.Commit();
             //_siteRepository.SaveChanges();
 
             // To Do: send event

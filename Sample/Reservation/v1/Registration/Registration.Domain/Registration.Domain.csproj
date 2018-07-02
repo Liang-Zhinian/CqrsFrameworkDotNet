@@ -50,6 +50,7 @@
     <Folder Include="ReadModel\Repositories\" />
     <Folder Include="ReadModel\Repositories\Interfaces\" />
     <Folder Include="Properties\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Runtime">

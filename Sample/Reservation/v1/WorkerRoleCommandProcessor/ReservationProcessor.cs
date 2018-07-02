@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using CqrsFramework.Bus.RabbitMQ;
 using CqrsFramework.Config;
 using Infrastructure.IoC;
@@ -17,7 +19,7 @@ namespace WorkerRoleCommandProcessor
 {
     public class ReservationProcessor : IDisposable
     {
-        private ServiceProvider serviceProvider;
+        private IServiceProvider serviceProvider;
 
         public ReservationProcessor()
         {
@@ -44,7 +46,7 @@ namespace WorkerRoleCommandProcessor
 
         public void Stop()
         {
-            this.serviceProvider.Dispose();
+            //this.serviceProvider.
             Console.WriteLine("The Service Provider Disposed.");
         }
 
@@ -52,7 +54,7 @@ namespace WorkerRoleCommandProcessor
         {
         }
 
-        private ServiceProvider CreateServiceProvider()
+        private IServiceProvider CreateServiceProvider()
         {
             var configuration = new ConfigurationBuilder()
                .SetBasePath(Directory.GetCurrentDirectory())
@@ -83,12 +85,17 @@ namespace WorkerRoleCommandProcessor
 
                 .AddRabbitMQEventBusSetup(configuration);
 
-            var _serviceProvider = services .BuildServiceProvider();
 
-            return _serviceProvider;
+            var container = new ContainerBuilder();
+            container.Populate(services);
+            return new AutofacServiceProvider(container.Build());
+
+            //var _serviceProvider = services .BuildServiceProvider();
+
+            //return _serviceProvider;
         }
 
-        private void RegisterHandlers(ServiceProvider provider)
+        private void RegisterHandlers(IServiceProvider provider)
         {
             var registrar = new BusRegistrar(new DependencyResolver(provider));
             registrar.Register(typeof(LocationEventHandler));

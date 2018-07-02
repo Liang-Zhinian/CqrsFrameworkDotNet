@@ -14,6 +14,9 @@
     <PackageReference Include="AutoMapper" Version="6.2.2" />
     <PackageReference Include="Scrutor" Version="1.12.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="2.5.0" />
+    <PackageReference Include="Autofac" Version="4.8.1" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.2.2" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,13 +32,18 @@
     <ProjectReference Include="..\Registration.Application\Registration.Application.csproj" />
     <ProjectReference Include="..\Registration.Domain\Registration.Domain.csproj" />
     <ProjectReference Include="..\Registration.Infra.Data\Registration.Infra.Data.csproj" />
-    <ProjectReference Include="..\..\..\..\SaaSEqt\IdentityAccess\IdentityAccess\SaaSEqt.IdentityAccess.csproj" />
     <ProjectReference Include="..\..\..\..\SaaSEqt\IdentityAccess\Application\SaaSEqt.Application.csproj" />
-    <ProjectReference Include="..\..\..\..\SaaSEqt\IdentityAccess\IdentityAccess.Infra.Data\SaaSEqt.IdentityAccess.Infra.Data.csproj" />
     <ProjectReference Include="..\..\Infrastructure.IoC\Infrastructure.IoC.csproj" />
     <ProjectReference Include="..\..\..\..\Infrastructure\HealthChecks\src\Microsoft.AspNetCore.HealthChecks\Microsoft.AspNetCore.HealthChecks.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Framework\CqrsFramework.EventStore.IntegrationEventLogEF\CqrsFramework.EventStore.IntegrationEventLogEF.csproj" />
+    <ProjectReference Include="..\..\..\..\Infrastructure\HealthChecks\src\HealthChecks.MySQL\HealthChecks.MySQL.csproj" />
+    <ProjectReference Include="..\..\..\..\Infrastructure\WebHostCustomization\WebHost.Customization\WebHost.Customization.csproj" />
+    <ProjectReference Include="..\..\..\..\SaaSEqt\SaaSEqt.IdentityAccess.Infra.Services\SaaSEqt.IdentityAccess.Infra.Services.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Dockerfile" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Infrastructure\" />
   </ItemGroup>
 </Project>

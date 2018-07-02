@@ -1,4 +1,5 @@
-﻿using CqrsFramework.Bus;
+﻿using Autofac;
+using CqrsFramework.Bus;
 using CqrsFramework.Bus.RabbitMQ;
 using CqrsFramework.Commands;
 using CqrsFramework.Events;
@@ -55,8 +56,9 @@ namespace Infrastructure.IoC
 
             services.AddSingleton<RabbitMQBus>(sp =>
             {
+                var subscriptionClientName = Configuration["SubscriptionClientName"];
                 var rabbitMQPersistentConnection = sp.GetRequiredService<IRabbitMQPersistentConnection>();
-                //var iLifetimeScope = sp.GetRequiredService<ILifetimeScope>();
+                var iLifetimeScope = sp.GetRequiredService<ILifetimeScope>();
                 var logger = sp.GetRequiredService<ILogger<RabbitMQBus>>();
 
                 var retryCount = 5;
@@ -65,7 +67,7 @@ namespace Infrastructure.IoC
                     retryCount = int.Parse(Configuration["EventBusRetryCount"]);
                 }
 
-                return new RabbitMQBus(rabbitMQPersistentConnection, logger, "book2", "fanout", "book2events", false, retryCount);
+                return new RabbitMQBus(rabbitMQPersistentConnection, logger, iLifetimeScope, "book2_event_bus", "fanout", subscriptionClientName, false, retryCount);
             });
 
             services.AddSingleton<ICommandSender>(y => y.GetService<RabbitMQBus>());

@@ -1,25 +1,25 @@
 ﻿using System;
 using System.Data.Common;
 using System.Threading.Tasks;
-using Business.Domain.Services;
-using Business.Infra.Data.Context;
+using Registration.Domain.Services;
+using Registration.Infra.Data.Context;
 using CqrsFramework.Events;
 using CqrsFramework.EventStore.IntegrationEventLogEF.Services;
 using CqrsFramework.EventStore.IntegrationEventLogEF.Utilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace Business.Application.Services
+namespace Registration.Application.Services
 {
     public class IntegrationEventService : IIntegrationEventService
     {
         private readonly Func<DbConnection, IIntegrationEventLogService> _integrationEventLogServiceFactory;
         private readonly IEventPublisher _eventBus;
-        private readonly BusinessDbContext _context;
+        private readonly ReservationDbContext _context;
         private readonly IIntegrationEventLogService _eventLogService;
 
         public IntegrationEventService(IEventPublisher eventBus, 
-                                       BusinessDbContext context,
+                                       ReservationDbContext context,
         Func<DbConnection, IIntegrationEventLogService> integrationEventLogServiceFactory)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));

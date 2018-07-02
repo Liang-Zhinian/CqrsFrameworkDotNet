@@ -9,25 +9,24 @@ using Business.Domain.Repositories;
 
 namespace Business.WebApi.Controllers
 {
-    /*
+    
     //[Authorize]
-    [Route("api/services")]
+    [Route("api/servicecategories")]
     public class ServiceCategoryController: Controller
     {
         private readonly IServiceCategoryService _serviceCategoryService;
-        //private readonly ITenantRepository _tenantRepository;
 
         public ServiceCategoryController(IServiceCategoryService serviceCategoryService)
         {
-            //_tenantRepository = tenantRepository;
             _serviceCategoryService = serviceCategoryService;
         }
 
         [HttpGet]
         [AllowAnonymous]
-        public JsonResult Get()
+        [Route("FindServiceItems")]
+        public JsonResult FindServiceItems()
         {
-            var list = _serviceCategoryService.FindServices()
+            var list = _serviceCategoryService.FindServiceItems()
                                     .ToList();
             return Json(list);
         }
@@ -42,9 +41,9 @@ namespace Business.WebApi.Controllers
 
         [HttpPost]
         //[Authorize(Policy = "CanWriteTenantData")]
-        //[Route("register")]
-        public ActionResult Post([FromBody]
-                                   ServiceViewModel request
+        [Route("AddServiceItem")]
+        public ActionResult AddServiceItem([FromBody]
+                                   ServiceItemViewModel request
                                   )
         {
             if (!ModelState.IsValid)
@@ -53,7 +52,7 @@ namespace Business.WebApi.Controllers
                 return Ok(request);
             }
 
-            _serviceCategoryService.AddService(request);
+            _serviceCategoryService.AddServiceItem(request);
 
             return Ok(request);
         }
@@ -75,5 +74,5 @@ namespace Business.WebApi.Controllers
 
             return Ok(request);
         }
-    }*/
+    }
 }

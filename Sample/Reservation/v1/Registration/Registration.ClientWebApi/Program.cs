@@ -30,8 +30,8 @@ namespace Registration.ClientWebApi
             WebHost.CreateDefaultBuilder(args)
                    //.UseUrls("http://*:60001")
                 .UseStartup<Startup>()
-                //   .UseApplicationInsights()
-                //.UseHealthChecks("/hc")
+                   .UseApplicationInsights()
+                .UseHealthChecks("/hc")
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 //.UseWebRoot("Pics")
                 .ConfigureAppConfiguration((builderContext, config) =>
