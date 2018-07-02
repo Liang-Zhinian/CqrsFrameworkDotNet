@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Business.Domain.Repositories;
 using Microsoft.AspNetCore.Http;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Business.WebApi.Controllers
 {
@@ -14,11 +16,61 @@ namespace Business.WebApi.Controllers
     [Route("api/tenants")]
     public class TenantController: Controller
     {
+        private static Dictionary<TenantViewModel, StaffViewModel> tenants = new Dictionary<TenantViewModel, StaffViewModel>();
+
         private readonly ITenantService _tenantService;
 
         public TenantController(ITenantService tenantService)
         {
             _tenantService = tenantService;
+
+            InitializeTenants();
+        }
+
+        private void InitializeTenants() {
+            string tenantName = "Chanel";
+            string email = "support@test.com";
+            string phone = "123-123-1234";
+            TenantViewModel tenant = new TenantViewModel(
+                Guid.NewGuid(),
+                tenantName,
+                tenantName,
+                email,
+                phone,
+                phone,
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+            );
+
+            StaffViewModel administrator = new StaffViewModel { 
+                FirstName = tenantName,
+                LastName = tenantName,
+                EmailAddress = email,
+                PrimaryTelephone = phone,
+                SecondaryTelephone = phone,
+                AddressStreetAddress="Tianhe",
+                AddressCity="Guangzhou",
+                AddressStateProvince="Guangdong",
+                AddressPostalCode="510510",
+                AddressCountryCode="China"
+            };
+
+            tenants.Add(tenant, administrator);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("GenerateTestData")]
+        public ActionResult GenerateTestData()
+        {
+            foreach(var tenant in tenants)
+                _tenantService.ProvisionTenant(tenant.Key, tenant.Value);
+
+            return Ok();
         }
 
         [HttpGet]

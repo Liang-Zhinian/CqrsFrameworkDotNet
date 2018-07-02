@@ -24,7 +24,7 @@ namespace Registration.ClientWebApi.Controllers
         [Route("Services")]
         public JsonResult Services()
         {
-            var list = _serviceCategoryService.FindServices()
+            var list = _serviceCategoryService.FindServiceItems()
                                     .ToList();
             return Json(list);
         }

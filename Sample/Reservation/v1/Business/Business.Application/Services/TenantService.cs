@@ -78,7 +78,7 @@ namespace Business.Application.Services
             //_eventStoreSession.Commit();
 
             _tenantAddressRepository.Update(address);
-            _tenantAddressRepository.SaveChanges();
+            _tenantAddressRepository.UnitOfWork.Commit();
         }
 
         public void AddTenantAddress(TenantAddressViewModel addressViewModel)
@@ -98,7 +98,7 @@ namespace Business.Application.Services
             //_eventStoreSession.Commit();
 
             _tenantAddressRepository.Add(address);
-            _tenantAddressRepository.SaveChanges();
+            _tenantAddressRepository.UnitOfWork.Commit();
         }
 
     }

@@ -20,7 +20,7 @@ namespace Registration.Infra.Data.Context
         public DbSet<Staff> Staffs { get; set; }
 
         public DbSet<ServiceCategory> ServiceCategories { get; set; }
-        public DbSet<Service> Services { get; set; }
+        public DbSet<ServiceItem> ServiceItems { get; set; }
 
         public DbSet<HomePageImage> HomePageImages { get; set; }
 
@@ -43,7 +43,7 @@ namespace Registration.Infra.Data.Context
             modelBuilder.ApplyConfiguration(new StaffLoginLocationMap());
             modelBuilder.ApplyConfiguration(new TimeZoneMap());
             modelBuilder.ApplyConfiguration(new RegionMap());
-            modelBuilder.ApplyConfiguration(new ServiceMap());
+            modelBuilder.ApplyConfiguration(new ServiceItemMap());
             modelBuilder.ApplyConfiguration(new ServiceCategoryMap());
 
 

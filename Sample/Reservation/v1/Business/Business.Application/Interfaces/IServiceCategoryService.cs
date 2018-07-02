@@ -10,9 +10,9 @@ namespace Business.Application.Interfaces
         // service category service
         IEnumerable<ServiceCategoryViewModel> FindServiceCategories();
         ServiceCategoryViewModel FindServiceCategory(Guid serviceCategoryId);
-        IEnumerable<ServiceViewModel> FindServices();
-        ServiceViewModel FindService(Guid serviceId);
-        void AddService(ServiceViewModel service);
+        IEnumerable<ServiceItemViewModel> FindServiceItems();
+        ServiceItemViewModel FindServiceItem(Guid serviceItemId);
+        void AddServiceItem(ServiceItemViewModel serviceItem);
         void AddServiceCategory(ServiceCategoryViewModel serviceCategory);
 
     }

@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Business.Contracts.Events.ServiceCategory
 {
-    public class ServiceEvent
+    public class ServiceItemEvent
     {
         public string Name { get; set; }
         public string Description { get; set; }

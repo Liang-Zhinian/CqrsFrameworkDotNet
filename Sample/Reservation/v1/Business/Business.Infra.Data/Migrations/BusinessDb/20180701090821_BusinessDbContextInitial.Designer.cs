@@ -351,8 +351,6 @@ namespace Business.Infra.Data.Migrations.BusinessDb
                         .IsRequired()
                         .HasColumnType("varchar(2000)");
 
-                    b.Property<string>("Descrtiption");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
@@ -367,7 +365,7 @@ namespace Business.Infra.Data.Migrations.BusinessDb
 
                     b.HasIndex("SiteId");
 
-                    b.ToTable("Service");
+                    b.ToTable("ServiceItem");
                 });
 
             modelBuilder.Entity("Business.Domain.Entities.Site", b =>

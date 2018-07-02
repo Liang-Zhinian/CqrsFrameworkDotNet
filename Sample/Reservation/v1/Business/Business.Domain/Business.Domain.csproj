@@ -31,6 +31,7 @@
     <Folder Include="Entities\ServiceCategories\" />
     <Folder Include="Entities\Schedules\" />
     <Folder Include="Exceptions\" />
+    <Folder Include="UoW\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\Resource\Resource.cs" />

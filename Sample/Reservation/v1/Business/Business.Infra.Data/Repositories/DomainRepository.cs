@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 using Business.Domain.Repositories;
+using Business.Domain.UoW;
 using Business.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,8 @@ namespace Business.Infra.Data.Repositories
     {
         protected readonly BusinessDbContext Db;
         protected readonly DbSet<TEntity> DbSet;
+
+        public virtual IUnitOfWork UnitOfWork => Db;
 
         public DomainRepository(BusinessDbContext context)
         {
@@ -33,10 +36,10 @@ namespace Business.Infra.Data.Repositories
             DbSet.Remove(DbSet.Find(id));
         }
 
-        public int SaveChanges()
-        {
-            return Db.SaveChanges();
-        }
+        //public int SaveChanges()
+        //{
+        //    return Db.SaveChanges();
+        //}
 
         public void Dispose()
         {

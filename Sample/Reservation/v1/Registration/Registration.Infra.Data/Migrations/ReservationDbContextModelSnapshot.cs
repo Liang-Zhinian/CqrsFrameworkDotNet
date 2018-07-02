@@ -396,38 +396,6 @@ namespace Registration.Infra.Data.Migrations
                     b.ToTable("V_Tenant");
                 });
 
-            modelBuilder.Entity("Registration.Domain.ReadModel.Service", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("CategoryId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("varchar(2000)");
-
-                    b.Property<DateTime>("LastModified");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<Guid>("SiteId")
-                        .HasColumnName("SiteId")
-                        .HasColumnType("char(36)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("SiteId");
-
-                    b.ToTable("V_Service");
-                });
-
             modelBuilder.Entity("Registration.Domain.ReadModel.ServiceCategory", b =>
                 {
                     b.Property<Guid>("Id")
@@ -440,18 +408,13 @@ namespace Registration.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(2000)");
 
-                    b.Property<bool>("IsInternal");
-
                     b.Property<DateTime>("LastModified");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
-                    b.Property<Guid>("ParentCategoryId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<int>("ScheduleTypeValue");
+                    b.Property<int>("ScheduleTypeId");
 
                     b.Property<Guid>("SiteId")
                         .HasColumnName("SiteId")
@@ -459,9 +422,43 @@ namespace Registration.Infra.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ParentCategoryId");
+                    b.HasIndex("SiteId");
 
                     b.ToTable("V_ServiceCategory");
+                });
+
+            modelBuilder.Entity("Registration.Domain.ReadModel.ServiceItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<int>("DefaultTimeLength");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("varchar(2000)");
+
+                    b.Property<DateTime>("LastModified");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<Guid>("ServiceCategoryId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("SiteId")
+                        .HasColumnName("SiteId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ServiceCategoryId");
+
+                    b.HasIndex("SiteId");
+
+                    b.ToTable("V_ServiceItem");
                 });
 
             modelBuilder.Entity("Registration.Domain.ReadModel.TimeZone", b =>
@@ -552,24 +549,24 @@ namespace Registration.Infra.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Registration.Domain.ReadModel.Service", b =>
+            modelBuilder.Entity("Registration.Domain.ReadModel.ServiceCategory", b =>
                 {
-                    b.HasOne("Registration.Domain.ReadModel.ServiceCategory", "Category")
-                        .WithMany("Services")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("Registration.Domain.ReadModel.Security.Site", "Site")
                         .WithMany()
                         .HasForeignKey("SiteId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Registration.Domain.ReadModel.ServiceCategory", b =>
+            modelBuilder.Entity("Registration.Domain.ReadModel.ServiceItem", b =>
                 {
-                    b.HasOne("Registration.Domain.ReadModel.ServiceCategory", "ParentCategory")
-                        .WithMany("SubCategories")
-                        .HasForeignKey("ParentCategoryId")
+                    b.HasOne("Registration.Domain.ReadModel.ServiceCategory", "ServiceCategory")
+                        .WithMany()
+                        .HasForeignKey("ServiceCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Registration.Domain.ReadModel.Security.Site", "Site")
+                        .WithMany()
+                        .HasForeignKey("SiteId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

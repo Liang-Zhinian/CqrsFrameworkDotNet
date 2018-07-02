@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using Business.Infra.Data.Context;
+using CqrsFramework.EventStore.IntegrationEventLogEF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Registration.Infra.Data.Context;
@@ -18,8 +19,8 @@ namespace DatabaseInitializer
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .Build();
-            string provider = config.GetConnectionString("DataProvider"),
-                connectionString = config.GetConnectionString("ConnectionString");
+            string provider = config["DataProvider"],
+                connectionString = config["ConnectionString"];
 
             var optionsBuilder = new DbContextOptionsBuilder<BusinessDbContext>();
             optionsBuilder.UseMySql(connectionString);
@@ -27,6 +28,8 @@ namespace DatabaseInitializer
             reportingDbOptionsBuilder.UseMySql(connectionString);
             var identityAccessDbOptionsBuilder = new DbContextOptionsBuilder<IdentityAccessDbContext>();
             identityAccessDbOptionsBuilder.UseMySql(connectionString);
+            var eventLogDbOptionsBuilder = new DbContextOptionsBuilder<IntegrationEventLogContext>();
+            eventLogDbOptionsBuilder.UseMySql(connectionString);
 
 
 
@@ -35,7 +38,7 @@ namespace DatabaseInitializer
                 connectionString = args[0];
             }
 
-            // Use ConferenceContext as entry point for dropping and recreating DB
+            // Use BusinessDbContext as entry point for dropping and recreating DB
             using (var context = new BusinessDbContext(optionsBuilder.Options))
             {
                 if (context.Database.EnsureDeleted())
@@ -45,6 +48,7 @@ namespace DatabaseInitializer
             DbContext[] contexts = new DbContext[] {
                     new ReservationDbContext(reportingDbOptionsBuilder.Options),
                     new IdentityAccessDbContext(identityAccessDbOptionsBuilder.Options),
+                    new IntegrationEventLogContext(eventLogDbOptionsBuilder.Options),
                 };
 
             foreach (DbContext context in contexts)

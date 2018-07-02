@@ -3,7 +3,7 @@ using Registration.Domain.ReadModel;
 
 namespace Registration.Domain.Repositories.Interfaces
 {
-    public interface IServiceRepository: IReadDbRepository<Service>
+    public interface IServiceItemRepository: IReadDbRepository<ServiceItem>
     {
         //Staff GetByEmail(string email);
     }

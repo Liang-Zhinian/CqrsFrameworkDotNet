@@ -8,10 +8,11 @@ namespace Business.Domain.Entities.ServiceCategories
             Id = Guid.NewGuid();
         }
 
-        public ServiceItem(Guid siteId, string name, int defaultTimeLength, Guid serviceCategoryId) : this()
+        public ServiceItem(Guid siteId, string name, string description, int defaultTimeLength, Guid serviceCategoryId) : this()
         {
             SiteId = siteId;
             Name = name;
+            Description = description;
             DefaultTimeLength = defaultTimeLength;
             ServiceCategoryId = serviceCategoryId;
             //Action = ActionCode.Added;
@@ -21,7 +22,7 @@ namespace Business.Domain.Entities.ServiceCategories
 
         public string Name { get; private set; }
 
-        public string Descrtiption { get; private set; }
+        public string Description { get; private set; }
 
         public int DefaultTimeLength { get; private set; }
 

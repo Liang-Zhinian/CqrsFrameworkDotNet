@@ -1,22 +1,8 @@
 version: '3.4'
 
 services:
-  business.webapi:
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-    ports:
-      - "80"
-
   registration.clientwebapi:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - "80"
-
-
-  dockerdemo:
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-    ports:
-      - "80"
-

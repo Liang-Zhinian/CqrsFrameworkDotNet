@@ -37,13 +37,14 @@ namespace Registration.ClientWebApi.Configurations
             services.AddScoped<Registration.Domain.Repositories.Interfaces.ITenantRepository, Registration.Infra.Data.Repositories.TenantRepository>();
             services.AddScoped<ISiteRepository, SiteRepository>();
             services.AddScoped<ILocationRepository, LocationRepository>();
-            services.AddScoped<IServiceRepository, ServiceRepository>();
+            services.AddScoped<IServiceItemRepository, ServiceItemRepository>();
             services.AddScoped<IServiceCategoryRepository, ServiceCategoryRepository>();
         }
 
         private static void RegisterAppService(IServiceCollection services)
         {
             // App service
+            services.AddScoped<SaaSEqt.Common.Domain.Model.IUnitOfWork, SaaSEqt.IdentityAccess.Infra.Data.UoW.UnitOfWork>();
             services.AddScoped<ISiteService, SiteService>();
             services.AddScoped<ILocationService, LocationService>();
             services.AddScoped<IServiceCategoryService, ServiceCategoryService>();
@@ -68,6 +69,7 @@ namespace Registration.ClientWebApi.Configurations
                 .AddSingleton<IGroupRepository, GroupRepository>()
                 .AddSingleton<IEncryptionService, MD5EncryptionService>()
                 .AddSingleton<IdentityApplicationService>(s => new IdentityApplicationService(
+                    s.GetService<SaaSEqt.Common.Domain.Model.IUnitOfWork>(),
                     s.GetService<AuthenticationService>(),
                     s.GetService<GroupMemberService>(),
                     s.GetService<IGroupRepository>(),

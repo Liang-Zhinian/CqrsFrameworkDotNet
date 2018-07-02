@@ -18,10 +18,9 @@ namespace Registration.Infra.Data.Mappings
             builder.Property<string>("Name").IsRequired().HasColumnType(Constants.DbConstants.String255);
             builder.Property<string>("Description").IsRequired().HasColumnType(Constants.DbConstants.String2000);
             builder.Property<int>("CancelOffset").IsRequired();
-            builder.Property<Guid>("ParentCategoryId").HasColumnType(Constants.DbConstants.KeyType);
-            builder.Property<bool>("IsInternal");
-            builder.Property<int>("ScheduleTypeValue").IsRequired();
+            builder.Property<int>("ScheduleTypeId").IsRequired();
 
+            MapToSite(builder);
         }
     }
 }

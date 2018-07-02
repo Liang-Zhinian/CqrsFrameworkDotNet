@@ -267,7 +267,7 @@ namespace Business.Infra.Data.Migrations.BusinessDb
                 });
 
             migrationBuilder.CreateTable(
-                name: "Service",
+                name: "ServiceItem",
                 schema: "book2",
                 columns: table => new
                 {
@@ -275,7 +275,6 @@ namespace Business.Infra.Data.Migrations.BusinessDb
                     CategoryId = table.Column<Guid>(type: "char(36)", nullable: false),
                     DefaultTimeLength = table.Column<int>(nullable: false),
                     Description = table.Column<string>(type: "varchar(2000)", nullable: false),
-                    Descrtiption = table.Column<string>(nullable: true),
                     Name = table.Column<string>(type: "varchar(255)", nullable: false),
                     ServiceCategoryId = table.Column<Guid>(nullable: false),
                     SiteId = table.Column<Guid>(nullable: false)
@@ -532,13 +531,13 @@ namespace Business.Infra.Data.Migrations.BusinessDb
             migrationBuilder.CreateIndex(
                 name: "IX_Service_ServiceCategoryId",
                 schema: "book2",
-                table: "Service",
+                table: "ServiceItem",
                 column: "ServiceCategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Service_SiteId",
                 schema: "book2",
-                table: "Service",
+                table: "ServiceItem",
                 column: "SiteId");
 
             migrationBuilder.CreateIndex(
@@ -601,7 +600,7 @@ namespace Business.Infra.Data.Migrations.BusinessDb
                 schema: "book2");
 
             migrationBuilder.DropTable(
-                name: "Service",
+                name: "ServiceItem",
                 schema: "book2");
 
             migrationBuilder.DropTable(

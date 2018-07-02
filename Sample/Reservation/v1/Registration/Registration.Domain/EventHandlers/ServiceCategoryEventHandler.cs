@@ -6,31 +6,33 @@ using Registration.Domain.Repositories.Interfaces;
 
 namespace Registration.Domain.EventHandlers
 {
-    public class ServiceCategoryEventHandler : IEventHandler<ServiceCreatedEvent>,
+    public class ServiceCategoryEventHandler : IEventHandler<ServiceItemCreatedEvent>,
                                                 IEventHandler<ServiceCategoryCreatedEvent>
     {
-        private readonly IServiceRepository _serviceRepository;
+        private readonly IServiceItemRepository _serviceRepository;
         private readonly IServiceCategoryRepository _serviceCategoryRepository;
 
         public ServiceCategoryEventHandler(IServiceCategoryRepository serviceCategoryRepository,
-                                           IServiceRepository serviceRepository)
+                                           IServiceItemRepository serviceRepository)
         {
             _serviceCategoryRepository = serviceCategoryRepository;
             _serviceRepository = serviceRepository;
         }
 
-        public void Handle(ServiceCreatedEvent @event)
+        public void Handle(ServiceItemCreatedEvent @event)
         {
-            Console.WriteLine("Handling ServiceCreatedEvent.");
+            Console.WriteLine("Handling ServiceItemCreatedEvent.");
             // save to ReadDB
-            Service service = new Service(@event.CategoryId,
+            ServiceItem serviceItem = new ServiceItem(@event.SiteId,
+                                                  @event.CategoryId,
                                            @event.Name,
-                                           @event.Description); //_mapper.Map<LocationRM>(message);
+                                           @event.Description,
+                                                  @event.DefaultTimeLength); //_mapper.Map<LocationRM>(message);
             try
             {
-                _serviceRepository.Add(service);
+                _serviceRepository.Add(serviceItem);
                 _serviceRepository.SaveChanges();
-                Console.WriteLine("ServiceCreatedEvent handled.");
+                Console.WriteLine("ServiceItemCreatedEvent handled.");
             }catch(Exception e){
                 Console.WriteLine(e.Message);
                 Console.WriteLine(e.InnerException.Message);
@@ -41,16 +43,15 @@ namespace Registration.Domain.EventHandlers
 
         public void Handle(ServiceCategoryCreatedEvent message)
         {
-
-            Console.WriteLine("Event handled.");
+            
+            Console.WriteLine("ServiceCategoryCreatedEvent handled.");
             // save to ReadDB
             ServiceCategory serviceCategory = new ServiceCategory(message.Id,
                                                                     message.Name,
                                                                     message.Description,
                                                                     10,
                                                                     1,
-                                                                    message.Id,
-                                                                    false); //_mapper.Map<LocationRM>(message);
+                                                                    message.SiteId); //_mapper.Map<LocationRM>(message);
             try
             {
                 _serviceCategoryRepository.Add(serviceCategory);

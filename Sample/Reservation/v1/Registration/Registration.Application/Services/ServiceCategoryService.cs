@@ -13,15 +13,15 @@ namespace Registration.Application.Services
 {
     public class ServiceCategoryService : IServiceCategoryService
     {
-        private readonly ISession _session;
+        //private readonly ISession _session;
         private readonly IServiceCategoryRepository _serviceCategoryRepository;
-        private readonly IServiceRepository _serviceRepository;
-        private readonly IMapper _mapper;
-        private readonly IEventPublisher _eventPublisher;
+        private readonly IServiceItemRepository _serviceRepository;
+        //private readonly IMapper _mapper;
+        //private readonly IEventPublisher _eventPublisher;
 
         public ServiceCategoryService(
             IServiceCategoryRepository serviceCategoryRepository,
-                                        IServiceRepository serviceRepository
+                                        IServiceItemRepository serviceRepository
                                      )
         {
             //_eventPublisher = eventPublisher;
@@ -38,27 +38,29 @@ namespace Registration.Application.Services
 
         #region Services
 
-        public Service FindService(Guid serviceId)
+        public ServiceItem FindServiceItem(Guid serviceId)
         {
-            var service =
+            var serviceItem =
             _serviceRepository.Find(serviceId);
-            var serviceCategory = this.FindServiceCategory(service.CategoryId);
+            var serviceCategory = this.FindServiceCategory(serviceItem.ServiceCategoryId);
 
-            return new Service(
+            return new ServiceItem(
+                serviceCategory.SiteId,
                 serviceCategory.Id,
-                service.Name,
-                service.Description
+                serviceItem.Name,
+                serviceItem.Description,
+                serviceItem.DefaultTimeLength
             );
         }
 
-        public IEnumerable<Service> FindServices()
+        public IEnumerable<ServiceItem> FindServiceItems()
         {
 
-            var services =
+            var serviceItems =
                 _serviceRepository.Find(_ => true)
-                                  .Include(_=>_.Category);
+                                  .Include(_=>_.ServiceCategory);
 
-            return services;
+            return serviceItems;
         }
 
         #endregion
@@ -77,10 +79,10 @@ namespace Registration.Application.Services
         public ServiceCategory FindServiceCategory(Guid serviceCategoryId)
         {
             
-            var categoriy =
+            var category =
                 _serviceCategoryRepository.Find(serviceCategoryId);
 
-            return categoriy;
+            return category;
         }
 
         #endregion

@@ -11,6 +11,7 @@ namespace Business.Application.ViewModels
         public string Name { get; set; }
         public string Description { get; set; }
         public int CancelOffset { get; set; }
-        public int ScheduleType { get; set; }
+        public int ScheduleTypeId { get; set; }
+        public Guid SiteId { get; private set; }
     }
 }

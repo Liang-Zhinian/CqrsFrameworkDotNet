@@ -1,29 +1,23 @@
 version: '3.4'
 
 services:
-  business.webapi:
-    image: business
-    build:
-      context: .
-      dockerfile: Sample/Reservation/Business.WebApi/Dockerfile
-
   registration.clientwebapi:
     image: registration
     build:
       context: .
-      dockerfile: Sample/Reservation/Registration.ClientWebApi/Dockerfile
+      dockerfile: Sample/Reservation/v1/Registration/Registration.ClientWebApi/Dockerfile
 
 
-  dockerdemo:
-    image: dockerdemo
+  business.webapi:
+    image: business
     build:
       context: .
-      dockerfile: Sample/DockerDemo/Dockerfile
+      dockerfile: Sample/Reservation/v1/Business/Business.WebApi/Dockerfile
 
+  
 
   workerrolecommandprocessor:
     image: workerrolecommandprocessor
     build:
       context: .
-      dockerfile: Sample/Reservation/WorkerRoleCommandProcessor/Dockerfile
-
+      dockerfile: Sample/Reservation/v1/WorkerRoleCommandProcessor/Dockerfile

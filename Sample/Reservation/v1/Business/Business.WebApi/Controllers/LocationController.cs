@@ -24,14 +24,105 @@ namespace Business.WebApi.Controllers
             _businessInformationService = businessInformationService;
         }
 
-        //[HttpGet]
-        //[AllowAnonymous]
-        //public JsonResult Get()
-        //{
-        //    var list = _locationService.()
-        //                            .ToList();
-        //    return Json(list);
-        //}
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("GenerateTestData")]
+        public ActionResult GenerateTestData() {
+
+            var site = _businessInformationService.FindSites().Where(_=>_.Name=="Chanel");
+
+            var location = new LocationViewModel { 
+                Name = "IFC",
+                Description = "Chanel IFC",
+            };
+            _businessInformationService.ProvisionLocation(location);
+            _businessInformationService.SetLocationAddress(location.SiteId, location.Id,
+                                                           "IFC", "",
+                                                           "Hongkong", "Hongkong", "", "China");
+            _businessInformationService.SetLocationGeolocation(location.SiteId, location.Id, 22.28588, 114.158131);
+
+
+            /////////////////////////
+            /// 
+            location = new LocationViewModel
+            {
+                Name = "HM3",
+                Description = "Chanel Prince's Building",
+            };
+            _businessInformationService.ProvisionLocation(location);
+            _businessInformationService.SetLocationAddress(location.SiteId, location.Id,
+                                                           "Prince's Building", "",
+                                                           "Hongkong", "Hongkong", "", "China");
+            _businessInformationService.SetLocationGeolocation(location.SiteId, location.Id, 22.2812257, 114.159262799999);
+            
+            /////////////////////////
+            /// 
+            location = new LocationViewModel
+            {
+                Name = "HHP",
+                Description = "Chanel Hysan Place",
+            };
+            _businessInformationService.ProvisionLocation(location);
+            _businessInformationService.SetLocationAddress(location.SiteId, location.Id,
+                                                           "Hysan Place", "",
+                                                           "Hongkong", "Hongkong", "", "China");
+            _businessInformationService.SetLocationGeolocation(location.SiteId, location.Id, 22.2798079, 114.1837883);
+            
+            /////////////////////////
+            ///
+            location = new LocationViewModel
+            {
+                Name = "HEM",
+                Description = "Chanel Elements",
+            };
+            _businessInformationService.ProvisionLocation(location);
+            _businessInformationService.SetLocationAddress(location.SiteId, location.Id,
+                                                           "Elements", "",
+                                                           "Hongkong", "Hongkong", "", "China");
+            _businessInformationService.SetLocationGeolocation(location.SiteId, location.Id, 22.3048708, 114.1615219);
+            
+            /////////////////////////
+            ///
+            location = new LocationViewModel
+            {
+                Name = "HFW",
+                Description = "Chanel Festival Walk",
+            };
+            _businessInformationService.ProvisionLocation(location);
+            _businessInformationService.SetLocationAddress(location.SiteId, location.Id,
+                                                           "Festival Walk", "",
+                                                           "Hongkong", "Hongkong", "", "China");
+            _businessInformationService.SetLocationGeolocation(location.SiteId, location.Id, 22.3372971, 114.1745273);
+            
+            /////////////////////////
+            ///
+            location = new LocationViewModel
+            {
+                Name = "HTP",
+                Description = "Chanel Telford Plaza",
+            };
+            _businessInformationService.ProvisionLocation(location);
+            _businessInformationService.SetLocationAddress(location.SiteId, location.Id,
+                                                           "Telford Plaza", "",
+                                                           "Hongkong", "Hongkong", "", "China");
+            _businessInformationService.SetLocationGeolocation(location.SiteId, location.Id, 22.3210652, 114.2132768);
+            
+            /////////////////////////
+            ///
+            location = new LocationViewModel
+            {
+                Name = "HNT",
+                Description = "Chanel New Town Plaza",
+            };
+            _businessInformationService.ProvisionLocation(location);
+            _businessInformationService.SetLocationAddress(location.SiteId, location.Id,
+                                                           "New Town Plaza", "",
+                                                           "Hongkong", "Hongkong", "", "China");
+            _businessInformationService.SetLocationGeolocation(location.SiteId, location.Id, 22.3814592, 114.1889307);
+
+
+            return Ok();
+        }
 
         [HttpGet]
         //[Authorize(Policy = "CanWriteTenantData")]

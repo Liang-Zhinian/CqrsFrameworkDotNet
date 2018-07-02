@@ -30,33 +30,6 @@ namespace Registration.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "V_ServiceCategory",
-                schema: "book2",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
-                    CancelOffset = table.Column<int>(nullable: false),
-                    Description = table.Column<string>(type: "varchar(2000)", nullable: false),
-                    IsInternal = table.Column<bool>(nullable: false),
-                    LastModified = table.Column<DateTime>(nullable: false),
-                    Name = table.Column<string>(type: "varchar(255)", nullable: false),
-                    ParentCategoryId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    ScheduleTypeValue = table.Column<int>(nullable: false),
-                    SiteId = table.Column<Guid>(type: "char(36)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_V_ServiceCategory", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_V_ServiceCategory_V_ServiceCategory_ParentCategoryId",
-                        column: x => x.ParentCategoryId,
-                        principalSchema: "book2",
-                        principalTable: "V_ServiceCategory",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "V_Tenant",
                 schema: "book2",
                 columns: table => new
@@ -99,41 +72,6 @@ namespace Registration.Infra.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_V_TimeZone", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "V_HomePageImage",
-                schema: "book2",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    CategoryId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    CategoryName = table.Column<string>(type: "varchar(255)", nullable: false),
-                    Data = table.Column<string>(type: "mediumtext", nullable: false),
-                    LastModified = table.Column<DateTime>(nullable: false),
-                    Name = table.Column<string>(type: "varchar(255)", nullable: false),
-                    ParentCategoryId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    ParentCategoryName = table.Column<string>(type: "varchar(255)", nullable: false),
-                    Version = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_V_HomePageImage", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_V_HomePageImage_V_ServiceCategory_CategoryId",
-                        column: x => x.CategoryId,
-                        principalSchema: "book2",
-                        principalTable: "V_ServiceCategory",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_V_HomePageImage_V_ServiceCategory_ParentCategoryId",
-                        column: x => x.ParentCategoryId,
-                        principalSchema: "book2",
-                        principalTable: "V_ServiceCategory",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -205,29 +143,23 @@ namespace Registration.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "V_Service",
+                name: "V_ServiceCategory",
                 schema: "book2",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
-                    CategoryId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    CancelOffset = table.Column<int>(nullable: false),
                     Description = table.Column<string>(type: "varchar(2000)", nullable: false),
                     LastModified = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(type: "varchar(255)", nullable: false),
+                    ScheduleTypeId = table.Column<int>(nullable: false),
                     SiteId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_V_Service", x => x.Id);
+                    table.PrimaryKey("PK_V_ServiceCategory", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_V_Service_V_ServiceCategory_CategoryId",
-                        column: x => x.CategoryId,
-                        principalSchema: "book2",
-                        principalTable: "V_ServiceCategory",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_V_Service_V_Site_SiteId",
+                        name: "FK_V_ServiceCategory_V_Site_SiteId",
                         column: x => x.SiteId,
                         principalSchema: "book2",
                         principalTable: "V_Site",
@@ -307,6 +239,73 @@ namespace Registration.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "V_HomePageImage",
+                schema: "book2",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    CategoryId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    CategoryName = table.Column<string>(type: "varchar(255)", nullable: false),
+                    Data = table.Column<string>(type: "mediumtext", nullable: false),
+                    LastModified = table.Column<DateTime>(nullable: false),
+                    Name = table.Column<string>(type: "varchar(255)", nullable: false),
+                    ParentCategoryId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    ParentCategoryName = table.Column<string>(type: "varchar(255)", nullable: false),
+                    Version = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_V_HomePageImage", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_V_HomePageImage_V_ServiceCategory_CategoryId",
+                        column: x => x.CategoryId,
+                        principalSchema: "book2",
+                        principalTable: "V_ServiceCategory",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_V_HomePageImage_V_ServiceCategory_ParentCategoryId",
+                        column: x => x.ParentCategoryId,
+                        principalSchema: "book2",
+                        principalTable: "V_ServiceCategory",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "V_ServiceItem",
+                schema: "book2",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
+                    DefaultTimeLength = table.Column<int>(nullable: false),
+                    Description = table.Column<string>(type: "varchar(2000)", nullable: false),
+                    LastModified = table.Column<DateTime>(nullable: false),
+                    Name = table.Column<string>(type: "varchar(255)", nullable: false),
+                    ServiceCategoryId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    SiteId = table.Column<Guid>(type: "char(36)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_V_ServiceItem", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_V_ServiceItem_V_ServiceCategory_ServiceCategoryId",
+                        column: x => x.ServiceCategoryId,
+                        principalSchema: "book2",
+                        principalTable: "V_ServiceCategory",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_V_ServiceItem_V_Site_SiteId",
+                        column: x => x.SiteId,
+                        principalSchema: "book2",
+                        principalTable: "V_Site",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "V_StaffLoginLocation",
                 schema: "book2",
                 columns: table => new
@@ -375,22 +374,22 @@ namespace Registration.Infra.Data.Migrations
                 column: "SiteId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_V_Service_CategoryId",
+                name: "IX_V_ServiceCategory_SiteId",
                 schema: "book2",
-                table: "V_Service",
-                column: "CategoryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_V_Service_SiteId",
-                schema: "book2",
-                table: "V_Service",
+                table: "V_ServiceCategory",
                 column: "SiteId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_V_ServiceCategory_ParentCategoryId",
+                name: "IX_V_ServiceItem_ServiceCategoryId",
                 schema: "book2",
-                table: "V_ServiceCategory",
-                column: "ParentCategoryId");
+                table: "V_ServiceItem",
+                column: "ServiceCategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_V_ServiceItem_SiteId",
+                schema: "book2",
+                table: "V_ServiceItem",
+                column: "SiteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_V_Site_TenantId",
@@ -438,7 +437,7 @@ namespace Registration.Infra.Data.Migrations
                 schema: "book2");
 
             migrationBuilder.DropTable(
-                name: "V_Service",
+                name: "V_ServiceItem",
                 schema: "book2");
 
             migrationBuilder.DropTable(

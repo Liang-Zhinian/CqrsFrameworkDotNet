@@ -10,8 +10,8 @@ namespace Registration.Application.Interfaces
         // service category service
         IEnumerable<ServiceCategory> FindServiceCategories();
         ServiceCategory FindServiceCategory(Guid serviceCategoryId);
-        IEnumerable<Service> FindServices();
-        Service FindService(Guid serviceId);
+        IEnumerable<ServiceItem> FindServiceItems();
+        ServiceItem FindServiceItem(Guid serviceId);
         //void AddService(ServiceViewModel service);
 
     }

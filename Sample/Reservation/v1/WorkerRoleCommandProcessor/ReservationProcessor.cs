@@ -15,29 +15,6 @@ using Registration.Infra.Data.Repositories;
 
 namespace WorkerRoleCommandProcessor
 {
-    public class TemporaryDbContextFactory : IDesignTimeDbContextFactory<ReservationDbContext>
-    {
-        public ReservationDbContext CreateDbContext(string[] args)
-        {
-            var configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .Build();
-
-            var builder = new DbContextOptionsBuilder<ReservationDbContext>();
-
-            var connectionString = configuration.GetConnectionString("DefaultConnection");
-
-            builder.UseSqlServer(connectionString);
-
-            // Stop client query evaluation
-            builder.ConfigureWarnings(w =>
-                w.Throw(RelationalEventId.QueryClientEvaluationWarning));
-
-            return new ReservationDbContext(builder.Options);
-        }
-    }
-
     public class ReservationProcessor : IDisposable
     {
         private ServiceProvider serviceProvider;
@@ -88,7 +65,7 @@ namespace WorkerRoleCommandProcessor
             services
                 .AddDbContext<ReservationDbContext>(config =>
                     {
-                        config.UseMySql(configuration.GetConnectionString("DefaultConnection"));
+                        config.UseMySql(configuration["ConnectionString"]);
                     }, ServiceLifetime.Scoped)
                 .AddLogging()
                 .AddScoped(typeof(IReadDbRepository<>), typeof(ReadDbRepository<>))
@@ -96,12 +73,12 @@ namespace WorkerRoleCommandProcessor
                 .AddScoped<ISiteRepository, SiteRepository>()
                 .AddScoped<ILocationRepository, LocationRepository>()
                 .AddScoped<IServiceCategoryRepository, ServiceCategoryRepository>()
-                .AddScoped<IServiceRepository, ServiceRepository>()
+                .AddScoped<IServiceItemRepository, ServiceItemRepository>()
                 .AddScoped<TenantEventHandler>(y => new TenantEventHandler(y.GetService<ITenantRepository>()))
                 .AddScoped<SiteEventHandler>(y => new SiteEventHandler(y.GetService<ISiteRepository>()))
                 .AddScoped<LocationEventHandler>(y => new LocationEventHandler(y.GetService<ILocationRepository>()))
                 .AddScoped<ServiceCategoryEventHandler>(y => new ServiceCategoryEventHandler(y.GetService<IServiceCategoryRepository>(),
-                                                                                             y.GetService<IServiceRepository>()))
+                                                                                             y.GetService<IServiceItemRepository>()))
                 .AddSingleton(new TestEventHandler())
 
                 .AddRabbitMQEventBusSetup(configuration);

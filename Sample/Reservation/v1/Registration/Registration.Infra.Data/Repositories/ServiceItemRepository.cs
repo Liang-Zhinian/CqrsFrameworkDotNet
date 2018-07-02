@@ -5,8 +5,8 @@ using Registration.Infra.Data.Context;
 
 namespace Registration.Infra.Data.Repositories
 {
-    public class ServiceRepository : ReadDbRepository<Service>, IServiceRepository
+    public class ServiceItemRepository : ReadDbRepository<ServiceItem>, IServiceItemRepository
     {
-        public ServiceRepository(ReservationDbContext context) : base(context) { }
+        public ServiceItemRepository(ReservationDbContext context) : base(context) { }
     }
 }

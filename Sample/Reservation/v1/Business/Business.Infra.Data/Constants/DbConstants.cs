@@ -57,7 +57,7 @@ namespace Business.Infra.Data.Constants
         public static string ScheduleLayoutTable { get; set; }
         public static string ScheduleLayoutTimeSlotTable { get; set; }
 
-        public static string ServiceTable { get; set; }
+        public static string ServiceItemTable { get; set; }
         public static string ServiceCategoryTable { get; set; }
 
 
@@ -97,7 +97,7 @@ namespace Business.Infra.Data.Constants
             ScheduleLayoutTable = "ScheduleLayout";
             ScheduleLayoutTimeSlotTable = "ScheduleLayoutTimeSlot";
 
-            ServiceTable = "Service";
+            ServiceItemTable = "ServiceItem";
             ServiceCategoryTable = "ServiceCategory";
 
 

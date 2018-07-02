@@ -121,7 +121,7 @@ namespace Business.Application.Services
                                                         postalAddress.StateProvince, postalAddress.PostalCode,
                                                         postalAddress.CountryCode));
 
-            _locationRepository.SaveChanges();
+            _locationRepository.UnitOfWork.Commit();
 
         }
 
@@ -134,7 +134,7 @@ namespace Business.Application.Services
 
             _eventPublisher.Publish<LocationGeolocationChangedEvent>(new LocationGeolocationChangedEvent(location.Id, location.SiteId, geolocation.Latitude, geolocation.Longitude));
 
-            _locationRepository.SaveChanges();
+            _locationRepository.UnitOfWork.Commit();
         }
 
         public void SetLocationImage(Guid siteId, Guid locationId, byte[] image)
@@ -145,10 +145,24 @@ namespace Business.Application.Services
 
             _eventPublisher.Publish<LocationImageChangedEvent>(new LocationImageChangedEvent(location.Id, location.SiteId, image));
 
-            _locationRepository.SaveChanges();
+            _locationRepository.UnitOfWork.Commit();
 
             //_eventStoreSession.Get<Location>(locationId);
             //_eventStoreSession.Commit();
+        }
+
+        public IEnumerable<SiteViewModel> FindSites()
+        {
+            var sites = _siteRepository.Find(_ => true);
+            return from s in sites
+                   select new SiteViewModel
+                   {
+                       Id = s.Id,
+                       Name = s.Name,
+                       Description = s.Description,
+                        TenantId = s.TenantId.Id,
+
+                   };
         }
     }
 }

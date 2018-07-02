@@ -7,6 +7,7 @@ using CqrsFramework.Events;
 using CqrsFramework.Messages;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Polly;
 using Polly.Retry;
 using RabbitMQ.Client;
@@ -34,41 +35,9 @@ namespace CqrsFramework.Bus.RabbitMQ
 
         private readonly Dictionary<Type, List<Action<IMessage>>> _routes = new Dictionary<Type, List<Action<IMessage>>>();
 
+
         //public event EventHandler<MessageReceivedEventArgs> MessageReceived;
 
-
-
-        //public RabbitMQBus(string hostName,
-        //    string exchangeName,
-        //    string exchangeType = ExchangeType.Fanout,
-        //    string queueName = null,
-        //    bool autoAck = false)
-        //    : this(new ConnectionFactory() { HostName = hostName },
-        //           exchangeName,
-        //           exchangeType,
-        //           queueName,
-        //           autoAck)
-        //{
-        //}
-
-        //public RabbitMQBus(ConnectionFactory connectionFactory,
-        //    string exchangeName,
-        //    string exchangeType = ExchangeType.Fanout,
-        //    string queueName = null,
-        //    bool autoAck = false)
-        //{
-        //    this._connectionFactory = connectionFactory;
-        //    this._connection = this._connectionFactory.CreateConnection();
-        //    this._consumerChannel = this._connection.CreateModel();
-        //    this._exchangeType = exchangeType;
-        //    this._exchangeName = exchangeName;
-        //    this._autoAck = autoAck;
-        //    this._queueName = queueName;
-
-        //    this._consumerChannel.ExchangeDeclare(this._exchangeName, this._exchangeType, true, false);
-
-        //    //this.queueName = this.ReceiveMessages(queueName);
-        //}
 
         public RabbitMQBus(IRabbitMQPersistentConnection persistentConnection, 
                            ILogger<RabbitMQBus> logger,
@@ -85,6 +54,7 @@ namespace CqrsFramework.Bus.RabbitMQ
             this._exchangeName = exchangeName;
             _queueName = queueName;
             this._autoAck = autoAck;
+            _consumerChannel = CreateConsumerChannel();
         }
 
         #region public methods
@@ -104,40 +74,29 @@ namespace CqrsFramework.Bus.RabbitMQ
                 _routes.Add(typeof(T), handlers);
             }
             handlers.Add(DelegateAdjuster.CastArgument<IMessage, T>(x => handler(x)));
+            DoInternalSubscription(typeof(T).Name);
         }
 
         public void Send<T>(T command) where T : ICommand
         {
-            string message = JsonConvert.SerializeObject(command/*, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All }*/);
-            byte[] body = Encoding.UTF8.GetBytes(message);
+            string message = JsonConvert.SerializeObject(command, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All });
+            //byte[] body = Encoding.UTF8.GetBytes(message);
 
-            var properties = new BasicProperties();
-            properties.Headers = new Dictionary<string, object>
-                    {
-                        { "type", "1" }
-                    };
-
-            SendMessage(body, command.GetType().FullName, properties);
+            SendMessage(message, command.GetType().Name);
         }
 
         public void Publish<T>(T @event) where T : IEvent
         {
-            string message = JsonConvert.SerializeObject(@event/*, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All }*/);
-            var body = Encoding.UTF8.GetBytes(message);
+            string message = JsonConvert.SerializeObject(@event, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All });
+            //var body = Encoding.UTF8.GetBytes(message);
 
-            var properties = new BasicProperties();
-            properties.Headers = new Dictionary<string, object>
-                    {
-                        { "type", "1" }
-                    };
-
-            SendMessage(body, @event.GetType().FullName, properties);
+            SendMessage(message, @event.GetType().Name);
         }
 
         public void Start()
         {
             //this._queueName = this.ReceiveMessages(this._queueName);
-            _consumerChannel = CreateConsumerChannel();
+            //_consumerChannel = CreateConsumerChannel();
         }
 
         public void Stop()
@@ -161,8 +120,10 @@ namespace CqrsFramework.Bus.RabbitMQ
 
         #region private methods
 
-        private void SendMessage(byte[] body, string routingKey = "", BasicProperties basicProperties = null)
+        private void SendMessage(string message, string routingKey = "")
         {
+            var body = Encoding.UTF8.GetBytes(message);
+
             if (!_persistentConnection.IsConnected)
             {
                 _persistentConnection.TryConnect();
@@ -183,9 +144,12 @@ namespace CqrsFramework.Bus.RabbitMQ
 
                 policy.Execute(() =>
                 {
+                    var properties = channel.CreateBasicProperties();
+                    properties.DeliveryMode = 2; // persistent
+
                     channel.BasicPublish(exchange: _exchangeName,
                                  routingKey: routingKey,
-                                 basicProperties: basicProperties,
+                                         basicProperties: properties,
                                          body: body);
                 });
             }
@@ -253,24 +217,29 @@ namespace CqrsFramework.Bus.RabbitMQ
 
             channel.ExchangeDeclare(this._exchangeName, this._exchangeType, true, false);
 
-            //_queueName = channel.QueueDeclare().QueueName;
-            if (string.IsNullOrEmpty(_queueName))
-            {
-                _queueName = this._consumerChannel.QueueDeclare().QueueName;
-            }
-            else
-            {
-                channel.QueueDeclare(_queueName, true, false, false, null);
-            }
+
+            channel.QueueDeclare(queue: _queueName,
+                                 durable: true,
+                                 exclusive: false,
+                                 autoDelete: false,
+                                 arguments: null);
 
 
             var consumer = new EventingBasicConsumer(channel);
             consumer.Received += (model, ea) =>
             {
-                //var eventName = ea.RoutingKey;
+                var eventName = ea.RoutingKey;
                 var message = Encoding.UTF8.GetString(ea.Body);
 
-                ProcessEvent(ea, message);
+                ProcessEvent(eventName, message);
+
+                if (!_autoAck)
+                {
+                    channel.BasicAck(ea.DeliveryTag, multiple: false);
+                    Console.WriteLine(" Ack sent: {0}", message);
+                    _logger.LogInformation($"Ack sent: \n" + message);
+                }
+
             };
 
             channel.BasicConsume(queue: _queueName,
@@ -287,7 +256,7 @@ namespace CqrsFramework.Bus.RabbitMQ
             return channel;
         }
 
-        private void ProcessEvent(BasicDeliverEventArgs ea, string message)
+        private void ProcessEvent(string eventName, string message)
         {
             Console.WriteLine(" [x] {0}", message);
             _logger.LogInformation($"RabbitMQBus is processing an event: \n" + message);
@@ -295,14 +264,13 @@ namespace CqrsFramework.Bus.RabbitMQ
             //this.MessageReceived(this, new MessageReceivedEventArgs(message));
             try
             {
-                dynamic eventData = JsonConvert.DeserializeObject(message/*, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All }*/);
+                dynamic eventData = JsonConvert.DeserializeObject(message, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All });
                 var @event = (IEvent)eventData;
                 List<Action<IMessage>> handlers;
                 if (!_routes.TryGetValue(@event.GetType(), out handlers)) return;
-                //Console.WriteLine(" Count of Handlers: {0}", handlers.Count);
                 foreach (var handler in handlers)
                     handler(@event);
-
+                
             }
             catch (Exception e)
             {
@@ -311,13 +279,31 @@ namespace CqrsFramework.Bus.RabbitMQ
                 throw e;
             }
 
-            if (!_autoAck)
-            {
-                _consumerChannel.BasicAck(ea.DeliveryTag, false);
-                Console.WriteLine(" Ack sent: {0}", message);
-                _logger.LogInformation($"Ack sent: \n" + message);
-            }
+            //if (!_autoAck)
+            //{
+            //    _consumerChannel.BasicAck(ea.DeliveryTag, false);
+            //    Console.WriteLine(" Ack sent: {0}", message);
+            //    _logger.LogInformation($"Ack sent: \n" + message);
+            //}
         }
+
+        private void DoInternalSubscription(string eventName)
+        {
+
+            if (!_persistentConnection.IsConnected)
+            {
+                _persistentConnection.TryConnect();
+            }
+
+            using (var channel = _persistentConnection.CreateModel())
+            {
+                channel.QueueBind(queue: _queueName,
+                                  exchange: this._exchangeName,
+                                  routingKey: eventName);
+            }
+
+        }
+
         #endregion
     }
 }

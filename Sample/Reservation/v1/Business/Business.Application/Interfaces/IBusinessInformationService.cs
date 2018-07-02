@@ -7,6 +7,7 @@ namespace Business.Application.Interfaces
 {
     public interface IBusinessInformationService
     {
+        IEnumerable<SiteViewModel> FindSites();
         SiteViewModel ProvisionSite(string tenantId, string siteName, string siteDescription, bool active);
         LocationViewModel ProvisionLocation(LocationViewModel locationViewModel);
         LocationViewModel FindLocation(Guid locationId);

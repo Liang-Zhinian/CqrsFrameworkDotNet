@@ -6,50 +6,68 @@ using Business.Application.Interfaces;
 using Business.Application.ViewModels;
 using Business.Contracts.Events.ServiceCategory;
 using Business.Domain.Entities;
+using Business.Domain.Entities.ServiceCategories;
 using Business.Domain.Repositories;
+using Business.Domain.Services;
 using CqrsFramework.Domain;
 using CqrsFramework.Events;
 
 namespace Business.Application.Services
 {
-    /*
+    
     public class ServiceCategoryService : IServiceCategoryService
     {
-        private readonly ISession _session;
+        //private readonly ISession _session;
+        private readonly IIntegrationEventService _integrationEventService;
         private readonly IServiceCategoryRepository _serviceCategoryRepository;
-        private readonly IServiceRepository _serviceRepository;
+        private readonly IServiceItemRepository _serviceItemRepository;
         private readonly IMapper _mapper;
         private readonly IEventPublisher _eventPublisher;
 
-        public ServiceCategoryService(IEventPublisher eventPublisher,
-                                        ISession session,
+        public ServiceCategoryService(
+                                        IIntegrationEventService integrationEventService,
+                                        IEventPublisher eventPublisher,
+                                        //ISession session,
                                         IMapper mapper,
                                         IServiceCategoryRepository serviceCategoryRepository,
-                                        IServiceRepository serviceRepository
+                                      IServiceItemRepository serviceItemRepository
                                      )
         {
+            _integrationEventService = integrationEventService;
             _eventPublisher = eventPublisher;
-            _session = session;
+            //_session = session;
             _mapper = mapper;
             _serviceCategoryRepository = serviceCategoryRepository;
-            _serviceRepository = serviceRepository;
+            _serviceItemRepository = serviceItemRepository;
         }
 
-        public void AddService(ServiceViewModel service)
+        public void AddServiceItem(ServiceItemViewModel serviceItem)
         {
-            var domainservice = new Service(
-                service.ServiceCategoryId,
-                service.Name,
-                service.Description
+            var domainservice = new ServiceItem(
+                serviceItem.SiteId,
+                serviceItem.Name,
+                serviceItem.Description,
+                serviceItem.DefaultTimeLength,
+                serviceItem.ServiceCategoryId
             );
-            _serviceRepository.Add(domainservice);
-            _serviceRepository.SaveChanges();
+            _serviceItemRepository.Add(domainservice);
+            //_serviceItemRepository.SaveChanges();
 
-            _eventPublisher.Publish<ServiceCreatedEvent>(new ServiceCreatedEvent(Guid.NewGuid(),
-                                                                                 service.Name,
-                                                                                 service.Description,
-                                                                                 service.ServiceCategoryId
-                                                                                ));
+            //_eventPublisher.Publish<ServiceCreatedEvent>(new ServiceCreatedEvent(Guid.NewGuid(),
+            // service.Name,
+            // service.Description,
+            // service.ServiceCategoryId
+            //));
+
+            var serviceItemCreatedEvent = new ServiceItemCreatedEvent(Guid.NewGuid(),
+                                                                                 serviceItem.Name,
+                                                                                 serviceItem.Description,
+                                                                      serviceItem.DefaultTimeLength,
+                                                                                 serviceItem.ServiceCategoryId,
+                                                                      serviceItem.SiteId
+                                                                 );
+
+            _integrationEventService.PublishThroughEventBus(serviceItemCreatedEvent);
         }
 
         public void Dispose()
@@ -57,12 +75,12 @@ namespace Business.Application.Services
             GC.SuppressFinalize(this);
         }
 
-        public ServiceViewModel FindService(Guid serviceId)
+        public ServiceItemViewModel FindServiceItem(Guid serviceItemId)
         {
             var service =
-            _serviceRepository.Find(serviceId);
+                _serviceItemRepository.Find(serviceItemId);
 
-            return new ServiceViewModel
+            return new ServiceItemViewModel
             {
                 Id = service.Id,
                 Name = service.Name,
@@ -98,43 +116,55 @@ namespace Business.Application.Services
                 Id = categoriy.Id,
                 Name = categoriy.Name,
                 Description = categoriy.Description,
-                ScheduleType = categoriy.ScheduleTypeValue,
+                ScheduleTypeId = categoriy.ScheduleTypeId,
                 CancelOffset = categoriy.CancelOffset
             };
         }
 
-        public IEnumerable<ServiceViewModel> FindServices()
+        public IEnumerable<ServiceItemViewModel> FindServiceItems()
         {
 
-            var services =
-            _serviceRepository.Find(_ => true);
+            var serviceItems =
+                _serviceItemRepository.Find(_ => true);
 
-            return from service in services
-                   select new ServiceViewModel
+            return from service in serviceItems
+                   select new ServiceItemViewModel
                    {
                        Id = service.Id,
                        Name = service.Name,
                        Description = service.Description,
-                ServiceCategoryId = service.CategoryId,
-                ServiceCategoryName = service.Category.Name
+                ServiceCategoryId = service.ServiceCategoryId,
+                ServiceCategoryName = service.ServiceCategory.Name
                    };
         }
 
         public void AddServiceCategory(ServiceCategoryViewModel serviceCategory) {
             var domainServiceCategory = new ServiceCategory(
+                serviceCategory.SiteId,
                 serviceCategory.Name,
-                serviceCategory.Description
+                serviceCategory.Description,
+                serviceCategory.CancelOffset,
+                serviceCategory.ScheduleTypeId
             );
             _serviceCategoryRepository.Add(domainServiceCategory);
-            _serviceCategoryRepository.SaveChanges();
+            //_serviceCategoryRepository.SaveChanges();
 
-            _eventPublisher.Publish<ServiceCategoryCreatedEvent>(
-                new ServiceCategoryCreatedEvent(domainServiceCategory.Id,
+            //_eventPublisher.Publish<ServiceCategoryCreatedEvent>(
+            //new ServiceCategoryCreatedEvent(domainServiceCategory.Id,
+            //serviceCategory.Name,
+            //serviceCategory.Description,
+            //serviceCategory.CancelOffset,
+            //serviceCategory.ScheduleTypeId
+            //));
+            var serviceCategoryCreatedEvent = new ServiceCategoryCreatedEvent(domainServiceCategory.Id,
                            serviceCategory.Name,
                                                 serviceCategory.Description,
                                                 serviceCategory.CancelOffset,
-                                                serviceCategory.ScheduleType
-                                                                              ));
+                                                serviceCategory.ScheduleTypeId,
+                                                                              serviceCategory.SiteId
+                                                                             );
+
+            _integrationEventService.PublishThroughEventBus(serviceCategoryCreatedEvent);
         }
-    }*/
+    }
 }

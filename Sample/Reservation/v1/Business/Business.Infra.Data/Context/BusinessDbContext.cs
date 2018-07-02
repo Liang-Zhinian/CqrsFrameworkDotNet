@@ -1,12 +1,13 @@
 ﻿using Business.Domain.Entities;
 using Business.Domain.Entities.Schedules;
 using Business.Domain.Entities.ServiceCategories;
+using Business.Domain.UoW;
 using Business.Infra.Data.Mappings;
 using Microsoft.EntityFrameworkCore;
 
 namespace Business.Infra.Data.Context
 {
-    public class BusinessDbContext : DbContext
+    public class BusinessDbContext : DbContext, IUnitOfWork
     {
 
         //public DbSet<TenantAddress> TenantAddresses { get; set; }
@@ -80,6 +81,13 @@ namespace Business.Infra.Data.Context
             //      ("LastModified");
             //    //modelBuilder.Entity(entityType.Name).Ignore("IsDirty");
             //}
+        }
+
+        public bool Commit()
+        {
+            var result = this.SaveChanges();
+
+            return true;
         }
 
         //public override int SaveChanges()
