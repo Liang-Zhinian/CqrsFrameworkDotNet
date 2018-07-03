@@ -29,6 +29,8 @@ namespace SaaSEqt.IdentityAccess.Application
                     Console.WriteLine("Persisting domain event.");
                     this.eventStore.Append(domainEvent);
                     //}
+
+                // to do: public event
                 });
 
         }
