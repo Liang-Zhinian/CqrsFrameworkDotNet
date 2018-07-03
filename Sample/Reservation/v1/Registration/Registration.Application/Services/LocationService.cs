@@ -9,21 +9,23 @@ using Registration.Domain.ReadModel;
 using CqrsFramework.Domain;
 using System.Linq;
 using Registration.Domain.ReadModel.Security;
+using Microsoft.EntityFrameworkCore;
 
 namespace Registration.Application.Services
 {
     public class LocationService : ILocationService
     {
-        private readonly ISession _session;
+        //private readonly ISession _session;
         private readonly ILocationRepository _locationRepository;
         private readonly IMapper _mapper;
 
-        public LocationService(ISession session, 
+        public LocationService(
+            //ISession session, 
                              IMapper mapper,
                           ILocationRepository locationRepository
                               )
         {
-            _session = session;
+            //_session = session;
             _mapper = mapper;
             _locationRepository = locationRepository;
         }
@@ -42,7 +44,7 @@ namespace Registration.Application.Services
 
         public IEnumerable<Location> FindLocations()
         {
-            var locations = _locationRepository.Find(_ => true);
+            var locations = _locationRepository.Find(_ => true).Include(_=>_.AdditionalLocationImages);
             return locations;
 
         }

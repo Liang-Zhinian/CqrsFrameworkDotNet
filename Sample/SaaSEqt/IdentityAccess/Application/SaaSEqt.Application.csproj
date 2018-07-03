@@ -15,4 +15,7 @@
     <ProjectReference Include="..\IdentityAccess.Infra.Data\SaaSEqt.IdentityAccess.Infra.Data.csproj" />
     <ProjectReference Include="..\..\Common\SaaSEqt.Common.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.8.1" />
+  </ItemGroup>
 </Project>

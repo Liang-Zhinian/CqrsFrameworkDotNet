@@ -162,6 +162,8 @@ namespace CqrsFramework.Bus.RabbitMQ
 
         private IModel CreateConsumerChannel()
         {
+            Task.Delay(3000);
+
             if (!_persistentConnection.IsConnected)
             {
                 _persistentConnection.TryConnect();

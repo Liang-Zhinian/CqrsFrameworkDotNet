@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using Autofac;
 using Business.Application.Interfaces;
 using Business.Application.Services;
 using Business.Domain.Repositories;
@@ -35,8 +36,8 @@ namespace Business.WebApi.Configurations
 
         private static void RegisterWriteDb(IServiceCollection services)
         {
-            services.AddScoped<BusinessDbContext>();
-            services.AddScoped<IdentityAccessDbContext>();
+            //services.AddScoped<BusinessDbContext>();
+            //services.AddScoped<IdentityAccessDbContext>();
             services.AddScoped<ISiteRepository, SiteRepository>();
             services.AddScoped<ITenantAddressRepository, TenantAddressRepository>();
             services.AddScoped<ITenantContactRepository, TenantContactRepository>();
@@ -86,9 +87,14 @@ namespace Business.WebApi.Configurations
 
         private static void RegisterIdentityAccessEventProcessor(IServiceCollection services){
             services
-                .AddScoped<SaaSEqt.Common.Events.IEventStore, SaaSEqt.IdentityAccess.Infra.Services.MySqlEventStore>()
-                .AddScoped<IdentityAccessEventProcessor>();
-            
+                .AddSingleton<SaaSEqt.Common.Events.IEventStore, SaaSEqt.IdentityAccess.Infra.Services.MySqlEventStore>()
+                .AddSingleton<IdentityAccessEventProcessor>(sp =>
+                {
+                    var eventStore = sp.GetRequiredService<SaaSEqt.Common.Events.IEventStore>();
+                    var iLifetimeScope = sp.GetRequiredService<ILifetimeScope>();
+
+                    return new IdentityAccessEventProcessor(eventStore, iLifetimeScope);
+                });
         }
 
         private static void ConfigureIdentityAccessEventProcessor(IServiceCollection services){

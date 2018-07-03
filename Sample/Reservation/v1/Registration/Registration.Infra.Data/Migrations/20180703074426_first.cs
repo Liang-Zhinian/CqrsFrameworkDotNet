@@ -214,7 +214,7 @@ namespace Registration.Infra.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
-                    Image = table.Column<byte[]>(type: "varchar(255)", nullable: false),
+                    Image = table.Column<byte[]>(nullable: true),
                     LastModified = table.Column<DateTime>(nullable: false),
                     LocationId = table.Column<Guid>(type: "char(36)", nullable: false),
                     SiteId = table.Column<Guid>(type: "char(36)", nullable: false)

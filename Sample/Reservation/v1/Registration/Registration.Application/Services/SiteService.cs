@@ -15,14 +15,15 @@ namespace Registration.Application.Services
 {
     public class SiteService : ISiteService
     {
-        private readonly ISession _session;
+        //private readonly ISession _session;
         private readonly ISiteRepository _siteRepository;
 
-        public SiteService(ISession session,
+        public SiteService(
+            //ISession session,
                                ISiteRepository siteRepository
                               )
         {
-            _session = session;
+            //_session = session;
             _siteRepository = siteRepository;
         }
 

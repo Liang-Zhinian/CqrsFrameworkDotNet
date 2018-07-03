@@ -13,7 +13,7 @@ namespace Registration.Infra.Data.Mappings
             base.Configure(builder, Constants.DbConstants.LocationImageTable);
 
             builder.Property<Guid>(_ => _.LocationId).IsRequired().HasColumnType(Constants.DbConstants.KeyType);
-            builder.Property(_ => _.Image).IsRequired().HasColumnType(Constants.DbConstants.String255);
+            builder.Property(_ => _.Image);
             //builder.Property<Guid>("SiteId").HasColumnType(Constants.DbConstants.KeyType);
             //builder.Property<Guid>("TenantId").HasColumnType(Constants.DbConstants.String36);
 

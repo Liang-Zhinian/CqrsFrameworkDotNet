@@ -39,4 +39,7 @@
   <ItemGroup>
     <Compile Remove="Utils\MaintenanceModeAttribute.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pics\" />
+  </ItemGroup>
 </Project>

@@ -150,9 +150,7 @@ namespace Registration.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<byte[]>("Image")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
+                    b.Property<byte[]>("Image");
 
                     b.Property<DateTime>("LastModified");
 

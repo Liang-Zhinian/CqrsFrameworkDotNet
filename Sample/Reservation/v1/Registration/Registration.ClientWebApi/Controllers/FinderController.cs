@@ -3,6 +3,7 @@ using Registration.Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using Registration.ClientWebApi.Requests;
 
 namespace Registration.ClientWebApi.Controllers
 {
@@ -30,12 +31,7 @@ namespace Registration.ClientWebApi.Controllers
         [HttpGet]
         //[Authorize(Policy = "CanWriteTenantData")]
         [Route("GetBusinessLocationsWithinRadius")]
-        public ActionResult GetBusinessLocationsWithinRadius(double latitude, 
-                                                             double longitude, 
-                                                             double radius, 
-                                                             Guid locationId,
-                                                            string searchText,
-                                                            string sortOption){
+        public ActionResult GetBusinessLocationsWithinRadius([FromBody]GetBusinessLocationsWithinRadiusRequest request){
             return Ok();
         }
 
@@ -78,6 +74,14 @@ namespace Registration.ClientWebApi.Controllers
         //[Authorize(Policy = "CanWriteTenantData")]
         [Route("GetFinderUser")]
         public ActionResult GetFinderUser(string email, string password)
+        {
+            return Ok();
+        }
+
+        [HttpGet]
+        //[Authorize(Policy = "CanWriteTenantData")]
+        [Route("GetServiceItemsWithinRadius")]
+        public ActionResult GetServiceItemsWithinRadius([FromBody]GetServiceItemsWithinRadiusRequest request)
         {
             return Ok();
         }

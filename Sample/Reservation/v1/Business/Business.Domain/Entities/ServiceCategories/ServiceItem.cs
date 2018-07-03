@@ -26,8 +26,8 @@ namespace Business.Domain.Entities.ServiceCategories
 
         public int DefaultTimeLength { get; private set; }
 
-        //public Guid ProgramId { get; private set; }
-        //public virtual Program Program { get; private set; }
+        public Guid ProgramId { get; private set; }
+        public virtual Program Program { get; private set; }
 
         //public int NumDeducted { get; private set; }
 

@@ -41,7 +41,7 @@ namespace Registration.ClientWebApi.Controllers
         [HttpGet]
         [AllowAnonymous]
         [Route("FindLocations")]
-        public JsonResult FindLocations(GetLocationsRequest request)
+        public JsonResult FindLocations(GetBusinessLocationsWithinRadiusRequest request)
         {
             var list = _locationService.FindLocations()
                                     .ToList();
@@ -78,5 +78,14 @@ namespace Registration.ClientWebApi.Controllers
             return Json(list);
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("FindServiceItems")]
+        public JsonResult FindServiceItems(GetServiceItemsRequest request)
+        {
+            var list = _locationService.FindLocations()
+                                    .ToList();
+            return Json(list);
+        }
     }
 }

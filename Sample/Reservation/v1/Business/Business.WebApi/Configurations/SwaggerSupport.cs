@@ -12,6 +12,7 @@ namespace Business.WebApi.Configurations
         {
             services.AddSwaggerGen(c =>
             {
+                c.DescribeAllEnumsAsStrings();
                 c.SwaggerDoc("v1", new Info
                 {
                     Version = "v1",

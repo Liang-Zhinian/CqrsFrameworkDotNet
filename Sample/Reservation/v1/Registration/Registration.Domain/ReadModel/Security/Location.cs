@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Registration.Domain.ReadModel.Security
@@ -17,6 +18,7 @@ namespace Registration.Domain.ReadModel.Security
             Name = name;
             Description = description;
             SiteId = siteId;
+            AdditionalLocationImages = new ObservableCollection<LocationImage>();
         }
 
         [Key]

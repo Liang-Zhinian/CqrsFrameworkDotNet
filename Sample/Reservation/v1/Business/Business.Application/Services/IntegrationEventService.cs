@@ -32,13 +32,13 @@ namespace Business.Application.Services
         {
             SaveEventAndContextChanges(evt);
             _eventBus.Publish(evt);
-            //_eventLogService.MarkEventAsPublished(evt);
+            _eventLogService.MarkEventAsPublished(evt);
         }
 
         public async Task PublishThroughEventBusAsync(IEvent evt)
         {
             await SaveEventAndContextChangesAsync(evt);
-            _eventBus.Publish(evt);
+            await _eventBus.Publish(evt);
             await _eventLogService.MarkEventAsPublishedAsync(evt);
         }
 

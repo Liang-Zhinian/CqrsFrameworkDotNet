@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using Business.Application.Interfaces;
 using Business.Application.ViewModels;
@@ -41,7 +42,7 @@ namespace Business.Application.Services
             _siteProvisioningService = siteProvisioningService;
         }
 
-        public LocationViewModel ProvisionLocation(LocationViewModel locationViewModel)
+        public async Task<LocationViewModel> ProvisionLocationAsync(LocationViewModel locationViewModel)
         {
             var existingSite = _siteRepository.Find(locationViewModel.SiteId);
 
@@ -64,7 +65,7 @@ namespace Business.Application.Services
             //_eventPublisher.Publish<LocationCreatedEvent>(locationCreatedEvent);
 
             _siteRepository.Update(existingSite);
-            _integrationEventService.PublishThroughEventBus(locationCreatedEvent);
+            await _integrationEventService.PublishThroughEventBusAsync(locationCreatedEvent);
 
             //_siteRepository.SaveChanges();
 
@@ -120,7 +121,7 @@ namespace Business.Application.Services
                                                         postalAddress.StreetAddress2, postalAddress.City,
                                                         postalAddress.StateProvince, postalAddress.PostalCode,
                                                         postalAddress.CountryCode));
-
+            _locationRepository.Update(location);
             _locationRepository.UnitOfWork.Commit();
 
         }
@@ -149,6 +150,16 @@ namespace Business.Application.Services
 
             //_eventStoreSession.Get<Location>(locationId);
             //_eventStoreSession.Commit();
+        }
+
+        public void AddAdditionalLocationImage(Guid siteId, Guid locationId, byte[] image){
+            var location = _locationRepository.Find(_ => _.SiteId.Equals(siteId) && _.Id.Equals(locationId)).FirstOrDefault();
+            var locationImage = new LocationImage(siteId, locationId, image);
+            location.AddImage(locationImage);
+
+            _eventPublisher.Publish<AdditionalLocationImageCreatedEvent>(new AdditionalLocationImageCreatedEvent(locationImage.Id, location.SiteId, location.Id, image));
+
+            _locationRepository.UnitOfWork.Commit();
         }
 
         public IEnumerable<SiteViewModel> FindSites()

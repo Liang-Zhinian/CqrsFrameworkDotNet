@@ -11,7 +11,7 @@ using System;
 namespace Registration.Infra.Data.Migrations
 {
     [DbContext(typeof(ReservationDbContext))]
-    [Migration("20180702084054_first")]
+    [Migration("20180703074426_first")]
     partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -151,9 +151,7 @@ namespace Registration.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<byte[]>("Image")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
+                    b.Property<byte[]>("Image");
 
                     b.Property<DateTime>("LastModified");
 

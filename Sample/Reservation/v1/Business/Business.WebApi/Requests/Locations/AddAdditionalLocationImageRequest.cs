@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Http;
 
 namespace Business.WebApi.Requests.Locations
 {
-    public class AddAdditionalLocationImageRequest
+    public class SetLocationImageRequest
     {
-        public Guid LocationId { get; set; }
+        public Guid Id { get; set; }
 
         public Guid SiteId { get; set; }
 

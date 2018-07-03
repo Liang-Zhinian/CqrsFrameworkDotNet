@@ -31,9 +31,10 @@ namespace CqrsFramework.EventStore.IntegrationEventLogEF.Services
             }
             
             var eventLogEntry = new IntegrationEventLogEntry(@event);
-            
-            _integrationEventLogContext.Database.UseTransaction(transaction);
+
             _integrationEventLogContext.IntegrationEventLogs.Add(eventLogEntry);
+            if (null == _integrationEventLogContext.Database.CurrentTransaction)
+                _integrationEventLogContext.Database.UseTransaction(transaction);
 
             return _integrationEventLogContext.SaveChangesAsync();
         }

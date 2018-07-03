@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Business.Application.ViewModels;
 using Business.Domain.Entities;
 
@@ -9,7 +10,7 @@ namespace Business.Application.Interfaces
     {
         IEnumerable<SiteViewModel> FindSites();
         SiteViewModel ProvisionSite(string tenantId, string siteName, string siteDescription, bool active);
-        LocationViewModel ProvisionLocation(LocationViewModel locationViewModel);
+        Task<LocationViewModel> ProvisionLocationAsync(LocationViewModel locationViewModel);
         LocationViewModel FindLocation(Guid locationId);
         IEnumerable<LocationViewModel> FindLocations();
         void SetLocationAddress(Guid siteId, Guid locationId, string streetAddress,
@@ -20,5 +21,6 @@ namespace Business.Application.Interfaces
                              string countryCode);
         void SetLocationGeolocation(Guid siteId, Guid locationId, double? latitude, double? longitude);
         void SetLocationImage(Guid siteId, Guid locationId, byte[] image);
+        void AddAdditionalLocationImage(Guid siteId, Guid locationId, byte[] image);
     }
 }

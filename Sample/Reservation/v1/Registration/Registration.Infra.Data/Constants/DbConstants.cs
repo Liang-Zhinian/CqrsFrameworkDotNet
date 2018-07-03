@@ -54,6 +54,7 @@ namespace Registration.Infra.Data.Constants
         public static string ResourceStatusTable { get; set; }
         public static string ResourceTypeTable { get; set; }
 
+        public static string ScheduleTypeTable { get; set; }
         public static string ScheduleTable { get; set; }
         public static string ScheduleLayoutTable { get; set; }
         public static string ScheduleLayoutTimeSlotTable { get; set; }
@@ -89,6 +90,7 @@ namespace Registration.Infra.Data.Constants
             ResourceStatusTable = "V_ResourceStatus";
             ResourceTypeTable = "V_ResourceType";
 
+            ScheduleTypeTable = "V_ScheduleType";
             ScheduleTable = "V_Schedule";
             ScheduleLayoutTable = "V_ScheduleLayout";
             ScheduleLayoutTimeSlotTable = "V_ScheduleLayoutTimeSlot";
