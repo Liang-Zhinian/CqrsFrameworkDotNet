@@ -87,7 +87,9 @@ namespace Business.WebApi.Configurations
 
         private static void RegisterIdentityAccessEventProcessor(IServiceCollection services){
             services
-                .AddSingleton<SaaSEqt.Common.Events.IEventStore, SaaSEqt.IdentityAccess.Infra.Services.MySqlEventStore>()
+                .AddSingleton<SaaSEqt.Common.Events.IEventStore, SaaSEqt.IdentityAccess.Infra.Services.MySqlEventStore>();
+
+            services
                 .AddSingleton<IdentityAccessEventProcessor>(sp =>
                 {
                     var eventStore = sp.GetRequiredService<SaaSEqt.Common.Events.IEventStore>();
