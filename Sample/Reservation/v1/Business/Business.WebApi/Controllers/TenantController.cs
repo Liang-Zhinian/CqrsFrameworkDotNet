@@ -16,7 +16,7 @@ namespace Business.WebApi.Controllers
     [Route("api/tenants")]
     public class TenantController: Controller
     {
-        private static Dictionary<TenantViewModel, StaffViewModel> tenants = new Dictionary<TenantViewModel, StaffViewModel>();
+        //private static Dictionary<TenantViewModel, StaffViewModel> tenants = new Dictionary<TenantViewModel, StaffViewModel>();
 
         private readonly ITenantService _tenantService;
 
@@ -24,7 +24,7 @@ namespace Business.WebApi.Controllers
         {
             _tenantService = tenantService;
 
-            InitializeTenants();
+            //InitializeTenants();
         }
 
         private void InitializeTenants() {
@@ -59,7 +59,7 @@ namespace Business.WebApi.Controllers
                 AddressCountryCode="China"
             };
 
-            tenants.Add(tenant, administrator);
+            //tenants.Add(tenant, administrator);
         }
 
         [HttpGet]
@@ -67,8 +67,8 @@ namespace Business.WebApi.Controllers
         [Route("GenerateTestData")]
         public ActionResult GenerateTestData()
         {
-            foreach(var tenant in tenants)
-                _tenantService.ProvisionTenant(tenant.Key, tenant.Value);
+            //foreach(var tenant in tenants)
+                //_tenantService.ProvisionTenant(tenant.Key, tenant.Value);
 
             return Ok();
         }

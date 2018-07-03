@@ -10,12 +10,12 @@ namespace SaaSEqt.IdentityAccess.Application
 {
     public class IdentityAccessEventProcessor
     {
-        private readonly ILifetimeScope _autofac;
+        //private readonly ILifetimeScope _autofac;
 
-        public IdentityAccessEventProcessor(IEventStore eventStore, ILifetimeScope autofac)
+        public IdentityAccessEventProcessor(IEventStore eventStore/*, ILifetimeScope autofac*/)
         {
             this.eventStore = eventStore;
-            _autofac = autofac;
+            //_autofac = autofac;
         }
 
         readonly IEventStore eventStore;
@@ -24,11 +24,11 @@ namespace SaaSEqt.IdentityAccess.Application
         {
             DomainEventPublisher.Instance.Subscribe(domainEvent =>
                 {
-                    using (var scope = _autofac.BeginLifetimeScope("IdentityAccessEventProcessor"))
-                    {
-
-                        this.eventStore.Append(domainEvent);
-                    }
+                    //using (var scope = _autofac.BeginLifetimeScope("IdentityAccessEventProcessor"))
+                    //{
+                    Console.WriteLine("Persisting domain event.");
+                    this.eventStore.Append(domainEvent);
+                    //}
                 });
 
         }

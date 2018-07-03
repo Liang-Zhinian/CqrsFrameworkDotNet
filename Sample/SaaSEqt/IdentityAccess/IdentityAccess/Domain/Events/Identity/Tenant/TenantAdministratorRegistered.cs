@@ -16,7 +16,7 @@ namespace SaaSEqt.IdentityAccess.Domain.Events.Identity.Tenant
             string temporaryPassword)
         {
             this.AdministorName = administorName;
-            this.Name = name;
+            this.Name = username;
             this.TemporaryPassword = temporaryPassword;
             this.TenantId = tenantId.Id;
 

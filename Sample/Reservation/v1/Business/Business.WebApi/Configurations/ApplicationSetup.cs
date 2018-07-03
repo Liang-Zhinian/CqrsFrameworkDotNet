@@ -15,6 +15,7 @@ using SaaSEqt.IdentityAccess.Domain.Services;
 using SaaSEqt.IdentityAccess.Infra.Data.Context;
 using SaaSEqt.IdentityAccess.Infra.Data.Repositories;
 using SaaSEqt.IdentityAccess.Infrastructure.Services;
+using SaaSEqt.Common.Domain.Model;
 
 namespace Business.WebApi.Configurations
 {
@@ -36,8 +37,8 @@ namespace Business.WebApi.Configurations
 
         private static void RegisterWriteDb(IServiceCollection services)
         {
-            //services.AddScoped<BusinessDbContext>();
-            //services.AddScoped<IdentityAccessDbContext>();
+            //services.AddSingleton<BusinessDbContext>();
+            //services.AddSingleton<IdentityAccessDbContext>();
             services.AddScoped<ISiteRepository, SiteRepository>();
             services.AddScoped<ITenantAddressRepository, TenantAddressRepository>();
             services.AddScoped<ITenantContactRepository, TenantContactRepository>();
@@ -50,53 +51,30 @@ namespace Business.WebApi.Configurations
         {
             // App service
             services.AddScoped<SaaSEqt.Common.Domain.Model.IUnitOfWork, SaaSEqt.IdentityAccess.Infra.Data.UoW.UnitOfWork>();
-            services.AddScoped<ITenantService, TenantService>();
-            services.AddScoped<SiteProvisioningService>();
-            services.AddScoped<IBusinessInformationService, BusinessInformationService>();
-            services.AddScoped<IServiceCategoryService, ServiceCategoryService>();
+            services.AddTransient<ITenantService, TenantService>();
+            services.AddTransient<SiteProvisioningService>();
+            services.AddTransient<IBusinessInformationService, BusinessInformationService>();
+            services.AddTransient<IServiceCategoryService, ServiceCategoryService>();
         }
 
         private static void RegisterIdentityAccessServices(IServiceCollection services){
             services
-                .AddScoped<AuthenticationService>(_ => new AuthenticationService(
-                    _.GetService<ITenantRepository>(),
-                    _.GetService<IUserRepository>(),
-                    _.GetService<IEncryptionService>()))
-                .AddScoped<GroupMemberService>(_ => new GroupMemberService(
-                    _.GetService<IUserRepository>(),
-                    _.GetService<IGroupRepository>()))
-                .AddScoped<TenantProvisioningService>(_ => new TenantProvisioningService(
-                    _.GetService<ITenantRepository>(),
-                    _.GetService<IUserRepository>(),
-                    _.GetService<IRoleRepository>()))
+                .AddTransient<AuthenticationService>()
+                .AddTransient<GroupMemberService>()
+                .AddTransient<TenantProvisioningService>()
                 .AddScoped<ITenantRepository, TenantRepository>()
                 .AddScoped<IUserRepository, UserRepository>()
                 .AddScoped<IRoleRepository, RoleRepository>()
                 .AddScoped<IGroupRepository, GroupRepository>()
-                .AddScoped<IEncryptionService, MD5EncryptionService>()
-                .AddScoped<IdentityApplicationService>(s => new IdentityApplicationService(
-                    s.GetService<SaaSEqt.Common.Domain.Model.IUnitOfWork>(),
-                    s.GetService<AuthenticationService>(),
-                    s.GetService<GroupMemberService>(),
-                    s.GetService<IGroupRepository>(),
-                    s.GetService<TenantProvisioningService>(),
-                    s.GetService<ITenantRepository>(),
-                    s.GetService<IUserRepository>()
-                ));
+                .AddTransient<IEncryptionService, MD5EncryptionService>()
+                .AddTransient<IdentityApplicationService>()
+                .AddSingleton<DomainEventPublisher>();
         }
 
         private static void RegisterIdentityAccessEventProcessor(IServiceCollection services){
             services
-                .AddSingleton<SaaSEqt.Common.Events.IEventStore, SaaSEqt.IdentityAccess.Infra.Services.MySqlEventStore>();
-
-            services
-                .AddSingleton<IdentityAccessEventProcessor>(sp =>
-                {
-                    var eventStore = sp.GetRequiredService<SaaSEqt.Common.Events.IEventStore>();
-                    var iLifetimeScope = sp.GetRequiredService<ILifetimeScope>();
-
-                    return new IdentityAccessEventProcessor(eventStore, iLifetimeScope);
-                });
+                .AddScoped<SaaSEqt.Common.Events.IEventStore, SaaSEqt.IdentityAccess.Infra.Services.MySqlEventStore>()
+                .AddScoped<IdentityAccessEventProcessor>();
         }
 
         private static void ConfigureIdentityAccessEventProcessor(IServiceCollection services){

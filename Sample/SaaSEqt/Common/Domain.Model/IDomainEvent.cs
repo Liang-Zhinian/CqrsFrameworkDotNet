@@ -15,11 +15,10 @@
 namespace SaaSEqt.Common.Domain.Model
 {
     using System;
-    using CqrsFramework.Events;
 
-    public interface IDomainEvent : IEvent
+    public interface IDomainEvent
     {
-        //int Version { get; set;  }
-        //DateTimeOffset TimeStamp { get; set; }
+        int Version { get; set;  }
+        DateTimeOffset TimeStamp { get; set; }
     }
 }

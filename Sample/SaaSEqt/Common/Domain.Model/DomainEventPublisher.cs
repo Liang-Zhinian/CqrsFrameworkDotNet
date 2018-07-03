@@ -6,7 +6,7 @@ namespace SaaSEqt.Common.Domain.Model
 
     public class DomainEventPublisher
     {
-        [ThreadStatic]
+        //[ThreadStatic]
         static DomainEventPublisher _instance;
         
         public static DomainEventPublisher Instance

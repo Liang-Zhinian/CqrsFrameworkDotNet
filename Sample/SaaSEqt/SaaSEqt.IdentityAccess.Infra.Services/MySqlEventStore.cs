@@ -33,33 +33,54 @@ namespace SaaSEqt.IdentityAccess.Infra.Services
 
         public StoredEvent Append(IDomainEvent domainEvent)
         {
-            ResilientTransaction.New(_context)
-                                .Execute(() =>
-                                {
-                                    // Achieving atomicity between original ordering database operation and the IntegrationEventLog thanks to a local transaction
-                                    _context.SaveChanges();
+            return SaveIntegrationEventLogContext(domainEvent);
+            //ResilientTransaction.New(_context)
+                                //.Execute(() => {
+                                //    // Achieving atomicity between original ordering database operation and the IntegrationEventLog thanks to a local transaction
+                                //    //_context.SaveChanges();
 
-                                    DbTransaction transaction = _context.Database.CurrentTransaction.GetDbTransaction();
+                                //    DbTransaction transaction = _context.Database.CurrentTransaction.GetDbTransaction();
                         
-                                    if (transaction == null)
-                                    {
-                                        throw new ArgumentNullException("transaction", $"A {typeof(DbTransaction).FullName} is required as a pre-requisite to save the event.");
-                                    }
+                                //    if (transaction == null)
+                                //    {
+                                //        throw new ArgumentNullException("transaction", $"A {typeof(DbTransaction).FullName} is required as a pre-requisite to save the event.");
+                                //    }
 
-                                    var eventLogEntry = new IntegrationEventLogEntry(Guid.NewGuid(),
+                                //    var eventLogEntry = new IntegrationEventLogEntry(Guid.NewGuid(),
+                                //                                 domainEvent.GetType().FullName,
+                                //                                 domainEvent.TimeStamp.DateTime,
+                                //                                 JsonConvert.SerializeObject(domainEvent)
+                                //                                );
+                
+                                //    eventLogEntry.TimesSent++;
+                                //    eventLogEntry.State = EventStateEnum.Published;
+
+                                //    if (null == _integrationEventLogContext.Database.CurrentTransaction)
+                                //        _integrationEventLogContext.Database.UseTransaction(transaction);
+                                //    _integrationEventLogContext.IntegrationEventLogs.Add(eventLogEntry);
+                                    
+                                //    int result =  _integrationEventLogContext.SaveChanges();
+                                //    //throw new Exception("test exception");
+                                //    return result;
+                                //});
+                                //return new StoredEvent(domainEvent.GetType().FullName, domainEvent.TimeStamp.DateTime, JsonConvert.SerializeObject(domainEvent));
+        }
+
+        private StoredEvent SaveIntegrationEventLogContext(IDomainEvent domainEvent)
+        {
+            var eventLogEntry = new IntegrationEventLogEntry(Guid.NewGuid(),
                                                                  domainEvent.GetType().FullName,
                                                                  domainEvent.TimeStamp.DateTime,
                                                                  JsonConvert.SerializeObject(domainEvent)
                                                                 );
-                
-                                    eventLogEntry.TimesSent++;
-                                    eventLogEntry.State = EventStateEnum.Published;
 
-                                    _integrationEventLogContext.Database.UseTransaction(transaction);
-                                    _integrationEventLogContext.IntegrationEventLogs.Add(eventLogEntry);
-                                    
-                                    return _integrationEventLogContext.SaveChanges();
-                                });
+            eventLogEntry.TimesSent++;
+            eventLogEntry.State = EventStateEnum.Published;
+
+            _integrationEventLogContext.IntegrationEventLogs.Add(eventLogEntry);
+
+            int result = _integrationEventLogContext.SaveChanges();
+
             return new StoredEvent(domainEvent.GetType().FullName, domainEvent.TimeStamp.DateTime, JsonConvert.SerializeObject(domainEvent));
         }
 

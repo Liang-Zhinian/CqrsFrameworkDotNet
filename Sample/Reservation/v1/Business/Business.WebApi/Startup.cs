@@ -191,7 +191,7 @@ namespace Business.WebApi
             //if (orchestratorType?.ToUpper() == "SF")
             //{
             //    // Enable SF telemetry initializer
-            //    services.AddSingleton<ITelemetryInitializer>((serviceProvider) =>
+            //    services.AddScoped<ITelemetryInitializer>((serviceProvider) =>
             //        new FabricTelemetryInitializer());
             //}
         }

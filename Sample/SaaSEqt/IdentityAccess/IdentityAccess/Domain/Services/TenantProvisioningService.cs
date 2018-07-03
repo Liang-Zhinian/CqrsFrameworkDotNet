@@ -126,7 +126,12 @@ namespace SaaSEqt.IdentityAccess.Domain.Services
 				// the collection-oriented repository.
 				// Subsequent changes to the entity
 				// are implicitly persisted.
-				this.tenantRepository.Add(tenant);
+                this.tenantRepository.Add(tenant);
+
+                DomainEventPublisher
+                    .Instance
+                    .Publish(new TenantProvisioned(
+                        tenant.TenantId, tenantName, tenantDescription, true));
 
 				// Creates user and role entities and stores them
 				// in their respective repositories, and publishes
@@ -140,10 +145,6 @@ namespace SaaSEqt.IdentityAccess.Domain.Services
 					primaryTelephone,
 					secondaryTelephone);
 
-				DomainEventPublisher
-					.Instance
-					.Publish(new TenantProvisioned(
-							tenant.TenantId));
 
 				return tenant;
 			}
@@ -192,6 +193,16 @@ namespace SaaSEqt.IdentityAccess.Domain.Services
 			// are implicitly persisted.
 			this.userRepository.Add(admin);
 
+            DomainEventPublisher
+                .Instance
+                .Publish(new TenantAdministratorRegistered(
+                        tenant.TenantId,
+                        tenant.Name,
+                        administorName,
+                        emailAddress,
+                        admin.Username,
+                        strongPassword));
+
 			// Publishes domain event RoleProvisioned.
 			Role adminRole = tenant.ProvisionRole(
 				"Administrator",
@@ -210,15 +221,6 @@ namespace SaaSEqt.IdentityAccess.Domain.Services
 			// are implicitly persisted.
 			this.roleRepository.Add(adminRole);
 
-			DomainEventPublisher
-				.Instance
-				.Publish(new TenantAdministratorRegistered(
-						tenant.TenantId,
-						tenant.Name,
-						administorName,
-						emailAddress,
-						admin.Username,
-						strongPassword));
 		}
 
 		#endregion
