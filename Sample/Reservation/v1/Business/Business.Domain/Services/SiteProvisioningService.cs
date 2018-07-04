@@ -27,7 +27,7 @@ namespace Business.Domain.Services
             site.CreateBranding(new byte[] { 0 }, "#", "#", "#", "#");
             _siteRepository.Add(site);
 
-            _integrationEventService.PublishThroughEventBus(new SiteCreatedEvent(site.Id, siteName, siteDescription, active, tenantId.Id));
+            //_integrationEventService.PublishThroughEventBus(new SiteCreatedEvent(site.Id, siteName, siteDescription, active, tenantId.Id));
             //_siteRepository.UnitOfWork.Commit();
             //_siteRepository.SaveChanges();
 

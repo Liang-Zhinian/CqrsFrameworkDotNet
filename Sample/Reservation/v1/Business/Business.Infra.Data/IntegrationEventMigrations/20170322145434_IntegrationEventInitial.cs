@@ -13,6 +13,7 @@ namespace Business.Infra.Data.Migrations
                 columns: table => new
                 {
                     EventId = table.Column<Guid>(nullable: false),
+                    SourceId = table.Column<Guid>(nullable: true),
                     Content = table.Column<string>(nullable: false),
                     CreationTime = table.Column<DateTime>(nullable: false),
                     EventTypeName = table.Column<string>(nullable: false),

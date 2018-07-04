@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 
 namespace Business.Domain.Entities
 {
-    public class Location
+    public class Location : AggregateRoot
     {
         #region ctors
 
@@ -30,23 +30,24 @@ namespace Business.Domain.Entities
             this.Geolocation = new Geolocation(null, null);
             this.AdditionalLocationImages = new ObservableCollection<LocationImage>();
 
-            //ApplyChange(new LocationCreatedEvent(
-                       //         this.Id,
-                       //         siteId,
-                       //         name,
-                       //         description,
-                       //         image,
-                       //         contactInformation.PrimaryTelephone,
-                       //         contactInformation.SecondaryTelephone
-                       //     )
-                       //);
+
+            ApplyChange(new LocationCreatedEvent(
+                                this.Id,
+                                siteId,
+                                name,
+                                description,
+                                image,
+                                contactInformation.PrimaryTelephone,
+                                contactInformation.SecondaryTelephone
+                            )
+                       );
         }
 
         #endregion
 
         #region public properties
 
-        public Guid Id { get; private set; }
+        //public Guid Id { get; private set; }
 
         public string Name { get; private set; }
 
@@ -77,6 +78,8 @@ namespace Business.Domain.Entities
                 AdditionalLocationImages = new List<LocationImage>();
             
             this.AdditionalLocationImages.Add(image);
+
+            ApplyChange(new AdditionalLocationImageCreatedEvent(image.Id, image.SiteId, this.Id, image.Image));
         }
 
         public void AssignStaff(Staff staff)
@@ -97,10 +100,10 @@ namespace Business.Domain.Entities
             this.PostalAddress.PostalCode = postalAddress.PostalCode;
             this.PostalAddress.CountryCode = postalAddress.CountryCode;
 
-            //ApplyChange(new LocationAddressChangedEvent(this.Id, this.SiteId, postalAddress.StreetAddress,
-                                                        //postalAddress.StreetAddress2, postalAddress.City,
-                                                        //postalAddress.StateProvince, postalAddress.PostalCode,
-                                                        //postalAddress.CountryCode));
+            ApplyChange(new LocationAddressChangedEvent(this.Id, this.SiteId, postalAddress.StreetAddress,
+                                                        postalAddress.StreetAddress2, postalAddress.City,
+                                                        postalAddress.StateProvince, postalAddress.PostalCode,
+                                                        postalAddress.CountryCode));
         }
 
         public void SetGeolocation(Geolocation geolocation)
@@ -108,14 +111,14 @@ namespace Business.Domain.Entities
             this.Geolocation.Latitude = geolocation.Latitude;
             this.Geolocation.Longitude = geolocation.Longitude;
 
-            //ApplyChange(new LocationGeolocationChangedEvent(this.Id, this.SiteId, geolocation.Latitude, geolocation.Longitude));
+            ApplyChange(new LocationGeolocationChangedEvent(this.Id, this.SiteId, geolocation.Latitude, geolocation.Longitude));
         }
 
         public void SetLocationImage(byte[] image)
         {
             this.Image = image;
 
-            //ApplyChange(new LocationImageChangedEvent(this.Id, this.SiteId, iamge));
+            ApplyChange(new LocationImageChangedEvent(this.Id, this.SiteId, image));
         }
 
         //public void AssignResource(Resource resource)

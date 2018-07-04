@@ -30,7 +30,7 @@ namespace SaaSEqt.IdentityAccess.Application
                     this.eventStore.Append(domainEvent);
                     //}
 
-                // to do: public event
+                    // to do: public event
                 });
 
         }

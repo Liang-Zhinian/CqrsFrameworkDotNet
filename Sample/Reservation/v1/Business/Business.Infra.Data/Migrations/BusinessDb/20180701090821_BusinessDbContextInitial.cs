@@ -10,11 +10,11 @@ namespace Business.Infra.Data.Migrations.BusinessDb
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "book2");
+                name: "book2business");
 
             migrationBuilder.CreateTable(
                 name: "Region",
-                schema: "book2",
+                schema: "book2business",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -30,7 +30,7 @@ namespace Business.Infra.Data.Migrations.BusinessDb
 
             migrationBuilder.CreateTable(
                 name: "ResourceStatus",
-                schema: "book2",
+                schema: "book2business",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -44,7 +44,7 @@ namespace Business.Infra.Data.Migrations.BusinessDb
 
             migrationBuilder.CreateTable(
                 name: "ResourceType",
-                schema: "book2",
+                schema: "book2business",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
@@ -58,7 +58,7 @@ namespace Business.Infra.Data.Migrations.BusinessDb
 
             migrationBuilder.CreateTable(
                 name: "ScheduleType",
-                schema: "book2",
+                schema: "book2business",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false, defaultValue: 1),
@@ -71,7 +71,7 @@ namespace Business.Infra.Data.Migrations.BusinessDb
 
             migrationBuilder.CreateTable(
                 name: "Site",
-                schema: "book2",
+                schema: "book2business",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
@@ -90,7 +90,7 @@ namespace Business.Infra.Data.Migrations.BusinessDb
 
             migrationBuilder.CreateTable(
                 name: "TimeZone",
-                schema: "book2",
+                schema: "book2business",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -105,7 +105,7 @@ namespace Business.Infra.Data.Migrations.BusinessDb
 
             migrationBuilder.CreateTable(
                 name: "Branding",
-                schema: "book2",
+                schema: "book2business",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
@@ -122,7 +122,7 @@ namespace Business.Infra.Data.Migrations.BusinessDb
                     table.ForeignKey(
                         name: "FK_Branding_Site_SiteId",
                         column: x => x.SiteId,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "Site",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -130,7 +130,7 @@ namespace Business.Infra.Data.Migrations.BusinessDb
 
             migrationBuilder.CreateTable(
                 name: "Location",
-                schema: "book2",
+                schema: "book2business",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
@@ -156,7 +156,7 @@ namespace Business.Infra.Data.Migrations.BusinessDb
                     table.ForeignKey(
                         name: "FK_Location_Site_SiteId",
                         column: x => x.SiteId,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "Site",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -164,7 +164,7 @@ namespace Business.Infra.Data.Migrations.BusinessDb
 
             migrationBuilder.CreateTable(
                 name: "ServiceCategory",
-                schema: "book2",
+                schema: "book2business",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
@@ -180,14 +180,14 @@ namespace Business.Infra.Data.Migrations.BusinessDb
                     table.ForeignKey(
                         name: "FK_ServiceCategory_ScheduleType_ScheduleTypeId",
                         column: x => x.ScheduleTypeId,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "ScheduleType",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ServiceCategory_Site_SiteId",
                         column: x => x.SiteId,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "Site",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -195,7 +195,7 @@ namespace Business.Infra.Data.Migrations.BusinessDb
 
             migrationBuilder.CreateTable(
                 name: "Staff",
-                schema: "book2",
+                schema: "book2business",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
@@ -211,7 +211,7 @@ namespace Business.Infra.Data.Migrations.BusinessDb
                     table.ForeignKey(
                         name: "FK_Staff_Site_SiteId",
                         column: x => x.SiteId,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "Site",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -219,7 +219,7 @@ namespace Business.Infra.Data.Migrations.BusinessDb
 
             migrationBuilder.CreateTable(
                 name: "ScheduleLayout",
-                schema: "book2",
+                schema: "book2business",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
@@ -231,7 +231,7 @@ namespace Business.Infra.Data.Migrations.BusinessDb
                     table.ForeignKey(
                         name: "FK_ScheduleLayout_TimeZone_TimeZoneId",
                         column: x => x.TimeZoneId,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "TimeZone",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -239,7 +239,7 @@ namespace Business.Infra.Data.Migrations.BusinessDb
 
             migrationBuilder.CreateTable(
                 name: "LocationImage",
-                schema: "book2",
+                schema: "book2business",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
@@ -253,14 +253,14 @@ namespace Business.Infra.Data.Migrations.BusinessDb
                     table.ForeignKey(
                         name: "FK_LocationImage_Location_LocationId",
                         column: x => x.LocationId,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "Location",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_LocationImage_Site_SiteId",
                         column: x => x.SiteId,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "Site",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -268,7 +268,7 @@ namespace Business.Infra.Data.Migrations.BusinessDb
 
             migrationBuilder.CreateTable(
                 name: "ServiceItem",
-                schema: "book2",
+                schema: "book2business",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
@@ -285,14 +285,14 @@ namespace Business.Infra.Data.Migrations.BusinessDb
                     table.ForeignKey(
                         name: "FK_Service_ServiceCategory_ServiceCategoryId",
                         column: x => x.ServiceCategoryId,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "ServiceCategory",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Service_Site_SiteId",
                         column: x => x.SiteId,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "Site",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -300,7 +300,7 @@ namespace Business.Infra.Data.Migrations.BusinessDb
 
             migrationBuilder.CreateTable(
                 name: "StaffLoginLocation",
-                schema: "book2",
+                schema: "book2business",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
@@ -314,21 +314,21 @@ namespace Business.Infra.Data.Migrations.BusinessDb
                     table.ForeignKey(
                         name: "FK_StaffLoginLocation_Location_LocationId",
                         column: x => x.LocationId,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "Location",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_StaffLoginLocation_Site_SiteId",
                         column: x => x.SiteId,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "Site",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_StaffLoginLocation_Staff_StaffId",
                         column: x => x.StaffId,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "Staff",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -336,7 +336,7 @@ namespace Business.Infra.Data.Migrations.BusinessDb
 
             migrationBuilder.CreateTable(
                 name: "Schedule",
-                schema: "book2",
+                schema: "book2business",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
@@ -355,7 +355,7 @@ namespace Business.Infra.Data.Migrations.BusinessDb
                     table.ForeignKey(
                         name: "FK_Schedule_ScheduleLayout_LayoutId",
                         column: x => x.LayoutId,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "ScheduleLayout",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -363,7 +363,7 @@ namespace Business.Infra.Data.Migrations.BusinessDb
 
             migrationBuilder.CreateTable(
                 name: "ScheduleLayoutTimeSlot",
-                schema: "book2",
+                schema: "book2business",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
@@ -382,7 +382,7 @@ namespace Business.Infra.Data.Migrations.BusinessDb
                     table.ForeignKey(
                         name: "FK_ScheduleLayoutTimeSlot_ScheduleLayout_LayoutId",
                         column: x => x.LayoutId,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "ScheduleLayout",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -390,7 +390,7 @@ namespace Business.Infra.Data.Migrations.BusinessDb
 
             migrationBuilder.CreateTable(
                 name: "Resource",
-                schema: "book2",
+                schema: "book2business",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
@@ -407,21 +407,21 @@ namespace Business.Infra.Data.Migrations.BusinessDb
                     table.ForeignKey(
                         name: "FK_Resource_ResourceType_ResourceTypeId",
                         column: x => x.ResourceTypeId,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "ResourceType",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Resource_Schedule_ScheduleId",
                         column: x => x.ScheduleId,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "Schedule",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Resource_ResourceStatus_StatusId",
                         column: x => x.StatusId,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "ResourceStatus",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -429,7 +429,7 @@ namespace Business.Infra.Data.Migrations.BusinessDb
 
             migrationBuilder.CreateTable(
                 name: "ResourceLocation",
-                schema: "book2",
+                schema: "book2business",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
@@ -442,14 +442,14 @@ namespace Business.Infra.Data.Migrations.BusinessDb
                     table.ForeignKey(
                         name: "FK_ResourceLocation_Location_LocationId",
                         column: x => x.LocationId,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "Location",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ResourceLocation_Resource_ResourceId",
                         column: x => x.ResourceId,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "Resource",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -457,122 +457,122 @@ namespace Business.Infra.Data.Migrations.BusinessDb
 
             migrationBuilder.CreateIndex(
                 name: "IX_Branding_SiteId",
-                schema: "book2",
+                schema: "book2business",
                 table: "Branding",
                 column: "SiteId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Location_SiteId",
-                schema: "book2",
+                schema: "book2business",
                 table: "Location",
                 column: "SiteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_LocationImage_LocationId",
-                schema: "book2",
+                schema: "book2business",
                 table: "LocationImage",
                 column: "LocationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_LocationImage_SiteId",
-                schema: "book2",
+                schema: "book2business",
                 table: "LocationImage",
                 column: "SiteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Resource_ResourceTypeId",
-                schema: "book2",
+                schema: "book2business",
                 table: "Resource",
                 column: "ResourceTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Resource_ScheduleId",
-                schema: "book2",
+                schema: "book2business",
                 table: "Resource",
                 column: "ScheduleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Resource_StatusId",
-                schema: "book2",
+                schema: "book2business",
                 table: "Resource",
                 column: "StatusId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ResourceLocation_LocationId",
-                schema: "book2",
+                schema: "book2business",
                 table: "ResourceLocation",
                 column: "LocationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ResourceLocation_ResourceId",
-                schema: "book2",
+                schema: "book2business",
                 table: "ResourceLocation",
                 column: "ResourceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Schedule_LayoutId",
-                schema: "book2",
+                schema: "book2business",
                 table: "Schedule",
                 column: "LayoutId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ScheduleLayout_TimeZoneId",
-                schema: "book2",
+                schema: "book2business",
                 table: "ScheduleLayout",
                 column: "TimeZoneId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ScheduleLayoutTimeSlot_LayoutId",
-                schema: "book2",
+                schema: "book2business",
                 table: "ScheduleLayoutTimeSlot",
                 column: "LayoutId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Service_ServiceCategoryId",
-                schema: "book2",
+                schema: "book2business",
                 table: "ServiceItem",
                 column: "ServiceCategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Service_SiteId",
-                schema: "book2",
+                schema: "book2business",
                 table: "ServiceItem",
                 column: "SiteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ServiceCategory_ScheduleTypeId",
-                schema: "book2",
+                schema: "book2business",
                 table: "ServiceCategory",
                 column: "ScheduleTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ServiceCategory_SiteId",
-                schema: "book2",
+                schema: "book2business",
                 table: "ServiceCategory",
                 column: "SiteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Staff_SiteId",
-                schema: "book2",
+                schema: "book2business",
                 table: "Staff",
                 column: "SiteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_StaffLoginLocation_LocationId",
-                schema: "book2",
+                schema: "book2business",
                 table: "StaffLoginLocation",
                 column: "LocationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_StaffLoginLocation_SiteId",
-                schema: "book2",
+                schema: "book2business",
                 table: "StaffLoginLocation",
                 column: "SiteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_StaffLoginLocation_StaffId",
-                schema: "book2",
+                schema: "book2business",
                 table: "StaffLoginLocation",
                 column: "StaffId");
         }
@@ -581,75 +581,75 @@ namespace Business.Infra.Data.Migrations.BusinessDb
         {
             migrationBuilder.DropTable(
                 name: "Branding",
-                schema: "book2");
+                schema: "book2business");
 
             migrationBuilder.DropTable(
                 name: "LocationImage",
-                schema: "book2");
+                schema: "book2business");
 
             migrationBuilder.DropTable(
                 name: "Region",
-                schema: "book2");
+                schema: "book2business");
 
             migrationBuilder.DropTable(
                 name: "ResourceLocation",
-                schema: "book2");
+                schema: "book2business");
 
             migrationBuilder.DropTable(
                 name: "ScheduleLayoutTimeSlot",
-                schema: "book2");
+                schema: "book2business");
 
             migrationBuilder.DropTable(
                 name: "ServiceItem",
-                schema: "book2");
+                schema: "book2business");
 
             migrationBuilder.DropTable(
                 name: "StaffLoginLocation",
-                schema: "book2");
+                schema: "book2business");
 
             migrationBuilder.DropTable(
                 name: "Resource",
-                schema: "book2");
+                schema: "book2business");
 
             migrationBuilder.DropTable(
                 name: "ServiceCategory",
-                schema: "book2");
+                schema: "book2business");
 
             migrationBuilder.DropTable(
                 name: "Location",
-                schema: "book2");
+                schema: "book2business");
 
             migrationBuilder.DropTable(
                 name: "Staff",
-                schema: "book2");
+                schema: "book2business");
 
             migrationBuilder.DropTable(
                 name: "ResourceType",
-                schema: "book2");
+                schema: "book2business");
 
             migrationBuilder.DropTable(
                 name: "Schedule",
-                schema: "book2");
+                schema: "book2business");
 
             migrationBuilder.DropTable(
                 name: "ResourceStatus",
-                schema: "book2");
+                schema: "book2business");
 
             migrationBuilder.DropTable(
                 name: "ScheduleType",
-                schema: "book2");
+                schema: "book2business");
 
             migrationBuilder.DropTable(
                 name: "Site",
-                schema: "book2");
+                schema: "book2business");
 
             migrationBuilder.DropTable(
                 name: "ScheduleLayout",
-                schema: "book2");
+                schema: "book2business");
 
             migrationBuilder.DropTable(
                 name: "TimeZone",
-                schema: "book2");
+                schema: "book2business");
         }
     }
 }

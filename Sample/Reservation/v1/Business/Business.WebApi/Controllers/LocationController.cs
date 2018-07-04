@@ -18,14 +18,17 @@ namespace Business.WebApi.Controllers
     {
         private readonly IHostingEnvironment _env;
         private readonly IBusinessInformationService _businessInformationService;
+        private readonly IBusinessInformationQueryService _businessInformationQueryService;
         //private readonly ITenantRepository _tenantRepository;
 
         public LocationController(
             IHostingEnvironment env,
-            IBusinessInformationService businessInformationService)
+            IBusinessInformationService businessInformationService,
+            IBusinessInformationQueryService businessInformationQueryService)
         {
             this._env = env;
             _businessInformationService = businessInformationService;
+            _businessInformationQueryService = businessInformationQueryService;
         }
 
         [HttpGet]
@@ -51,7 +54,7 @@ namespace Business.WebApi.Controllers
                 locImg = memoryStream.ToArray();
             }
 
-            var site = _businessInformationService.FindSites().Where(_ => _.Name == "Chanel").FirstOrDefault();
+            var site = _businessInformationQueryService.FindSites().Where(_ => _.Name == "Chanel").FirstOrDefault();
 
             var location = new LocationViewModel
             {
@@ -71,15 +74,15 @@ namespace Business.WebApi.Controllers
                 SiteId = site.Id,
             };
             location = await _businessInformationService.ProvisionLocationAsync(location);
-            _businessInformationService.SetLocationAddress(location.SiteId, location.Id,
+            await _businessInformationService.SetLocationAddress(location.SiteId, location.Id,
                                                            "IFC", "",
                                                            "Hongkong", "Hongkong", "", "China");
-            _businessInformationService.SetLocationGeolocation(location.SiteId, location.Id, 22.28588, 114.158131);
-            _businessInformationService.SetLocationImage(location.SiteId, location.Id, logo);
-            _businessInformationService.AddAdditionalLocationImage(location.SiteId, location.Id, locImg);
+            await _businessInformationService.SetLocationGeolocation(location.SiteId, location.Id, 22.28588, 114.158131);
+            await _businessInformationService.SetLocationImage(location.SiteId, location.Id, logo);
+            await _businessInformationService.AddAdditionalLocationImage(location.SiteId, location.Id, locImg);
 
             /////////////////////////
-            /// 
+             
             location = new LocationViewModel
             {
                 Name = "HM3",
@@ -98,15 +101,15 @@ namespace Business.WebApi.Controllers
                 SiteId = site.Id,
             };
             location = await _businessInformationService.ProvisionLocationAsync(location);
-            _businessInformationService.SetLocationAddress(location.SiteId, location.Id,
+            await _businessInformationService.SetLocationAddress(location.SiteId, location.Id,
                                                            "Prince's Building", "",
                                                            "Hongkong", "Hongkong", "", "China");
-            _businessInformationService.SetLocationGeolocation(location.SiteId, location.Id, 22.2812257, 114.159262799999);
-            _businessInformationService.SetLocationImage(location.SiteId, location.Id, logo);
-            _businessInformationService.AddAdditionalLocationImage(location.SiteId, location.Id, locImg);
+            await _businessInformationService.SetLocationGeolocation(location.SiteId, location.Id, 22.2812257, 114.159262799999);
+            await _businessInformationService.SetLocationImage(location.SiteId, location.Id, logo);
+            await _businessInformationService.AddAdditionalLocationImage(location.SiteId, location.Id, locImg);
 
             /////////////////////////
-            /// 
+             
             location = new LocationViewModel
             {
                 Name = "HHP",
@@ -125,12 +128,12 @@ namespace Business.WebApi.Controllers
                 SiteId = site.Id,
             };
             location = await _businessInformationService.ProvisionLocationAsync(location);
-            _businessInformationService.SetLocationAddress(location.SiteId, location.Id,
+            await _businessInformationService.SetLocationAddress(location.SiteId, location.Id,
                                                            "Hysan Place", "",
                                                            "Hongkong", "Hongkong", "", "China");
-            _businessInformationService.SetLocationGeolocation(location.SiteId, location.Id, 22.2798079, 114.1837883);
-            _businessInformationService.SetLocationImage(location.SiteId, location.Id, logo);
-            _businessInformationService.AddAdditionalLocationImage(location.SiteId, location.Id, locImg);
+            await _businessInformationService.SetLocationGeolocation(location.SiteId, location.Id, 22.2798079, 114.1837883);
+            await _businessInformationService.SetLocationImage(location.SiteId, location.Id, logo);
+            await _businessInformationService.AddAdditionalLocationImage(location.SiteId, location.Id, locImg);
 
             /////////////////////////
             ///
@@ -152,12 +155,12 @@ namespace Business.WebApi.Controllers
                 SiteId = site.Id,
             };
             location = await _businessInformationService.ProvisionLocationAsync(location);
-            _businessInformationService.SetLocationAddress(location.SiteId, location.Id,
+            await _businessInformationService.SetLocationAddress(location.SiteId, location.Id,
                                                            "Elements", "",
                                                            "Hongkong", "Hongkong", "", "China");
-            _businessInformationService.SetLocationGeolocation(location.SiteId, location.Id, 22.3048708, 114.1615219);
-            _businessInformationService.SetLocationImage(location.SiteId, location.Id, logo);
-            _businessInformationService.AddAdditionalLocationImage(location.SiteId, location.Id, locImg);
+            await _businessInformationService.SetLocationGeolocation(location.SiteId, location.Id, 22.3048708, 114.1615219);
+            await _businessInformationService.SetLocationImage(location.SiteId, location.Id, logo);
+            await _businessInformationService.AddAdditionalLocationImage(location.SiteId, location.Id, locImg);
 
             /////////////////////////
             ///
@@ -179,12 +182,12 @@ namespace Business.WebApi.Controllers
                 SiteId = site.Id,
             };
             location = await _businessInformationService.ProvisionLocationAsync(location);
-            _businessInformationService.SetLocationAddress(location.SiteId, location.Id,
+            await _businessInformationService.SetLocationAddress(location.SiteId, location.Id,
                                                            "Festival Walk", "",
                                                            "Hongkong", "Hongkong", "", "China");
-            _businessInformationService.SetLocationGeolocation(location.SiteId, location.Id, 22.3372971, 114.1745273);
-            _businessInformationService.SetLocationImage(location.SiteId, location.Id, logo);
-            _businessInformationService.AddAdditionalLocationImage(location.SiteId, location.Id, locImg);
+            await _businessInformationService.SetLocationGeolocation(location.SiteId, location.Id, 22.3372971, 114.1745273);
+            await _businessInformationService.SetLocationImage(location.SiteId, location.Id, logo);
+            await _businessInformationService.AddAdditionalLocationImage(location.SiteId, location.Id, locImg);
 
             /////////////////////////
             ///
@@ -206,12 +209,12 @@ namespace Business.WebApi.Controllers
                 SiteId = site.Id,
             };
             location = await _businessInformationService.ProvisionLocationAsync(location);
-            _businessInformationService.SetLocationAddress(location.SiteId, location.Id,
+            await _businessInformationService.SetLocationAddress(location.SiteId, location.Id,
                                                            "Telford Plaza", "",
                                                            "Hongkong", "Hongkong", "", "China");
-            _businessInformationService.SetLocationGeolocation(location.SiteId, location.Id, 22.3210652, 114.2132768);
-            _businessInformationService.SetLocationImage(location.SiteId, location.Id, logo);
-            _businessInformationService.AddAdditionalLocationImage(location.SiteId, location.Id, locImg);
+            await _businessInformationService.SetLocationGeolocation(location.SiteId, location.Id, 22.3210652, 114.2132768);
+            await _businessInformationService.SetLocationImage(location.SiteId, location.Id, logo);
+            await _businessInformationService.AddAdditionalLocationImage(location.SiteId, location.Id, locImg);
 
             /////////////////////////
             ///
@@ -233,12 +236,12 @@ namespace Business.WebApi.Controllers
                 SiteId = site.Id,
             };
             location = await _businessInformationService.ProvisionLocationAsync(location);
-            _businessInformationService.SetLocationAddress(location.SiteId, location.Id,
+            await _businessInformationService.SetLocationAddress(location.SiteId, location.Id,
                                                            "New Town Plaza", "",
                                                            "Hongkong", "Hongkong", "", "China");
-            _businessInformationService.SetLocationGeolocation(location.SiteId, location.Id, 22.3814592, 114.1889307);
-            _businessInformationService.SetLocationImage(location.SiteId, location.Id, logo);
-            _businessInformationService.AddAdditionalLocationImage(location.SiteId, location.Id, locImg);
+            await _businessInformationService.SetLocationGeolocation(location.SiteId, location.Id, 22.3814592, 114.1889307);
+            await _businessInformationService.SetLocationImage(location.SiteId, location.Id, logo);
+            await _businessInformationService.AddAdditionalLocationImage(location.SiteId, location.Id, locImg);
 
 
             return Ok();

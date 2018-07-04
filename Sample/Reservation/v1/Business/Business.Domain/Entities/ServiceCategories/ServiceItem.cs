@@ -1,31 +1,39 @@
 ﻿using System;
+using Business.Contracts.Events.ServiceCategory;
+using CqrsFramework.Domain;
+
 namespace Business.Domain.Entities.ServiceCategories
 {
-    public class ServiceItem
+    public class ServiceItem : AggregateRoot
     {
         private ServiceItem()
         {
             Id = Guid.NewGuid();
         }
 
-        public ServiceItem(Guid siteId, string name, string description, int defaultTimeLength, Guid serviceCategoryId) : this()
+        public ServiceItem(Guid siteId, string name, string description, int defaultTimeLength, double price, Guid serviceCategoryId, int industryStandardCategoryId) 
+            : this()
         {
             SiteId = siteId;
             Name = name;
             Description = description;
             DefaultTimeLength = defaultTimeLength;
             ServiceCategoryId = serviceCategoryId;
-            //Action = ActionCode.Added;
-        }
-
-        public ServiceItem(Guid siteId, string name, string description, int defaultTimeLength, double price, Guid serviceCategoryId, int industryStandardCategoryId) 
-            : this( siteId, name,  description,  defaultTimeLength,  serviceCategoryId)
-        {
             Price = price;
             IndustryStandardCategoryId = industryStandardCategoryId;
-        }
 
-        public Guid Id { get; private set; }
+
+            var serviceItemCreatedEvent = new ServiceItemCreatedEvent(Id,
+                                                                      name,
+                                                                      description,
+                                                                      defaultTimeLength,
+                                                                      price,
+                                                                      serviceCategoryId,
+                                                                      siteId,
+                                                                      industryStandardCategoryId
+                                                                     );
+            ApplyChange(serviceItemCreatedEvent);
+        }
 
         public string Name { get; private set; }
 

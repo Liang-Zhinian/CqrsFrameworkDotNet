@@ -18,12 +18,10 @@ namespace SaaSEqt.IdentityAccess.Domain.Events.Identity.User
             this.TenantId = tenantId.Id;
             this.Username = username;
 
-            this.Id = Guid.NewGuid();
             this.Version = 1;
             this.TimeStamp = DateTimeOffset.Now;
         }
 
-        public Guid Id { get; set; }
         public int Version { get; set; }
         public DateTimeOffset TimeStamp { get; set; }
 

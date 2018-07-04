@@ -18,7 +18,7 @@ namespace Business.Infra.Data.Migrations.BusinessDb
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("book2")
+                .HasDefaultSchema("book2businessbusiness")
                 .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
                 .HasAnnotation("ProductVersion", "2.0.3-rtm-10026");
 
@@ -485,7 +485,7 @@ namespace Business.Infra.Data.Migrations.BusinessDb
                             b1.Property<string>("SecondaryTelephone")
                                 .HasColumnType("varchar(255)");
 
-                            b1.ToTable("Location","book2");
+                            b1.ToTable("Location","book2business");
 
                             b1.HasOne("Business.Domain.Entities.Location")
                                 .WithOne("ContactInformation")
@@ -502,7 +502,7 @@ namespace Business.Infra.Data.Migrations.BusinessDb
 
                             b1.Property<double?>("Longitude");
 
-                            b1.ToTable("Location","book2");
+                            b1.ToTable("Location","book2business");
 
                             b1.HasOne("Business.Domain.Entities.Location")
                                 .WithOne("Geolocation")
@@ -532,7 +532,7 @@ namespace Business.Infra.Data.Migrations.BusinessDb
 
                             b1.Property<string>("StreetAddress2");
 
-                            b1.ToTable("Location","book2");
+                            b1.ToTable("Location","book2business");
 
                             b1.HasOne("Business.Domain.Entities.Location")
                                 .WithOne("PostalAddress")
@@ -651,7 +651,7 @@ namespace Business.Infra.Data.Migrations.BusinessDb
                             b1.Property<string>("SecondaryTelephone")
                                 .HasColumnType("varchar(255)");
 
-                            b1.ToTable("Site","book2");
+                            b1.ToTable("Site","book2business");
 
                             b1.HasOne("Business.Domain.Entities.Site")
                                 .WithOne("ContactInformation")
@@ -667,7 +667,7 @@ namespace Business.Infra.Data.Migrations.BusinessDb
                                 .IsRequired()
                                 .HasColumnType("varchar(36)");
 
-                            b1.ToTable("Site","book2");
+                            b1.ToTable("Site","book2business");
 
                             b1.HasOne("Business.Domain.Entities.Site")
                                 .WithOne("TenantId")

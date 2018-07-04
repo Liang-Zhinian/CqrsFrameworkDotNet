@@ -12,7 +12,7 @@ namespace Registration.Infra.Data.Constants
 
     public class DbConstants
     {
-        public static string Schema = "book2";
+        public static string Schema = "book2public";
 
         public static string KeyType = "uniqueidentifier";
         public static string String10 = "NVarchar(10)";

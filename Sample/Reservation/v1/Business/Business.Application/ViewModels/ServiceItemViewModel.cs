@@ -9,7 +9,8 @@ namespace Business.Application.ViewModels
         public string Name { get; set; }
         public string Description { get; set; }
         public int DefaultTimeLength { get; set; }
-
+        public double Price { get; set; }
+        public int IndustryStandardCategoryId { get; set; }
         public Guid ServiceCategoryId { get; set; }
         public string ServiceCategoryName { get; set; }
 

@@ -54,7 +54,9 @@ namespace Business.WebApi.Configurations
             services.AddTransient<ITenantService, TenantService>();
             services.AddTransient<SiteProvisioningService>();
             services.AddTransient<IBusinessInformationService, BusinessInformationService>();
+            services.AddTransient<IBusinessInformationQueryService, BusinessInformationQueryService>();
             services.AddTransient<IServiceCategoryService, ServiceCategoryService>();
+            services.AddTransient<IServiceCategoryQueryService, ServiceCategoryQueryService>();
         }
 
         private static void RegisterIdentityAccessServices(IServiceCollection services){

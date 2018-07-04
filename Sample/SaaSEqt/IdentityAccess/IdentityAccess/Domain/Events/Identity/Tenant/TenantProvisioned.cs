@@ -12,15 +12,13 @@ namespace SaaSEqt.IdentityAccess.Domain.Events.Identity.Tenant
         public TenantProvisioned(TenantId tenantId, string name, string description, bool active)
         {
             this.TenantId = tenantId.Id;
-            this.Id = Guid.NewGuid();
             Version = 1;
             TimeStamp = DateTimeOffset.Now;
             Name = name;
             Description = description;
             Active = active;
         }
-        
-        public Guid Id { get; set; }
+
         public int Version { get; set; }
         public DateTimeOffset TimeStamp { get; set; }
         public string TenantId { get; private set; }

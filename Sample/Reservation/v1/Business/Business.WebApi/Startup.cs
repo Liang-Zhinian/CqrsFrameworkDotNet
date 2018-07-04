@@ -119,6 +119,8 @@ namespace Business.WebApi
 
             services.AddRabbitMQEventBusSetup(Configuration);
 
+            services.AddEventStoreSetup(Configuration);
+
             services.AddApplicationSetup();
 
             services.AddSwaggerSupport();

@@ -18,20 +18,21 @@ namespace Business.WebApi.Controllers
     public class ServiceCategoryController: Controller
     {
         private readonly IServiceCategoryService _serviceCategoryService;
+        private readonly IServiceCategoryQueryService _serviceCategoryQueryService;
 
-        public ServiceCategoryController(IServiceCategoryService serviceCategoryService)
+        public ServiceCategoryController(IServiceCategoryService serviceCategoryService, IServiceCategoryQueryService serviceCategoryQueryService)
         {
             _serviceCategoryService = serviceCategoryService;
+            _serviceCategoryQueryService = serviceCategoryQueryService;
         }
 
         [HttpGet]
         [Route("FindServiceItems")]
         [ProducesResponseType(typeof(IEnumerable<ServiceItemViewModel>), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> FindServiceItems()
+        public Task<IActionResult> FindServiceItems()
         {
-            var list = await _serviceCategoryService.FindServiceItems()
-                                    .ToListAsync();
-            return Json(list);
+            var list = _serviceCategoryQueryService.FindServiceItems();
+            return Task.FromResult<IActionResult>(Json(list));
         }
 
         [HttpGet]

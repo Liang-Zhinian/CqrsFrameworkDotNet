@@ -25,4 +25,7 @@
     <ProjectReference Include="..\..\..\..\SaaSEqt\IdentityAccess\Application\SaaSEqt.Application.csproj" />
     <ProjectReference Include="..\Business.Infra.Data\Business.Infra.Data.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Services\ServiceCategoryService %28另一个副本%29.cs" />
+  </ItemGroup>
 </Project>

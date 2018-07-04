@@ -1,7 +1,8 @@
-﻿using CqrsFramework.Bus.RabbitMQ;
-using CqrsFramework.Caching;
+﻿using CqrsFramework.Caching;
 using CqrsFramework.Domain;
 using CqrsFramework.Events;
+using CqrsFramework.EventStore.IntegrationEventLogEF;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -36,6 +37,13 @@ namespace Infrastructure.IoC
         private static void RegisterEventStore(IServiceCollection services)
         {
             services.AddScoped<ISession, Session>();
+
+            // EfMySqlEventStore
+            services.AddSingleton<IEventStore>(y => new EfMySqlEventStore(y.GetService<IntegrationEventLogContext>().Database.GetDbConnection()));
+            services.AddSingleton<ICache, MemoryCache>();
+            services.AddScoped<IRepository>(y => new CacheRepository(new Repository(y.GetService<IEventStore>(), y.GetService<IEventPublisher>()), y.GetService<IEventStore>(), y.GetService<ICache>()));
+
+
             // InMemoryEventStore
             //services.AddSingleton<IEventStore>(y => new InMemoryEventStore(y.GetService<RabbitMQBus>()));
             //services.AddScoped<IRepository>(y => new CacheRepository(new Repository(y.GetService<IEventStore>(), y.GetService<IEventPublisher>()), y.GetService<IEventStore>()));

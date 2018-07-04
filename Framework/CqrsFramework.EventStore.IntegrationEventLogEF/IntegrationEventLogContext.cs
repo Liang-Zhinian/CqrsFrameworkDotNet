@@ -26,7 +26,9 @@ namespace CqrsFramework.EventStore.IntegrationEventLogEF
             builder.HasKey(e => e.EventId);
 
             builder.Property(e => e.EventId)
-                .IsRequired();
+                   .IsRequired();
+
+            builder.Property(e => e.SourceId);
 
             builder.Property(e => e.Content)
                 .IsRequired();

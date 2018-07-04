@@ -69,7 +69,7 @@ namespace Registration.ClientWebApi
 
             services.AddDbContext<IntegrationEventLogContext>(options =>
             {
-                options.UseMySql(Configuration["ConnectionString"],
+                options.UseMySql(Configuration["IntegrationEventLogConnectionString"],
                                  mySqlOptionsAction: sqlOptions =>
                                  {
                                      sqlOptions.MigrationsAssembly(typeof(Startup).GetTypeInfo().Assembly.GetName().Name);

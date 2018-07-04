@@ -6,7 +6,7 @@ using CqrsFramework.Domain;
 
 namespace Business.Domain.Entities
 {
-    public class Site
+    public class Site : AggregateRoot
     {
         private Site()
         {
@@ -28,12 +28,12 @@ namespace Business.Domain.Entities
 
             Locations = new ObservableCollection<Location>();
 
-            //ApplyChange(new SiteCreatedEvent(Id, siteName, siteDescription, active, tenantId.Id));
+            ApplyChange(new SiteCreatedEvent(this.Id, siteName, siteDescription, active, tenantId.Id));
         }
 
         #region public properties
 
-        public Guid Id { get; private set; }
+        //public Guid Id { get; private set; }
 
         /// The name of the site
         public string Name { get; private set; }

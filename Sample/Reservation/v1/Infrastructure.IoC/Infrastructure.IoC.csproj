@@ -12,6 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Framework\CqrsFramework\CqrsFramework.csproj" />
     <ProjectReference Include="..\..\..\..\Framework\CqrsFramework.Bus.RabbitMQ\CqrsFramework.Bus.RabbitMQ.csproj" />
+    <ProjectReference Include="..\..\..\..\Framework\CqrsFramework.EventStore.IntegrationEventLogEF\CqrsFramework.EventStore.IntegrationEventLogEF.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="AutoMapperSetup.cs" />

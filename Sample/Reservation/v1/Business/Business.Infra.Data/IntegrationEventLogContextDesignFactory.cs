@@ -11,7 +11,7 @@ namespace Business.Infra.Data
         public IntegrationEventLogContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<IntegrationEventLogContext>();
-            optionsBuilder.UseMySql("Server=localhost;database=book2;uid=root;pwd=P@ssword;charset=utf8;port=3306;SslMode=None", b => b.MigrationsAssembly("Business.Infra.Data"));
+            optionsBuilder.UseMySql("Server=localhost;database=IntegrationEventLogDb;uid=root;pwd=P@ssword;charset=utf8;port=3306;SslMode=None", b => b.MigrationsAssembly("Business.Infra.Data"));
 
             return new IntegrationEventLogContext(optionsBuilder.Options);
         }

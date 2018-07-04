@@ -54,7 +54,15 @@ namespace CqrsFramework.EventStore.IntegrationEventLogEF
 
         public Task Save(IEnumerable<IEvent> events, CancellationToken cancellationToken = default(CancellationToken))
         {
-            throw new NotImplementedException();
+            foreach(var @event in events)
+            {
+                var eventLogEntry = new IntegrationEventLogEntry(@event);
+
+                _integrationEventLogContext.IntegrationEventLogs.Add(eventLogEntry);
+            };
+
+            _integrationEventLogContext.SaveChanges();
+            return Task.CompletedTask;
         }
     }
 }

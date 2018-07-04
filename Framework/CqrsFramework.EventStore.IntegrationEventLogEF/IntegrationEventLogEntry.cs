@@ -11,7 +11,8 @@ namespace CqrsFramework.EventStore.IntegrationEventLogEF
         private IntegrationEventLogEntry() { }
         public IntegrationEventLogEntry(IEvent @event)
         {
-            EventId = @event.Id;
+            EventId = Guid.NewGuid();
+            SourceId = @event.Id;
             CreationTime = @event.TimeStamp.DateTime;
             EventTypeName = @event.GetType().FullName;
             Content = JsonConvert.SerializeObject(@event);
@@ -20,7 +21,8 @@ namespace CqrsFramework.EventStore.IntegrationEventLogEF
         }
         public IntegrationEventLogEntry(Guid eventId, string eventTypeName, DateTime creationTime, string content)
         {
-            EventId = eventId;
+            EventId = Guid.NewGuid();
+            SourceId = eventId;
             CreationTime = creationTime;
             EventTypeName = eventTypeName;
             Content = content;
@@ -29,6 +31,7 @@ namespace CqrsFramework.EventStore.IntegrationEventLogEF
         }
 
         public Guid EventId { get; private set; }
+        public Guid SourceId { get; private set; }
         public string EventTypeName { get; private set; }
         public EventStateEnum State { get; set; }
         public int TimesSent { get; set; }
