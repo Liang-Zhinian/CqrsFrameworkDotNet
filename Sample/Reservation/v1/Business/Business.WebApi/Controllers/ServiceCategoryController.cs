@@ -8,6 +8,7 @@ using System.Linq;
 using Business.Domain.Repositories;
 using System.Threading.Tasks;
 using System.Net;
+using System.Collections.Generic;
 
 namespace Business.WebApi.Controllers
 {
@@ -24,12 +25,12 @@ namespace Business.WebApi.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         [Route("FindServiceItems")]
-        public JsonResult FindServiceItems()
+        [ProducesResponseType(typeof(IEnumerable<ServiceItemViewModel>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> FindServiceItems()
         {
-            var list = _serviceCategoryService.FindServiceItems()
-                                    .ToList();
+            var list = await _serviceCategoryService.FindServiceItems()
+                                    .ToListAsync();
             return Json(list);
         }
 
