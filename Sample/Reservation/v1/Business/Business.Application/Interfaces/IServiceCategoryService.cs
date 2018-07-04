@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Business.Application.EventSourcedNormalizers;
 using Business.Application.ViewModels;
 
@@ -10,10 +11,10 @@ namespace Business.Application.Interfaces
         // service category service
         IEnumerable<ServiceCategoryViewModel> FindServiceCategories();
         ServiceCategoryViewModel FindServiceCategory(Guid serviceCategoryId);
-        IEnumerable<ServiceItemViewModel> FindServiceItems();
+        Task<IEnumerable<ServiceItemViewModel>> FindServiceItems();
         ServiceItemViewModel FindServiceItem(Guid serviceItemId);
-        void AddServiceItem(ServiceItemViewModel serviceItem);
-        void AddServiceCategory(ServiceCategoryViewModel serviceCategory);
+        Task<ServiceItemViewModel> AddServiceItem(ServiceItemViewModel serviceItem);
+        Task<ServiceCategoryViewModel> AddServiceCategory(ServiceCategoryViewModel serviceCategory);
 
     }
 }

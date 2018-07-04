@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using Business.Application.Interfaces;
 using Business.Application.ViewModels;
@@ -41,7 +42,7 @@ namespace Business.Application.Services
             _serviceItemRepository = serviceItemRepository;
         }
 
-        public void AddServiceItem(ServiceItemViewModel serviceItem)
+        public async Task<ServiceItemViewModel> AddServiceItem(ServiceItemViewModel serviceItem)
         {
             var domainservice = new ServiceItem(
                 serviceItem.SiteId,
@@ -67,7 +68,11 @@ namespace Business.Application.Services
                                                                       serviceItem.SiteId
                                                                  );
 
-            _integrationEventService.PublishThroughEventBus(serviceItemCreatedEvent);
+            await _integrationEventService.PublishThroughEventBusAsync(serviceItemCreatedEvent);
+
+            serviceItem.Id = domainservice.Id;
+
+            return serviceItem;
         }
 
         public void Dispose()
@@ -121,24 +126,26 @@ namespace Business.Application.Services
             };
         }
 
-        public IEnumerable<ServiceItemViewModel> FindServiceItems()
+        public Task<IEnumerable<ServiceItemViewModel>> FindServiceItems()
         {
 
             var serviceItems =
                 _serviceItemRepository.Find(_ => true);
 
-            return from service in serviceItems
+            var result = from service in serviceItems
                    select new ServiceItemViewModel
                    {
                        Id = service.Id,
                        Name = service.Name,
                        Description = service.Description,
-                ServiceCategoryId = service.ServiceCategoryId,
-                ServiceCategoryName = service.ServiceCategory.Name
+                        ServiceCategoryId = service.ServiceCategoryId,
+                        ServiceCategoryName = service.ServiceCategory.Name
                    };
+
+            return Task.FromResult<IEnumerable<ServiceItemViewModel>>(result);
         }
 
-        public void AddServiceCategory(ServiceCategoryViewModel serviceCategory) {
+        public async Task<ServiceCategoryViewModel> AddServiceCategory(ServiceCategoryViewModel serviceCategory) {
             var domainServiceCategory = new ServiceCategory(
                 serviceCategory.SiteId,
                 serviceCategory.Name,
@@ -164,7 +171,11 @@ namespace Business.Application.Services
                                                                               serviceCategory.SiteId
                                                                              );
 
-            _integrationEventService.PublishThroughEventBus(serviceCategoryCreatedEvent);
+            await _integrationEventService.PublishThroughEventBusAsync(serviceCategoryCreatedEvent);
+
+            serviceCategory.Id = domainServiceCategory.Id;
+
+            return serviceCategory;
         }
     }
 }

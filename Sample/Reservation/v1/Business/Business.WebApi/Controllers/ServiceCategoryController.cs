@@ -6,6 +6,8 @@ using Business.Application.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Business.Domain.Repositories;
+using System.Threading.Tasks;
+using System.Net;
 
 namespace Business.WebApi.Controllers
 {
@@ -42,7 +44,8 @@ namespace Business.WebApi.Controllers
         [HttpPost]
         //[Authorize(Policy = "CanWriteTenantData")]
         [Route("AddServiceItem")]
-        public ActionResult AddServiceItem([FromBody]
+        [ProducesResponseType((int)HttpStatusCode.Created)]
+        public async Task<IActionResult> AddServiceItem([FromBody]
                                    ServiceItemViewModel request
                                   )
         {
@@ -52,15 +55,16 @@ namespace Business.WebApi.Controllers
                 return Ok(request);
             }
 
-            _serviceCategoryService.AddServiceItem(request);
+            var result = await _serviceCategoryService.AddServiceItem(request);
 
-            return Ok(request);
+            return CreatedAtAction(nameof(AddServiceItem), new { id = result.Id }, null);
         }
 
         [HttpPost]
         //[Authorize(Policy = "CanWriteTenantData")]
         [Route("AddServiceCategory")]
-        public ActionResult AddServiceCategory([FromBody]
+        [ProducesResponseType((int)HttpStatusCode.Created)]
+        public async Task<IActionResult> AddServiceCategory([FromBody]
                                    ServiceCategoryViewModel request
                                   )
         {
@@ -70,9 +74,9 @@ namespace Business.WebApi.Controllers
                 return Ok(request);
             }
 
-            _serviceCategoryService.AddServiceCategory(request);
+            var result = await _serviceCategoryService.AddServiceCategory(request);
 
-            return Ok(request);
+            return CreatedAtAction(nameof(AddServiceCategory), new { id = result.Id }, null);
         }
     }
 }
