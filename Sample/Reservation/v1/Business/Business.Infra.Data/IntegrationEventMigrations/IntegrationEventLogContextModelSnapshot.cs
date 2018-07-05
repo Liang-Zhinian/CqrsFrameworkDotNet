@@ -13,7 +13,7 @@ namespace Business.Infra.Data.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasDefaultSchema("IntegrationEventLogDb")
+                .HasDefaultSchema("book2")
                 .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
                 .HasAnnotation("ProductVersion", "2.0.3-rtm-10026");
 
