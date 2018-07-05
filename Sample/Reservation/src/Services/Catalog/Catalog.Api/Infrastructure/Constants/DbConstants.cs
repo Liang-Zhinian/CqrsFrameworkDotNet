@@ -12,7 +12,7 @@ namespace Catalog.Api.Infrastructure.Constants
 
     public class DbConstants
     {
-        public static string Schema = "book2";
+        public static string Schema = "book2business";
 
         public static string KeyType = "uniqueidentifier";
         public static string String10 = "NVarchar(10)";

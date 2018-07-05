@@ -5,6 +5,7 @@ using System.Text;
 using SaaSEqt.Common.Events;
 using SaaSEqt.Common.Domain.Model;
 using Autofac;
+using SaaSEqt.IdentityAccess.Domain.Events.Identity.Tenant;
 
 namespace SaaSEqt.IdentityAccess.Application
 {
@@ -31,6 +32,10 @@ namespace SaaSEqt.IdentityAccess.Application
                     //}
 
                     // to do: public event
+                    if (domainEvent is TenantProvisioned)
+                    {
+                        Console.WriteLine("To Do: TenantProvisionedEvent.");
+                    }
                 });
 
         }

@@ -25,7 +25,7 @@ namespace Registration.Domain.EventHandlers
             Console.WriteLine("Handling ServiceItemCreatedEvent.");
             // save to ReadDB
             ServiceItem serviceItem = new ServiceItem(@event.SiteId,
-                                                  @event.CategoryId,
+                                                  @event.ServiceCategoryId,
                                            @event.Name,
                                            @event.Description,
                                                   @event.DefaultTimeLength); //_mapper.Map<LocationRM>(message);

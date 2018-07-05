@@ -9,11 +9,11 @@ namespace Site.Api.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "book2");
+                name: "book2business");
 
             migrationBuilder.CreateTable(
                 name: "Site",
-                schema: "book2",
+                schema: "book2business",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
@@ -32,7 +32,7 @@ namespace Site.Api.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Branding",
-                schema: "book2",
+                schema: "book2business",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
@@ -49,7 +49,7 @@ namespace Site.Api.Migrations
                     table.ForeignKey(
                         name: "FK_Branding_Site_SiteId",
                         column: x => x.SiteId,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "Site",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -57,7 +57,7 @@ namespace Site.Api.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Location",
-                schema: "book2",
+                schema: "book2business",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
@@ -83,7 +83,7 @@ namespace Site.Api.Migrations
                     table.ForeignKey(
                         name: "FK_Location_Site_SiteId",
                         column: x => x.SiteId,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "Site",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -91,7 +91,7 @@ namespace Site.Api.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Staff",
-                schema: "book2",
+                schema: "book2business",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
@@ -107,7 +107,7 @@ namespace Site.Api.Migrations
                     table.ForeignKey(
                         name: "FK_Staff_Site_SiteId",
                         column: x => x.SiteId,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "Site",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -115,7 +115,7 @@ namespace Site.Api.Migrations
 
             migrationBuilder.CreateTable(
                 name: "LocationImage",
-                schema: "book2",
+                schema: "book2business",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
@@ -129,14 +129,14 @@ namespace Site.Api.Migrations
                     table.ForeignKey(
                         name: "FK_LocationImage_Location_LocationId",
                         column: x => x.LocationId,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "Location",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_LocationImage_Site_SiteId",
                         column: x => x.SiteId,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "Site",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -144,7 +144,7 @@ namespace Site.Api.Migrations
 
             migrationBuilder.CreateTable(
                 name: "StaffLoginLocation",
-                schema: "book2",
+                schema: "book2business",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
@@ -158,21 +158,21 @@ namespace Site.Api.Migrations
                     table.ForeignKey(
                         name: "FK_StaffLoginLocation_Location_LocationId",
                         column: x => x.LocationId,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "Location",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_StaffLoginLocation_Site_SiteId",
                         column: x => x.SiteId,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "Site",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_StaffLoginLocation_Staff_StaffId",
                         column: x => x.StaffId,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "Staff",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -180,50 +180,50 @@ namespace Site.Api.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Branding_SiteId",
-                schema: "book2",
+                schema: "book2business",
                 table: "Branding",
                 column: "SiteId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Location_SiteId",
-                schema: "book2",
+                schema: "book2business",
                 table: "Location",
                 column: "SiteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_LocationImage_LocationId",
-                schema: "book2",
+                schema: "book2business",
                 table: "LocationImage",
                 column: "LocationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_LocationImage_SiteId",
-                schema: "book2",
+                schema: "book2business",
                 table: "LocationImage",
                 column: "SiteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Staff_SiteId",
-                schema: "book2",
+                schema: "book2business",
                 table: "Staff",
                 column: "SiteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_StaffLoginLocation_LocationId",
-                schema: "book2",
+                schema: "book2business",
                 table: "StaffLoginLocation",
                 column: "LocationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_StaffLoginLocation_SiteId",
-                schema: "book2",
+                schema: "book2business",
                 table: "StaffLoginLocation",
                 column: "SiteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_StaffLoginLocation_StaffId",
-                schema: "book2",
+                schema: "book2business",
                 table: "StaffLoginLocation",
                 column: "StaffId");
         }
@@ -232,27 +232,27 @@ namespace Site.Api.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Branding",
-                schema: "book2");
+                schema: "book2business");
 
             migrationBuilder.DropTable(
                 name: "LocationImage",
-                schema: "book2");
+                schema: "book2business");
 
             migrationBuilder.DropTable(
                 name: "StaffLoginLocation",
-                schema: "book2");
+                schema: "book2business");
 
             migrationBuilder.DropTable(
                 name: "Location",
-                schema: "book2");
+                schema: "book2business");
 
             migrationBuilder.DropTable(
                 name: "Staff",
-                schema: "book2");
+                schema: "book2business");
 
             migrationBuilder.DropTable(
                 name: "Site",
-                schema: "book2");
+                schema: "book2business");
         }
     }
 }

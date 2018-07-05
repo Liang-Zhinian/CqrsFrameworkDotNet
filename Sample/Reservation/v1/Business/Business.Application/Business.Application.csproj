@@ -18,6 +18,7 @@
     <Folder Include="EventSourcedNormalizers\" />
     <Folder Include="AutoMapper\" />
     <Folder Include="Commands\" />
+    <Folder Include="IdentityAccessEventProcessors\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Business.Domain\Business.Domain.csproj" />
@@ -27,5 +28,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Services\ServiceCategoryService %28另一个副本%29.cs" />
+    <Compile Remove="IdentityAccessEventHandlers\TenantEventHandler.cs" />
   </ItemGroup>
 </Project>

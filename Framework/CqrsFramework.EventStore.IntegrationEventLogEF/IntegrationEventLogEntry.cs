@@ -12,17 +12,17 @@ namespace CqrsFramework.EventStore.IntegrationEventLogEF
         public IntegrationEventLogEntry(IEvent @event)
         {
             EventId = Guid.NewGuid();
-            SourceId = @event.Id;
+            SourceId = @event.Id.ToString();
             CreationTime = @event.TimeStamp.DateTime;
             EventTypeName = @event.GetType().FullName;
             Content = JsonConvert.SerializeObject(@event);
             State = EventStateEnum.NotPublished;
             TimesSent = 0;
         }
-        public IntegrationEventLogEntry(Guid eventId, string eventTypeName, DateTime creationTime, string content)
+        public IntegrationEventLogEntry(string sourceId, string eventTypeName, DateTime creationTime, string content)
         {
             EventId = Guid.NewGuid();
-            SourceId = eventId;
+            SourceId = sourceId;
             CreationTime = creationTime;
             EventTypeName = eventTypeName;
             Content = content;
@@ -31,7 +31,7 @@ namespace CqrsFramework.EventStore.IntegrationEventLogEF
         }
 
         public Guid EventId { get; private set; }
-        public Guid SourceId { get; private set; }
+        public string SourceId { get; private set; }
         public string EventTypeName { get; private set; }
         public EventStateEnum State { get; set; }
         public int TimesSent { get; set; }

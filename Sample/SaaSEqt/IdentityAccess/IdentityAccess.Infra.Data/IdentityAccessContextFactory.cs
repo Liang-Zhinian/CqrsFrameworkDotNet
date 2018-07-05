@@ -10,7 +10,7 @@ namespace SaaSEqt.IdentityAccess.Infra.Data
         public IdentityAccessDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<IdentityAccessDbContext>();
-            optionsBuilder.UseMySql("Server=localhost;database=book2;uid=root;pwd=P@ssword;charset=utf8;port=3306;SslMode=None");
+            optionsBuilder.UseMySql("Server=localhost;database=book2business;uid=root;pwd=P@ssword;charset=utf8;port=3306;SslMode=None");
 
             return new IdentityAccessDbContext(optionsBuilder.Options);
         }

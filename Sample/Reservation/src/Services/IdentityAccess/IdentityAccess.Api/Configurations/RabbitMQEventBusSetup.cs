@@ -65,7 +65,7 @@ namespace SaaSEqt.IdentityAccess.Api.Configurations
                     retryCount = int.Parse(Configuration["EventBusRetryCount"]);
                 }
 
-                return new RabbitMQBus(rabbitMQPersistentConnection, logger, "book2", "fanout", "book2events", false, retryCount);
+                return new RabbitMQBus(rabbitMQPersistentConnection, logger, "book2business", "fanout", "book2events", false, retryCount);
             });
 
             services.AddSingleton<ICommandSender>(y => y.GetService<RabbitMQBus>());

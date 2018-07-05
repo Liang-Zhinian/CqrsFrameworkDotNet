@@ -51,16 +51,16 @@ namespace Business.Application.Services
 
             var _tenant = _identityApplicationService.ProvisionTenant(command);
 
-            TenantCreatedEvent tenantCreatedEvent = new TenantCreatedEvent(
-                Guid.Parse(_tenant.TenantId_Id),
-                _tenant.Name,
-                _tenant.Description
-            );
+            //TenantCreatedEvent tenantCreatedEvent = new TenantCreatedEvent(
+            //    Guid.Parse(_tenant.TenantId_Id),
+            //    _tenant.Name,
+            //    _tenant.Description
+            //);
 
-            _eventPublisher.Publish<TenantCreatedEvent>(tenantCreatedEvent);
+            //_eventPublisher.Publish<TenantCreatedEvent>(tenantCreatedEvent);
 
-            _businessInformationService.ProvisionSite(_tenant.TenantId.Id, _tenant.Name,
-                                                      _tenant.Description, _tenant.Active);
+            //_businessInformationService.ProvisionSite(_tenant.TenantId.Id, _tenant.Name,
+                                                      //_tenant.Description, _tenant.Active);
         }
 
         public void ModifyTenantAddress(TenantAddressViewModel addressViewModel){

@@ -13,7 +13,7 @@ namespace Business.Infra.Data.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasDefaultSchema("book2")
+                .HasDefaultSchema("book2business")
                 .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
                 .HasAnnotation("ProductVersion", "2.0.3-rtm-10026");
 
@@ -22,7 +22,8 @@ namespace Business.Infra.Data.Migrations
                     b.Property<Guid>("EventId")
                         .ValueGeneratedOnAdd();
                 
-                    b.Property<Guid>("SourceId");
+                b.Property<string>("SourceId")
+                        .IsRequired();
 
                     b.Property<string>("Content")
                         .IsRequired();

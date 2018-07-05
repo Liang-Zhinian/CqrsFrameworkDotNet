@@ -10,11 +10,11 @@ namespace Registration.Infra.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "book2");
+                name: "book2public");
 
             migrationBuilder.CreateTable(
                 name: "V_Region",
-                schema: "book2",
+                schema: "book2public",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -31,7 +31,7 @@ namespace Registration.Infra.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "V_Tenant",
-                schema: "book2",
+                schema: "book2public",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
@@ -60,7 +60,7 @@ namespace Registration.Infra.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "V_TimeZone",
-                schema: "book2",
+                schema: "book2public",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -76,7 +76,7 @@ namespace Registration.Infra.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "V_Site",
-                schema: "book2",
+                schema: "book2public",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
@@ -101,7 +101,7 @@ namespace Registration.Infra.Data.Migrations
                     table.ForeignKey(
                         name: "FK_V_Site_V_Tenant_TenantId",
                         column: x => x.TenantId,
-                        principalSchema: "book2",
+                        principalSchema: "book2public",
                         principalTable: "V_Tenant",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -109,7 +109,7 @@ namespace Registration.Infra.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "V_Location",
-                schema: "book2",
+                schema: "book2public",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
@@ -136,7 +136,7 @@ namespace Registration.Infra.Data.Migrations
                     table.ForeignKey(
                         name: "FK_V_Location_V_Site_SiteId",
                         column: x => x.SiteId,
-                        principalSchema: "book2",
+                        principalSchema: "book2public",
                         principalTable: "V_Site",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -144,7 +144,7 @@ namespace Registration.Infra.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "V_ServiceCategory",
-                schema: "book2",
+                schema: "book2public",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
@@ -161,7 +161,7 @@ namespace Registration.Infra.Data.Migrations
                     table.ForeignKey(
                         name: "FK_V_ServiceCategory_V_Site_SiteId",
                         column: x => x.SiteId,
-                        principalSchema: "book2",
+                        principalSchema: "book2public",
                         principalTable: "V_Site",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -169,7 +169,7 @@ namespace Registration.Infra.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "V_Staff",
-                schema: "book2",
+                schema: "book2public",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
@@ -202,7 +202,7 @@ namespace Registration.Infra.Data.Migrations
                     table.ForeignKey(
                         name: "FK_V_Staff_V_Site_SiteId",
                         column: x => x.SiteId,
-                        principalSchema: "book2",
+                        principalSchema: "book2public",
                         principalTable: "V_Site",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -210,7 +210,7 @@ namespace Registration.Infra.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "V_LocationImage",
-                schema: "book2",
+                schema: "book2public",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
@@ -225,14 +225,14 @@ namespace Registration.Infra.Data.Migrations
                     table.ForeignKey(
                         name: "FK_V_LocationImage_V_Location_LocationId",
                         column: x => x.LocationId,
-                        principalSchema: "book2",
+                        principalSchema: "book2public",
                         principalTable: "V_Location",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_V_LocationImage_V_Site_SiteId",
                         column: x => x.SiteId,
-                        principalSchema: "book2",
+                        principalSchema: "book2public",
                         principalTable: "V_Site",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -240,7 +240,7 @@ namespace Registration.Infra.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "V_HomePageImage",
-                schema: "book2",
+                schema: "book2public",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -260,14 +260,14 @@ namespace Registration.Infra.Data.Migrations
                     table.ForeignKey(
                         name: "FK_V_HomePageImage_V_ServiceCategory_CategoryId",
                         column: x => x.CategoryId,
-                        principalSchema: "book2",
+                        principalSchema: "book2public",
                         principalTable: "V_ServiceCategory",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_V_HomePageImage_V_ServiceCategory_ParentCategoryId",
                         column: x => x.ParentCategoryId,
-                        principalSchema: "book2",
+                        principalSchema: "book2public",
                         principalTable: "V_ServiceCategory",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -275,7 +275,7 @@ namespace Registration.Infra.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "V_ServiceItem",
-                schema: "book2",
+                schema: "book2public",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
@@ -292,14 +292,14 @@ namespace Registration.Infra.Data.Migrations
                     table.ForeignKey(
                         name: "FK_V_ServiceItem_V_ServiceCategory_ServiceCategoryId",
                         column: x => x.ServiceCategoryId,
-                        principalSchema: "book2",
+                        principalSchema: "book2public",
                         principalTable: "V_ServiceCategory",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_V_ServiceItem_V_Site_SiteId",
                         column: x => x.SiteId,
-                        principalSchema: "book2",
+                        principalSchema: "book2public",
                         principalTable: "V_Site",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -307,7 +307,7 @@ namespace Registration.Infra.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "V_StaffLoginLocation",
-                schema: "book2",
+                schema: "book2public",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
@@ -323,21 +323,21 @@ namespace Registration.Infra.Data.Migrations
                     table.ForeignKey(
                         name: "FK_V_StaffLoginLocation_V_Location_LocationId",
                         column: x => x.LocationId,
-                        principalSchema: "book2",
+                        principalSchema: "book2public",
                         principalTable: "V_Location",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_V_StaffLoginLocation_V_Site_SiteId",
                         column: x => x.SiteId,
-                        principalSchema: "book2",
+                        principalSchema: "book2public",
                         principalTable: "V_Site",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_V_StaffLoginLocation_V_Staff_StaffId",
                         column: x => x.StaffId,
-                        principalSchema: "book2",
+                        principalSchema: "book2public",
                         principalTable: "V_Staff",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -345,79 +345,79 @@ namespace Registration.Infra.Data.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_V_HomePageImage_CategoryId",
-                schema: "book2",
+                schema: "book2public",
                 table: "V_HomePageImage",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_V_HomePageImage_ParentCategoryId",
-                schema: "book2",
+                schema: "book2public",
                 table: "V_HomePageImage",
                 column: "ParentCategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_V_Location_SiteId",
-                schema: "book2",
+                schema: "book2public",
                 table: "V_Location",
                 column: "SiteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_V_LocationImage_LocationId",
-                schema: "book2",
+                schema: "book2public",
                 table: "V_LocationImage",
                 column: "LocationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_V_LocationImage_SiteId",
-                schema: "book2",
+                schema: "book2public",
                 table: "V_LocationImage",
                 column: "SiteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_V_ServiceCategory_SiteId",
-                schema: "book2",
+                schema: "book2public",
                 table: "V_ServiceCategory",
                 column: "SiteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_V_ServiceItem_ServiceCategoryId",
-                schema: "book2",
+                schema: "book2public",
                 table: "V_ServiceItem",
                 column: "ServiceCategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_V_ServiceItem_SiteId",
-                schema: "book2",
+                schema: "book2public",
                 table: "V_ServiceItem",
                 column: "SiteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_V_Site_TenantId",
-                schema: "book2",
+                schema: "book2public",
                 table: "V_Site",
                 column: "TenantId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_V_Staff_SiteId",
-                schema: "book2",
+                schema: "book2public",
                 table: "V_Staff",
                 column: "SiteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_V_StaffLoginLocation_LocationId",
-                schema: "book2",
+                schema: "book2public",
                 table: "V_StaffLoginLocation",
                 column: "LocationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_V_StaffLoginLocation_SiteId",
-                schema: "book2",
+                schema: "book2public",
                 table: "V_StaffLoginLocation",
                 column: "SiteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_V_StaffLoginLocation_StaffId",
-                schema: "book2",
+                schema: "book2public",
                 table: "V_StaffLoginLocation",
                 column: "StaffId");
         }
@@ -426,47 +426,47 @@ namespace Registration.Infra.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "V_HomePageImage",
-                schema: "book2");
+                schema: "book2public");
 
             migrationBuilder.DropTable(
                 name: "V_LocationImage",
-                schema: "book2");
+                schema: "book2public");
 
             migrationBuilder.DropTable(
                 name: "V_Region",
-                schema: "book2");
+                schema: "book2public");
 
             migrationBuilder.DropTable(
                 name: "V_ServiceItem",
-                schema: "book2");
+                schema: "book2public");
 
             migrationBuilder.DropTable(
                 name: "V_StaffLoginLocation",
-                schema: "book2");
+                schema: "book2public");
 
             migrationBuilder.DropTable(
                 name: "V_TimeZone",
-                schema: "book2");
+                schema: "book2public");
 
             migrationBuilder.DropTable(
                 name: "V_ServiceCategory",
-                schema: "book2");
+                schema: "book2public");
 
             migrationBuilder.DropTable(
                 name: "V_Location",
-                schema: "book2");
+                schema: "book2public");
 
             migrationBuilder.DropTable(
                 name: "V_Staff",
-                schema: "book2");
+                schema: "book2public");
 
             migrationBuilder.DropTable(
                 name: "V_Site",
-                schema: "book2");
+                schema: "book2public");
 
             migrationBuilder.DropTable(
                 name: "V_Tenant",
-                schema: "book2");
+                schema: "book2public");
         }
     }
 }

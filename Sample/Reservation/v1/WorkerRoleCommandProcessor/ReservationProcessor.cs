@@ -68,7 +68,7 @@ namespace WorkerRoleCommandProcessor
             services
                 .AddDbContext<ReservationDbContext>(config =>
                     {
-                        config.UseMySql(configuration["ConnectionString"]);
+                        config.UseMySql(configuration["PublicDbConnectionString"]);
                     }, ServiceLifetime.Scoped)
                 .AddLogging()
                 .AddScoped(typeof(IReadDbRepository<>), typeof(ReadDbRepository<>))

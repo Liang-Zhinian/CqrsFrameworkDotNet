@@ -17,7 +17,7 @@ namespace Site.Api.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("book2")
+                .HasDefaultSchema("book2business")
                 .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
                 .HasAnnotation("ProductVersion", "2.0.0-rtm-26452");
 
@@ -202,7 +202,7 @@ namespace Site.Api.Migrations
                             b1.Property<string>("SecondaryTelephone")
                                 .HasColumnType("varchar(255)");
 
-                            b1.ToTable("Location","book2");
+                            b1.ToTable("Location","book2business");
 
                             b1.HasOne("SaaSEqt.eShop.Site.Api.Model.Location")
                                 .WithOne("ContactInformation")
@@ -219,7 +219,7 @@ namespace Site.Api.Migrations
 
                             b1.Property<double?>("Longitude");
 
-                            b1.ToTable("Location","book2");
+                            b1.ToTable("Location","book2business");
 
                             b1.HasOne("SaaSEqt.eShop.Site.Api.Model.Location")
                                 .WithOne("Geolocation")
@@ -249,7 +249,7 @@ namespace Site.Api.Migrations
 
                             b1.Property<string>("StreetAddress2");
 
-                            b1.ToTable("Location","book2");
+                            b1.ToTable("Location","book2business");
 
                             b1.HasOne("SaaSEqt.eShop.Site.Api.Model.Location")
                                 .WithOne("PostalAddress")
@@ -287,7 +287,7 @@ namespace Site.Api.Migrations
                             b1.Property<string>("SecondaryTelephone")
                                 .HasColumnType("varchar(255)");
 
-                            b1.ToTable("Site","book2");
+                            b1.ToTable("Site","book2business");
 
                             b1.HasOne("SaaSEqt.eShop.Site.Api.Model.Site")
                                 .WithOne("ContactInformation")

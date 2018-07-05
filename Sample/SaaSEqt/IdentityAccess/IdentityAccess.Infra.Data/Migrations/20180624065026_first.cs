@@ -9,11 +9,11 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "book2");
+                name: "book2business");
 
             migrationBuilder.CreateTable(
                 name: "Tenant",
-                schema: "book2",
+                schema: "book2business",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -30,7 +30,7 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Group",
-                schema: "book2",
+                schema: "book2business",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -44,7 +44,7 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Migrations
                     table.ForeignKey(
                         name: "FK_Group_Tenant_TenantId_Id",
                         column: x => x.TenantId_Id,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "Tenant",
                         principalColumn: "TenantId_Id",
                         onDelete: ReferentialAction.Cascade);
@@ -52,7 +52,7 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "User",
-                schema: "book2",
+                schema: "book2business",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -69,7 +69,7 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Migrations
                     table.ForeignKey(
                         name: "FK_User_Tenant_TenantId_Id",
                         column: x => x.TenantId_Id,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "Tenant",
                         principalColumn: "TenantId_Id",
                         onDelete: ReferentialAction.Cascade);
@@ -77,7 +77,7 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "GroupMember",
-                schema: "book2",
+                schema: "book2business",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -92,14 +92,14 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Migrations
                     table.ForeignKey(
                         name: "FK_GroupMember_Group_GroupId",
                         column: x => x.GroupId,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "Group",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_GroupMember_Tenant_TenantId_Id",
                         column: x => x.TenantId_Id,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "Tenant",
                         principalColumn: "TenantId_Id",
                         onDelete: ReferentialAction.Cascade);
@@ -107,7 +107,7 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Role",
-                schema: "book2",
+                schema: "book2business",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -123,14 +123,14 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Migrations
                     table.ForeignKey(
                         name: "FK_Role_Group_GroupId",
                         column: x => x.GroupId,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "Group",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Role_Tenant_TenantId_Id",
                         column: x => x.TenantId_Id,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "Tenant",
                         principalColumn: "TenantId_Id",
                         onDelete: ReferentialAction.Cascade);
@@ -138,7 +138,7 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Person",
-                schema: "book2",
+                schema: "book2business",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -161,14 +161,14 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Migrations
                     table.ForeignKey(
                         name: "FK_Person_Tenant_TenantId_Id",
                         column: x => x.TenantId_Id,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "Tenant",
                         principalColumn: "TenantId_Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Person_User_UserId",
                         column: x => x.UserId,
-                        principalSchema: "book2",
+                        principalSchema: "book2business",
                         principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -176,50 +176,50 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Group_TenantId_Id",
-                schema: "book2",
+                schema: "book2business",
                 table: "Group",
                 column: "TenantId_Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_GroupMember_GroupId",
-                schema: "book2",
+                schema: "book2business",
                 table: "GroupMember",
                 column: "GroupId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_GroupMember_TenantId_Id",
-                schema: "book2",
+                schema: "book2business",
                 table: "GroupMember",
                 column: "TenantId_Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Person_TenantId_Id",
-                schema: "book2",
+                schema: "book2business",
                 table: "Person",
                 column: "TenantId_Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Person_UserId",
-                schema: "book2",
+                schema: "book2business",
                 table: "Person",
                 column: "UserId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Role_GroupId",
-                schema: "book2",
+                schema: "book2business",
                 table: "Role",
                 column: "GroupId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Role_TenantId_Id",
-                schema: "book2",
+                schema: "book2business",
                 table: "Role",
                 column: "TenantId_Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_User_TenantId_Id",
-                schema: "book2",
+                schema: "book2business",
                 table: "User",
                 column: "TenantId_Id");
         }
@@ -228,27 +228,27 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "GroupMember",
-                schema: "book2");
+                schema: "book2business");
 
             migrationBuilder.DropTable(
                 name: "Person",
-                schema: "book2");
+                schema: "book2business");
 
             migrationBuilder.DropTable(
                 name: "Role",
-                schema: "book2");
+                schema: "book2business");
 
             migrationBuilder.DropTable(
                 name: "User",
-                schema: "book2");
+                schema: "book2business");
 
             migrationBuilder.DropTable(
                 name: "Group",
-                schema: "book2");
+                schema: "book2business");
 
             migrationBuilder.DropTable(
                 name: "Tenant",
-                schema: "book2");
+                schema: "book2business");
         }
     }
 }
