@@ -26,7 +26,6 @@ namespace SaaSEqt.IdentityAccess.Domain.Entities
             string description,
             DateTime startingOn,
             DateTime until)
-            :this()
         {
             this.Description = description;
             this.InvitationId = invitationId;
@@ -42,11 +41,11 @@ namespace SaaSEqt.IdentityAccess.Domain.Entities
 
         protected RegistrationInvitation()
         {
-            this.Id = Guid.NewGuid();
+            //this.Id = Guid.NewGuid();
         }
 
-        [Key]
-        public Guid Id { get; private set; }
+        //[Key]
+        //public Guid Id { get; private set; }
 
         public string Description { get; private set; }
 

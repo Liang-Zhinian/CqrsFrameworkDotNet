@@ -17,7 +17,7 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Active = table.Column<bool>(nullable: false, defaultValue: false),
+                    Active = table.Column<bool>(nullable: false),
                     Description = table.Column<string>(type: "varchar(2000)", nullable: true),
                     Name = table.Column<string>(type: "varchar(255)", nullable: false),
                     TenantId_Id = table.Column<string>(type: "varchar(36)", nullable: false)
@@ -80,10 +80,10 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Migrations
                 schema: "book2business",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
                     GroupId = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(type: "varchar(255)", nullable: false),
-                    TenantId_Id = table.Column<string>(type: "varchar(36)", nullable: false),
+                    TenantId_Id = table.Column<string>(nullable: true),
                     Type = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

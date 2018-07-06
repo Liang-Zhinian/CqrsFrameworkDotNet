@@ -50,7 +50,7 @@ namespace SaaSEqt.IdentityAccess.Domain.Entities
             AssertionConcern.AssertArgumentNotEmpty(description, "The tenant description is required.");
             AssertionConcern.AssertArgumentLength(description, 1, 100, "The name description be 100 characters or less.");
 
-            this.Id = Guid.Parse(tenantId.Id);
+            //this.Id = Guid.Parse(tenantId.Id);
             this.TenantId = tenantId;
             this.Name = name;
             this.Description = description;
@@ -65,16 +65,16 @@ namespace SaaSEqt.IdentityAccess.Domain.Entities
         /// </summary>
         protected Tenant()
         {
-            if (this.Id == Guid.Empty) this.Id = Guid.NewGuid();
-            this.TenantId = new TenantId(this.Id.ToString());
+            //if (this.Id == Guid.Empty) this.Id = Guid.NewGuid();
+            //this.TenantId = new TenantId(this.Id.ToString());
         }
 
         #endregion
 
         #region [ Public Properties ]
 
-        [Key]
-        public Guid Id { get; private set; }
+        //[Key]
+        //public Guid Id { get; private set; }
 
         public string TenantId_Id { get { return TenantId.Id; } private set {} }
         public TenantId TenantId { get; private set; }

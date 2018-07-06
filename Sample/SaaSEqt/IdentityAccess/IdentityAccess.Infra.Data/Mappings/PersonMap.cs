@@ -6,7 +6,7 @@ using SaaSEqt.IdentityAccess.Domain.Entities;
 
 namespace SaaSEqt.IdentityAccess.Infra.Data.Mappings
 {
-    public class PersonMap : BaseMap<Person>, IEntityTypeConfiguration<Person>
+    public class PersonMap : EntityWithCompositeIdMap<Person>, IEntityTypeConfiguration<Person>
     {
         public void Configure(EntityTypeBuilder<Person> builder)
         {

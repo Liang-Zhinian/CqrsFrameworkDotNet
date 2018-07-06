@@ -5,7 +5,7 @@ namespace SaaSEqt.Common.Domain.Model
     using System.Collections.Generic;
     using System;
 
-    public abstract class Entity { /*public Guid Id { get; set; }*/ }
+    public abstract class Entity { public Guid Id { get; set; } }
 
     public abstract class EntityWithCompositeId : Entity
     {

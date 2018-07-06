@@ -54,7 +54,6 @@ namespace SaaSEqt.IdentityAccess.Domain.Entities
         /// Initial value of the <see cref="SupportsNesting"/> property.
         /// </param>
         public Role(TenantId tenantId, string name, string description, bool supportsNesting)
-            : this()
         {
             // Defer validation to the property setters.
             this.Description = description;
@@ -71,15 +70,15 @@ namespace SaaSEqt.IdentityAccess.Domain.Entities
         /// </summary>
         protected Role()
         {
-            this.Id = Guid.NewGuid();
+            //this.Id = Guid.NewGuid();
         }
 
         #endregion
 
         #region [ Public Properties ]
 
-        [Key]
-        public Guid Id { get; private set; }
+        //[Key]
+        //public Guid Id { get; private set; }
 
         public string Description { get; private set; }
 

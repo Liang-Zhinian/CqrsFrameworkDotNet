@@ -7,7 +7,7 @@ using SaaSEqt.IdentityAccess.Infra.Data.Mappings.Constants;
 
 namespace SaaSEqt.IdentityAccess.Infra.Data.Mappings
 {
-    public class UserMap : BaseMap<User>, IEntityTypeConfiguration<User>
+    public class UserMap : EntityWithCompositeIdMap<User>, IEntityTypeConfiguration<User>
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {

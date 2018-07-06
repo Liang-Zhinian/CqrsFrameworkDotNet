@@ -53,8 +53,7 @@ namespace SaaSEqt.IdentityAccess.Domain.Entities
 		/// <see cref="User"/> or <see cref="Group"/>, respectively.
 		/// </remarks>
 		internal GroupMember(TenantId tenantId, string name, GroupMemberType type)
-            :this()
-		{
+        {
 			AssertionConcern.AssertArgumentNotNull(tenantId, "The tenantId must be provided.");
 			AssertionConcern.AssertArgumentNotEmpty(name, "Member name is required.");
 			AssertionConcern.AssertArgumentLength(name, 1, 100, "Member name must be 100 characters or less.");
@@ -71,15 +70,15 @@ namespace SaaSEqt.IdentityAccess.Domain.Entities
 		/// </summary>
 		protected GroupMember()
         {
-            this.Id = Guid.NewGuid();
+            //this.Id = Guid.NewGuid();
 		}
 
 		#endregion
 
 		#region [ Public Properties ]
 
-        [Key]
-        public Guid Id { get; private set; }
+        //[Key]
+        //public Guid Id { get; private set; }
 
         public string TenantId_Id { get { return TenantId.Id; } private set { } }
 		public TenantId TenantId { get; private set; }

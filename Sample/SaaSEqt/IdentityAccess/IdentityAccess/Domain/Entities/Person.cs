@@ -76,15 +76,15 @@ namespace SaaSEqt.IdentityAccess.Domain.Entities
 		/// </summary>
 		protected Person()
         {
-            this.Id = Guid.NewGuid();
+            //this.Id = Guid.NewGuid();
 		}
 
 		#endregion
 
         #region [ Public Properties ]
 
-        [Key]
-        public Guid Id { get; private set; }
+        //[Key]
+        //public Guid Id { get; private set; }
 
         public string TenantId_Id { get { return TenantId.Id; } private set { } }
 		public TenantId TenantId

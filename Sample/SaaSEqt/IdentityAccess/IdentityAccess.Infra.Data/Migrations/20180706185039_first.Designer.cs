@@ -10,7 +10,7 @@ using System;
 namespace SaaSEqt.IdentityAccess.Infra.Data.Migrations
 {
     [DbContext(typeof(IdentityAccessDbContext))]
-    [Migration("20180624065026_first")]
+    [Migration("20180706185039_first")]
     partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,6 +55,7 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)")
                         .HasAnnotation("MySQL:Collation", "utf8_general_ci");
 
                     b.Property<Guid>("GroupId");
@@ -63,11 +64,7 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("TenantId_Id")
-                        .IsRequired()
-                        .HasColumnName("TenantId_Id")
-                        .HasColumnType("varchar(36)")
-                        .HasAnnotation("MySQL:Collation", "utf8_general_ci");
+                    b.Property<string>("TenantId_Id");
 
                     b.Property<int>("TypeValue")
                         .HasColumnName("Type");
@@ -155,9 +152,7 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("MySQL:Collation", "utf8_general_ci");
 
-                    b.Property<bool>("Active")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(false);
+                    b.Property<bool>("Active");
 
                     b.Property<string>("Description")
                         .HasColumnType("varchar(2000)");

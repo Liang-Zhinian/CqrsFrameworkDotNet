@@ -78,6 +78,7 @@
     <Compile Remove="Models\Group.cs" />
     <Compile Remove="Migrations\20180617174138_first.cs" />
     <Compile Remove="Migrations\20180624064207_first.cs" />
+    <Compile Remove="Migrations\20180624065026_first.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IdentityAccess\SaaSEqt.IdentityAccess.csproj" />

@@ -56,7 +56,7 @@ namespace SaaSEqt.IdentityAccess.Domain.Entities
 		/// </summary>
 		protected Group()
 		{
-            this.Id = Guid.NewGuid();
+            //this.Id = Guid.NewGuid();
 			this.GroupMembers = new HashSet<GroupMember>();
 		}
 
@@ -64,8 +64,8 @@ namespace SaaSEqt.IdentityAccess.Domain.Entities
 
 		#region [ Public Properties and Private IsInternalGroup Property ]
 
-        [Key]
-        public Guid Id { get; private set; }
+        //[Key]
+        //public Guid Id { get; private set; }
 
         public string TenantId_Id { get { return TenantId.Id; } private set { } }
 		public TenantId TenantId { get; private set; }

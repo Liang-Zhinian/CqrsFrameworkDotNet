@@ -39,7 +39,7 @@ namespace SaaSEqt.IdentityAccess.Domain.Entities
 			string username,
 			string password,
 			Enablement enablement,
-            Person person): this()
+            Person person)
 		{
 			AssertionConcern.AssertArgumentNotNull(tenantId, "The tenantId is required.");
 			AssertionConcern.AssertArgumentNotNull(person, "The person is required.");
@@ -71,15 +71,15 @@ namespace SaaSEqt.IdentityAccess.Domain.Entities
 		/// </summary>
 		protected User()
         {
-            this.Id = Guid.NewGuid();
+            //this.Id = Guid.NewGuid();
 		}
 
 		#endregion
 
         #region [ Public Properties ]
 
-        [Key]
-        public Guid Id { get; private set; }
+        //[Key]
+        //public Guid Id { get; private set; }
 
         public string TenantId_Id { get { return TenantId.Id; } private set { } }
 		public TenantId TenantId { get; private set; }

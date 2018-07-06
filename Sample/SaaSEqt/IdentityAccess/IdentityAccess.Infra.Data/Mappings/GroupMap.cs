@@ -7,7 +7,7 @@ using SaaSEqt.IdentityAccess.Domain.Entities;
 
 namespace SaaSEqt.IdentityAccess.Infra.Data.Mappings
 {
-    public class GroupMap : BaseMap<Group>, IEntityTypeConfiguration<Group>
+    public class GroupMap : EntityWithCompositeIdMap<Group>, IEntityTypeConfiguration<Group>
     {
         public void Configure(EntityTypeBuilder<Group> builder)
         {

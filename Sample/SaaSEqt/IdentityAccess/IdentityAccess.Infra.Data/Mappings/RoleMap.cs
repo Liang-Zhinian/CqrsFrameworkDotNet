@@ -7,7 +7,7 @@ using SaaSEqt.IdentityAccess.Infra.Data.Mappings.Constants;
 
 namespace SaaSEqt.IdentityAccess.Infra.Data.Mappings
 {
-    public class RoleMap : BaseMap<Role>, IEntityTypeConfiguration<Role>
+    public class RoleMap : EntityWithCompositeIdMap<Role>, IEntityTypeConfiguration<Role>
     {
         public void Configure(EntityTypeBuilder<Role> builder)
         {
