@@ -9,6 +9,9 @@ using Business.Domain.Repositories;
 using Business.WebApi.Requests.Locations;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using Business.Contracts.Commands.Locations;
+using System.Threading.Tasks;
+using System.Net;
 
 namespace Business.WebApi.Controllers
 {
@@ -31,6 +34,47 @@ namespace Business.WebApi.Controllers
             _businessInformationQueryService = businessInformationQueryService;
         }
 
+        private ProvisionLocationCommand BuildLocationCmd(Guid siteId, 
+                                                          string name, 
+                                                          string description
+                                                         ){
+            var command = new ProvisionLocationCommand {
+                Name = name,
+                Description = description,
+                ContactName = "test",
+                EmailAddress = "test@test.com",
+                PrimaryTelephone = "123-123-1234",
+                SecondaryTelephone = "123-123-1234",
+                SiteId = siteId
+            };
+
+            return command;
+        }
+
+        private async Task CreateTestData(Guid siteId,
+                                          string locName,
+                                          string locDesc,
+                                          byte[] img,
+                                                          double latitude = 0,
+                                          double longitude = 0)
+        { 
+
+            var command = BuildLocationCmd(siteId, locName, "Chanel IFC");
+
+            var location = await _businessInformationService.ProvisionLocationAsync(command);
+            await _businessInformationService.SetLocationAddress(location.SiteId, location.Id,
+                                                                 locName, "",
+                                                           "Hongkong", "Hongkong", "", "China");
+            await _businessInformationService.SetLocationGeolocation(location.SiteId, location.Id, latitude, longitude);
+            await _businessInformationService.UpdateLocationImage(new UpdateLocationImageCommand
+            {
+                LocationId = location.Id,
+                SiteId = location.SiteId,
+                Image = img
+            });
+            await _businessInformationService.AddAdditionalLocationImage(location.SiteId, location.Id, img);
+        }
+
         [HttpGet]
         [AllowAnonymous]
         [Route("GenerateTestData")]
@@ -39,6 +83,15 @@ namespace Business.WebApi.Controllers
             var contentRootPath = this._env.ContentRootPath;
             string picFileLogo = Path.Combine(contentRootPath, "Pics", "Chanel logo.png");
             string picFileLocation = Path.Combine(contentRootPath, "Pics", "Location image.png");
+
+            string city = "test";
+            string countryCode = "test";
+            string postalCode = "test";
+            string stateProvince = "test";
+            string streetAddress = "test";
+            string streetAddress2 = "test";
+            double latitude = 0;
+            double longitude = 0;
 
             byte[] logo;
             using (var memoryStream = new MemoryStream())
@@ -56,221 +109,46 @@ namespace Business.WebApi.Controllers
 
             var site = _businessInformationQueryService.FindSites().Where(_ => _.Name == "Chanel").FirstOrDefault();
 
-            var location = new LocationViewModel
-            {
-                Name = "IFC",
-                Description = "Chanel IFC",
-                ContactName = "test",
-                PrimaryTelephone = "123-123-1234",
-                SecondaryTelephone = "123-123-1234",
-                City = "test",
-                CountryCode = "test",
-                PostalCode = "test",
-                StateProvince = "test",
-                StreetAddress = "test",
-                StreetAddress2 = "test",
-                Latitude = 0,
-                Longitude = 0,
-                SiteId = site.Id,
-            };
-            location = await _businessInformationService.ProvisionLocationAsync(location);
-            await _businessInformationService.SetLocationAddress(location.SiteId, location.Id,
-                                                           "IFC", "",
-                                                           "Hongkong", "Hongkong", "", "China");
-            await _businessInformationService.SetLocationGeolocation(location.SiteId, location.Id, 22.28588, 114.158131);
-            await _businessInformationService.SetLocationImage(location.SiteId, location.Id, logo);
-            await _businessInformationService.AddAdditionalLocationImage(location.SiteId, location.Id, locImg);
-
-            /////////////////////////
-             
-            location = new LocationViewModel
-            {
-                Name = "HM3",
-                Description = "Chanel Prince's Building",
-                ContactName = "test",
-                PrimaryTelephone = "123-123-1234",
-                SecondaryTelephone = "123-123-1234",
-                City = "test",
-                CountryCode = "test",
-                PostalCode = "test",
-                StateProvince = "test",
-                StreetAddress = "test",
-                StreetAddress2 = "test",
-                Latitude = 0,
-                Longitude = 0,
-                SiteId = site.Id,
-            };
-            location = await _businessInformationService.ProvisionLocationAsync(location);
-            await _businessInformationService.SetLocationAddress(location.SiteId, location.Id,
-                                                           "Prince's Building", "",
-                                                           "Hongkong", "Hongkong", "", "China");
-            await _businessInformationService.SetLocationGeolocation(location.SiteId, location.Id, 22.2812257, 114.159262799999);
-            await _businessInformationService.SetLocationImage(location.SiteId, location.Id, logo);
-            await _businessInformationService.AddAdditionalLocationImage(location.SiteId, location.Id, locImg);
-
-            /////////////////////////
-             
-            location = new LocationViewModel
-            {
-                Name = "HHP",
-                Description = "Chanel Hysan Place",
-                ContactName = "test",
-                PrimaryTelephone = "123-123-1234",
-                SecondaryTelephone = "123-123-1234",
-                City = "test",
-                CountryCode = "test",
-                PostalCode = "test",
-                StateProvince = "test",
-                StreetAddress = "test",
-                StreetAddress2 = "test",
-                Latitude = 0,
-                Longitude = 0,
-                SiteId = site.Id,
-            };
-            location = await _businessInformationService.ProvisionLocationAsync(location);
-            await _businessInformationService.SetLocationAddress(location.SiteId, location.Id,
-                                                           "Hysan Place", "",
-                                                           "Hongkong", "Hongkong", "", "China");
-            await _businessInformationService.SetLocationGeolocation(location.SiteId, location.Id, 22.2798079, 114.1837883);
-            await _businessInformationService.SetLocationImage(location.SiteId, location.Id, logo);
-            await _businessInformationService.AddAdditionalLocationImage(location.SiteId, location.Id, locImg);
-
-            /////////////////////////
-            ///
-            location = new LocationViewModel
-            {
-                Name = "HEM",
-                Description = "Chanel Elements",
-                ContactName = "test",
-                PrimaryTelephone = "123-123-1234",
-                SecondaryTelephone = "123-123-1234",
-                City = "test",
-                CountryCode = "test",
-                PostalCode = "test",
-                StateProvince = "test",
-                StreetAddress = "test",
-                StreetAddress2 = "test",
-                Latitude = 0,
-                Longitude = 0,
-                SiteId = site.Id,
-            };
-            location = await _businessInformationService.ProvisionLocationAsync(location);
-            await _businessInformationService.SetLocationAddress(location.SiteId, location.Id,
-                                                           "Elements", "",
-                                                           "Hongkong", "Hongkong", "", "China");
-            await _businessInformationService.SetLocationGeolocation(location.SiteId, location.Id, 22.3048708, 114.1615219);
-            await _businessInformationService.SetLocationImage(location.SiteId, location.Id, logo);
-            await _businessInformationService.AddAdditionalLocationImage(location.SiteId, location.Id, locImg);
-
-            /////////////////////////
-            ///
-            location = new LocationViewModel
-            {
-                Name = "HFW",
-                Description = "Chanel Festival Walk",
-                ContactName = "test",
-                PrimaryTelephone = "123-123-1234",
-                SecondaryTelephone = "123-123-1234",
-                City = "test",
-                CountryCode = "test",
-                PostalCode = "test",
-                StateProvince = "test",
-                StreetAddress = "test",
-                StreetAddress2 = "test",
-                Latitude = 0,
-                Longitude = 0,
-                SiteId = site.Id,
-            };
-            location = await _businessInformationService.ProvisionLocationAsync(location);
-            await _businessInformationService.SetLocationAddress(location.SiteId, location.Id,
-                                                           "Festival Walk", "",
-                                                           "Hongkong", "Hongkong", "", "China");
-            await _businessInformationService.SetLocationGeolocation(location.SiteId, location.Id, 22.3372971, 114.1745273);
-            await _businessInformationService.SetLocationImage(location.SiteId, location.Id, logo);
-            await _businessInformationService.AddAdditionalLocationImage(location.SiteId, location.Id, locImg);
-
-            /////////////////////////
-            ///
-            location = new LocationViewModel
-            {
-                Name = "HTP",
-                Description = "Chanel Telford Plaza",
-                ContactName = "test",
-                PrimaryTelephone = "123-123-1234",
-                SecondaryTelephone = "123-123-1234",
-                City = "test",
-                CountryCode = "test",
-                PostalCode = "test",
-                StateProvince = "test",
-                StreetAddress = "test",
-                StreetAddress2 = "test",
-                Latitude = 0,
-                Longitude = 0,
-                SiteId = site.Id,
-            };
-            location = await _businessInformationService.ProvisionLocationAsync(location);
-            await _businessInformationService.SetLocationAddress(location.SiteId, location.Id,
-                                                           "Telford Plaza", "",
-                                                           "Hongkong", "Hongkong", "", "China");
-            await _businessInformationService.SetLocationGeolocation(location.SiteId, location.Id, 22.3210652, 114.2132768);
-            await _businessInformationService.SetLocationImage(location.SiteId, location.Id, logo);
-            await _businessInformationService.AddAdditionalLocationImage(location.SiteId, location.Id, locImg);
-
-            /////////////////////////
-            ///
-            location = new LocationViewModel
-            {
-                Name = "HNT",
-                Description = "Chanel New Town Plaza",
-                ContactName = "test",
-                PrimaryTelephone = "123-123-1234",
-                SecondaryTelephone = "123-123-1234",
-                City = "test",
-                CountryCode = "test",
-                PostalCode = "test",
-                StateProvince = "test",
-                StreetAddress = "test",
-                StreetAddress2 = "test",
-                Latitude = 0,
-                Longitude = 0,
-                SiteId = site.Id,
-            };
-            location = await _businessInformationService.ProvisionLocationAsync(location);
-            await _businessInformationService.SetLocationAddress(location.SiteId, location.Id,
-                                                           "New Town Plaza", "",
-                                                           "Hongkong", "Hongkong", "", "China");
-            await _businessInformationService.SetLocationGeolocation(location.SiteId, location.Id, 22.3814592, 114.1889307);
-            await _businessInformationService.SetLocationImage(location.SiteId, location.Id, logo);
-            await _businessInformationService.AddAdditionalLocationImage(location.SiteId, location.Id, locImg);
+            await CreateTestData(site.Id, "IFC", "Chanel IFC", locImg, 22.28588, 114.158131);
+            await CreateTestData(site.Id, "HM3", "Chanel Prince's Building", locImg, 22.2812257, 114.159262799999);
+            await CreateTestData(site.Id, "HHP", "Chanel Hysan Place", locImg, 22.2798079, 114.1837883);
+            await CreateTestData(site.Id, "HEM", "Chanel Elements", locImg, 22.3048708, 114.1615219);
+            await CreateTestData(site.Id, "HFW", "Chanel Festival Walk", locImg, 22.3372971, 114.1745273);
+            await CreateTestData(site.Id, "HTP", "Chanel Telford Plaza", locImg, 22.3210652, 114.2132768);
+            await CreateTestData(site.Id, "HNT", "Chanel New Town Plaza", locImg, 22.3814592, 114.1889307);
 
 
             return Ok();
         }
 
-        [HttpGet]
-        //[Authorize(Policy = "CanWriteTenantData")]
-        [Route("test")]
-        public ActionResult Test()
-        {
-            return Ok("Success!");
-        }
-
         [HttpPost]
         //[Authorize(Policy = "CanWriteTenantData")]
-        //[Route("register")]
-        public ActionResult Post([FromBody]
-                                   LocationViewModel request
+        [Route("ProvisionLocation")]
+        [ProducesResponseType((int)HttpStatusCode.Created)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> ProvisionLocation([FromBody]
+                                                           ProvisionLocationRequest request
                                   )
         {
             if (!ModelState.IsValid)
             {
-                //NotifyModelStateErrors();
-                return Ok(request);
+                return (IActionResult)BadRequest();
             }
 
-            var location = _businessInformationService.ProvisionLocationAsync(request);
+            var command = new ProvisionLocationCommand
+            {
+                Name = request.Name,
+                Description = request.Description,
+                ContactName = request.ContactName,
+                EmailAddress = request.EmailAddress,
+                PrimaryTelephone = request.PrimaryTelephone,
+                SecondaryTelephone = request.SecondaryTelephone,
+                SiteId = request.SiteId
+            };
 
-            return Ok(location);
+            var location = _businessInformationService.ProvisionLocationAsync(command);
+
+            return (IActionResult)Ok(location);
         }
 
         [HttpPost]
@@ -317,7 +195,11 @@ namespace Business.WebApi.Controllers
                 image = memoryStream.ToArray();
             }
 
-            _businessInformationService.SetLocationImage(siteId, locationId, image);
+            _businessInformationService.UpdateLocationImage(new UpdateLocationImageCommand{
+                LocationId = request.Id,
+                SiteId = request.SiteId,
+                Image = image
+            });
             return Ok();
         }
 

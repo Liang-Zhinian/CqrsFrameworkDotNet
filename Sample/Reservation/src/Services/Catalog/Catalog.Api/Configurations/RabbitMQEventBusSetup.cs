@@ -2,6 +2,7 @@
 using CqrsFramework.Bus.RabbitMQ;
 using CqrsFramework.Commands;
 using CqrsFramework.Events;
+using CqrsFramework.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;

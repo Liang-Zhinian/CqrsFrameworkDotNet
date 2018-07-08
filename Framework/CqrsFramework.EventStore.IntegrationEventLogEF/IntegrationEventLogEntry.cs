@@ -11,7 +11,7 @@ namespace CqrsFramework.EventStore.IntegrationEventLogEF
         private IntegrationEventLogEntry() { }
         public IntegrationEventLogEntry(IEvent @event)
         {
-            EventId = Guid.NewGuid();
+            AggregateId = Guid.NewGuid();
             SourceId = @event.Id.ToString();
             CreationTime = @event.TimeStamp.DateTime;
             EventTypeName = @event.GetType().FullName;
@@ -21,7 +21,7 @@ namespace CqrsFramework.EventStore.IntegrationEventLogEF
         }
         public IntegrationEventLogEntry(string sourceId, string eventTypeName, DateTime creationTime, string content)
         {
-            EventId = Guid.NewGuid();
+            AggregateId = Guid.NewGuid();
             SourceId = sourceId;
             CreationTime = creationTime;
             EventTypeName = eventTypeName;
@@ -30,7 +30,7 @@ namespace CqrsFramework.EventStore.IntegrationEventLogEF
             TimesSent = 0;
         }
 
-        public Guid EventId { get; private set; }
+        public Guid AggregateId { get; private set; }
         public string SourceId { get; private set; }
         public string EventTypeName { get; private set; }
         public EventStateEnum State { get; set; }

@@ -55,9 +55,11 @@ namespace Infrastructure.IoC
                 return new DefaultRabbitMQPersistentConnection(factory, logger, retryCount);
             });
 
+
+            var subscriptionClientName = Configuration["SubscriptionClientName"];
+
             services.AddSingleton<RabbitMQBus>(sp =>
             {
-                var subscriptionClientName = Configuration["SubscriptionClientName"];
                 var rabbitMQPersistentConnection = sp.GetRequiredService<IRabbitMQPersistentConnection>();
                 var iLifetimeScope = sp.GetRequiredService<ILifetimeScope>();
                 var logger = sp.GetRequiredService<ILogger<RabbitMQBus>>();

@@ -106,6 +106,5 @@ namespace CqrsFramework.Domain
         {
             return !(x == y);
         }
-
     }
 }

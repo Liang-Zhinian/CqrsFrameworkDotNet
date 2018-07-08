@@ -41,7 +41,7 @@ namespace CqrsFramework.EventStore.IntegrationEventLogEF.Services
 
         public Task MarkEventAsPublishedAsync(IEvent @event)
         {
-            var eventLogEntry = _integrationEventLogContext.IntegrationEventLogs.Single(ie => ie.EventId == @event.Id);
+            var eventLogEntry = _integrationEventLogContext.IntegrationEventLogs.Single(ie => ie.AggregateId == @event.Id);
             eventLogEntry.TimesSent++;
             eventLogEntry.State = EventStateEnum.Published;
 
@@ -67,7 +67,7 @@ namespace CqrsFramework.EventStore.IntegrationEventLogEF.Services
 
         public int MarkEventAsPublished(IEvent @event)
         {
-            var eventLogEntry = _integrationEventLogContext.IntegrationEventLogs.Single(ie => ie.EventId == @event.Id);
+            var eventLogEntry = _integrationEventLogContext.IntegrationEventLogs.Single(ie => ie.AggregateId == @event.Id);
             eventLogEntry.TimesSent++;
             eventLogEntry.State = EventStateEnum.Published;
 

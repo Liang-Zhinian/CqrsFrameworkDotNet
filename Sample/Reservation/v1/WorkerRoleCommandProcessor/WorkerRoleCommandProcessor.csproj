@@ -19,6 +19,7 @@
     <ProjectReference Include="..\Registration\Registration.Infra.Data\Registration.Infra.Data.csproj" />
     <ProjectReference Include="..\Registration\Registration.Domain\Registration.Domain.csproj" />
     <ProjectReference Include="..\Infrastructure.IoC\Infrastructure.IoC.csproj" />
+    <ProjectReference Include="..\Business\Business.Domain\Business.Domain.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="DelegateAdjuster.cs" />

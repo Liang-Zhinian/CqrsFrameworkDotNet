@@ -10,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.DependencyInjection;
-using CqrsFramework.EventStore.IntegrationEventLogEF;
+using CqrsFramework.EventSourcing;
 
 namespace Business.WebApi
 {
@@ -29,7 +29,7 @@ namespace Business.WebApi
                     .Wait();
 
                 })
-                .MigrateDbContext<IntegrationEventLogContext>((_,__)=> { })
+                .MigrateDbContext<EventStoreDbContext>((_,__)=> { })
 				.Run();
         }
 

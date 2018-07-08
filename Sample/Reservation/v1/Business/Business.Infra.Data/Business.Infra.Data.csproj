@@ -67,6 +67,9 @@
     <Compile Remove="Migrations\20180701071056_IntegrationEventInitial.cs" />
     <Compile Remove="Migrations\20180701071749_BusinessDbContextInitial.cs" />
     <Compile Remove="Services\MySQLIntegrationEventLogService.cs" />
+    <Compile Remove="Migrations\BusinessDb\20180701090821_BusinessDbContextInitial.cs" />
+    <Compile Remove="IntegrationEventMigrations\20170322145434_IntegrationEventInitial.cs" />
+    <Compile Remove="IntegrationEventLogContextDesignFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Business.Domain\Business.Domain.csproj" />

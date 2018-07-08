@@ -9,23 +9,28 @@ namespace Business.Domain.Services
 {
     public class SiteProvisioningService
     {
-        private readonly IIntegrationEventService _integrationEventService;
+        //private readonly IIntegrationEventService _integrationEventService;
         private readonly ISiteRepository _siteRepository;
 
         public SiteProvisioningService(/*ISession eventStore, */
-                                       IIntegrationEventService integrationEventService,
+                                       /*IIntegrationEventService integrationEventService,*/
                                        ISiteRepository siteRepository)
         {
             //_eventStore = eventStore;
-            _integrationEventService = integrationEventService;
+            //_integrationEventService = integrationEventService;
             _siteRepository = siteRepository;
         }
 
-        public Site ProvisionSite(TenantId tenantId, string siteName, string siteDescription, bool active){
-            Site site = new Site(tenantId, siteName, siteDescription, active);
+        public Site ProvisionSite(TenantId tenantId, string siteName, string siteDescription, string contactName, string primaryTelephone, string secondaryTelephone, string emailAddress, bool active){
+            ContactInformation contactInformation = new ContactInformation( contactName,  primaryTelephone,  secondaryTelephone, emailAddress);
 
-            site.CreateBranding(new byte[] { 0 }, "#", "#", "#", "#");
+            Site site = new Site(tenantId, siteName, siteDescription, active, contactInformation);
+
+            //site.UpdateContactInformation(contactName, primaryTelephone, secondaryTelephone);
+
             _siteRepository.Add(site);
+
+            site.UpdateBranding(new byte[] { 0 }, "#", "#", "#", "#");
 
             //_integrationEventService.PublishThroughEventBus(new SiteCreatedEvent(site.Id, siteName, siteDescription, active, tenantId.Id));
             //_siteRepository.UnitOfWork.Commit();

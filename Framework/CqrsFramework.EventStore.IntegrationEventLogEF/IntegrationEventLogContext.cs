@@ -23,9 +23,9 @@ namespace CqrsFramework.EventStore.IntegrationEventLogEF
         {
             builder.ToTable("IntegrationEventLog");
 
-            builder.HasKey(e => e.EventId);
+            builder.HasKey(e => e.AggregateId);
 
-            builder.Property(e => e.EventId)
+            builder.Property(e => e.AggregateId)
                    .IsRequired();
 
             builder.Property(e => e.SourceId);

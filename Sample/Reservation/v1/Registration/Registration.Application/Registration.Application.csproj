@@ -40,6 +40,5 @@
   <ItemGroup>
     <ProjectReference Include="..\Registration.Infra.Data\Registration.Infra.Data.csproj" />
     <ProjectReference Include="..\Registration.Domain\Registration.Domain.csproj" />
-    <ProjectReference Include="..\..\..\..\..\Framework\CqrsFramework.EventStore.IntegrationEventLogEF\CqrsFramework.EventStore.IntegrationEventLogEF.csproj" />
   </ItemGroup>
 </Project>

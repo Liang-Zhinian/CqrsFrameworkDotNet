@@ -30,7 +30,7 @@ namespace CqrsFramework.EventStore.IntegrationEventLogEF
         public Task<IEnumerable<IEvent>> Get(Guid aggregateId, int fromVersion, CancellationToken cancellationToken = default(CancellationToken))
         {
             IList<IEvent> events = new List<IEvent>();
-            var evts = _integrationEventLogContext.IntegrationEventLogs.Where(_=>_.EventId.Equals(aggregateId));
+            var evts = _integrationEventLogContext.IntegrationEventLogs.Where(_=>_.AggregateId.Equals(aggregateId));
             foreach (var evt in evts)
             {
                 var eventTypeString = evt.EventTypeName;

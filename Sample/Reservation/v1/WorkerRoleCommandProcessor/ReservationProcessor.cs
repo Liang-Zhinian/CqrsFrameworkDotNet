@@ -100,6 +100,7 @@ namespace WorkerRoleCommandProcessor
         {
             var registrar = new RouteRegistrar(provider);
             registrar.RegisterInAssemblyOf(typeof(LocationEventHandler));
+            registrar.RegisterInAssemblyOf(typeof(Business.Domain.EventHandlers.TenantDomainEventHandler));
 
         }
     }

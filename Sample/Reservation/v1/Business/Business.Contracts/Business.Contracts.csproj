@@ -9,6 +9,9 @@
     <Folder Include="Events\Locations\" />
     <Folder Include="Events\Staffs\" />
     <Folder Include="Events\Sites\" />
+    <Folder Include="Commands\" />
+    <Folder Include="Commands\Sites\" />
+    <Folder Include="Commands\Locations\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\..\Framework\CqrsFramework\CqrsFramework.csproj" />

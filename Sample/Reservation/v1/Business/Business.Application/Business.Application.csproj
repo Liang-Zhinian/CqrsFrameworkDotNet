@@ -15,19 +15,24 @@
     <Folder Include="ViewModels\" />
     <Folder Include="Services\" />
     <Folder Include="Interfaces\" />
-    <Folder Include="EventSourcedNormalizers\" />
     <Folder Include="AutoMapper\" />
-    <Folder Include="Commands\" />
-    <Folder Include="IdentityAccessEventProcessors\" />
+    <Folder Include="Behaviors\" />
+    <Folder Include="Services\Queries\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Business.Domain\Business.Domain.csproj" />
     <ProjectReference Include="..\Business.Contracts\Business.Contracts.csproj" />
     <ProjectReference Include="..\..\..\..\SaaSEqt\IdentityAccess\Application\SaaSEqt.Application.csproj" />
     <ProjectReference Include="..\Business.Infra.Data\Business.Infra.Data.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Framework\CqrsFramework.EventStore.MySqlDB\CqrsFramework.EventStore.MySqlDB.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Services\ServiceCategoryService %28另一个副本%29.cs" />
     <Compile Remove="IdentityAccessEventHandlers\TenantEventHandler.cs" />
+    <Compile Remove="IdentityAccessEventProcessors\IdentityAccessEventProcessor.cs" />
+    <Compile Remove="EventSourcedNormalizers\TenantHistoryData.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="app.config" />
   </ItemGroup>
 </Project>

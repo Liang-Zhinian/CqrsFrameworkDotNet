@@ -34,7 +34,6 @@ namespace Business.Contracts.Events.Locations
             Guid siteId,
             string name,
             string description,
-            byte[] image,
             string primaryTelephone,
             string secondaryTelephone)
         {
@@ -42,7 +41,6 @@ namespace Business.Contracts.Events.Locations
             this.SiteId = siteId;
             this.Name = name;
             this.Description = description;
-            this.Image = image;
             this.PrimaryTelephone = primaryTelephone;
             this.SecondaryTelephone = secondaryTelephone;
         }

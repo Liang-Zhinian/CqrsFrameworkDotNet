@@ -1,7 +1,8 @@
 ﻿using CqrsFramework.Caching;
 using CqrsFramework.Domain;
 using CqrsFramework.Events;
-using CqrsFramework.EventStore.IntegrationEventLogEF;
+using CqrsFramework.EventSourcing;
+using CqrsFramework.EventStore.MySqlDB;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,12 +11,8 @@ namespace Infrastructure.IoC
 {
     public static class EventStoreSetup
     {
-        public static IConfiguration Configuration { get; private set; }
-
-        public static void AddEventStoreSetup(this IServiceCollection services, IConfiguration configuration)
+        public static void AddEventStoreSetup(this IServiceCollection services)
         {
-            Configuration = configuration;
-
             // event store
             RegisterEventStore(services);
 
@@ -39,7 +36,7 @@ namespace Infrastructure.IoC
             services.AddScoped<ISession, Session>();
 
             // EfMySqlEventStore
-            services.AddSingleton<IEventStore>(y => new EfMySqlEventStore(y.GetService<IntegrationEventLogContext>().Database.GetDbConnection()));
+            services.AddSingleton<IEventStore>(y => new MySqlEventStore(y.GetService<EventStoreDbContext>().Database.GetDbConnection()));
             services.AddSingleton<ICache, MemoryCache>();
             services.AddScoped<IRepository>(y => new CacheRepository(new Repository(y.GetService<IEventStore>(), y.GetService<IEventPublisher>()), y.GetService<IEventStore>(), y.GetService<ICache>()));
 

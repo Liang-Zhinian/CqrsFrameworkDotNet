@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Common\SaaSEqt.Common.csproj" />
-    <ProjectReference Include="..\..\..\Framework\CqrsFramework.EventStore.IntegrationEventLogEF\CqrsFramework.EventStore.IntegrationEventLogEF.csproj" />
     <ProjectReference Include="..\IdentityAccess\IdentityAccess.Infra.Data\SaaSEqt.IdentityAccess.Infra.Data.csproj" />
   </ItemGroup>
 </Project>

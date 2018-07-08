@@ -26,6 +26,7 @@ namespace Business.Infra.Data.Mappings
                 cb.Property<string>(e => e.ContactName).HasColumnType(Constants.DbConstants.String255);
                 cb.Property<string>(e => e.PrimaryTelephone).HasColumnType(Constants.DbConstants.String255);
                 cb.Property<string>(e => e.SecondaryTelephone).HasColumnType(Constants.DbConstants.String255);
+                cb.Property<string>(e => e.EmailAddress).HasColumnType(Constants.DbConstants.String255);
             });
 
             builder.OwnsOne(ci => ci.PostalAddress, address => {

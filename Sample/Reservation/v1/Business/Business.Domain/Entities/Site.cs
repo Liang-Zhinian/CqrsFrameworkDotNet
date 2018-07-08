@@ -12,14 +12,19 @@ namespace Business.Domain.Entities
         {
         }
 
-        public Site(TenantId tenantId, string siteName, string siteDescription, bool active)
+        public Site(TenantId tenantId,
+                    string siteName,
+                    string siteDescription,
+                    bool active,
+                    ContactInformation contactInformation
+                   )
         {
             this.TenantId = tenantId;
             this.Id = Guid.NewGuid();
             this.Name = siteName;
             this.Description = siteDescription;
             this.Active = active;
-            this.ContactInformation = new ContactInformation();
+            this.ContactInformation = contactInformation ?? ContactInformation.Empty();
             this.Locations = new ObservableCollection<Location>();
             this.Staffs = new ObservableCollection<Staff>();
 
@@ -28,7 +33,7 @@ namespace Business.Domain.Entities
 
             Locations = new ObservableCollection<Location>();
 
-            ApplyChange(new SiteCreatedEvent(this.Id, siteName, siteDescription, active, tenantId.Id));
+            ApplyChange(new SiteCreatedEvent(this.Id, siteName, siteDescription, active, tenantId.Id, contactInformation.ContactName, contactInformation.PrimaryTelephone, contactInformation.SecondaryTelephone));
         }
 
         #region public properties
@@ -54,13 +59,13 @@ namespace Business.Domain.Entities
 
         #endregion
 
-        #region public methods
+        #region [ Command Methods which Publish Domain Events ]
 
         public Location ProvisionLocation(string name,
                         string description,
-                        byte[] image,
-                        ContactInformation contactInformation){
-            Location location = new Location(this.Id, name, description, image, contactInformation);
+                        ContactInformation contactInformation)
+        {
+            Location location = new Location(this.Id, name, description, contactInformation);
 
             // To Do: send event
             if (Locations == null) Locations = new ObservableCollection<Location>();
@@ -69,21 +74,21 @@ namespace Business.Domain.Entities
             return location;
         }
 
-        public void CreateBranding(byte[] logo, string pageColor1, string pageColor2, string pageColor3, string pageColor4){
+        public void UpdateBranding(byte[] logo, string pageColor1, string pageColor2, string pageColor3, string pageColor4)
+        {
             this.Branding = new Branding(this.Id, logo, pageColor1, pageColor2, pageColor3, pageColor4);
-            //return 
+            ApplyChange(new SiteBrandingAppliedEvent(this.Id, this.Id, this.Branding.Id, logo, pageColor1, pageColor2, pageColor3, pageColor4));
+        }
+
+        public void UpdateContactInformation(string contactName, string primaryTelephone, string secondaryTelephone, string emailAddress)
+        {
+            this.ContactInformation = new ContactInformation(contactName, primaryTelephone, secondaryTelephone, emailAddress);
+
             // To Do: send event
         }
 
-        public void ChangeContactInformation(string contactName, string primaryTelephone, string secondaryTelephone){
-            this.ContactInformation.ContactName = contactName;
-            this.ContactInformation.PrimaryTelephone = primaryTelephone;
-            this.ContactInformation.SecondaryTelephone = secondaryTelephone;
-
-            // To Do: send event
-        }
-
-        public void Activate(){
+        public void Activate()
+        {
             if (!this.Active)
             {
                 this.Active = true;
@@ -91,13 +96,29 @@ namespace Business.Domain.Entities
             }
         }
 
-        public void Deactivate() { 
+        public void Deactivate()
+        {
             if (this.Active)
             {
                 this.Active = false;
 
                 //DomainEventPublisher.Instance.Publish(new TenantDeactivated(this.TenantId));
             }
+        }
+
+        #endregion
+
+        #region [ Apply event methods ]
+
+        public void Apply(SiteCreatedEvent @event) {
+            this.Name = @event.Name;
+            this.Description = @event.Description;
+            this.Active = @event.Active;
+            this.TenantId = new TenantId(@event.TenantId);
+        }
+
+        public void Apply(SiteBrandingAppliedEvent @event) {
+            this.Branding = new Branding(this.Id, @event.Logo, @event.PageColor1, @event.PageColor2, @event.PageColor3, @event.PageColor4);
         }
 
         #endregion

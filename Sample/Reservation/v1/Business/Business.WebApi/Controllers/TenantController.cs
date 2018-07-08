@@ -1,14 +1,11 @@
 ﻿using System;
-using Microsoft.AspNetCore.Mvc;
+using System.Net;
+using System.Threading.Tasks;
 using Business.Application.ViewModels;
 using Microsoft.AspNetCore.Authorization;
-using Business.Application.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using Business.Domain.Repositories;
-using Microsoft.AspNetCore.Http;
-using System.Collections;
-using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+using SaaSEqt.IdentityAccess.Application;
+using SaaSEqt.IdentityAccess.Application.Commands;
 
 namespace Business.WebApi.Controllers
 {
@@ -16,13 +13,12 @@ namespace Business.WebApi.Controllers
     [Route("api/tenants")]
     public class TenantController: Controller
     {
-        //private static Dictionary<TenantViewModel, StaffViewModel> tenants = new Dictionary<TenantViewModel, StaffViewModel>();
 
-        private readonly ITenantService _tenantService;
+        private readonly IdentityApplicationService _identityApplicationService;
 
-        public TenantController(ITenantService tenantService)
+        public TenantController(IdentityApplicationService identityApplicationService)
         {
-            _tenantService = tenantService;
+            _identityApplicationService = identityApplicationService;
 
             //InitializeTenants();
         }
@@ -93,8 +89,10 @@ namespace Business.WebApi.Controllers
 
         [HttpPost]
         //[Authorize(Policy = "CanWriteTenantData")]
-        [Route("register")]
-        public ActionResult Create([FromBody]
+        [Route("Register")]
+        [ProducesResponseType((int)HttpStatusCode.Created)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> Register([FromBody]
                                    TenantViewModel tenant,
                                    StaffViewModel administrator
                                   )
@@ -103,19 +101,36 @@ namespace Business.WebApi.Controllers
             if (!ModelState.IsValid)
             {
                 //NotifyModelStateErrors();
-                return Ok();
+                return (IActionResult)BadRequest();
             }
 
-            _tenantService.ProvisionTenant(tenant, administrator);
+            ProvisionTenantCommand command = new ProvisionTenantCommand(
+                        tenant.Name,
+                        tenant.Description,
+                        administrator.FirstName,
+                        administrator.LastName,
+                        administrator.EmailAddress,
+                        administrator.PrimaryTelephone,
+                        administrator.SecondaryTelephone,
+                        administrator.AddressStreetAddress,
+                        administrator.AddressCity,
+                        administrator.AddressStateProvince,
+                        administrator.AddressPostalCode,
+                        administrator.AddressCountryCode
+                    );
 
-            return Ok();
+            var _tenant = await _identityApplicationService.ProvisionTenant(command);
+
+            return (IActionResult)Ok(_tenant);
         }
 
         [HttpPost]
         [HttpPut]
         //[Authorize(Policy = "CanWriteTenantData")]
         [Route("TenantAddress")]
-        public ActionResult AddOrUpdateTenantAddress([FromBody]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public IActionResult AddOrUpdateTenantAddress([FromBody]
                                    TenantAddressViewModel tenantAddress
                                   )
         {
@@ -123,16 +138,16 @@ namespace Business.WebApi.Controllers
             if (!ModelState.IsValid)
             {
                 //NotifyModelStateErrors();
-                return Ok();
+                return (IActionResult)BadRequest();
             }
 
-            if (Request.Method.ToUpper() == "POST")
-                _tenantService.AddTenantAddress(tenantAddress);
-            
-            if (Request.Method.ToUpper() == "PUT")
-                _tenantService.ModifyTenantAddress(tenantAddress);
+            //if (Request.Method.ToUpper() == "POST")
+            //    _tenantService.AddTenantAddress(tenantAddress);
 
-            return Ok(tenantAddress);
+            //if (Request.Method.ToUpper() == "PUT")
+            //_tenantService.ModifyTenantAddress(tenantAddress);
+
+            return (IActionResult)Ok(tenantAddress);
         }
     }
 }

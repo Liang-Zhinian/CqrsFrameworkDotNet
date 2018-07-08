@@ -1,19 +1,17 @@
 ﻿using System;
-using System.Data.Common;
 using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using Business.Application.Services;
-using Business.Domain.Services;
 using Business.Infra.Data.Context;
 using Business.WebApi.Configurations;
+using Business.WebApi.Infrastructure.AutofacModules;
 using Business.WebApi.Infrastructure.Filters;
-using CqrsFramework.EventStore.IntegrationEventLogEF;
-using CqrsFramework.EventStore.IntegrationEventLogEF.Services;
+using CqrsFramework.EventSourcing;
 using HealthChecks.MySQL;
 using Infrastructure.IoC;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
@@ -22,6 +20,7 @@ using Microsoft.Extensions.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using SaaSEqt.IdentityAccess.Application;
 using SaaSEqt.IdentityAccess.Infra.Data.Context;
 
 namespace Business.WebApi
@@ -38,6 +37,37 @@ namespace Business.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            //services.AddMemoryCache();
+
+            RegisterAppInsights(services);
+
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(HttpGlobalExceptionFilter));
+            }).AddControllersAsServices() //Injecting Controllers themselves thru DI
+            //全局配置Json序列化处理
+            .AddJsonOptions(options =>
+            {
+                //忽略循环引用
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                //不使用驼峰样式的key
+                options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                //设置时间格式
+                options.SerializerSettings.DateFormatString = "yyyy-MM-dd";
+            });
+
+            services.AddHealthChecks(checks =>
+            {
+                var minutes = 1;
+                if (int.TryParse(Configuration["HealthCheck:Timeout"], out var minutesParsed))
+                {
+                    minutes = minutesParsed;
+                }
+                checks.AddMySQLCheck("book2db", Configuration["ConnectionString"], TimeSpan.FromMinutes(minutes));
+                checks.AddUrlCheck("http://localhost:15672/", TimeSpan.FromMinutes(minutes));
+
+            });
+
             services.AddDbContext<BusinessDbContext>(options =>
             {
                 options.UseMySql(Configuration["ConnectionString"],
@@ -52,7 +82,7 @@ namespace Business.WebApi
                 // Default in EF Core would be to log a warning when client evaluation is performed.
                 options.ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryClientEvaluationWarning));
                 //Check Client vs. Server evaluation: https://docs.microsoft.com/en-us/ef/core/querying/client-eval
-            });
+            }, ServiceLifetime.Scoped);
 
             services.AddDbContext<IdentityAccessDbContext>(options =>
             {
@@ -64,10 +94,10 @@ namespace Business.WebApi
                                  });
 
                 options.ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryClientEvaluationWarning));
-            });
+            }, ServiceLifetime.Scoped);
 
 
-            services.AddDbContext<IntegrationEventLogContext>(options =>
+            services.AddDbContext<EventStoreDbContext>(options =>
             {
                 options.UseMySql(Configuration["ConnectionString"],
                                  mySqlOptionsAction: sqlOptions =>
@@ -77,51 +107,7 @@ namespace Business.WebApi
                                  });
 
                 options.ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryClientEvaluationWarning));
-            });
-            //services.AddMemoryCache();
-    
-            RegisterAppInsights(services);
-
-            services.AddHealthChecks(checks =>
-            {
-                var minutes = 1;
-                if (int.TryParse(Configuration["HealthCheck:Timeout"], out var minutesParsed))
-                {
-                    minutes = minutesParsed;
-                }
-                checks.AddMySQLCheck("book2db", Configuration["ConnectionString"], TimeSpan.FromMinutes(minutes));
-                checks.AddUrlCheck("http://localhost:15672/", TimeSpan.FromMinutes(minutes));
-
-            });
-
-            services.AddMvc(options =>
-            {
-                options.Filters.Add(typeof(HttpGlobalExceptionFilter));
-            }).AddControllersAsServices()
-            //全局配置Json序列化处理
-            .AddJsonOptions(options =>
-            {
-                //忽略循环引用
-                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                //不使用驼峰样式的key
-                options.SerializerSettings.ContractResolver = new DefaultContractResolver();
-                //设置时间格式
-                options.SerializerSettings.DateFormatString = "yyyy-MM-dd";
-            }); ;
-
-            services.AddTransient<Func<DbConnection, IIntegrationEventLogService>>(
-                sp => (DbConnection c) => new MySQLIntegrationEventLogService(c));
-            
-            services.AddTransient<IIntegrationEventService, IntegrationEventService>();
-
-
-            services.AddAutoMapperSetup();
-
-            services.AddRabbitMQEventBusSetup(Configuration);
-
-            services.AddEventStoreSetup(Configuration);
-
-            services.AddApplicationSetup();
+            }, ServiceLifetime.Scoped);
 
             services.AddSwaggerSupport();
 
@@ -134,9 +120,30 @@ namespace Business.WebApi
                     .AllowCredentials());
             });
 
+            // Add application services.
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            //services.AddTransient<Func<DbConnection, IEventService>>(
+            //    sp => (DbConnection c) => new MySQLIntegrationEventLogService(c));
+            
+            //services.AddTransient<IIntegrationEventService, IntegrationEventService>();
+
+
+            services.AddAutoMapperSetup();
+
+            services.AddEventStoreSetup();
+
+            services.AddApplicationSetup();
+
+            services.AddRabbitMQEventBusSetup(Configuration);
+
+            services.AddIdentityAccessEventProcessorSetup();
 
             var container = new ContainerBuilder();
             container.Populate(services);
+
+            container.RegisterModule(new ApplicationModule());
+            container.RegisterModule(new MediatorModule());
+
             return new AutofacServiceProvider(container.Build());
         }
 
@@ -166,20 +173,48 @@ namespace Business.WebApi
 
             app.UseMvcWithDefaultRoute();
 
-            app.UseSwagger();
-
+            app.UseSwagger()
             // Enable middleware to serve swagger-ui (HTML, JS, CSS etc.), specifying the Swagger JSON endpoint.
-            app.UseSwaggerUI(c =>
+            .UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Book2 API V1");
                 //c.ShowRequestHeaders();
             });
 
-            app.UseMvc();
+            //app.UseMvc();
+
+            ConfigureEventBus(app);
+
+        }
+
+        private void ConfigureEventBus(IApplicationBuilder app)
+        {
+            var services = app.ApplicationServices;
+            services.GetService<IdentityAccessEventProcessor>().Listen();
+
+            //var eventBus = app.ApplicationServices.GetRequiredService<BuildingBlocks.EventBus.Abstractions.IEventBus>();
+
+            //private static void RegisterIdentityAccessEventProcessor(IServiceCollection services)
+            //{
+            using (var scope = services.CreateScope())
+            {
+                //scope.ServiceProvider.AddScoped<SaaSEqt.Common.Events.IEventStore, SaaSEqt.IdentityAccess.Infra.Services.MySqlEventStore>()
+                //    .AddScoped<IdentityAccessEventProcessor>(/*y =>
+                //{
+                //    return new IdentityAccessEventProcessor(y.GetService<SaaSEqt.Common.Events.IEventStore>(),
+                //                                            y.GetService<IEventPublisher>());
+                //}*/);
+                ////}
+
+                ////private static void ConfigureIdentityAccessEventProcessor(IServiceCollection services)
+                ////{
+                //services.BuildServiceProvider().GetService<IdentityAccessEventProcessor>().Listen();
+                //}
+            }
         }
 
         #region additional registration
-  
+
         private void RegisterAppInsights(IServiceCollection services)
         {
             services.AddApplicationInsightsTelemetry(Configuration);

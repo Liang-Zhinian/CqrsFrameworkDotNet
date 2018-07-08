@@ -7,6 +7,7 @@
     using SaaSEqt.IdentityAccess.Domain.Services;
     using SaaSEqt.IdentityAccess.Domain.Repositories;
     using SaaSEqt.Common.Domain.Model;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Coordinates interactions among entities in the "Domain.Model.Identity" namespace.
@@ -170,7 +171,7 @@
             return group;
         }
 
-        public Tenant ProvisionTenant(ProvisionTenantCommand command)
+        public Task<Tenant> ProvisionTenant(ProvisionTenantCommand command)
         {
             Tenant tenant = this.tenantProvisioningService.ProvisionTenant(
                 command.TenantName,
@@ -187,7 +188,7 @@
                 new Telephone(command.SecondaryTelephone));
 
             this.unitOfWork.Commit();
-            return tenant;
+            return Task.FromResult(tenant);
         }
 
         public User RegisterUser(RegisterUserCommand command)

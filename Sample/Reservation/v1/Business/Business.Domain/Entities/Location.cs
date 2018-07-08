@@ -16,15 +16,14 @@ namespace Business.Domain.Entities
 
         public Location(Guid siteId,
                         string name, 
-                        string description, 
-                        byte[] image, 
+                        string description,
                         ContactInformation contactInformation)
         {
 			this.Id = Guid.NewGuid();
             this.SiteId = siteId;
             this.Name = name;
             this.Description = description;
-            this.Image = image;
+            this.Image = null;
             this.ContactInformation = contactInformation;
             this.PostalAddress = new PostalAddress("", "", "", "", "", "");
             this.Geolocation = new Geolocation(null, null);
@@ -36,7 +35,8 @@ namespace Business.Domain.Entities
                                 siteId,
                                 name,
                                 description,
-                                image,
+                                contactInformation.ContactName,
+                                contactInformation.EmailAddress,
                                 contactInformation.PrimaryTelephone,
                                 contactInformation.SecondaryTelephone
                             )
@@ -72,6 +72,8 @@ namespace Business.Domain.Entities
         //public virtual ICollection<ResourceLocation> ResourceLocations { get; set; }
 
         #endregion
+
+        #region [Command Methods which Publish Domain Events]
 
         public void AddImage(LocationImage image){
             if (AdditionalLocationImages == null)
@@ -131,20 +133,56 @@ namespace Business.Domain.Entities
         //    this.ResourceLocations.Add(resourceLocation);
         //}
 
-        //public void Apply(LocationCreatedEvent message){
-        //this.Id = message.Id;
-        //this.TenantId = new TenantId(message.TenantId.ToString());
-        //this.Name = message.Name;
-        //this.Description = message.Description;
-        //this.Image = message.Image;
-        //this.Phone = message.PrimaryTelephone;
-        //this.SecondaryTelephone = message.SecondaryTelephone;
-        //this.PostalAddress = new PostalAddress(message.StreetAddress,
-        //message.StreetAddress2,
-        //message.City,
-        //message.StateProvince,
-        //message.PostalCode,
-        //message.CountryCode);
-        //}
+        #endregion
+
+        #region [ Apply event methods ]
+
+        public void Apply(LocationCreatedEvent message)
+        {
+            this.Name = message.Name;
+            this.Description = message.Description;
+            this.ContactInformation = new ContactInformation(message.ContactName,
+                                                             message.PrimaryTelephone,
+                                                             message.SecondaryTelephone,
+                                                             message.EmailAddress);
+            this.SiteId = message.SiteId;
+
+        }
+
+        public void Apply(LocationAddressChangedEvent message)
+        {
+            this.PostalAddress = new PostalAddress(message.StreetAddress,
+                                                    message.StreetAddress2,
+                                                    message.City,
+                                                    message.StateProvince,
+                                                    message.PostalCode,
+                                                   message.CountryCode);
+
+            this.SiteId = message.SiteId;
+        }
+
+        public void Apply(LocationImageChangedEvent message)
+        {
+            this.Image = message.Image;
+
+            this.SiteId = message.SiteId;
+        }
+
+        public void Apply(LocationGeolocationChangedEvent message)
+        {
+            this.Geolocation = new Geolocation(message.Latitude, message.Longitude);
+
+            this.SiteId = message.SiteId;
+        }
+
+        public void Apply(AdditionalLocationImageCreatedEvent message)
+        {
+            this.AdditionalLocationImages.Add(new LocationImage(this.SiteId, this.Id, message.Image));
+
+            this.SiteId = message.SiteId;
+        }
+
+
+        #endregion
     }
 }

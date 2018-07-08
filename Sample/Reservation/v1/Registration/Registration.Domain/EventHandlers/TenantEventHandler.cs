@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Business.Contracts.Events.Security.Tenants;
 using CqrsFramework.Events;
 using Registration.Domain.ReadModel.Security;
 using Registration.Domain.Repositories.Interfaces;
+using SaaSEqt.IdentityAccess.Contracts.IntegrationEvents.Tenant;
 
 namespace Registration.Domain.EventHandlers
 {
-    public class TenantEventHandler : IEventHandler<TenantCreatedEvent>
+    public class TenantEventHandler : IEventHandler<TenantProvisionedIntegrationEvent>
     {
         private ITenantRepository _tenantRepository;
 
@@ -16,9 +16,9 @@ namespace Registration.Domain.EventHandlers
             _tenantRepository = tenantRepository;
         }
 
-        public Task Handle(TenantCreatedEvent message)
+        public Task Handle(TenantProvisionedIntegrationEvent message)
         {
-            Console.WriteLine("Handling TenantCreatedEvent.");
+            Console.WriteLine("Handling TenantProvisionedIntegrationEvent.");
             Tenant tenant = new Tenant (
                     message.Id,
                     message.Name,
@@ -28,7 +28,7 @@ namespace Registration.Domain.EventHandlers
             {
                 _tenantRepository.Add(tenant);
                 _tenantRepository.SaveChanges();
-                Console.WriteLine("TenantCreatedEvent handled.");
+                Console.WriteLine("TenantProvisionedIntegrationEvent handled.");
                 return Task.CompletedTask;
             }
             catch (Exception e)

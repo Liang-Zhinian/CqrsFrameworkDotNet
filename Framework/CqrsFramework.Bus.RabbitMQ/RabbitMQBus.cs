@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
@@ -37,7 +38,7 @@ namespace CqrsFramework.Bus.RabbitMQ
         private string _queueName;
 
         private readonly Dictionary<Type, List<Func<IMessage, CancellationToken, Task>>> _routes = new Dictionary<Type, List<Func<IMessage, CancellationToken, Task>>>();
-
+        private readonly List<Type> _eventTypes = new List<Type>();
         //public event EventHandler<MessageReceivedEventArgs> MessageReceived;
 
 
@@ -77,12 +78,14 @@ namespace CqrsFramework.Bus.RabbitMQ
                 _routes.Add(typeof(T), handlers);
             }
             handlers.Add((message, token) => handler((T)message, token));
+            _eventTypes.Add(typeof(T));
             DoInternalSubscription(typeof(T).Name);
         }
 
         public Task Send<T>(T command, CancellationToken cancellationToken = default(CancellationToken)) where T : class, ICommand
         {
-            string message = JsonConvert.SerializeObject(command, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All });
+            string message = JsonConvert.SerializeObject(command/*, 
+                                                         new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All }*/);
             //byte[] body = Encoding.UTF8.GetBytes(message);
 
             SendMessage(message, command.GetType().Name);
@@ -91,7 +94,8 @@ namespace CqrsFramework.Bus.RabbitMQ
 
         public Task Publish<T>(T @event, CancellationToken cancellationToken = default(CancellationToken)) where T : class, IEvent
         {
-            string message = JsonConvert.SerializeObject(@event, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All });
+            string message = JsonConvert.SerializeObject(@event/*, 
+                                                         new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All }*/);
             //var body = Encoding.UTF8.GetBytes(message);
 
             SendMessage(message, @event.GetType().Name);
@@ -183,17 +187,17 @@ namespace CqrsFramework.Bus.RabbitMQ
             var consumer = new EventingBasicConsumer(channel);
             consumer.Received += async (model, ea) =>
             {
-                
+                var eventName = ea.RoutingKey;
                 var message = Encoding.UTF8.GetString(ea.Body);
 
-                await ProcessEvent(ea, message);
+                await ProcessEvent(eventName, message);
 
-                //if (!_autoAck)
-                //{
-                //    channel.BasicAck(ea.DeliveryTag, multiple: false);
-                //    Console.WriteLine(" Ack sent: {0}", message);
-                //    _logger.LogInformation($"Ack sent: \n" + message);
-                //}
+                if (!_autoAck)
+                {
+                    channel.BasicAck(ea.DeliveryTag, multiple: false);
+                    Console.WriteLine(" Ack sent: {0}", message);
+                    _logger.LogInformation($"Ack sent: \n" + message);
+                }
 
             };
 
@@ -211,48 +215,63 @@ namespace CqrsFramework.Bus.RabbitMQ
             return channel;
         }
 
-        private Task ProcessEvent(BasicDeliverEventArgs ea, string message, CancellationToken cancellationToken = default(CancellationToken))
+        private async Task ProcessEvent(string eventName, string message, CancellationToken cancellationToken = default(CancellationToken))
         {
-            using (var scope = _autofac.BeginLifetimeScope(AUTOFAC_SCOPE_NAME))
+            if (HasSubscriptionsForEvent(eventName))
             {
-                Console.WriteLine(" [x] {0}", message);
-                _logger.LogInformation($"RabbitMQBus is processing an event: \n" + message);
-
-                //this.MessageReceived(this, new MessageReceivedEventArgs(message));
-                try
+                using (var scope = _autofac.BeginLifetimeScope(AUTOFAC_SCOPE_NAME))
                 {
-                    dynamic eventData = JsonConvert.DeserializeObject(message, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All });
-                    var @event = (IEvent)eventData;
-                    //List<Func<IMessage, CancellationToken, Task>> handlers;
-                    //if (!_routes.TryGetValue(@event.GetType(), out handlers)) return;
-                    //foreach (var handler in handlers)
-                        //handler.(@event);
+                    Console.WriteLine(" [x] {0}", message);
+                    _logger.LogInformation($"RabbitMQBus is processing an event: \n" + message);
 
-                    if (!_routes.TryGetValue(@event.GetType(), out var handlers))
-                        return Task.FromResult(0);
-
-                    var tasks = new Task[handlers.Count];
-                    for (var index = 0; index < handlers.Count; index++)
+                    //this.MessageReceived(this, new MessageReceivedEventArgs(message));
+                    try
                     {
-                        tasks[index] = handlers[index](@event, cancellationToken);
-                    }
+                        var eventType = GetEventTypeByName(eventName);
+                        var eventData = JsonConvert.DeserializeObject(
+                            message,
+                            eventType
+                        /*new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All }*/
+                        );
+                        var @event = (IEvent)eventData;
 
-                    if (!_autoAck)
+                        if (_routes.TryGetValue(@event.GetType(), out var handlers))
+                        {
+
+                            //var tasks = new Task[handlers.Count];
+                            for (var index = 0; index < handlers.Count; index++)
+                            {
+                                await handlers[index](@event, cancellationToken);
+                            }
+
+                            //if (!_autoAck)
+                            //{
+                            //    _consumerChannel.BasicAck(ea.DeliveryTag, false);
+                            //    Console.WriteLine(" Ack sent: {0}", message);
+                            //    _logger.LogInformation($"Ack sent: \n" + message);
+                            //}
+                            //return Task.WhenAll(tasks);
+                        }
+
+                    }
+                    catch (Exception e)
                     {
-                        _consumerChannel.BasicAck(ea.DeliveryTag, false);
-                        Console.WriteLine(" Ack sent: {0}", message);
-                        _logger.LogInformation($"Ack sent: \n" + message);
+                        Console.WriteLine(e.Message);
+                        if (e.InnerException != null) Console.WriteLine(e.InnerException.Message);
+                        //return Task.FromResult(0);
+                        //throw e;
                     }
-                    return Task.WhenAll(tasks);
-
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                    if (e.InnerException != null) Console.WriteLine(e.InnerException.Message);
-                    throw e;
                 }
             }
+        }
+
+        private bool HasSubscriptionsForEvent(string eventName) => _routes.Any(_ => _.Key.Name.Equals(eventName));
+
+        private Type GetEventTypeByName(string eventName) => _eventTypes.SingleOrDefault(t => t.Name == eventName);
+
+        private string GetEventKey<T>()
+        {
+            return typeof(T).Name;
         }
 
         private void DoInternalSubscription(string eventName)

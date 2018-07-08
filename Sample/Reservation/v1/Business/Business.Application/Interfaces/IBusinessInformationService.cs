@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Business.Application.ViewModels;
+using Business.Contracts.Commands.Locations;
+using Business.Contracts.Commands.Sites;
 using Business.Domain.Entities;
 
 namespace Business.Application.Interfaces
@@ -16,8 +18,20 @@ namespace Business.Application.Interfaces
 
     public interface IBusinessInformationService
     {
-        Task<SiteViewModel> ProvisionSite(string tenantId, string siteName, string siteDescription, bool active);
-        Task<LocationViewModel> ProvisionLocationAsync(LocationViewModel locationViewModel);
+        #region site services
+
+        Task<SiteViewModel> ProvisionSite(ProvisionSiteCommand provisionSiteCommand);
+        Task<SiteViewModel> UpdateSiteDescription(UpdateSiteDescriptionCommand updateSiteDescriptionCommand);
+        Task<SiteViewModel> UpdateSiteContactInformation(UpdateSiteContactInformationCommand updateSiteContactInformationCommand);
+        Task<SiteViewModel> UpdateSiteBranding(UpdateSiteBrandingCommand updateSiteBrandingCommand);
+        Task ActivateSite(ActivateSiteCommand activateSiteCommand);
+        Task DeactivateSite(DeactivateSiteCommand deactivateSiteCommand);
+
+        #endregion
+
+        #region Location services
+
+        Task<LocationViewModel> ProvisionLocationAsync(ProvisionLocationCommand provisionLocationCommand);
         Task SetLocationAddress(Guid siteId, Guid locationId, string streetAddress,
                              string streetAddress2,
                              string city,
@@ -25,7 +39,9 @@ namespace Business.Application.Interfaces
                              string postalCode,
                              string countryCode);
         Task SetLocationGeolocation(Guid siteId, Guid locationId, double? latitude, double? longitude);
-        Task SetLocationImage(Guid siteId, Guid locationId, byte[] image);
+        Task UpdateLocationImage(UpdateLocationImageCommand updateLocationImageCommand);
         Task AddAdditionalLocationImage(Guid siteId, Guid locationId, byte[] image);
+
+        #endregion
     }
 }

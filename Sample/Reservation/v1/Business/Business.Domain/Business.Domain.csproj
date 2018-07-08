@@ -22,7 +22,6 @@
     <ProjectReference Include="..\..\..\..\..\Framework\CqrsFramework\CqrsFramework.csproj" />
     <ProjectReference Include="..\..\..\..\SaaSEqt\IdentityAccess\IdentityAccess\SaaSEqt.IdentityAccess.csproj" />
     <ProjectReference Include="..\..\..\..\..\Framework\CqrsFramework.Extensions\CqrsFramework.Extensions.csproj" />
-    <ProjectReference Include="..\..\..\..\..\Framework\CqrsFramework.EventStore.IntegrationEventLogEF\CqrsFramework.EventStore.IntegrationEventLogEF.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Repositories\" />
@@ -50,5 +49,6 @@
     <Compile Remove="Models\ValueObjects\PersonName.cs" />
     <Compile Remove="Repositories\Interfaces\IServiceCategoryRepository.cs" />
     <Compile Remove="Bus\BusEventPublisher.cs" />
+    <Compile Remove="EventHandlers\TenantDomainEventHandler.cs" />
   </ItemGroup>
 </Project>
