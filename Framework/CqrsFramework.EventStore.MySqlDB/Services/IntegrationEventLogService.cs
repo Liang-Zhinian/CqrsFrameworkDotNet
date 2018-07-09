@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Common;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using CqrsFramework.Events;
 using CqrsFramework.EventSourcing;
@@ -10,12 +11,12 @@ using Newtonsoft.Json;
 
 namespace CqrsFramework.EventStore.MySqlDB.Services
 {
-    public class EventService : IEventService
+    public class IntegrationEventLogService : IIntegrationEventLogService
     {
         private readonly EventStoreDbContext _eventStoreContext;
         private readonly DbConnection _dbConnection;
 
-        public EventService(DbConnection dbConnection)
+        public IntegrationEventLogService(DbConnection dbConnection)
         {
             _dbConnection = dbConnection?? throw new ArgumentNullException("dbConnection");
             _eventStoreContext = new EventStoreDbContext(
@@ -45,7 +46,7 @@ namespace CqrsFramework.EventStore.MySqlDB.Services
         {
             var eventEntry = _eventStoreContext.Events.Single(ie => ie.AggregateId == @event.Id && ie.Version == @event.Version);
             eventEntry.Version++;
-            eventEntry.State = (int)EventStateEnum.Published;
+            eventEntry.State = EventStateEnum.Published;
 
             _eventStoreContext.Events.Update(eventEntry);
 
@@ -60,8 +61,10 @@ namespace CqrsFramework.EventStore.MySqlDB.Services
                 AggregateType = "",
                 Version = @event.Version,
                 Payload = JsonConvert.SerializeObject(@event),
+                State = EventStateEnum.NotPublished,
+                TimeStamp = @event.TimeStamp,
                 CorrelationId = "",
-                EventType = @event.GetType().Name
+                EventType = string.Format("{0}, {1}", @event.GetType().FullName, @event.GetType().GetTypeInfo().Assembly.GetName().Name)
             };
 
             return eventEntity;

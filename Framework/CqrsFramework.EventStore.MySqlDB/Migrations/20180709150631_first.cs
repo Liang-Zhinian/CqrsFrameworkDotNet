@@ -18,7 +18,8 @@ namespace CqrsFramework.EventStore.MySqlDB.Migrations
                     CorrelationId = table.Column<string>(nullable: true),
                     EventType = table.Column<string>(nullable: false),
                     Payload = table.Column<string>(nullable: false),
-                    State = table.Column<int>(nullable: false)
+                    State = table.Column<int>(nullable: false),
+                    TimeStamp = table.Column<DateTimeOffset>(nullable: false)
                 },
                 constraints: table =>
                 {

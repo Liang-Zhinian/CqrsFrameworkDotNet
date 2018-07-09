@@ -6,7 +6,7 @@ using CqrsFramework.Domain;
 
 namespace Business.Domain.Entities
 {
-    public class Site : AggregateRoot
+    public class Site // : AggregateRoot
     {
         private Site()
         {
@@ -33,12 +33,12 @@ namespace Business.Domain.Entities
 
             Locations = new ObservableCollection<Location>();
 
-            ApplyChange(new SiteCreatedEvent(this.Id, siteName, siteDescription, active, tenantId.Id, contactInformation.ContactName, contactInformation.PrimaryTelephone, contactInformation.SecondaryTelephone));
+            //ApplyChange(new SiteCreatedEvent(this.Id, siteName, siteDescription, active, tenantId.Id, contactInformation.ContactName, contactInformation.PrimaryTelephone, contactInformation.SecondaryTelephone));
         }
 
         #region public properties
 
-        //public Guid Id { get; private set; }
+        public Guid Id { get; private set; }
 
         /// The name of the site
         public string Name { get; private set; }
@@ -71,7 +71,7 @@ namespace Business.Domain.Entities
             if (Locations == null) Locations = new ObservableCollection<Location>();
             Locations.Add(location);
 
-            ApplyChange(new LocationAssignedToSiteEvent(this.Id, this.Id, location.Id));
+            //ApplyChange(new LocationAssignedToSiteEvent(this.Id, this.Id, location.Id));
 
             return location;
         }
@@ -79,7 +79,7 @@ namespace Business.Domain.Entities
         public void UpdateBranding(byte[] logo, string pageColor1, string pageColor2, string pageColor3, string pageColor4)
         {
             this.Branding = new Branding(this.Id, logo, pageColor1, pageColor2, pageColor3, pageColor4);
-            ApplyChange(new SiteBrandingAppliedEvent(this.Id, this.Id, this.Branding.Id, logo, pageColor1, pageColor2, pageColor3, pageColor4));
+            //ApplyChange(new SiteBrandingAppliedEvent(this.Id, this.Id, this.Branding.Id, logo, pageColor1, pageColor2, pageColor3, pageColor4));
         }
 
         public void UpdateContactInformation(string contactName, string primaryTelephone, string secondaryTelephone, string emailAddress)
@@ -94,7 +94,6 @@ namespace Business.Domain.Entities
             if (!this.Active)
             {
                 this.Active = true;
-                //DomainEventPublisher.Instance.Publish(new TenantActivated(this.TenantId));
             }
         }
 
@@ -103,8 +102,6 @@ namespace Business.Domain.Entities
             if (this.Active)
             {
                 this.Active = false;
-
-                //DomainEventPublisher.Instance.Publish(new TenantDeactivated(this.TenantId));
             }
         }
 

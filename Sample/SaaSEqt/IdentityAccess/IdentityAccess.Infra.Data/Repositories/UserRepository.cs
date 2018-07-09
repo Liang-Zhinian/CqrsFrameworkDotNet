@@ -100,7 +100,7 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Repositories
 
         public DomainModels.User UserWithUsername(DomainModels.TenantId tenantId, string username)
         {
-            DomainModels.User user = this.Find(_ => _.TenantId.Equals(tenantId.Id)
+            DomainModels.User user = this.Find(_ => _.TenantId_Id.Equals(tenantId.Id)
                                                   && _.Username.Equals(username)
                                               )
                        .First();

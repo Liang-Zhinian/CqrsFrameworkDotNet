@@ -5,7 +5,7 @@ namespace Business.Contracts.Events.ServiceCategory
 {
     public class ServiceCategoryCreatedEvent :ServiceCategoryEvent, IEvent
     {
-        public ServiceCategoryCreatedEvent(Guid id, string name, string description, int cancelOffset, int scheduleTypeValue, Guid siteId)
+        public ServiceCategoryCreatedEvent(Guid siteId, Guid id, string name, string description, int cancelOffset, int scheduleTypeValue)
         {
             Id = id;
             Name = name;

@@ -14,12 +14,4 @@
     <ProjectReference Include="..\CqrsFramework\CqrsFramework.csproj" />
     <ProjectReference Include="..\CqrsFramework.EventStore.EF\CqrsFramework.EventSourcing.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\" />
-    <Folder Include="Utilities\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="Services\IntegrationEventLogService.cs" />
-    <Compile Remove="Migrations\20180708080823_first.cs" />
-  </ItemGroup>
 </Project>

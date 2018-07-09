@@ -5,9 +5,9 @@ namespace Business.Contracts.Events.Locations
 {
     public class AdditionalLocationImageCreatedEvent : BaseEvent, IEvent
     {
-        public AdditionalLocationImageCreatedEvent(Guid id, Guid siteId, Guid locationId, byte[] image)
+        public AdditionalLocationImageCreatedEvent(Guid siteId, Guid locationId, byte[] image)
         {
-            Id = id;
+            Id = locationId;
             SiteId = siteId;
             LocationId = locationId;
             Image = image;

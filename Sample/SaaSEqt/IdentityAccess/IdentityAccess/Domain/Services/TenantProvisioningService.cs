@@ -214,7 +214,7 @@ namespace SaaSEqt.IdentityAccess.Domain.Services
 				.Instance
 				.Publish(new TenantAdministratorRegistered(
 						tenant.TenantId,
-						tenant.Name,
+                        admin.Username,
 						administorName,
 						emailAddress,
 						admin.Username,

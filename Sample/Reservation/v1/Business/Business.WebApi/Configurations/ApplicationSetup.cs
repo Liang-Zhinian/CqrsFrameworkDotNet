@@ -83,6 +83,7 @@ namespace Business.WebApi.Configurations
         public static void AddIdentityAccessEventProcessorSetup(this IServiceCollection services)
         {
             services
+                .AddScoped<SaaSEqt.Common.Events.IEventStore, SaaSEqt.IdentityAccess.Infra.Services.MySqlEventStore>()
                 .AddScoped<IdentityAccessEventProcessor>();
         }
     }

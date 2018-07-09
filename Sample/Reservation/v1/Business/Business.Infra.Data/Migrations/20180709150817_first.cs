@@ -100,7 +100,6 @@ namespace Business.Infra.Data.Migrations
                     Active = table.Column<bool>(nullable: false),
                     Description = table.Column<string>(type: "varchar(2000)", nullable: true),
                     Name = table.Column<string>(type: "varchar(255)", nullable: false),
-                    Version = table.Column<int>(nullable: false),
                     ContactInformation_ContactName = table.Column<string>(type: "varchar(255)", nullable: true),
                     ContactInformation_EmailAddress = table.Column<string>(type: "varchar(255)", nullable: true),
                     ContactInformation_PrimaryTelephone = table.Column<string>(type: "varchar(255)", nullable: true),
@@ -162,7 +161,6 @@ namespace Business.Infra.Data.Migrations
                     Image = table.Column<byte[]>(nullable: true),
                     Name = table.Column<string>(type: "varchar(255)", nullable: false),
                     SiteId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    Version = table.Column<int>(nullable: false),
                     ContactInformation_ContactName = table.Column<string>(type: "varchar(255)", nullable: true),
                     ContactInformation_EmailAddress = table.Column<string>(type: "varchar(255)", nullable: true),
                     ContactInformation_PrimaryTelephone = table.Column<string>(type: "varchar(255)", nullable: true),
@@ -198,8 +196,7 @@ namespace Business.Infra.Data.Migrations
                     Description = table.Column<string>(type: "varchar(2000)", nullable: false),
                     Name = table.Column<string>(type: "varchar(255)", nullable: false),
                     ScheduleTypeId = table.Column<int>(nullable: false),
-                    SiteId = table.Column<Guid>(nullable: false),
-                    Version = table.Column<int>(nullable: false)
+                    SiteId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -306,8 +303,7 @@ namespace Business.Infra.Data.Migrations
                     Name = table.Column<string>(type: "varchar(255)", nullable: false),
                     Price = table.Column<double>(nullable: false),
                     ServiceCategoryId = table.Column<Guid>(nullable: false),
-                    SiteId = table.Column<Guid>(nullable: false),
-                    Version = table.Column<int>(nullable: false)
+                    SiteId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {

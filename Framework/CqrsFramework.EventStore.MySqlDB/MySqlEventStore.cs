@@ -49,15 +49,6 @@ namespace CqrsFramework.EventStore.MySqlDB
             return Task.FromResult(events.AsEnumerable());
         }
 
-        //public Task Save(IEvent @event, CancellationToken cancellationToken = default(CancellationToken))
-        //{
-        //    var eventEntity = FromEvent(@event);
-
-        //    _eventStoreContext.Events.Add(eventEntity);
-        //    _eventStoreContext.SaveChanges();
-        //    return Task.CompletedTask;
-        //}
-
         public async Task Save(IEnumerable<IEvent> events, CancellationToken cancellationToken = default(CancellationToken))
         {
             foreach (var @event in events)
@@ -67,10 +58,12 @@ namespace CqrsFramework.EventStore.MySqlDB
                 _eventStoreContext.Events.Add(eventEntity);
 
                 await _publisher.Publish(@event, cancellationToken);
+
+                //eventEntity.State = EventStateEnum.Published;
+                //eventEntity.Version++;
             };
 
             await _eventStoreContext.SaveChangesAsync();
-            //return Task.CompletedTask;
         }
 
         private Event FromEvent(IEvent @event){
@@ -81,7 +74,8 @@ namespace CqrsFramework.EventStore.MySqlDB
                 Version = @event.Version,
                 Payload = JsonConvert.SerializeObject(@event),
                 CorrelationId = "",
-                State = 1,
+                State = EventStateEnum.NotPublished,
+                TimeStamp = @event.TimeStamp,
                 EventType = string.Format("{0}, {1}", @event.GetType().FullName, @event.GetType().GetTypeInfo().Assembly.GetName().Name)
             };
 

@@ -13,7 +13,7 @@ namespace CqrsFramework.EventStore.MySqlDB.Utilities
         public static ResilientTransaction New (DbContext context) =>
             new ResilientTransaction(context);        
 
-        public async Task Execute(Func<Task> action)
+        public async Task ExecuteAsync(Func<Task> action)
         {
             //Use of an EF Core resiliency strategy when using multiple DbContexts within an explicit BeginTransaction():
             //See: https://docs.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency

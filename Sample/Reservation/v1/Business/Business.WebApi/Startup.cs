@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Data.Common;
 using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Business.Application.Services;
+using Business.Domain.Services;
 using Business.Infra.Data.Context;
 using Business.WebApi.Configurations;
 using Business.WebApi.Infrastructure.AutofacModules;
 using Business.WebApi.Infrastructure.Filters;
 using CqrsFramework.EventSourcing;
+using CqrsFramework.EventStore.MySqlDB.Services;
 using HealthChecks.MySQL;
 using Infrastructure.IoC;
 using Microsoft.AspNetCore.Builder;
@@ -122,10 +126,10 @@ namespace Business.WebApi
 
             // Add application services.
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            //services.AddTransient<Func<DbConnection, IEventService>>(
-            //    sp => (DbConnection c) => new MySQLIntegrationEventLogService(c));
+            services.AddTransient<Func<DbConnection, IIntegrationEventLogService>>(
+                sp => (DbConnection c) => new IntegrationEventLogService(c));
             
-            //services.AddTransient<IIntegrationEventService, IntegrationEventService>();
+            services.AddTransient<IBusinessIntegrationEventService, BusinessIntegrationEventService>();
 
 
             services.AddAutoMapperSetup();

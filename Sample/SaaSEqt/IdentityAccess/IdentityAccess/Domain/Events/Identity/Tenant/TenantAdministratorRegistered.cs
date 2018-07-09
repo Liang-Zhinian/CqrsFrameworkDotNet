@@ -16,6 +16,7 @@ namespace SaaSEqt.IdentityAccess.Domain.Events.Identity.Tenant
             string temporaryPassword)
         {
             this.AdministorName = administorName;
+            this.EmailAddress = emailAddress;
             this.Name = username;
             this.TemporaryPassword = temporaryPassword;
             this.TenantId = tenantId.Id;
@@ -27,7 +28,11 @@ namespace SaaSEqt.IdentityAccess.Domain.Events.Identity.Tenant
         public int Version { get; set; }
         public DateTimeOffset TimeStamp { get; set; }
 
+        public Guid UserId { get; private set; }
+
         public FullName AdministorName { get; private set; }
+
+        public EmailAddress EmailAddress { get; private set; }
 
         public string Name { get; private set; }
 

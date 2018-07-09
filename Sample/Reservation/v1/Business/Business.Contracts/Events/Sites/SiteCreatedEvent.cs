@@ -3,13 +3,13 @@ using CqrsFramework.Events;
 
 namespace Business.Contracts.Events.Sites
 {
-    public class SiteCreatedEvent : IEvent
+    public class SiteCreatedEvent : BaseEvent, IEvent
     {
-        public Guid Id { get; set; }
+        //public Guid Id { get; set; }
 
-        public int Version { get; set; }
+        //public int Version { get; set; }
 
-        public DateTimeOffset TimeStamp { get; set; }
+        //public DateTimeOffset TimeStamp { get; set; }
 
         public string Name { get; set; }
 
@@ -25,9 +25,9 @@ namespace Business.Contracts.Events.Sites
 
         public string TenantId { get; set; }
 
-        public SiteCreatedEvent(Guid sourceId, string name, string description, bool active, string tenantId, string contactName, string primaryTelephone, string secondaryTelephone)
+        public SiteCreatedEvent(string tenantId, Guid siteId, string name, string description, bool active, string contactName, string primaryTelephone, string secondaryTelephone)
         {
-            this.Id = sourceId;
+            this.Id = siteId;
             this.Version = 1;
             this.TimeStamp = DateTimeOffset.Now;
             this.Name = name;

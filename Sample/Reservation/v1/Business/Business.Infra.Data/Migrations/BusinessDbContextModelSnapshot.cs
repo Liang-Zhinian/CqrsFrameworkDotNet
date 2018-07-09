@@ -71,8 +71,6 @@ namespace Business.Infra.Data.Migrations
                     b.Property<Guid>("SiteId")
                         .HasColumnType("char(36)");
 
-                    b.Property<int>("Version");
-
                     b.HasKey("Id");
 
                     b.HasIndex("SiteId");
@@ -344,8 +342,6 @@ namespace Business.Infra.Data.Migrations
 
                     b.Property<Guid>("SiteId");
 
-                    b.Property<int>("Version");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ScheduleTypeId");
@@ -382,8 +378,6 @@ namespace Business.Infra.Data.Migrations
 
                     b.Property<Guid>("SiteId");
 
-                    b.Property<int>("Version");
-
                     b.HasKey("Id");
 
                     b.HasIndex("IndustryStandardCategoryId");
@@ -409,8 +403,6 @@ namespace Business.Infra.Data.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
-
-                    b.Property<int>("Version");
 
                     b.HasKey("Id");
 

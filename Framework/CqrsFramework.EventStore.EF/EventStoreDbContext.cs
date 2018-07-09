@@ -57,7 +57,8 @@ namespace CqrsFramework.EventSourcing
         public int Version { get; set; }
         public string Payload { get; set; }
         public string CorrelationId { get; set; }
-        public int State { get; set; }
+        public EventStateEnum State { get; set; }
+        public DateTimeOffset TimeStamp { get; set; }
 
         // TODO: Following could be very useful for when rebuilding the read model from the event store, 
         // to avoid replaying every possible event in the system

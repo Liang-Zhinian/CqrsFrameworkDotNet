@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Business.Contracts.Events.Sites;
 using Business.Domain.Entities;
 using Business.Domain.Repositories;
@@ -9,37 +10,35 @@ namespace Business.Domain.Services
 {
     public class SiteProvisioningService
     {
-        //private readonly IIntegrationEventService _integrationEventService;
+        private readonly IBusinessIntegrationEventService _businessIntegrationEventService;
         private readonly ISiteRepository _siteRepository;
 
-        public SiteProvisioningService(/*ISession eventStore, */
-                                       /*IIntegrationEventService integrationEventService,*/
+        public SiteProvisioningService(IBusinessIntegrationEventService businessIntegrationEventService,
                                        ISiteRepository siteRepository)
         {
-            //_eventStore = eventStore;
-            //_integrationEventService = integrationEventService;
+            _businessIntegrationEventService = businessIntegrationEventService;
             _siteRepository = siteRepository;
         }
 
-        public Site ProvisionSite(TenantId tenantId, string siteName, string siteDescription, string contactName, string primaryTelephone, string secondaryTelephone, string emailAddress, bool active){
+        public async Task<Site> ProvisionSite(TenantId tenantId, string siteName, string siteDescription, string contactName, string primaryTelephone, string secondaryTelephone, string emailAddress, bool active){
             ContactInformation contactInformation = new ContactInformation( contactName,  primaryTelephone,  secondaryTelephone, emailAddress);
 
             Site site = new Site(tenantId, siteName, siteDescription, active, contactInformation);
-
-            //site.UpdateContactInformation(contactName, primaryTelephone, secondaryTelephone);
 
             _siteRepository.Add(site);
 
             site.UpdateBranding(new byte[] { 0 }, "#", "#", "#", "#");
 
-            //_integrationEventService.PublishThroughEventBus(new SiteCreatedEvent(site.Id, siteName, siteDescription, active, tenantId.Id));
-            //_siteRepository.UnitOfWork.Commit();
-            //_siteRepository.SaveChanges();
-
-            // To Do: send event
-            //_eventStore.Add<Site>(site);
-            //_eventStore.Commit();
-
+            await _businessIntegrationEventService.PublishThroughEventBusAsync(new SiteCreatedEvent(
+                                                                   tenantId.Id, 
+                                                                    site.Id, 
+                                                                   siteName, 
+                                                                   siteDescription, 
+                                                                   active, 
+                                                                   contactInformation.ContactName, 
+                                                                   contactInformation.PrimaryTelephone, 
+                                                                   contactInformation.SecondaryTelephone));
+          
             return site;
         }
     }

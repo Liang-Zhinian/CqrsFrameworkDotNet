@@ -11,7 +11,7 @@ using System;
 namespace Business.Infra.Data.Migrations
 {
     [DbContext(typeof(BusinessDbContext))]
-    [Migration("20180708122531_first")]
+    [Migration("20180709150817_first")]
     partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,8 +71,6 @@ namespace Business.Infra.Data.Migrations
 
                     b.Property<Guid>("SiteId")
                         .HasColumnType("char(36)");
-
-                    b.Property<int>("Version");
 
                     b.HasKey("Id");
 
@@ -345,8 +343,6 @@ namespace Business.Infra.Data.Migrations
 
                     b.Property<Guid>("SiteId");
 
-                    b.Property<int>("Version");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ScheduleTypeId");
@@ -383,8 +379,6 @@ namespace Business.Infra.Data.Migrations
 
                     b.Property<Guid>("SiteId");
 
-                    b.Property<int>("Version");
-
                     b.HasKey("Id");
 
                     b.HasIndex("IndustryStandardCategoryId");
@@ -410,8 +404,6 @@ namespace Business.Infra.Data.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
-
-                    b.Property<int>("Version");
 
                     b.HasKey("Id");
 

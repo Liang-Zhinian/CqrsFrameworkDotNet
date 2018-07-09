@@ -34,13 +34,6 @@
     <ProjectReference Include="..\..\..\..\Infrastructure\HealthChecks\src\Microsoft.Extensions.HealthChecks.SqlServer\Microsoft.Extensions.HealthChecks.SqlServer.csproj" />
     <ProjectReference Include="..\..\..\..\Infrastructure\WebHostCustomization\WebHost.Customization\WebHost.Customization.csproj" />
     <ProjectReference Include="..\..\..\..\Infrastructure\HealthChecks\src\HealthChecks.MySQL\HealthChecks.MySQL.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="Utils\MaintenanceModeAttribute.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Pics\" />
-    <Folder Include="Infrastructure\AutofacModules\" />
-    <Folder Include="Requests\Sites\" />
+    <ProjectReference Include="..\..\..\..\SaaSEqt\IdentityAccess\IdentityAccess.Infra.Services\SaaSEqt.IdentityAccess.Infra.Services.csproj" />
   </ItemGroup>
 </Project>

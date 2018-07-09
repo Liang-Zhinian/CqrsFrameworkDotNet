@@ -4,7 +4,7 @@ using CqrsFramework.Domain;
 
 namespace Business.Domain.Entities.ServiceCategories
 {
-    public class ServiceItem : AggregateRoot
+    public class ServiceItem // : AggregateRoot
     {
         private ServiceItem()
         {
@@ -23,17 +23,19 @@ namespace Business.Domain.Entities.ServiceCategories
             IndustryStandardCategoryId = industryStandardCategoryId;
 
 
-            var serviceItemCreatedEvent = new ServiceItemCreatedEvent(Id,
-                                                                      name,
-                                                                      description,
-                                                                      defaultTimeLength,
-                                                                      price,
-                                                                      serviceCategoryId,
-                                                                      siteId,
-                                                                      industryStandardCategoryId
-                                                                     );
-            ApplyChange(serviceItemCreatedEvent);
+            //var serviceItemCreatedEvent = new ServiceItemCreatedEvent(Id,
+                                                                     // name,
+                                                                     // description,
+                                                                     // defaultTimeLength,
+                                                                     // price,
+                                                                     // serviceCategoryId,
+                                                                     // siteId,
+                                                                     // industryStandardCategoryId
+                                                                     //);
+            //ApplyChange(serviceItemCreatedEvent);
         }
+
+        public Guid Id { get; private set; }
 
         public string Name { get; private set; }
 

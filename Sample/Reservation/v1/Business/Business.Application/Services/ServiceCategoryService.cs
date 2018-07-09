@@ -18,16 +18,25 @@ namespace Business.Application.Services
     
     public class ServiceCategoryService : IServiceCategoryService
     {
-        private readonly ISession _session;
+        //private readonly ISession _session;
+        private readonly IBusinessIntegrationEventService _businessIntegrationEventService;
         private readonly IMapper _mapper;
+        private readonly IServiceCategoryRepository _serviceCategoryRepository;
+        private readonly IServiceItemRepository _serviceItemRepository;
 
         public ServiceCategoryService(
-                                        ISession session,
-                                        IMapper mapper
+            //ISession session,
+                                          IBusinessIntegrationEventService businessIntegrationEventService,
+                                        IMapper mapper,
+            IServiceCategoryRepository serviceCategoryRepository,
+            IServiceItemRepository serviceItemRepository
                                      )
         {
-            _session = session;
+            //_session = session;
+            _businessIntegrationEventService = businessIntegrationEventService;
             _mapper = mapper;
+            _serviceCategoryRepository = serviceCategoryRepository;
+            _serviceItemRepository = serviceItemRepository;
         }
 
         public void Dispose()
@@ -35,7 +44,7 @@ namespace Business.Application.Services
             GC.SuppressFinalize(this);
         }
 
-        public Task<ServiceItemViewModel> AddServiceItem(ServiceItemViewModel serviceItem)
+        public async Task<ServiceItemViewModel> AddServiceItem(ServiceItemViewModel serviceItem)
         {
             var domainservice = new ServiceItem(
                 serviceItem.SiteId,
@@ -46,16 +55,30 @@ namespace Business.Application.Services
                 serviceItem.ServiceCategoryId,
                 serviceItem.IndustryStandardCategoryId
             );
+            _serviceItemRepository.Add(domainservice);
 
-            _session.Add<ServiceItem>(domainservice);
-            _session.Commit();
+            var serviceItemCreatedEvent = new ServiceItemCreatedEvent(
+                                                                        domainservice.SiteId,
+                                                                      domainservice.Id,
+                                                                        domainservice.Name,
+                                                                      domainservice.Description,
+                                                                      domainservice.DefaultTimeLength,
+                                                                      domainservice.Price,
+                                                                      domainservice.ServiceCategoryId,
+                                                                      domainservice.IndustryStandardCategoryId
+                                                                     );
+            
+            await _businessIntegrationEventService.PublishThroughEventBusAsync(serviceItemCreatedEvent);
+
+            //_session.Add<ServiceItem>(domainservice);
+            //_session.Commit();
 
             serviceItem.Id = domainservice.Id;
 
-            return Task.FromResult<ServiceItemViewModel>(serviceItem);
+            return serviceItem;
         }
 
-        public Task<ServiceCategoryViewModel> AddServiceCategory(ServiceCategoryViewModel serviceCategory) {
+        public async Task<ServiceCategoryViewModel> AddServiceCategory(ServiceCategoryViewModel serviceCategory) {
             var domainServiceCategory = new ServiceCategory(
                 serviceCategory.SiteId,
                 serviceCategory.Name,
@@ -64,12 +87,25 @@ namespace Business.Application.Services
                 serviceCategory.ScheduleTypeId
             );
 
-            _session.Add<ServiceCategory>(domainServiceCategory);
-            _session.Commit();
+            _serviceCategoryRepository.Add(domainServiceCategory);
+
+            //_session.Add<ServiceCategory>(domainServiceCategory);
+            //_session.Commit();
+
+            var serviceCategoryCreatedEvent = new ServiceCategoryCreatedEvent(
+                                                                              domainServiceCategory.SiteId,
+                                                                                domainServiceCategory.Id,
+                                                                              domainServiceCategory.Name,
+                                                                              domainServiceCategory.Description,
+                                                                              domainServiceCategory.CancelOffset,
+                                                                              domainServiceCategory.ScheduleTypeId
+                                                                             );
+
+            await _businessIntegrationEventService.PublishThroughEventBusAsync(serviceCategoryCreatedEvent);
 
             serviceCategory.Id = domainServiceCategory.Id;
 
-            return Task.FromResult<ServiceCategoryViewModel>(serviceCategory);
+            return serviceCategory;
         }
     }
 }

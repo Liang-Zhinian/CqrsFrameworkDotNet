@@ -4,7 +4,7 @@ using CqrsFramework.Events;
 
 namespace CqrsFramework.EventStore.MySqlDB.Services
 {
-    public interface IEventService
+    public interface IIntegrationEventLogService
     {
         Task SaveEventAsync(IEvent @event, DbTransaction transaction);
         Task MarkEventAsPublishedAsync(IEvent @event);

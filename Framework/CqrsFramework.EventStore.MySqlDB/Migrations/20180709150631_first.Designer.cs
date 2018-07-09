@@ -11,7 +11,7 @@ using System;
 namespace CqrsFramework.EventStore.MySqlDB.Migrations
 {
     [DbContext(typeof(EventStoreDbContext))]
-    [Migration("20180708091035_first")]
+    [Migration("20180709150631_first")]
     partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,6 +38,8 @@ namespace CqrsFramework.EventStore.MySqlDB.Migrations
                         .IsRequired();
 
                     b.Property<int>("State");
+
+                    b.Property<DateTimeOffset>("TimeStamp");
 
                     b.HasKey("AggregateId", "AggregateType", "Version");
 

@@ -4,9 +4,9 @@ using CqrsFramework.Events;
 
 namespace Business.Domain.Services
 {
-    public interface IIntegrationEventService
+    public interface IBusinessIntegrationEventService
     {
+        //Task SaveEventAndBusinessDbContextChangesAsync(IEvent evt);
         Task PublishThroughEventBusAsync(IEvent evt);
-        void PublishThroughEventBus(IEvent evt);
     }
 }

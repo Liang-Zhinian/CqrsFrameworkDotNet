@@ -38,6 +38,8 @@ namespace CqrsFramework.EventStore.MySqlDB.Migrations
 
                     b.Property<int>("State");
 
+                    b.Property<DateTimeOffset>("TimeStamp");
+
                     b.HasKey("AggregateId", "AggregateType", "Version");
 
                     b.ToTable("Events");

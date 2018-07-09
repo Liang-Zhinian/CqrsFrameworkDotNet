@@ -17,9 +17,9 @@ namespace SaaSEqt.IdentityAccess.Application
         readonly IGroupRepository groupRepository;
         readonly ITenantRepository tenantRepository;
         readonly IUserRepository userRepository;
-        readonly IEventStore eventStore;
+        readonly Common.Events.IEventStore eventStore;
 
-        public IdentityAccessEventProcessor(IEventStore eventStore,
+        public IdentityAccessEventProcessor(Common.Events.IEventStore eventStore,
                                             IEventPublisher eventPublisher,
                                             IGroupRepository groupRepository,
                                             ITenantRepository tenantRepository,
@@ -38,12 +38,6 @@ namespace SaaSEqt.IdentityAccess.Application
         {
             DomainEventPublisher.Instance.Subscribe(domainEvent =>
                 {
-                    //using (var scope = _autofac.BeginLifetimeScope("IdentityAccessEventProcessor"))
-                    //{
-                    Console.WriteLine("Persisting domain event.");
-                    //this.eventStore.Save(domainEvent);
-                    //}
-
                     // to do: publish integration events
 
                     if (domainEvent is TenantProvisioned)
@@ -57,70 +51,93 @@ namespace SaaSEqt.IdentityAccess.Application
                             evt.Name,
                             evt.Description,
                             evt.Active
-                        );
+                    );
+                        tenantProvisionedEvent.TimeStamp = evt.TimeStamp;
+                        tenantProvisionedEvent.Version = evt.Version;
 
-                        eventStore.Save(new List<IEvent> { tenantProvisionedEvent });
+                        //eventStore.Save(new List<IEvent> { tenantProvisionedEvent });
                         _eventPublisher.Publish<TenantProvisionedIntegrationEvent>(tenantProvisionedEvent);
-                        return;
+                        //return;
                     }
 
-                    if (domainEvent is TenantAdministratorRegistered)
+                    else if (domainEvent is TenantAdministratorRegistered)
                     {
                         Console.WriteLine("To Do: TenantAdministratorRegistered.");
-                        return;
+
+                        TenantAdministratorRegistered evt = domainEvent as TenantAdministratorRegistered;
+                        TenantId tenantId = new TenantId(evt.TenantId);
+                        //var user = userRepository.UserWithUsername(tenantId, evt.Name);
+
+                        UserRegisteredIntegrationEvent userRegisteredIntegrationEvent = new UserRegisteredIntegrationEvent(
+                                new TenantId(evt.TenantId),
+                                Guid.NewGuid(),
+                                evt.Name,
+                                evt.AdministorName,
+                                evt.EmailAddress
+                            );
+                        userRegisteredIntegrationEvent.TimeStamp = evt.TimeStamp;
+                        userRegisteredIntegrationEvent.Version = evt.Version;
+
+                        //eventStore.Save(new List<IEvent> { userRegisteredIntegrationEvent });
+                        _eventPublisher.Publish<UserRegisteredIntegrationEvent>(userRegisteredIntegrationEvent);
+                        //return;
                     }
 
-                    if (domainEvent is TenantActivated)
+                    else if (domainEvent is TenantActivated)
                     {
                         Console.WriteLine("To Do: TenantActivated.");
-                        return;
+                        //return;
                     }
 
-                    if (domainEvent is TenantDeactivated)
+                    else if (domainEvent is TenantDeactivated)
                     {
                         Console.WriteLine("To Do: TenantDeactivated.");
-                        return;
+                        //return;
                     }
 
 
-                    if (domainEvent is UserRegisteredIntegrationEvent)
+                    else if (domainEvent is UserRegisteredIntegrationEvent)
                     {
                         Console.WriteLine("To Do: UserRegistered.");
 
                         UserRegisteredIntegrationEvent evt = domainEvent as UserRegisteredIntegrationEvent;
                         TenantId tenantId = new TenantId(evt.TenantId);
-                        var user = userRepository.UserWithUsername(tenantId, evt.Username);
 
                         UserRegisteredIntegrationEvent userRegisteredIntegrationEvent = new UserRegisteredIntegrationEvent(
                                 new TenantId(evt.TenantId),
-                                user.Id,
-                                user.Username,
-                                user.Person.Name,
-                                user.Person.EmailAddress
-                            );
+                                Guid.NewGuid(),
+                                evt.Username,
+                                evt.Name,
+                                evt.EmailAddress
+                    );
+                        userRegisteredIntegrationEvent.TimeStamp = evt.TimeStamp;
+                        userRegisteredIntegrationEvent.Version = evt.Version;
 
-                        eventStore.Save(new List<IEvent> { userRegisteredIntegrationEvent });
+                        //eventStore.Save(new List<IEvent> { userRegisteredIntegrationEvent });
                         _eventPublisher.Publish<UserRegisteredIntegrationEvent>(userRegisteredIntegrationEvent);
-                        return;
+                        //return;
                     }
 
-                    if (domainEvent is UserEnablementChangedIntegrationEvent)
+                    else if (domainEvent is UserEnablementChangedIntegrationEvent)
                     {
                         Console.WriteLine("To Do: UserEnablementChanged.");
-                        return;
+                        //return;
                     }
 
-                    if (domainEvent is PersonNameChangedIntegrationEvent)
+                    else if (domainEvent is PersonNameChangedIntegrationEvent)
                     {
                         Console.WriteLine("To Do: PersonNameChanged.");
-                        return;
+                        //return;
                     }
 
-                    if (domainEvent is PersonContactInformationChangedIntegrationEvent)
+                    else if (domainEvent is PersonContactInformationChangedIntegrationEvent)
                     {
                         Console.WriteLine("To Do: PersonContactInformationChanged.");
-                        return;
+                        //return;
                     }
+
+
+                    this.eventStore.Append(domainEvent);
                 });
 
         }

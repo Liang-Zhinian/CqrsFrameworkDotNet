@@ -12,6 +12,11 @@ namespace SaaSEqt.IdentityAccess.Domain.Entities
             return new Enablement(true, DateTime.MinValue, DateTime.MinValue);
         }
 
+        protected Enablement()
+        {
+
+        }
+
         public Enablement(bool enabled, DateTime startDate, DateTime endDate)
         {
             if (startDate > endDate)
