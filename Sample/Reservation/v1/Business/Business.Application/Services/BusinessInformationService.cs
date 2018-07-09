@@ -97,11 +97,15 @@ namespace Business.Application.Services
 
             var location = existingSite.ProvisionLocation(provisionLocationCommand.Name, provisionLocationCommand.Description, contactInformation);
 
+
             await _eventStoreSession.Add<Location>(location);
             await _eventStoreSession.Commit();
 
-            _siteRepository.Update(existingSite);
+            var site = _siteRepository.Find(provisionLocationCommand.SiteId);
+            site.ProvisionLocation(provisionLocationCommand.Name, provisionLocationCommand.Description, contactInformation);
+
             _siteRepository.UnitOfWork.Commit();
+
 
             return _mapper.Map<LocationViewModel>(location);
         }

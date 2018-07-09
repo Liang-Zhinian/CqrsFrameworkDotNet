@@ -17,8 +17,9 @@ namespace CqrsFramework.EventStore.MySqlDB
     {
         private readonly EventStoreDbContext _eventStoreContext;
         private readonly DbConnection _dbConnection;
+        private readonly IEventPublisher _publisher;
 
-        public MySqlEventStore(DbConnection dbConnection)
+        public MySqlEventStore(DbConnection dbConnection, IEventPublisher publisher)
         {
             _dbConnection = dbConnection ?? throw new ArgumentNullException("dbConnection");
             _eventStoreContext = new EventStoreDbContext(
@@ -26,12 +27,14 @@ namespace CqrsFramework.EventStore.MySqlDB
                     .UseMySql(_dbConnection)
                     .ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryClientEvaluationWarning))
                     .Options);
+
+            _publisher = publisher ?? throw new ArgumentNullException(nameof(publisher));
         }
 
         public Task<IEnumerable<IEvent>> Get(Guid aggregateId, int fromVersion, CancellationToken cancellationToken = default(CancellationToken))
         {
             IList<IEvent> events = new List<IEvent>();
-            var evts = _eventStoreContext.Events.Where(_ => _.AggregateId.Equals(aggregateId))
+            var evts = _eventStoreContext.Events.Where(_ => _.AggregateId.Equals(aggregateId) && _.Version > fromVersion)
                                          .OrderBy(x => x.Version)
                                             .AsEnumerable();
             foreach (var evt in evts)
@@ -55,17 +58,19 @@ namespace CqrsFramework.EventStore.MySqlDB
         //    return Task.CompletedTask;
         //}
 
-        public Task Save(IEnumerable<IEvent> events, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task Save(IEnumerable<IEvent> events, CancellationToken cancellationToken = default(CancellationToken))
         {
             foreach (var @event in events)
             {
                 var eventEntity = FromEvent(@event);
 
                 _eventStoreContext.Events.Add(eventEntity);
+
+                await _publisher.Publish(@event, cancellationToken);
             };
 
-            _eventStoreContext.SaveChanges();
-            return Task.CompletedTask;
+            await _eventStoreContext.SaveChangesAsync();
+            //return Task.CompletedTask;
         }
 
         private Event FromEvent(IEvent @event){

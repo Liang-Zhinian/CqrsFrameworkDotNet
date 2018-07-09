@@ -29,19 +29,19 @@ namespace Business.WebApi.Controllers
         [Route("ProvisionSite")]
         [ProducesResponseType((int)HttpStatusCode.Created)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        public async Task<IActionResult> ProvisionSite(CreateSiteRequest request)
+        public async Task<IActionResult> ProvisionSite([FromBody]CreateSiteRequest request)
         {
             if (!ModelState.IsValid)
             {
                 return (IActionResult)BadRequest();
             }
 
-            byte[] logo;
-            using (var memoryStream = new MemoryStream())
-            {
-                request.Logo.CopyTo(memoryStream);
-                logo = memoryStream.ToArray();
-            }
+            //byte[] logo;
+            //using (var memoryStream = new MemoryStream())
+            //{
+            //    request.Logo.CopyTo(memoryStream);
+            //    logo = memoryStream.ToArray();
+            //}
 
             ProvisionSiteCommand provisionSiteCommand = new ProvisionSiteCommand { 
                 Name = request.Name,

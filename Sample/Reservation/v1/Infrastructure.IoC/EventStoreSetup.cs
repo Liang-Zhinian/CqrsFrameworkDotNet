@@ -36,9 +36,12 @@ namespace Infrastructure.IoC
             services.AddScoped<ISession, Session>();
 
             // EfMySqlEventStore
-            services.AddSingleton<IEventStore>(y => new MySqlEventStore(y.GetService<EventStoreDbContext>().Database.GetDbConnection()));
+            services.AddSingleton<IEventStore>(y => new MySqlEventStore(y.GetService<EventStoreDbContext>().Database.GetDbConnection(),
+                                                                        y.GetService<IEventPublisher>()));
             services.AddSingleton<ICache, MemoryCache>();
-            services.AddScoped<IRepository>(y => new CacheRepository(new Repository(y.GetService<IEventStore>(), y.GetService<IEventPublisher>()), y.GetService<IEventStore>(), y.GetService<ICache>()));
+            services.AddScoped<IRepository>(y => new CacheRepository(new Repository(y.GetService<IEventStore>()), 
+                                                                     y.GetService<IEventStore>(), 
+                                                                     y.GetService<ICache>()));
 
 
             // InMemoryEventStore

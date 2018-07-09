@@ -71,6 +71,8 @@ namespace Business.Domain.Entities
             if (Locations == null) Locations = new ObservableCollection<Location>();
             Locations.Add(location);
 
+            ApplyChange(new LocationAssignedToSiteEvent(this.Id, this.Id, location.Id));
+
             return location;
         }
 

@@ -9,7 +9,7 @@ namespace Business.WebApi.Requests.Sites
 
         public string Description { get; set; }
 
-        public IFormFile Logo { get; set; }
+        //public IFormFile Logo { get; set; }
 
         public string ContactName { get; set; }
 
