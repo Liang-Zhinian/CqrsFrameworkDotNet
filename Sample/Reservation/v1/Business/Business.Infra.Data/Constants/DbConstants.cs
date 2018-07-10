@@ -52,7 +52,6 @@ namespace Business.Infra.Data.Constants
         public static string ResourceStatusTable { get; set; }
         public static string ResourceTypeTable { get; set; }
 
-        public static string ScheduleTypeTable { get; set; }
         public static string ScheduleTable { get; set; }
         public static string ScheduleLayoutTable { get; set; }
         public static string ScheduleLayoutTimeSlotTable { get; set; }
@@ -60,6 +59,9 @@ namespace Business.Infra.Data.Constants
         public static string ServiceItemTable { get; set; }
         public static string ServiceCategoryTable { get; set; }
 
+        public static string ScheduleTypeTable { get; set; }
+        public static string AvailabilityTable { get; set; }
+        public static string UnavailabilityTable { get; set; }
 
         static DbConstants()
         {
@@ -93,6 +95,9 @@ namespace Business.Infra.Data.Constants
             ResourceTypeTable = "ResourceType";
 
             ScheduleTypeTable = "ScheduleType";
+            AvailabilityTable = "Availability";
+            UnavailabilityTable = "Unavailability";
+
             ScheduleTable = "Schedule";
             ScheduleLayoutTable = "ScheduleLayout";
             ScheduleLayoutTimeSlotTable = "ScheduleLayoutTimeSlot";

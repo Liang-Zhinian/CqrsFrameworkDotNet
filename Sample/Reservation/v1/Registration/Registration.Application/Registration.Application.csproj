@@ -21,6 +21,7 @@
     <Compile Remove="ViewModels\LocationViewModel.cs" />
     <Compile Remove="Interfaces\ITenantService.cs" />
     <Compile Remove="Services\TenantService.cs" />
+    <Compile Remove="Services\IntegrationEventService.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,6 +37,7 @@
     <Folder Include="EventSourcedNormalizers\" />
     <Folder Include="AutoMapper\" />
     <Folder Include="Commands\" />
+    <Folder Include="Behaviors\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Registration.Infra.Data\Registration.Infra.Data.csproj" />

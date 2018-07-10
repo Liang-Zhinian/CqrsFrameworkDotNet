@@ -12,6 +12,8 @@
     <Folder Include="Commands\" />
     <Folder Include="Commands\Sites\" />
     <Folder Include="Commands\Locations\" />
+    <Folder Include="Events\Schedules\" />
+    <Folder Include="Commands\Staffs\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\..\Framework\CqrsFramework\CqrsFramework.csproj" />

@@ -1,22 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
-using SaaSEqt.eShop.Site.Api.ViewModel;
+using System.Threading.Tasks;
+using Business.Application.ViewModels;
+using Business.Contracts.Commands.Locations;
+using Business.Contracts.Commands.Sites;
+using Business.Domain.Entities;
 
-namespace SaaSEqt.eShop.Site.Api.Application.Services
+namespace SaaSEqt.eShop.Site.Api.Application.Interfaces
 {
-    public interface IBusinessInformationService
+    public interface IBusinessInformationQueryService
     {
-        SiteViewModel ProvisionSite(Guid tenantId, string siteName, string siteDescription, bool active);
-        LocationViewModel ProvisionLocation(LocationViewModel locationViewModel);
+        IEnumerable<SiteViewModel> FindSites();
         LocationViewModel FindLocation(Guid locationId);
         IEnumerable<LocationViewModel> FindLocations();
-        void SetLocationAddress(Guid siteId, Guid locationId, string streetAddress,
+
+    }
+
+    public interface IBusinessInformationService
+    {
+        #region site services
+
+        Task<SiteViewModel> ProvisionSite(ProvisionSiteCommand provisionSiteCommand);
+        Task<SiteViewModel> UpdateSiteDescription(UpdateSiteDescriptionCommand updateSiteDescriptionCommand);
+        Task<SiteViewModel> UpdateSiteContactInformation(UpdateSiteContactInformationCommand updateSiteContactInformationCommand);
+        Task<SiteViewModel> UpdateSiteBranding(UpdateSiteBrandingCommand updateSiteBrandingCommand);
+        Task ActivateSite(ActivateSiteCommand activateSiteCommand);
+        Task DeactivateSite(DeactivateSiteCommand deactivateSiteCommand);
+
+        #endregion
+
+        #region Location services
+
+        Task<LocationViewModel> ProvisionLocationAsync(ProvisionLocationCommand provisionLocationCommand);
+        Task SetLocationAddress(Guid siteId, Guid locationId, string streetAddress,
                              string streetAddress2,
                              string city,
                              string stateProvince,
                              string postalCode,
                              string countryCode);
-        void SetLocationGeolocation(Guid siteId, Guid locationId, double? latitude, double? longitude);
-        void SetLocationImage(Guid siteId, Guid locationId, byte[] image);
+        Task SetLocationGeolocation(Guid siteId, Guid locationId, double? latitude, double? longitude);
+        Task UpdateLocationImage(UpdateLocationImageCommand updateLocationImageCommand);
+        Task AddAdditionalLocationImage(Guid siteId, Guid locationId, byte[] image);
+
+        #endregion
     }
 }

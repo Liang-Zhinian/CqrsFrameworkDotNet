@@ -84,7 +84,7 @@ namespace SaaSEqt.IdentityAccess.Application
                         userRegisteredIntegrationEvent.Version = evt.Version;
 
                         //eventStore.Save(new List<IEvent> { userRegisteredIntegrationEvent });
-                    _identityAccessIntegrationEventService.PublishThroughEventBusAsync(userRegisteredIntegrationEvent);
+                        _identityAccessIntegrationEventService.PublishThroughEventBusAsync(userRegisteredIntegrationEvent);
                         //return;
                     }
 
@@ -119,7 +119,7 @@ namespace SaaSEqt.IdentityAccess.Application
                         userRegisteredIntegrationEvent.Version = evt.Version;
 
                         //eventStore.Save(new List<IEvent> { userRegisteredIntegrationEvent });
-                    _identityAccessIntegrationEventService.PublishThroughEventBusAsync(userRegisteredIntegrationEvent);
+                        _identityAccessIntegrationEventService.PublishThroughEventBusAsync(userRegisteredIntegrationEvent);
                         //return;
                     }
 

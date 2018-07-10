@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Business.Domain.Entities.Schedules;
 using CqrsFramework.Domain;
 using SaaSEqt.IdentityAccess.Domain.Entities;
 
@@ -12,9 +14,9 @@ namespace Business.Domain.Entities
 
         private Staff() { }
 
-        public Staff(Guid siteId, Guid userId, bool isMale, string image, string bio, bool canLoginAllLocations)
+        public Staff(Guid siteId, Guid staffId, bool isMale, string image, string bio, bool canLoginAllLocations)
         {
-            Id = userId;
+            Id = staffId;
             this.SiteId = siteId;
             this.IsMale = isMale;
             this.Image = image;
@@ -23,6 +25,8 @@ namespace Business.Domain.Entities
         }
 
         public Guid Id { get; private set; }
+
+        //public string UserName { get; private set; }
 
         public bool IsMale { get; private set; }
 
@@ -36,6 +40,29 @@ namespace Business.Domain.Entities
         public virtual Site Site { get; private set; }
 
         public virtual ICollection<StaffLoginLocation> StaffLoginLocations { get; private set; }
+        public virtual ICollection<Availability> Availibilities { get; private set; }
+        public virtual ICollection<Unavailability> Unavailabilities { get; private set; }
+
+        public Availability AddAvailability(Guid serviceItemId, Guid locationId, DateTime startTime, DateTime endTime, bool Sunday, bool Monday, bool Tuesday, bool Wednesday, bool Thursday, bool Friday, bool Saturday, DateTime bookableEndTime) {
+            Availability availability = new Availability(this.SiteId, this.Id, serviceItemId, locationId, startTime, endTime, Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, bookableEndTime);
+
+            if (Availibilities == null) Availibilities = new ObservableCollection<Availability>();
+
+            Availibilities.Add(availability);
+
+            return availability;
+        }
+
+        public Unavailability AddUnavailability(Guid serviceItemId, Guid locationId, DateTime startTime, DateTime endTime, bool Sunday, bool Monday, bool Tuesday, bool Wednesday, bool Thursday, bool Friday, bool Saturday, string description)
+        {
+            Unavailability unavailability = new Unavailability(this.SiteId, this.Id, serviceItemId, locationId, startTime, endTime, Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, description);
+
+            if (Unavailabilities == null) Unavailabilities = new ObservableCollection<Unavailability>();
+
+            Unavailabilities.Add(unavailability);
+
+            return unavailability;
+        }
 
     }
 }

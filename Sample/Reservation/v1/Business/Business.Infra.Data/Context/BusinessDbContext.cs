@@ -28,9 +28,13 @@ namespace Business.Infra.Data.Context
         public DbSet<ResourceType> ResourceTypes { get; set; }
 
         public DbSet<ScheduleType> ScheduleTypes { get; set; }
-        public DbSet<Schedule> Schedules { get; set; }
-        public DbSet<ScheduleLayout> ScheduleLayouts { get; set; }
-        public DbSet<ScheduleLayoutTimeSlot> ScheduleLayoutTimeSlots { get; set; }
+        public DbSet<Availability> Availabilities { get; set; }
+        public DbSet<Unavailability> Unavailabilities { get; set; }
+
+
+        //public DbSet<Schedule> Schedules { get; set; }
+        //public DbSet<ScheduleLayout> ScheduleLayouts { get; set; }
+        //public DbSet<ScheduleLayoutTimeSlot> ScheduleLayoutTimeSlots { get; set; }
 
         protected BusinessDbContext()
         {
@@ -66,9 +70,9 @@ namespace Business.Infra.Data.Context
             modelBuilder.ApplyConfiguration(new ResourceTypeMap());
             modelBuilder.ApplyConfiguration(new ResourceLocationMap());
 
-            modelBuilder.ApplyConfiguration(new ScheduleMap());
-            modelBuilder.ApplyConfiguration(new ScheduleLayoutMap());
-            modelBuilder.ApplyConfiguration(new ScheduleLayoutTimeSlotMap());
+            //modelBuilder.ApplyConfiguration(new ScheduleMap());
+            //modelBuilder.ApplyConfiguration(new ScheduleLayoutMap());
+            //modelBuilder.ApplyConfiguration(new ScheduleLayoutTimeSlotMap());
 
             modelBuilder.ApplyConfiguration(new ServiceItemMap());
             modelBuilder.ApplyConfiguration(new ServiceCategoryMap());

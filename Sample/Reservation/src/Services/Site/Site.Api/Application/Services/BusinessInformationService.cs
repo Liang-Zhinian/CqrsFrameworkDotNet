@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
-using SaaSEqt.eShop.Site.Api.ViewModel;
-using SaaSEqt.eShop.Site.Api.Events.Locations;
-using SaaSEqt.eShop.Site.Api.Model;
-using SaaSEqt.eShop.Site.Api.Infrastructure.Context;
+using Business.Application.Interfaces;
+using Business.Application.ViewModels;
+using Business.Contracts.Commands.Locations;
+using Business.Contracts.Commands.Sites;
+using Business.Contracts.Events.Locations;
+using Business.Domain.Entities;
+using Business.Domain.Repositories;
+using Business.Domain.Services;
 
 using CqrsFramework.Domain;
 using CqrsFramework.Events;
@@ -14,85 +19,126 @@ namespace SaaSEqt.eShop.Site.Api.Application.Services
 {
     public class BusinessInformationService : IBusinessInformationService
     {
+        //private readonly ISession _eventStoreSession;
+        private readonly IBusinessIntegrationEventService _businessIntegrationEventService;
         private readonly IMapper _mapper;
-        private readonly IEventPublisher _eventPublisher;
-        private readonly SiteDbContext _context;
         private readonly SiteProvisioningService _siteProvisioningService;
+        private readonly ISiteRepository _siteRepository;
+        private readonly ILocationRepository _locationRepository;
 
-        public BusinessInformationService(IMapper mapper,
-                             IEventPublisher eventPublisher,
-                                          SiteDbContext context,
-                                          SiteProvisioningService siteProvisioningService)
+        public BusinessInformationService(//ISession eventStoreSession,
+                                          IBusinessIntegrationEventService businessIntegrationEventService,
+                                          IMapper mapper,
+                                          SiteProvisioningService siteProvisioningService,
+                                          ISiteRepository siteRepository,
+                                          ILocationRepository locationRepository)
         {
+            //_eventStoreSession = eventStoreSession;
+            _businessIntegrationEventService = businessIntegrationEventService;
             _mapper = mapper;
-            _eventPublisher = eventPublisher;
-            _context = context;
             _siteProvisioningService = siteProvisioningService;
+            _siteRepository = siteRepository;
+            _locationRepository = locationRepository;
         }
 
-        public LocationViewModel ProvisionLocation(LocationViewModel locationViewModel)
+        #region site services
+
+        public async Task<SiteViewModel> ProvisionSite(ProvisionSiteCommand provisionSiteCommand)
         {
-            var existingSite = _context.Sites.Find(locationViewModel.SiteId);
+            Site site = await _siteProvisioningService.ProvisionSite(new TenantId(provisionSiteCommand.TenantId),
+                                                               provisionSiteCommand.Name,
+                                                               provisionSiteCommand.Description,
+                                                               provisionSiteCommand.ContactName,
+                                                               provisionSiteCommand.PrimaryTelephone,
+                                                               provisionSiteCommand.SecondaryTelephone,
+                                                               provisionSiteCommand.EmailAddress,
+                                                               provisionSiteCommand.Active);
 
-            ContactInformation contactInformation = new ContactInformation();
-            contactInformation.ContactName = locationViewModel.ContactName;
-            contactInformation.PrimaryTelephone = locationViewModel.PrimaryTelephone;
-            contactInformation.SecondaryTelephone = locationViewModel.SecondaryTelephone;
+            //await _eventStoreSession.Add<Site>(site);
+            //await _eventStoreSession.Commit();
 
-            var location = existingSite.ProvisionLocation(locationViewModel.Name, locationViewModel.Description, locationViewModel.Image, contactInformation);
+            //_siteRepository.UnitOfWork.Commit();
 
-            _eventPublisher.Publish<LocationCreatedEvent>(new LocationCreatedEvent(
-                                                                location.Id,
-                                                                location.SiteId,
-                                                                location.Name,
-                                                                location.Description,
-                                                                location.Image,
-                                                                     contactInformation.PrimaryTelephone,
-                                                                     contactInformation.SecondaryTelephone
-                                                            )
-                                                         );
-
-            _context.Sites.Update(existingSite);
-            _context.SaveChanges();
-
-            //_eventStoreSession.Add(location);
-            //_eventStoreSession.Commit();
-
-            return _mapper.Map<LocationViewModel>(location);
-        }
-
-        public SiteViewModel ProvisionSite(Guid tenantId, string siteName, string siteDescription, bool active)
-        {
-            Model.Site site = _siteProvisioningService.ProvisionSite(tenantId, siteName, siteDescription, active);
+            //_businessIntegrationEventService.SaveEventAndBusinessDbContextChangesAsync();
 
             var siteView = _mapper.Map<SiteViewModel>(site);
             return siteView;
         }
 
-        public LocationViewModel FindLocation(Guid locationId)
+        public Task<SiteViewModel> UpdateSiteDescription(UpdateSiteDescriptionCommand updateSiteDescriptionCommand)
         {
-            var location = _context.Locations.Find(locationId);
+            throw new NotImplementedException();
+        }
+
+        public Task<SiteViewModel> UpdateSiteContactInformation(UpdateSiteContactInformationCommand updateSiteContactInformationCommand)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<SiteViewModel> UpdateSiteBranding(UpdateSiteBrandingCommand updateSiteBrandingCommand)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task ActivateSite(ActivateSiteCommand activateSiteCommand)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeactivateSite(DeactivateSiteCommand deactivateSiteCommand)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region Location services
+
+        public async Task<LocationViewModel> ProvisionLocationAsync(ProvisionLocationCommand provisionLocationCommand)
+        {
+            var existingSite = _siteRepository.Find(provisionLocationCommand.SiteId); //await _eventStoreSession.Get<Site>(provisionLocationCommand.SiteId);
+
+            ContactInformation contactInformation = new ContactInformation(provisionLocationCommand.ContactName, provisionLocationCommand.PrimaryTelephone, provisionLocationCommand.SecondaryTelephone, provisionLocationCommand.EmailAddress);
+
+            var location = existingSite.ProvisionLocation(provisionLocationCommand.Name, provisionLocationCommand.Description, contactInformation);
+
+
+            //await _eventStoreSession.Add<Location>(location);
+            //await _eventStoreSession.Commit();
+
+            //var site = _siteRepository.Find(provisionLocationCommand.SiteId);
+            //site.ProvisionLocation(provisionLocationCommand.Name, provisionLocationCommand.Description, contactInformation);
+
+            //_siteRepository
+            //_siteRepository.UnitOfWork.Commit();
+
+            await _businessIntegrationEventService.PublishThroughEventBusAsync(new LocationCreatedEvent(
+                location.Id,
+                provisionLocationCommand.SiteId,
+                    provisionLocationCommand.Name, 
+                    provisionLocationCommand.Description,
+                     contactInformation.ContactName,
+                     contactInformation.EmailAddress,
+                     contactInformation.PrimaryTelephone,
+                     contactInformation.SecondaryTelephone
+                 )
+            );
+
+
             return _mapper.Map<LocationViewModel>(location);
         }
 
-        public IEnumerable<LocationViewModel> FindLocations()
-        {
-            var locations = _context.Locations;
-            return from location in locations
-                select _mapper.Map<LocationViewModel>(location);
 
-        }
-
-        public void SetLocationAddress(Guid siteId, Guid locationId, string streetAddress,
+        public async Task SetLocationAddress(Guid siteId, Guid locationId, string streetAddress,
                              string streetAddress2,
                              string city,
                              string stateProvince,
                              string postalCode,
                              string countryCode)
         {
-            var location = _context.Locations.Where(_=>_.SiteId.Equals(siteId) && _.Id.Equals(locationId)).FirstOrDefault();
+            var location = FindExistingLocation(siteId, locationId); //await _eventStoreSession.Get<Location>(locationId);
 
-            PostalAddress postalAddress = new PostalAddress( streetAddress,
+            PostalAddress postalAddress = new PostalAddress(streetAddress,
                               streetAddress2,
                               city,
                               stateProvince,
@@ -101,39 +147,91 @@ namespace SaaSEqt.eShop.Site.Api.Application.Services
 
             location.ChangeAddress(postalAddress);
 
-            _eventPublisher.Publish<LocationAddressChangedEvent>(new LocationAddressChangedEvent(location.Id, location.SiteId, postalAddress.StreetAddress,
-                                                        postalAddress.StreetAddress2, postalAddress.City,
-                                                        postalAddress.StateProvince, postalAddress.PostalCode,
-                                                        postalAddress.CountryCode));
+            //await _eventStoreSession.Add<Location>(location);
+            //await _eventStoreSession.Commit();
 
-            _context.SaveChanges();
+            //_locationRepository.Update(location);
+            //_locationRepository.UnitOfWork.Commit();
 
+            await _businessIntegrationEventService
+                .PublishThroughEventBusAsync(new LocationAddressChangedEvent(location.Id, 
+                                                                             location.SiteId, 
+                                                                             postalAddress.StreetAddress,
+                                                        postalAddress.StreetAddress2, 
+                                                                             postalAddress.City,
+                                                        postalAddress.StateProvince, 
+                                                                             postalAddress.PostalCode,
+                                                        postalAddress.CountryCode)
+            );
         }
 
-        public void SetLocationGeolocation(Guid siteId, Guid locationId, double? latitude, double? longitude){
-            var location = _context.Locations.Where(_ => _.SiteId.Equals(siteId) && _.Id.Equals(locationId)).FirstOrDefault();
+        public async Task SetLocationGeolocation(Guid siteId, Guid locationId, double? latitude, double? longitude)
+        {
+            var location = FindExistingLocation(siteId, locationId);
 
             Geolocation geolocation = new Geolocation(latitude, longitude);
 
             location.SetGeolocation(geolocation);
 
-            _eventPublisher.Publish<LocationGeolocationChangedEvent>(new LocationGeolocationChangedEvent(location.Id, location.SiteId, geolocation.Latitude, geolocation.Longitude));
 
-            _context.SaveChanges();
+            //await _eventStoreSession.Add<Location>(location);
+            //await _eventStoreSession.Commit();
+
+            //_locationRepository.Update(location);
+            //_locationRepository.UnitOfWork.Commit();
+
+            await _businessIntegrationEventService
+                .PublishThroughEventBusAsync(new LocationGeolocationChangedEvent(
+                    locationId, 
+                    siteId, 
+                    latitude, 
+                    longitude));
         }
 
-        public void SetLocationImage(Guid siteId, Guid locationId, byte[] image)
+        public async Task UpdateLocationImage(UpdateLocationImageCommand updateLocationImageCommand)
         {
-            var location = _context.Locations.Where(_ => _.SiteId.Equals(siteId) && _.Id.Equals(locationId)).FirstOrDefault();
+            //Guid siteId, Guid locationId, byte[] image
+            var location = FindExistingLocation(updateLocationImageCommand.SiteId, updateLocationImageCommand.LocationId);
 
-            location.SetLocationImage(image);
+            location.SetLocationImage(updateLocationImageCommand.Image);
 
-            _eventPublisher.Publish<LocationImageChangedEvent>(new LocationImageChangedEvent(location.Id, location.SiteId, image));
+            //await _eventStoreSession.Add<Location>(location);
+            //await _eventStoreSession.Commit();
 
-            _context.SaveChanges();
+            //_locationRepository.Update(location);
+            //_locationRepository.UnitOfWork.Commit();
 
-            //_eventStoreSession.Get<Location>(locationId);
-            //_eventStoreSession.Commit();
+            await _businessIntegrationEventService
+                .PublishThroughEventBusAsync(new LocationImageChangedEvent(location.Id, 
+                                                                           location.SiteId, 
+                                                                           updateLocationImageCommand.Image));
+        }
+
+        public async Task AddAdditionalLocationImage(Guid siteId, Guid locationId, byte[] image)
+        {
+            var location = FindExistingLocation(siteId, locationId);
+
+            var locationImage = new LocationImage(siteId, locationId, image);
+            location.AddImage(locationImage);
+
+            //await _eventStoreSession.Add<Location>(location);
+            //await _eventStoreSession.Commit();
+
+            //_locationRepository.Update(location);
+            //_locationRepository.UnitOfWork.Commit();
+
+
+            await _businessIntegrationEventService
+                .PublishThroughEventBusAsync(new AdditionalLocationImageCreatedEvent(location.Id,
+                                                                           location.SiteId,
+                                                                                     image));
+        }
+
+        #endregion
+
+        private Location FindExistingLocation(Guid siteId, Guid locationId){
+            var location = _locationRepository.Find(locationId);
+            return location;
         }
     }
 }
