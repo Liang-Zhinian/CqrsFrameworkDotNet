@@ -1,5 +1,6 @@
-﻿using IdentityAccess.Api.Services;
+﻿using SaaSEqt.IdentityAccess.Api.Services;
 using Microsoft.Extensions.DependencyInjection;
+using SaaSEqt.Common.Domain.Model;
 using SaaSEqt.IdentityAccess;
 using SaaSEqt.IdentityAccess.Application;
 using SaaSEqt.IdentityAccess.Domain.Repositories;
@@ -38,36 +39,36 @@ namespace SaaSEqt.IdentityAccess.Api.Configurations
 
         private static void RegisterIdentityAccessRepositories(IServiceCollection services)
         {
-            services
-                .AddScoped<ITenantRepository, TenantRepository>()
-                .AddScoped<IUserRepository, UserRepository>()
-                .AddScoped<IRoleRepository, RoleRepository>()
-                .AddScoped<IGroupRepository, GroupRepository>();
+            //services
+                //.AddScoped<ITenantRepository, TenantRepository>()
+                //.AddScoped<IUserRepository, UserRepository>()
+                //.AddScoped<IRoleRepository, RoleRepository>()
+                //.AddScoped<IGroupRepository, GroupRepository>();
         }
 
         private static void RegisterIdentityAccessServices(IServiceCollection services)
         {
             services
-                .AddScoped<AuthenticationService>(_ => new AuthenticationService(
-                    _.GetService<ITenantRepository>(),
-                    _.GetService<IUserRepository>(),
-                    _.GetService<IEncryptionService>()))
-                .AddScoped<GroupMemberService>(_ => new GroupMemberService(
-                    _.GetService<IUserRepository>(),
-                    _.GetService<IGroupRepository>()))
-                .AddScoped<TenantProvisioningService>(_ => new TenantProvisioningService(
-                    _.GetService<ITenantRepository>(),
-                    _.GetService<IUserRepository>(),
-                    _.GetService<IRoleRepository>()))
-                .AddScoped<IEncryptionService, MD5EncryptionService>()
-                .AddScoped<IdentityApplicationService>(s => new IdentityApplicationService(
-                    s.GetService<AuthenticationService>(),
-                    s.GetService<GroupMemberService>(),
-                    s.GetService<IGroupRepository>(),
-                    s.GetService<TenantProvisioningService>(),
-                    s.GetService<ITenantRepository>(),
-                    s.GetService<IUserRepository>()
-                ));
+                .AddTransient<AuthenticationService>()
+                .AddTransient<GroupMemberService>()
+                .AddTransient<TenantProvisioningService>()
+                .AddScoped<ITenantRepository, TenantRepository>()
+                .AddScoped<IUserRepository, UserRepository>()
+                .AddScoped<IRoleRepository, RoleRepository>()
+                .AddScoped<IGroupRepository, GroupRepository>()
+                .AddTransient<IEncryptionService, MD5EncryptionService>()
+                .AddTransient<IdentityApplicationService>()
+                .AddSingleton<DomainEventPublisher>();
+        }
+    }
+
+    public static class IdentityAccessEventProcessorSetup
+    {
+        public static void AddIdentityAccessEventProcessorSetup(this IServiceCollection services)
+        {
+            services
+                .AddScoped<SaaSEqt.Common.Events.IEventStore, SaaSEqt.IdentityAccess.Infra.Services.MySqlEventStore>()
+                .AddScoped<IdentityAccessEventProcessor>();
         }
     }
 }

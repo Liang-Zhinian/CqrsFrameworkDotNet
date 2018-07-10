@@ -11,20 +11,23 @@ namespace SaaSEqt.IdentityAccess.Domain.Events.Identity.User
     {
         public PersonNameChanged(
                 TenantId tenantId,
+            Guid userId,
                 String username,
                 FullName name)
         {
             this.Name = name;
             this.TenantId = tenantId.Id;
+            this.UserId = userId;
             this.Username = username;
 
             this.Version = 1;
             this.TimeStamp = DateTimeOffset.Now;
         }
 
-        public Guid Id { get; set; }
         public int Version { get; set; }
         public DateTimeOffset TimeStamp { get; set; }
+
+        public Guid UserId { get; set; }
 
         public FullName Name { get; private set; }
 

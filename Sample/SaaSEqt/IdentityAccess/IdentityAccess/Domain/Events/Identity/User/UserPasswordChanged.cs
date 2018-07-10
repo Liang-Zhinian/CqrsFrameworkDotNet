@@ -11,9 +11,11 @@ namespace SaaSEqt.IdentityAccess.Domain.Events.Identity.User
     {
         public UserPasswordChanged(
                 TenantId tenantId,
+            Guid userId,
                 String username)
         {
             this.TenantId = tenantId.Id;
+            this.UserId = userId;
             this.Username = username;
 
             this.Version = 1;
@@ -24,6 +26,8 @@ namespace SaaSEqt.IdentityAccess.Domain.Events.Identity.User
         public DateTimeOffset TimeStamp { get; set; }
 
         public string TenantId { get; private set; }
+
+        public Guid UserId { get; set; }
 
         public string Username { get; private set; }
     }

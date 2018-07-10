@@ -3,7 +3,7 @@ using System.Data;
 using Microsoft.Extensions.HealthChecks;
 using MySql.Data.MySqlClient;
 
-namespace HealthChecks.MySQL
+namespace SaaSEqt.Infrastructure.HealthChecks.MySQL
 {
     public static class HealthCheckBuilderMySQLExtensions
     {

@@ -47,6 +47,7 @@ namespace SaaSEqt.IdentityAccess.Domain.Entities
 			AssertionConcern.AssertArgumentLength(username, 3, 250, "The username must be 3 to 250 characters.");
 
             // Defer validation to the property setters.
+            this.Id = Guid.NewGuid();
 			this.Enablement = enablement;
 			this.Person = person;
 			this.TenantId = tenantId;
@@ -60,6 +61,7 @@ namespace SaaSEqt.IdentityAccess.Domain.Entities
 				.Instance
 				.Publish(new UserRegistered(
 						tenantId,
+                    this.Id,
 						username,
 						person.Name,
 						person.ContactInformation.EmailAddress));
@@ -71,7 +73,7 @@ namespace SaaSEqt.IdentityAccess.Domain.Entities
 		/// </summary>
 		protected User()
         {
-            //this.Id = Guid.NewGuid();
+            
 		}
 
 		#endregion
@@ -141,7 +143,8 @@ namespace SaaSEqt.IdentityAccess.Domain.Entities
 			DomainEventPublisher
 				.Instance
 				.Publish(new UserPasswordChanged(
-						this.TenantId,
+                    this.TenantId,
+                    this.Id,
 						this.Username));
 		}
 
@@ -162,7 +165,8 @@ namespace SaaSEqt.IdentityAccess.Domain.Entities
 			DomainEventPublisher
 				.Instance
 				.Publish(new UserEnablementChanged(
-						this.TenantId,
+                    this.TenantId,
+                    this.Id,
 						this.Username,
 						this.Enablement));
 		}

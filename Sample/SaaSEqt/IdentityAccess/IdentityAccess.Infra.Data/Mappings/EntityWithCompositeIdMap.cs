@@ -16,7 +16,7 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Mappings
             //builder.HasKey("Id");
             builder.ToTable(tableName);
             builder.Property<Guid>("Id")
-                   .ValueGeneratedOnAdd()
+                   //.ValueGeneratedOnAdd()
                    .HasColumnType(Constants.DbConstants.KeyType)
                    .ForMySQLHasCollation("utf8_general_ci");
 

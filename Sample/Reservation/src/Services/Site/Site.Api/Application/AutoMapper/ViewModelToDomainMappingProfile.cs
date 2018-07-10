@@ -3,7 +3,7 @@ using AutoMapper;
 using SaaSEqt.eShop.Site.Api.ViewModel;
 using SaaSEqt.eShop.Site.Api.Model;
 
-namespace SaaSEqt.eShop.Site.Api.AutoMapper
+namespace SaaSEqt.eShop.Site.Api.Application.AutoMapper
 {
     public class ViewModelToDomainMappingProfile : Profile
     {

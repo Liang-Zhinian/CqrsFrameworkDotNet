@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Microsoft.eShopOnContainers.BuildingBlocks.IntegrationEventLogEF
+namespace SaaSEqt.Infrastructure.IntegrationEventLogEF
 {
     public enum EventStateEnum
     {

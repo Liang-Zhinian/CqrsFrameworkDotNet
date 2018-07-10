@@ -1,7 +1,7 @@
-﻿using Microsoft.eShopOnContainers.BuildingBlocks.EventBus.Events;
+﻿using SaaSEqt.Infrastructure.EventBus.Events;
 using System;
 
-namespace Microsoft.eShopOnContainers.BuildingBlocks.EventBus.Abstractions
+namespace SaaSEqt.Infrastructure.EventBus.Abstractions
 {
     public interface IEventBus
     {

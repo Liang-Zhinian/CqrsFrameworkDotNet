@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Threading.Tasks;
 using CqrsFramework.Events;
+using CqrsFramework.Messages;
 using SaaSEqt.eShop.Site.Api.Events.Tenants;
 using SaaSEqt.eShop.Site.Api.Infrastructure.Context;
-using SaaSEqt.eShop.Site.Api.Services;
+using SaaSEqt.eShop.Site.Api.Application.Services;
 
-namespace Site.Api.Events.EventHandling
+namespace SaaSEqt.eShop.Site.Api.Events.EventHandling
 {
     public class TenantEventHandler : IEventHandler<TenantCreatedEvent>
     {
@@ -15,11 +17,12 @@ namespace Site.Api.Events.EventHandling
             _businessInformationService = businessInformationService;
         }
 
-        public void Handle(TenantCreatedEvent message)
+        public async Task Handle(TenantCreatedEvent message)
         {
-            Console.WriteLine("Handling TenantCreatedEvent.");
-            _businessInformationService.ProvisionSite(message.Id, message.Name,
-                                                      message.Description, true);
+            //Console.WriteLine("Handling TenantCreatedEvent.");
+            //await _businessInformationService.ProvisionSite(message.Id, message.Name,
+            //message.Description, true);
+            throw new NotImplementedException();
         }
     }
 }

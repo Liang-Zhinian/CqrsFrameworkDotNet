@@ -1,10 +1,10 @@
-﻿using Microsoft.eShopOnContainers.BuildingBlocks.EventBus.Abstractions;
+﻿using SaaSEqt.Infrastructure.EventBus.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microsoft.eShopOnContainers.BuildingBlocks.EventBus.Abstractions
+namespace SaaSEqt.Infrastructure.EventBus.Abstractions
 {
     public interface IDynamicIntegrationEventHandler
     {

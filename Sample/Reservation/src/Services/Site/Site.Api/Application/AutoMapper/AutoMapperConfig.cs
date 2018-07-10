@@ -1,7 +1,7 @@
 ﻿using System;
 using AutoMapper;
 
-namespace SaaSEqt.eShop.Site.Api.AutoMapper
+namespace SaaSEqt.eShop.Site.Api.Application.AutoMapper
 {
     public class AutoMapperConfig
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using SaaSEqt.eShop.Site.Api.ViewModel;
 
-namespace SaaSEqt.eShop.Site.Api.Services
+namespace SaaSEqt.eShop.Site.Api.Application.Services
 {
     public interface IBusinessInformationService
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Microsoft.eShopOnContainers.BuildingBlocks.EventBus
+namespace SaaSEqt.Infrastructure.EventBus
 {
     public partial class InMemoryEventBusSubscriptionsManager : IEventBusSubscriptionsManager
     {

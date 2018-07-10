@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SaaSEqt.eShop.Site.Api.Infrastructure.Context;
-using SaaSEqt.eShop.Site.Api.Services;
+using SaaSEqt.eShop.Site.Api.Application.Services;
 
-namespace SaaSEqt.eShop.Site.Api.Configurations
+namespace SaaSEqt.eShop.Site.Api.Application.Configurations
 {
     public static class ApplicationSetup
     {

@@ -10,7 +10,7 @@ using SaaSEqt.eShop.Site.Api.Infrastructure.Context;
 using CqrsFramework.Domain;
 using CqrsFramework.Events;
 
-namespace SaaSEqt.eShop.Site.Api.Services
+namespace SaaSEqt.eShop.Site.Api.Application.Services
 {
     public class BusinessInformationService : IBusinessInformationService
     {

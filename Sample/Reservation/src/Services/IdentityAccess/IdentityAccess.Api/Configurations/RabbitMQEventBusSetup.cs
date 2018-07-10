@@ -1,7 +1,9 @@
-﻿using CqrsFramework.Bus;
+﻿using Autofac;
+using CqrsFramework.Bus;
 using CqrsFramework.Bus.RabbitMQ;
 using CqrsFramework.Commands;
 using CqrsFramework.Events;
+using CqrsFramework.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -9,6 +11,7 @@ using RabbitMQ.Client;
 
 namespace SaaSEqt.IdentityAccess.Api.Configurations
 {
+    /*
     public static class RabbitMQEventBusSetup
     {
         public static IConfiguration Configuration { get; private set; }
@@ -56,7 +59,7 @@ namespace SaaSEqt.IdentityAccess.Api.Configurations
             services.AddSingleton<RabbitMQBus>(sp =>
             {
                 var rabbitMQPersistentConnection = sp.GetRequiredService<IRabbitMQPersistentConnection>();
-                //var iLifetimeScope = sp.GetRequiredService<ILifetimeScope>();
+                var iLifetimeScope = sp.GetRequiredService<ILifetimeScope>();
                 var logger = sp.GetRequiredService<ILogger<RabbitMQBus>>();
 
                 var retryCount = 5;
@@ -65,7 +68,7 @@ namespace SaaSEqt.IdentityAccess.Api.Configurations
                     retryCount = int.Parse(Configuration["EventBusRetryCount"]);
                 }
 
-                return new RabbitMQBus(rabbitMQPersistentConnection, logger, "book2business", "fanout", "book2events", false, retryCount);
+                return new RabbitMQBus(rabbitMQPersistentConnection, logger, iLifetimeScope, "book2business", "fanout", "book2events", false, retryCount);
             });
 
             services.AddSingleton<ICommandSender>(y => y.GetService<RabbitMQBus>());
@@ -74,5 +77,5 @@ namespace SaaSEqt.IdentityAccess.Api.Configurations
 
 
         }
-    }
+    }*/
 }

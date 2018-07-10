@@ -1,5 +1,5 @@
 ﻿using System;
-namespace IdentityAccess.Api.Events
+namespace SaaSEqt.IdentityAccess.Api.Events
 {
     public class TenantEvent
     {

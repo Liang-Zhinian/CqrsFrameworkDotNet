@@ -1,4 +1,4 @@
-﻿//using Microsoft.eShopOnContainers.BuildingBlocks.CommandBus;
+﻿//using SaaSEqt.Infrastructure.CommandBus;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Polly;
@@ -13,7 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 /*
-namespace Microsoft.eShopOnContainers.BuildingBlocks.EventBusRabbitMQ
+namespace SaaSEqt.Infrastructure.EventBusRabbitMQ
 {
     public class CommandBusRabbitMQ : ICommandBus, IDisposable
     {

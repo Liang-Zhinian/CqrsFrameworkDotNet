@@ -1,11 +1,11 @@
 ﻿using System;
 using CqrsFramework.Events;
-using IdentityAccess.Api.Events;
-using IdentityAccess.Api.ViewModel;
+using SaaSEqt.IdentityAccess.Api.Events;
+using SaaSEqt.IdentityAccess.Api.ViewModel;
 using SaaSEqt.IdentityAccess.Application;
 using SaaSEqt.IdentityAccess.Application.Commands;
 
-namespace IdentityAccess.Api.Services
+namespace SaaSEqt.IdentityAccess.Api.Services
 {
     public class TenantService: ITenantService
     {
@@ -36,10 +36,10 @@ namespace IdentityAccess.Api.Services
                         administrator.AddressCountryCode
                     );
 
-            var _tenant = _identityApplicationService.ProvisionTenant(command);
+            var _tenant = _identityApplicationService.ProvisionTenant(command).Result;
 
             TenantCreatedEvent tenantCreatedEvent = new TenantCreatedEvent(
-                Guid.Parse(_tenant.TenantId_Id),
+                _tenant.Id,
                 _tenant.Name,
                 _tenant.Description
             );

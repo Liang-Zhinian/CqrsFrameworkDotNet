@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 using SaaSEqt.eShop.Site.Api.Infrastructure.Context;
 using System;
 
-namespace Site.Api.Migrations
+namespace SaaSEqt.eShop.Site.Api.Migrations
 {
     [DbContext(typeof(SiteDbContext))]
     [Migration("20180630055445_first")]

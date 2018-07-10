@@ -153,7 +153,8 @@ namespace SaaSEqt.IdentityAccess.Domain.Entities
 			DomainEventPublisher
 				.Instance
 				.Publish(new PersonContactInformationChanged(
-						this.TenantId,
+                    this.TenantId,
+                    this.Id,
 						this.User.Username,
 						this.ContactInformation));
 		}
@@ -166,7 +167,8 @@ namespace SaaSEqt.IdentityAccess.Domain.Entities
 			DomainEventPublisher
 				.Instance
 				.Publish(new PersonNameChanged(
-						this.TenantId,
+                    this.TenantId,
+                    this.Id,
 						this.User.Username,
 						this.Name));
 		}

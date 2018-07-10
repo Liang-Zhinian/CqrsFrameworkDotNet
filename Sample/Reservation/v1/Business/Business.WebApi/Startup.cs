@@ -129,6 +129,7 @@ namespace Business.WebApi
             services.AddTransient<Func<DbConnection, IIntegrationEventLogService>>(
                 sp => (DbConnection c) => new IntegrationEventLogService(c));
             
+            services.AddTransient<IIdentityAccessIntegrationEventService, IdentityAccessIntegrationEventService>();
             services.AddTransient<IBusinessIntegrationEventService, BusinessIntegrationEventService>();
 
 
@@ -181,7 +182,7 @@ namespace Business.WebApi
             // Enable middleware to serve swagger-ui (HTML, JS, CSS etc.), specifying the Swagger JSON endpoint.
             .UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Book2 API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Book2 IdentityAccess API V1");
                 //c.ShowRequestHeaders();
             });
 

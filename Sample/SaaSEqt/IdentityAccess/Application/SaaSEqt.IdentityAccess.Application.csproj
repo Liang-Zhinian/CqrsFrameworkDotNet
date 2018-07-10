@@ -16,8 +16,13 @@
     <ProjectReference Include="..\..\Common\SaaSEqt.Common.csproj" />
     <ProjectReference Include="..\..\..\Reservation\v1\Business\Business.Contracts\Business.Contracts.csproj" />
     <ProjectReference Include="..\..\SaaSEqt.IdentityAccess.Contracts\SaaSEqt.IdentityAccess.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\..\Framework\CqrsFramework.EventStore.MySqlDB\CqrsFramework.EventStore.MySqlDB.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.8.1" />
+    <PackageReference Include="MediatR" Version="5.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Behaviors\" />
   </ItemGroup>
 </Project>

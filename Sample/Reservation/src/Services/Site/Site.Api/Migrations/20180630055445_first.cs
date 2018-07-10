@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Site.Api.Migrations
+namespace SaaSEqt.eShop.Site.Api.Migrations
 {
     public partial class first : Migration
     {

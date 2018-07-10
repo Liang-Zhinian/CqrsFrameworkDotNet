@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <RootNamespace>SaaSEqt.IdentityAccess.Api</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -12,15 +13,18 @@
     <Folder Include="Configurations\" />
     <Folder Include="ViewModel\" />
     <Folder Include="Events\" />
+    <Folder Include="Infrastructure\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="AutoMapper" Version="6.2.2" />
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="2.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="2.5.0" />
+    <PackageReference Include="FluentValidation" Version="7.6.104" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.2.2" />
+    <PackageReference Include="MediatR" Version="5.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,9 +34,15 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\..\..\Framework\CqrsFramework\CqrsFramework.csproj" />
     <ProjectReference Include="..\..\..\..\..\..\Framework\CqrsFramework.Bus.RabbitMQ\CqrsFramework.Bus.RabbitMQ.csproj" />
-    <ProjectReference Include="..\..\..\..\..\SaaSEqt\IdentityAccess\Application\SaaSEqt.Application.csproj" />
     <ProjectReference Include="..\..\..\..\..\SaaSEqt\IdentityAccess\IdentityAccess\SaaSEqt.IdentityAccess.csproj" />
     <ProjectReference Include="..\..\..\..\..\SaaSEqt\IdentityAccess\IdentityAccess.Infra.Data\SaaSEqt.IdentityAccess.Infra.Data.csproj" />
+    <ProjectReference Include="..\..\..\..\..\SaaSEqt\IdentityAccess\Application\SaaSEqt.IdentityAccess.Application.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Infrastructure\HealthChecks\src\Microsoft.Extensions.HealthChecks\Microsoft.Extensions.HealthChecks.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Infrastructure\HealthChecks\src\Microsoft.AspNetCore.HealthChecks\Microsoft.AspNetCore.HealthChecks.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Infrastructure\HealthChecks\src\HealthChecks.MySQL\HealthChecks.MySQL.csproj" />
+    <ProjectReference Include="..\..\..\..\v1\Infrastructure.IoC\Infrastructure.IoC.csproj" />
+    <ProjectReference Include="..\..\..\..\..\SaaSEqt\IdentityAccess\IdentityAccess.Infra.Services\SaaSEqt.IdentityAccess.Infra.Services.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Infrastructure\WebHostCustomization\WebHost.Customization\WebHost.Customization.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Configurations\AutoMapperSetup.cs" />

@@ -8,11 +8,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
-using Site.Api.Events.EventHandling;
-using Site.Api.Infrastructure;
+using SaaSEqt.eShop.Site.Api.Events.EventHandling;
+using SaaSEqt.eShop.Site.Api.Infrastructure;
 
-namespace SaaSEqt.eShop.Site.Api.Configurations
+namespace SaaSEqt.eShop.Site.Api.Application.Configurations
 {
+    /*
     public static class RabbitMQEventBusSetup
     {
         public static IConfiguration Configuration { get; private set; }
@@ -92,4 +93,5 @@ namespace SaaSEqt.eShop.Site.Api.Configurations
             provider.GetService<RabbitMQBus>().Start();
         }
     }
+    */
 }

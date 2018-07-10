@@ -6,6 +6,7 @@ using SaaSEqt.IdentityAccess.Contracts.IntegrationEvents.Tenant;
 using SaaSEqt.IdentityAccess.Contracts.IntegrationEvents.User;
 using SaaSEqt.IdentityAccess.Domain.Entities;
 using SaaSEqt.IdentityAccess.Domain.Events.Identity.Tenant;
+using SaaSEqt.IdentityAccess.Domain.Events.Identity.User;
 using SaaSEqt.IdentityAccess.Domain.Repositories;
 
 namespace SaaSEqt.IdentityAccess.Application
@@ -13,25 +14,29 @@ namespace SaaSEqt.IdentityAccess.Application
     public class IdentityAccessEventProcessor
     {
         //private readonly ILifetimeScope _autofac;
-        readonly IEventPublisher _eventPublisher;
-        readonly IGroupRepository groupRepository;
-        readonly ITenantRepository tenantRepository;
-        readonly IUserRepository userRepository;
-        readonly Common.Events.IEventStore eventStore;
+        readonly IIdentityAccessIntegrationEventService _identityAccessIntegrationEventService;
+        //readonly IEventPublisher _eventPublisher;
+        //readonly IGroupRepository groupRepository;
+        //readonly ITenantRepository tenantRepository;
+        //readonly IUserRepository userRepository;
+        //readonly Common.Events.IEventStore eventStore;
 
-        public IdentityAccessEventProcessor(Common.Events.IEventStore eventStore,
-                                            IEventPublisher eventPublisher,
-                                            IGroupRepository groupRepository,
-                                            ITenantRepository tenantRepository,
-                                            IUserRepository userRepository
+        public IdentityAccessEventProcessor(
+                                            //Common.Events.IEventStore eventStore,
+                                            //IEventPublisher eventPublisher,
+                                            IIdentityAccessIntegrationEventService identityAccessIntegrationEventService
+                                            //IGroupRepository groupRepository,
+                                            //ITenantRepository tenantRepository,
+                                            //IUserRepository userRepository
                                             /*, ILifetimeScope autofac*/)
         {
-            this.eventStore = eventStore;
+            //this.eventStore = eventStore;
             //_autofac = autofac;
-            _eventPublisher = eventPublisher;
-            this.groupRepository = groupRepository;
-            this.tenantRepository = tenantRepository;
-            this.userRepository = userRepository;
+            //_eventPublisher = eventPublisher;
+            _identityAccessIntegrationEventService = identityAccessIntegrationEventService;
+            //this.groupRepository = groupRepository;
+            //this.tenantRepository = tenantRepository;
+            //this.userRepository = userRepository;
         }
 
         public void Listen()
@@ -44,7 +49,7 @@ namespace SaaSEqt.IdentityAccess.Application
                     {
                         Console.WriteLine("To Do: TenantProvisionedEvent.");
                         TenantProvisioned evt = domainEvent as TenantProvisioned;
-                        var tenant = tenantRepository.Get(new TenantId(evt.TenantId));
+                        //var tenant = tenantRepository.Get(new TenantId(evt.TenantId));
 
                         TenantProvisionedIntegrationEvent tenantProvisionedEvent = new TenantProvisionedIntegrationEvent(
                             new TenantId(evt.TenantId),
@@ -56,7 +61,7 @@ namespace SaaSEqt.IdentityAccess.Application
                         tenantProvisionedEvent.Version = evt.Version;
 
                         //eventStore.Save(new List<IEvent> { tenantProvisionedEvent });
-                        _eventPublisher.Publish<TenantProvisionedIntegrationEvent>(tenantProvisionedEvent);
+                        _identityAccessIntegrationEventService.PublishThroughEventBusAsync(tenantProvisionedEvent);
                         //return;
                     }
 
@@ -70,7 +75,7 @@ namespace SaaSEqt.IdentityAccess.Application
 
                         UserRegisteredIntegrationEvent userRegisteredIntegrationEvent = new UserRegisteredIntegrationEvent(
                                 new TenantId(evt.TenantId),
-                                Guid.NewGuid(),
+                                evt.UserId,
                                 evt.Name,
                                 evt.AdministorName,
                                 evt.EmailAddress
@@ -79,7 +84,7 @@ namespace SaaSEqt.IdentityAccess.Application
                         userRegisteredIntegrationEvent.Version = evt.Version;
 
                         //eventStore.Save(new List<IEvent> { userRegisteredIntegrationEvent });
-                        _eventPublisher.Publish<UserRegisteredIntegrationEvent>(userRegisteredIntegrationEvent);
+                    _identityAccessIntegrationEventService.PublishThroughEventBusAsync(userRegisteredIntegrationEvent);
                         //return;
                     }
 
@@ -96,16 +101,16 @@ namespace SaaSEqt.IdentityAccess.Application
                     }
 
 
-                    else if (domainEvent is UserRegisteredIntegrationEvent)
+                    else if (domainEvent is UserRegistered)
                     {
                         Console.WriteLine("To Do: UserRegistered.");
 
-                        UserRegisteredIntegrationEvent evt = domainEvent as UserRegisteredIntegrationEvent;
+                        UserRegistered evt = domainEvent as UserRegistered;
                         TenantId tenantId = new TenantId(evt.TenantId);
 
                         UserRegisteredIntegrationEvent userRegisteredIntegrationEvent = new UserRegisteredIntegrationEvent(
                                 new TenantId(evt.TenantId),
-                                Guid.NewGuid(),
+                                evt.UserId,
                                 evt.Username,
                                 evt.Name,
                                 evt.EmailAddress
@@ -114,30 +119,30 @@ namespace SaaSEqt.IdentityAccess.Application
                         userRegisteredIntegrationEvent.Version = evt.Version;
 
                         //eventStore.Save(new List<IEvent> { userRegisteredIntegrationEvent });
-                        _eventPublisher.Publish<UserRegisteredIntegrationEvent>(userRegisteredIntegrationEvent);
+                    _identityAccessIntegrationEventService.PublishThroughEventBusAsync(userRegisteredIntegrationEvent);
                         //return;
                     }
 
-                    else if (domainEvent is UserEnablementChangedIntegrationEvent)
+                    else if (domainEvent is UserEnablementChanged)
                     {
                         Console.WriteLine("To Do: UserEnablementChanged.");
                         //return;
                     }
 
-                    else if (domainEvent is PersonNameChangedIntegrationEvent)
+                    else if (domainEvent is PersonNameChanged)
                     {
                         Console.WriteLine("To Do: PersonNameChanged.");
                         //return;
                     }
 
-                    else if (domainEvent is PersonContactInformationChangedIntegrationEvent)
+                    else if (domainEvent is PersonContactInformationChanged)
                     {
                         Console.WriteLine("To Do: PersonContactInformationChanged.");
                         //return;
                     }
 
 
-                    this.eventStore.Append(domainEvent);
+                    //this.eventStore.Append(domainEvent);
                 });
 
         }

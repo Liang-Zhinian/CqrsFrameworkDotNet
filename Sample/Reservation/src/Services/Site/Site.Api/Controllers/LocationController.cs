@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SaaSEqt.eShop.Site.Api.ViewModel;
 using Microsoft.AspNetCore.Authorization;
-using SaaSEqt.eShop.Site.Api.Services;
+using SaaSEqt.eShop.Site.Api.Application.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using SaaSEqt.eShop.Site.Api.Requests.Locations;

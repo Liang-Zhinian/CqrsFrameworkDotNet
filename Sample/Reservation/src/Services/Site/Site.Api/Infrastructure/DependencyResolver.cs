@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using CqrsFramework.Config;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Site.Api.Infrastructure
+namespace SaaSEqt.eShop.Site.Api.Infrastructure
 {
     public class DependencyResolver : IServiceLocator
     {

@@ -11,6 +11,7 @@ namespace SaaSEqt.IdentityAccess.Domain.Events.Identity.User
     {
         public UserRegistered(
                 TenantId tenantId,
+            Guid userId,
                 String username,
                 FullName name,
                 EmailAddress emailAddress)
@@ -18,6 +19,7 @@ namespace SaaSEqt.IdentityAccess.Domain.Events.Identity.User
             this.EmailAddress = emailAddress;
             this.Name = name;
             this.TenantId = tenantId.Id;
+            this.UserId = userId;
             this.Username = username;
 
             this.Version = 1;
@@ -26,6 +28,8 @@ namespace SaaSEqt.IdentityAccess.Domain.Events.Identity.User
 
         public int Version { get; set; }
         public DateTimeOffset TimeStamp { get; set; }
+
+        public Guid UserId { get; set; }
 
         public EmailAddress EmailAddress { get; private set; }
 

@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.eShopOnContainers.BuildingBlocks.EventBus.Events;
+using SaaSEqt.Infrastructure.EventBus.Events;
 using System.Data.Common;
 using System.Linq;
 using System.Threading.Tasks;
 using System;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace Microsoft.eShopOnContainers.BuildingBlocks.IntegrationEventLogEF.Services
+namespace SaaSEqt.Infrastructure.IntegrationEventLogEF.Services
 {
     public class IntegrationEventLogService : IIntegrationEventLogService
     {

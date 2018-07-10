@@ -11,11 +11,13 @@ namespace SaaSEqt.IdentityAccess.Domain.Events.Identity.User
     {
         public UserEnablementChanged(
                 TenantId tenantId,
+            Guid userId,
                 String username,
                 Enablement enablement)
         {
             this.Enablement = enablement;
             this.TenantId = tenantId.Id;
+            this.UserId = userId;
             this.Username = username;
 
             this.Version = 1;
@@ -24,6 +26,8 @@ namespace SaaSEqt.IdentityAccess.Domain.Events.Identity.User
 
         public int Version { get; set; }
         public DateTimeOffset TimeStamp { get; set; }
+
+        public Guid UserId { get; set; }
 
         public Enablement Enablement { get; private set; }
 

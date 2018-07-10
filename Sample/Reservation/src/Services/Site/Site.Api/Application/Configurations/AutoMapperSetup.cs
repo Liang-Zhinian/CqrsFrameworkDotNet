@@ -1,9 +1,9 @@
 ﻿using System;
 using AutoMapper;
-using SaaSEqt.eShop.Site.Api.AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
+using SaaSEqt.eShop.Site.Api.Application.AutoMapper;
 
-namespace SaaSEqt.eShop.Site.Api.Configurations
+namespace SaaSEqt.eShop.Site.Api.Application.Configurations
 {
     public static class AutoMapperSetup
     {

@@ -1,7 +1,7 @@
 ﻿using System;
-using IdentityAccess.Api.ViewModel;
+using SaaSEqt.IdentityAccess.Api.ViewModel;
 
-namespace IdentityAccess.Api.Services
+namespace SaaSEqt.IdentityAccess.Api.Services
 {
     public interface ITenantService
     {
