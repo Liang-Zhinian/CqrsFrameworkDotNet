@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Business.Contracts.Commands.Staffs
+namespace Business.Contracts.Commands.ServiceCategories
 {
     public class AddUnavailabilityCommand: ScheduleItemCommand
     {

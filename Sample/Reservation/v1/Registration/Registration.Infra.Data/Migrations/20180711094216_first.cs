@@ -30,6 +30,20 @@ namespace Registration.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "V_ScheduleType",
+                schema: "book2public",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false, defaultValue: 1),
+                    LastModified = table.Column<DateTime>(nullable: false),
+                    Name = table.Column<string>(type: "varchar(255)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_V_ScheduleType", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "V_Tenant",
                 schema: "book2public",
                 columns: table => new
@@ -103,6 +117,40 @@ namespace Registration.Infra.Data.Migrations
                         column: x => x.TenantId,
                         principalSchema: "book2public",
                         principalTable: "V_Tenant",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "V_Availability",
+                schema: "book2public",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
+                    BookableEndDateTime = table.Column<DateTime>(nullable: false),
+                    EndDateTime = table.Column<DateTime>(nullable: false),
+                    Friday = table.Column<bool>(nullable: false),
+                    LastModified = table.Column<DateTime>(nullable: false),
+                    LocationId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Monday = table.Column<bool>(nullable: false),
+                    Saturday = table.Column<bool>(nullable: false),
+                    ServiceItemId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    SiteId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    StaffId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    StartDateTime = table.Column<DateTime>(nullable: false),
+                    Sunday = table.Column<bool>(nullable: false),
+                    Thursday = table.Column<bool>(nullable: false),
+                    Tuesday = table.Column<bool>(nullable: false),
+                    Wednesday = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_V_Availability", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_V_Availability_V_Site_SiteId",
+                        column: x => x.SiteId,
+                        principalSchema: "book2public",
+                        principalTable: "V_Site",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -201,6 +249,40 @@ namespace Registration.Infra.Data.Migrations
                     table.PrimaryKey("PK_V_Staff", x => x.Id);
                     table.ForeignKey(
                         name: "FK_V_Staff_V_Site_SiteId",
+                        column: x => x.SiteId,
+                        principalSchema: "book2public",
+                        principalTable: "V_Site",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "V_Unavailability",
+                schema: "book2public",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Description = table.Column<string>(type: "varchar(2000)", nullable: true),
+                    EndDateTime = table.Column<DateTime>(nullable: false),
+                    Friday = table.Column<bool>(nullable: false),
+                    LastModified = table.Column<DateTime>(nullable: false),
+                    LocationId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Monday = table.Column<bool>(nullable: false),
+                    Saturday = table.Column<bool>(nullable: false),
+                    ServiceItemId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    SiteId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    StaffId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    StartDateTime = table.Column<DateTime>(nullable: false),
+                    Sunday = table.Column<bool>(nullable: false),
+                    Thursday = table.Column<bool>(nullable: false),
+                    Tuesday = table.Column<bool>(nullable: false),
+                    Wednesday = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_V_Unavailability", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_V_Unavailability_V_Site_SiteId",
                         column: x => x.SiteId,
                         principalSchema: "book2public",
                         principalTable: "V_Site",
@@ -344,6 +426,12 @@ namespace Registration.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_V_Availability_SiteId",
+                schema: "book2public",
+                table: "V_Availability",
+                column: "SiteId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_V_HomePageImage_CategoryId",
                 schema: "book2public",
                 table: "V_HomePageImage",
@@ -420,10 +508,20 @@ namespace Registration.Infra.Data.Migrations
                 schema: "book2public",
                 table: "V_StaffLoginLocation",
                 column: "StaffId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_V_Unavailability_SiteId",
+                schema: "book2public",
+                table: "V_Unavailability",
+                column: "SiteId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "V_Availability",
+                schema: "book2public");
+
             migrationBuilder.DropTable(
                 name: "V_HomePageImage",
                 schema: "book2public");
@@ -437,6 +535,10 @@ namespace Registration.Infra.Data.Migrations
                 schema: "book2public");
 
             migrationBuilder.DropTable(
+                name: "V_ScheduleType",
+                schema: "book2public");
+
+            migrationBuilder.DropTable(
                 name: "V_ServiceItem",
                 schema: "book2public");
 
@@ -446,6 +548,10 @@ namespace Registration.Infra.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "V_TimeZone",
+                schema: "book2public");
+
+            migrationBuilder.DropTable(
+                name: "V_Unavailability",
                 schema: "book2public");
 
             migrationBuilder.DropTable(

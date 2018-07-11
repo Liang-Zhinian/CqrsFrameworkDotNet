@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Business.Application.Interfaces;
+using Business.Contracts.Commands.ServiceCategories;
 using Business.Contracts.Events.Staffs;
 using Business.Domain.Entities;
 using Business.Domain.Entities.Schedules;
@@ -31,6 +33,14 @@ namespace Business.Application.Services
             _unavailabilityRepository = unavailabilityRepository;
         }
 
+
+
+        public IList<Availability> GetAvailabilitiesFor(Guid siteId, Guid serviceItemId)
+        {
+            return _availabilityRepository.Find(y => y.SiteId.Equals(siteId) &&
+                                                y.ServiceItemId.Equals(serviceItemId)).ToList();
+        }
+
         public async Task<Availability> AddAvailability(AddAvailabilityCommand addAvailabilityCommand)
         {
             Availability availability = new Availability(
@@ -48,6 +58,8 @@ namespace Business.Application.Services
                 addAvailabilityCommand.Friday,
                 addAvailabilityCommand.Saturday,
                 addAvailabilityCommand.BookableEndDateTime);
+
+            _availabilityRepository.Add(availability);
 
             await _businessIntegrationEventService.PublishThroughEventBusAsync(new AvailabilityAddedByStaffEvent(
                 availability.StaffId,
@@ -67,8 +79,7 @@ namespace Business.Application.Services
                 availability.BookableEndDateTime
             ));
 
-            _availabilityRepository.Add(availability);
-            _availabilityRepository.UnitOfWork.Commit();
+            //_availabilityRepository.UnitOfWork.Commit();
 
             return availability;
         }
@@ -91,6 +102,8 @@ namespace Business.Application.Services
                 addUnavailabilityCommand.Saturday,
                 addUnavailabilityCommand.Description);
 
+            _unavailabilityRepository.Add(unavailability);
+
             await _businessIntegrationEventService.PublishThroughEventBusAsync(new UnavailabilityAddedByStaffEvent(
                 unavailability.StaffId,
                 unavailability.SiteId,
@@ -109,8 +122,7 @@ namespace Business.Application.Services
                 unavailability.Description
             ));
 
-            _unavailabilityRepository.Add(unavailability);
-            _unavailabilityRepository.UnitOfWork.Commit();
+            //_unavailabilityRepository.UnitOfWork.Commit();
 
             return unavailability;
         }

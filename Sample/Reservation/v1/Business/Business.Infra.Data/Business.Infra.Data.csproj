@@ -71,6 +71,7 @@
     <Compile Remove="IntegrationEventMigrations\20170322145434_IntegrationEventInitial.cs" />
     <Compile Remove="IntegrationEventLogContextDesignFactory.cs" />
     <Compile Remove="Migrations\20180708122531_first.cs" />
+    <Compile Remove="Migrations\20180709150817_first.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Business.Domain\Business.Domain.csproj" />

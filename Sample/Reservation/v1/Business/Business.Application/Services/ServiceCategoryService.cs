@@ -1,21 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Business.Application.Interfaces;
 using Business.Application.ViewModels;
+using Business.Contracts.Commands.ServiceCategories;
+using Business.Contracts.Events.Schedules;
 using Business.Contracts.Events.ServiceCategory;
-using Business.Domain.Entities;
+using Business.Domain.Entities.Schedules;
 using Business.Domain.Entities.ServiceCategories;
 using Business.Domain.Repositories;
 using Business.Domain.Services;
-using CqrsFramework.Domain;
-using CqrsFramework.Events;
+using Infrastructure;
 
 namespace Business.Application.Services
 {
-    
+
     public class ServiceCategoryService : IServiceCategoryService
     {
         //private readonly ISession _session;
@@ -106,6 +106,93 @@ namespace Business.Application.Services
             serviceCategory.Id = domainServiceCategory.Id;
 
             return serviceCategory;
+        }
+
+        public async Task<Availability> AddAvailability(AddAvailabilityCommand addAvailabilityCommand)
+        {
+            ServiceItem serviceItem = GetExistingServiceItem(addAvailabilityCommand.SiteId, addAvailabilityCommand.ServiceItemId);
+
+            Availability availability = serviceItem.AddAvailability(
+                addAvailabilityCommand.StaffId,
+                addAvailabilityCommand.LocationId,
+                addAvailabilityCommand.StartDateTime,
+                addAvailabilityCommand.EndDateTime,
+                addAvailabilityCommand.Sunday,
+                addAvailabilityCommand.Monday,
+                addAvailabilityCommand.Tuesday,
+                addAvailabilityCommand.Wednesday,
+                addAvailabilityCommand.Thursday,
+                addAvailabilityCommand.Friday,
+                addAvailabilityCommand.Saturday,
+                addAvailabilityCommand.BookableEndDateTime);
+
+            await _businessIntegrationEventService.PublishThroughEventBusAsync(new AvailabilityCreatedEvent(
+                availability.StaffId,
+                availability.SiteId,
+                availability.StaffId,
+                availability.ServiceItemId,
+                availability.LocationId,
+                availability.StartDateTime,
+                availability.EndDateTime,
+                availability.Sunday,
+                availability.Monday,
+                availability.Tuesday,
+                availability.Wednesday,
+                availability.Thursday,
+                availability.Friday,
+                availability.Saturday,
+                availability.BookableEndDateTime
+            ));
+
+            return availability;
+        }
+
+        public async Task<Unavailability> AddUnavailability(AddUnavailabilityCommand addUnavailabilityCommand)
+        {
+            ServiceItem serviceItem = GetExistingServiceItem(addUnavailabilityCommand.SiteId, addUnavailabilityCommand.ServiceItemId);
+
+            Unavailability unavailability = serviceItem.AddUnavailability(
+                addUnavailabilityCommand.StaffId,
+                addUnavailabilityCommand.LocationId,
+                addUnavailabilityCommand.StartDateTime,
+                addUnavailabilityCommand.EndDateTime,
+                addUnavailabilityCommand.Sunday,
+                addUnavailabilityCommand.Monday,
+                addUnavailabilityCommand.Tuesday,
+                addUnavailabilityCommand.Wednesday,
+                addUnavailabilityCommand.Thursday,
+                addUnavailabilityCommand.Friday,
+                addUnavailabilityCommand.Saturday,
+                addUnavailabilityCommand.Description);
+
+            await _businessIntegrationEventService.PublishThroughEventBusAsync(new UnavailabilityCreatedEvent(
+                unavailability.StaffId,
+                unavailability.SiteId,
+                unavailability.StaffId,
+                unavailability.ServiceItemId,
+                unavailability.LocationId,
+                unavailability.StartDateTime,
+                unavailability.EndDateTime,
+                unavailability.Sunday,
+                unavailability.Monday,
+                unavailability.Tuesday,
+                unavailability.Wednesday,
+                unavailability.Thursday,
+                unavailability.Friday,
+                unavailability.Saturday,
+                unavailability.Description
+            ));
+
+            return unavailability;
+        }
+
+        private ServiceItem GetExistingServiceItem(Guid siteId, Guid serviceItemId){
+            var serviceItem = _serviceItemRepository.Find(y => y.SiteId.Equals(siteId) &&
+                                                          y.Id.Equals(serviceItemId)).First();
+
+            if (serviceItem == null) throw new EntityNotFoundException(serviceItemId, typeof(ServiceItem).FullName);
+
+            return serviceItem;
         }
     }
 }

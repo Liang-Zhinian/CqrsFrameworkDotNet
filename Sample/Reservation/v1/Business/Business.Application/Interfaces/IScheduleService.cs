@@ -8,7 +8,7 @@ namespace Business.Application.Interfaces
 {
     public interface IScheduleService
     {
-        Task<Availability> AddAvailability(AddAvailabilityCommand addAvailabilityCommand);
-        Task<Unavailability> AddUnavailability(AddUnavailabilityCommand addUnavailabilityCommand);
+        //Task<Availability> AddAvailability(AddAvailabilityCommand addAvailabilityCommand);
+        //Task<Unavailability> AddUnavailability(AddUnavailabilityCommand addUnavailabilityCommand);
     }
 }

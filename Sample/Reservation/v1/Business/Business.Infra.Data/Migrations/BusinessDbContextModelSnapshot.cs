@@ -212,8 +212,7 @@ namespace Business.Infra.Data.Migrations
             modelBuilder.Entity("Business.Domain.Entities.Schedule", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("DaysVisible");
 
@@ -223,12 +222,9 @@ namespace Business.Infra.Data.Migrations
 
                     b.Property<bool>("IsDefault");
 
-                    b.Property<Guid>("LayoutId")
-                        .HasColumnType("char(36)");
+                    b.Property<Guid>("LayoutId");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)");
+                    b.Property<string>("Name");
 
                     b.Property<DateTime>("StartDateTime");
 
@@ -244,8 +240,7 @@ namespace Business.Infra.Data.Migrations
             modelBuilder.Entity("Business.Domain.Entities.ScheduleLayout", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("TimeZoneId");
 
@@ -259,37 +254,77 @@ namespace Business.Infra.Data.Migrations
             modelBuilder.Entity("Business.Domain.Entities.ScheduleLayoutTimeSlot", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("AvailabilityCode");
 
                     b.Property<int>("DayOfWeek");
 
-                    b.Property<string>("EndLabel")
-                        .HasColumnType("varchar(255)");
+                    b.Property<string>("EndLabel");
 
-                    b.Property<string>("EndTime")
-                        .IsRequired()
-                        .HasColumnType("varchar(10)");
+                    b.Property<string>("EndTime");
 
                     b.Property<bool>("IsEnabled");
 
-                    b.Property<string>("Label")
-                        .HasColumnType("varchar(255)");
+                    b.Property<string>("Label");
 
-                    b.Property<Guid>("LayoutId")
-                        .HasColumnType("char(36)");
+                    b.Property<Guid>("LayoutId");
 
-                    b.Property<string>("StartTime")
-                        .IsRequired()
-                        .HasColumnType("varchar(10)");
+                    b.Property<string>("StartTime");
 
                     b.HasKey("Id");
 
                     b.HasIndex("LayoutId");
 
                     b.ToTable("ScheduleLayoutTimeSlot");
+                });
+
+            modelBuilder.Entity("Business.Domain.Entities.Schedules.Availability", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("BookableEndDateTime");
+
+                    b.Property<DateTime>("EndDateTime");
+
+                    b.Property<bool>("Friday");
+
+                    b.Property<Guid>("LocationId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<bool>("Monday");
+
+                    b.Property<bool>("Saturday");
+
+                    b.Property<Guid>("ServiceItemId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("SiteId");
+
+                    b.Property<Guid>("StaffId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("StartDateTime");
+
+                    b.Property<bool>("Sunday");
+
+                    b.Property<bool>("Thursday");
+
+                    b.Property<bool>("Tuesday");
+
+                    b.Property<bool>("Wednesday");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ServiceItemId");
+
+                    b.HasIndex("SiteId");
+
+                    b.HasIndex("StaffId");
+
+                    b.ToTable("Availability");
                 });
 
             modelBuilder.Entity("Business.Domain.Entities.Schedules.ScheduleType", b =>
@@ -306,6 +341,55 @@ namespace Business.Infra.Data.Migrations
                     b.ToTable("ScheduleType");
                 });
 
+            modelBuilder.Entity("Business.Domain.Entities.Schedules.Unavailability", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("varchar(2000)");
+
+                    b.Property<DateTime>("EndDateTime");
+
+                    b.Property<bool>("Friday");
+
+                    b.Property<Guid>("LocationId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<bool>("Monday");
+
+                    b.Property<bool>("Saturday");
+
+                    b.Property<Guid>("ServiceItemId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("SiteId");
+
+                    b.Property<Guid>("StaffId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("StartDateTime");
+
+                    b.Property<bool>("Sunday");
+
+                    b.Property<bool>("Thursday");
+
+                    b.Property<bool>("Tuesday");
+
+                    b.Property<bool>("Wednesday");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ServiceItemId");
+
+                    b.HasIndex("SiteId");
+
+                    b.HasIndex("StaffId");
+
+                    b.ToTable("Unavailability");
+                });
+
             modelBuilder.Entity("Business.Domain.Entities.ServiceCategories.IndustryStandardCategory", b =>
                 {
                     b.Property<int>("Id")
@@ -320,6 +404,28 @@ namespace Business.Infra.Data.Migrations
                     b.HasIndex("ParentCategoryId");
 
                     b.ToTable("IndustryStandardCategory");
+                });
+
+            modelBuilder.Entity("Business.Domain.Entities.ServiceCategories.Program", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("AvailabilityId");
+
+                    b.Property<int>("CancelOffset");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int?>("ScheduleTypeId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AvailabilityId");
+
+                    b.HasIndex("ScheduleTypeId");
+
+                    b.ToTable("Program");
                 });
 
             modelBuilder.Entity("Business.Domain.Entities.ServiceCategories.ServiceCategory", b =>
@@ -633,12 +739,59 @@ namespace Business.Infra.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("Business.Domain.Entities.Schedules.Availability", b =>
+                {
+                    b.HasOne("Business.Domain.Entities.ServiceCategories.ServiceItem")
+                        .WithMany("Availibilities")
+                        .HasForeignKey("ServiceItemId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Business.Domain.Entities.Site", "Site")
+                        .WithMany()
+                        .HasForeignKey("SiteId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Business.Domain.Entities.Staff")
+                        .WithMany("Availibilities")
+                        .HasForeignKey("StaffId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Business.Domain.Entities.Schedules.Unavailability", b =>
+                {
+                    b.HasOne("Business.Domain.Entities.ServiceCategories.ServiceItem")
+                        .WithMany("Unavailabilities")
+                        .HasForeignKey("ServiceItemId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Business.Domain.Entities.Site", "Site")
+                        .WithMany()
+                        .HasForeignKey("SiteId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Business.Domain.Entities.Staff")
+                        .WithMany("Unavailabilities")
+                        .HasForeignKey("StaffId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Business.Domain.Entities.ServiceCategories.IndustryStandardCategory", b =>
                 {
                     b.HasOne("Business.Domain.Entities.ServiceCategories.IndustryStandardCategory", "ParentCategory")
                         .WithMany()
                         .HasForeignKey("ParentCategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Business.Domain.Entities.ServiceCategories.Program", b =>
+                {
+                    b.HasOne("Business.Domain.Entities.Schedules.Availability")
+                        .WithMany("Programs")
+                        .HasForeignKey("AvailabilityId");
+
+                    b.HasOne("Business.Domain.Entities.Schedules.ScheduleType", "ScheduleType")
+                        .WithMany()
+                        .HasForeignKey("ScheduleTypeId");
                 });
 
             modelBuilder.Entity("Business.Domain.Entities.ServiceCategories.ServiceCategory", b =>

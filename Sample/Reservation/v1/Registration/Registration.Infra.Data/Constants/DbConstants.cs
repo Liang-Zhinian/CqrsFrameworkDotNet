@@ -54,13 +54,17 @@ namespace Registration.Infra.Data.Constants
         public static string ResourceStatusTable { get; set; }
         public static string ResourceTypeTable { get; set; }
 
-        public static string ScheduleTypeTable { get; set; }
         public static string ScheduleTable { get; set; }
         public static string ScheduleLayoutTable { get; set; }
         public static string ScheduleLayoutTimeSlotTable { get; set; }
 
         public static string ServiceItemTable { get; set; }
         public static string ServiceCategoryTable { get; set; }
+        public static string ProgramTable { get; set; }
+
+        public static string AvailabilityTable { get; set; }
+        public static string UnavailabilityTable { get; set; }
+        public static string ScheduleTypeTable { get; set; }
 
 
         static DbConstants()
@@ -90,13 +94,17 @@ namespace Registration.Infra.Data.Constants
             ResourceStatusTable = "V_ResourceStatus";
             ResourceTypeTable = "V_ResourceType";
 
-            ScheduleTypeTable = "V_ScheduleType";
             ScheduleTable = "V_Schedule";
             ScheduleLayoutTable = "V_ScheduleLayout";
             ScheduleLayoutTimeSlotTable = "V_ScheduleLayoutTimeSlot";
 
             ServiceItemTable = "V_ServiceItem";
             ServiceCategoryTable = "V_ServiceCategory";
+            ProgramTable = "V_Program";
+
+            ScheduleTypeTable = "V_ScheduleType";
+            AvailabilityTable = "V_Availability";
+            UnavailabilityTable = "V_Unavailability";
 
 
             var config = new ConfigurationBuilder()

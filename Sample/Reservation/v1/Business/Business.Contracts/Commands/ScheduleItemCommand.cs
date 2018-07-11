@@ -1,7 +1,7 @@
 ﻿using System;
 using CqrsFramework.Commands;
 
-namespace Business.Contracts.Events
+namespace Business.Contracts.Commands
 {
     public class ScheduleItemCommand
     {

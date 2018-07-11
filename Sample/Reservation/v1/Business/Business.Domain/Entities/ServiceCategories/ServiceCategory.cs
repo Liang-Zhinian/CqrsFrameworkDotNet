@@ -11,7 +11,7 @@ namespace Business.Domain.Entities.ServiceCategories
         public Guid Id { get; private set; }
         public string Name { get; private set; }
         public string Description { get; private set; }
-        public int CancelOffset { get; private set; }
+        public bool AllowOnlineScheduling { get; private set; }
 
         public int ScheduleTypeId { get; private set; }
         public virtual ScheduleType ScheduleType { get; private set; }
@@ -26,12 +26,12 @@ namespace Business.Domain.Entities.ServiceCategories
             Id = Guid.NewGuid();
         }
 
-        public ServiceCategory(Guid siteId, string name, string description, int cancelOffset, int scheduleType) : this()
+        public ServiceCategory(Guid siteId, string name, string description, bool allowOnlineScheduling, int scheduleType) : this()
         {
             SiteId = siteId;
             Name = name;
             Description = description;
-            CancelOffset = cancelOffset;
+            AllowOnlineScheduling = allowOnlineScheduling;
             ScheduleTypeId = scheduleType;
 
             //var serviceCategoryCreatedEvent = new ServiceCategoryCreatedEvent(Id,

@@ -2,21 +2,8 @@
   <PropertyGroup>
 <TargetFramework>netcoreapp2.0</TargetFramework>
 <RuntimeFrameworkVersion>2.0.0</RuntimeFrameworkVersion>
-<AssemblyName>Registration.Infra.Data</AssemblyName>
-<PackageId>Registration.Infra.Data</PackageId>
-<AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
-<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-<GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-<GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Repositories\" />
-    <Folder Include="Context\" />
-    <Folder Include="Mappings\" />
-    <Folder Include="Constants\" />
-    <Folder Include="Seeders\" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.0.3" />
@@ -37,60 +24,10 @@
   </ItemGroup>
   
   <ItemGroup>
-    <Compile Remove="Models\Common\Address.cs" />
-    <Compile Remove="Migrations\20180609100820_FirstMigration.cs" />
-    <Compile Remove="Migrations\20180609114123_FirstMigration.cs" />
-    <Compile Remove="Models\Region.cs" />
-    <Compile Remove="Program.cs" />
-    <Compile Remove="Migrations\20180610134536_FirstMigration.cs" />
-    <Compile Remove="Repositories\IReadModelFacade.cs" />
-    <Compile Remove="Migrations\20180610165411_FirstMigration.cs" />
-    <Compile Remove="Migrations\20180611145030_First.cs" />
-    <Compile Remove="Migrations\20180611145426_First.cs" />
-    <Compile Remove="Migrations\20180611175447_first.cs" />
-    <Compile Remove="Mappings\TenantAddressMap.cs" />
-    <Compile Remove="Mappings\LocationAddressMap.cs" />
-    <Compile Remove="Mappings\BrandingMap.cs" />
-    <Compile Remove="Migrations\20180615064044_first.cs" />
-    <Compile Remove="Mappings\StaffLoginCredentialMap.cs" />
-    <Compile Remove="Migrations\20180615064545_first.cs" />
-    <Compile Remove="Migrations\20180618130308_first.cs" />
-    <Compile Remove="Migrations\20180620130110_first.cs" />
-    <Compile Remove="Migrations\20180620143413_first.cs" />
-    <Compile Remove="Migrations\20180620145624_first.cs" />
-    <Compile Remove="Migrations\20180620150807_first.cs" />
-    <Compile Remove="Migrations\20180620151548_first.cs" />
-    <Compile Remove="Migrations\20180620152055_first.cs" />
-    <Compile Remove="Migrations\20180620152714_first.cs" />
-    <Compile Remove="Migrations\20180620152845_first.cs" />
-    <Compile Remove="Migrations\20180620153645_first.cs" />
-    <Compile Remove="Migrations\20180620154613_first.cs" />
-    <Compile Remove="Migrations\20180620155849_first.cs" />
-    <Compile Remove="Migrations\20180621092115_first.cs" />
-    <Compile Remove="Migrations\20180621092549_first.cs" />
-    <Compile Remove="Migrations\20180621093842_first.cs" />
-    <Compile Remove="Migrations\20180621095246_first.cs" />
-    <Compile Remove="Migrations\20180624064159_first.cs" />
-    <Compile Remove="Migrations\20180624064959_first.cs" />
-    <Compile Remove="Migrations\20180624114557_first.cs" />
-    <Compile Remove="Migrations\20180624115104_first.cs" />
-    <Compile Remove="Migrations\20180624120057_first.cs" />
-    <Compile Remove="Migrations\20180624120529_first.cs" />
-    <Compile Remove="Migrations\20180624121330_first.cs" />
-    <Compile Remove="Migrations\20180624121752_first.cs" />
-    <Compile Remove="Migrations\20180626035102_first.cs" />
-    <Compile Remove="Migrations\20180627070349_first.cs" />
-    <Compile Remove="Migrations\20180627070929_first.cs" />
-    <Compile Remove="Migrations\20180627071350_first.cs" />
-    <Compile Remove="Migrations\20180627071732_first.cs" />
-    <Compile Remove="Migrations\20180627071915_first.cs" />
-    <Compile Remove="Migrations\20180702083725_first.cs" />
-    <Compile Remove="Migrations\20180702084054_first.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Remove="appsettings.json" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Registration.Domain\Registration.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Migrations\20180711081446_first.cs" />
+    <Compile Remove="Migrations\20180711081919_first.cs" />
   </ItemGroup>
 </Project>

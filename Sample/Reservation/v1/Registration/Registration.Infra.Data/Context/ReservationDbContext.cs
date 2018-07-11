@@ -24,6 +24,10 @@ namespace Registration.Infra.Data.Context
 
         public DbSet<HomePageImage> HomePageImages { get; set; }
 
+        public DbSet<ScheduleType> ScheduleTypes { get; set; }
+        public DbSet<Availability> Availabilities { get; set; }
+        public DbSet<Unavailability> Unavailabilities { get; set; }
+
         public ReservationDbContext(DbContextOptions<ReservationDbContext> options) : base(options)
         {
         }
@@ -45,6 +49,9 @@ namespace Registration.Infra.Data.Context
             modelBuilder.ApplyConfiguration(new RegionMap());
             modelBuilder.ApplyConfiguration(new ServiceItemMap());
             modelBuilder.ApplyConfiguration(new ServiceCategoryMap());
+            modelBuilder.ApplyConfiguration(new ScheduleTypeMap());
+            modelBuilder.ApplyConfiguration(new AvailabilityMap());
+            modelBuilder.ApplyConfiguration(new UnavailabilityMap());
 
 
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())

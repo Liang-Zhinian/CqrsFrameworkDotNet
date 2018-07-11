@@ -18,6 +18,7 @@ namespace Registration.Domain.ReadModel
 
         public string Name { get; private set; }
 
+        public int ScheduleTypeId { get; private set; }
         public ScheduleType ScheduleType { get; private set; }
 
         public int CancelOffset { get; private set; }

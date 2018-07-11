@@ -21,6 +21,54 @@ namespace Registration.Infra.Data.Migrations
                 .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
                 .HasAnnotation("ProductVersion", "2.0.3-rtm-10026");
 
+            modelBuilder.Entity("Registration.Domain.ReadModel.Availability", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("BookableEndDateTime");
+
+                    b.Property<DateTime>("EndDateTime");
+
+                    b.Property<bool>("Friday");
+
+                    b.Property<DateTime>("LastModified");
+
+                    b.Property<Guid>("LocationId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<bool>("Monday");
+
+                    b.Property<bool>("Saturday");
+
+                    b.Property<Guid>("ServiceItemId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("SiteId")
+                        .HasColumnName("SiteId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("StaffId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("StartDateTime");
+
+                    b.Property<bool>("Sunday");
+
+                    b.Property<bool>("Thursday");
+
+                    b.Property<bool>("Tuesday");
+
+                    b.Property<bool>("Wednesday");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SiteId");
+
+                    b.ToTable("V_Availability");
+                });
+
             modelBuilder.Entity("Registration.Domain.ReadModel.HomePageImage", b =>
                 {
                     b.Property<int>("Id")
@@ -83,6 +131,22 @@ namespace Registration.Infra.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("V_Region");
+                });
+
+            modelBuilder.Entity("Registration.Domain.ReadModel.ScheduleType", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasDefaultValue(1);
+
+                    b.Property<DateTime>("LastModified");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("V_ScheduleType");
                 });
 
             modelBuilder.Entity("Registration.Domain.ReadModel.Security.Location", b =>
@@ -479,6 +543,63 @@ namespace Registration.Infra.Data.Migrations
                     b.ToTable("V_TimeZone");
                 });
 
+            modelBuilder.Entity("Registration.Domain.ReadModel.Unavailability", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("varchar(2000)");
+
+                    b.Property<DateTime>("EndDateTime");
+
+                    b.Property<bool>("Friday");
+
+                    b.Property<DateTime>("LastModified");
+
+                    b.Property<Guid>("LocationId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<bool>("Monday");
+
+                    b.Property<bool>("Saturday");
+
+                    b.Property<Guid>("ServiceItemId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("SiteId")
+                        .HasColumnName("SiteId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("StaffId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("StartDateTime");
+
+                    b.Property<bool>("Sunday");
+
+                    b.Property<bool>("Thursday");
+
+                    b.Property<bool>("Tuesday");
+
+                    b.Property<bool>("Wednesday");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SiteId");
+
+                    b.ToTable("V_Unavailability");
+                });
+
+            modelBuilder.Entity("Registration.Domain.ReadModel.Availability", b =>
+                {
+                    b.HasOne("Registration.Domain.ReadModel.Security.Site", "Site")
+                        .WithMany()
+                        .HasForeignKey("SiteId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Registration.Domain.ReadModel.HomePageImage", b =>
                 {
                     b.HasOne("Registration.Domain.ReadModel.ServiceCategory", "Category")
@@ -562,6 +683,14 @@ namespace Registration.Infra.Data.Migrations
                         .HasForeignKey("ServiceCategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
 
+                    b.HasOne("Registration.Domain.ReadModel.Security.Site", "Site")
+                        .WithMany()
+                        .HasForeignKey("SiteId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Registration.Domain.ReadModel.Unavailability", b =>
+                {
                     b.HasOne("Registration.Domain.ReadModel.Security.Site", "Site")
                         .WithMany()
                         .HasForeignKey("SiteId")

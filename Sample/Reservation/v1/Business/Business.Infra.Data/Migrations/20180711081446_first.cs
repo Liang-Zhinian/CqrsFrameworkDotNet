@@ -246,7 +246,7 @@ namespace Business.Infra.Data.Migrations
                 schema: "book2business",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Id = table.Column<Guid>(nullable: false),
                     TimeZoneId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -372,13 +372,13 @@ namespace Business.Infra.Data.Migrations
                 schema: "book2business",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Id = table.Column<Guid>(nullable: false),
                     DaysVisible = table.Column<int>(nullable: false),
                     EndDateTime = table.Column<DateTime>(nullable: false),
                     IsCalendarSubscriptionAllowed = table.Column<bool>(nullable: false),
                     IsDefault = table.Column<bool>(nullable: false),
-                    LayoutId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    Name = table.Column<string>(type: "varchar(255)", nullable: false),
+                    LayoutId = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
                     StartDateTime = table.Column<DateTime>(nullable: false),
                     WeekdayStart = table.Column<int>(nullable: false)
                 },
@@ -399,15 +399,15 @@ namespace Business.Infra.Data.Migrations
                 schema: "book2business",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Id = table.Column<Guid>(nullable: false),
                     AvailabilityCode = table.Column<int>(nullable: false),
                     DayOfWeek = table.Column<int>(nullable: false),
-                    EndLabel = table.Column<string>(type: "varchar(255)", nullable: true),
-                    EndTime = table.Column<string>(type: "varchar(10)", nullable: false),
+                    EndLabel = table.Column<string>(nullable: true),
+                    EndTime = table.Column<string>(nullable: true),
                     IsEnabled = table.Column<bool>(nullable: false),
-                    Label = table.Column<string>(type: "varchar(255)", nullable: true),
-                    LayoutId = table.Column<Guid>(type: "char(36)", nullable: false),
-                    StartTime = table.Column<string>(type: "varchar(10)", nullable: false)
+                    Label = table.Column<string>(nullable: true),
+                    LayoutId = table.Column<Guid>(nullable: false),
+                    StartTime = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -417,6 +417,100 @@ namespace Business.Infra.Data.Migrations
                         column: x => x.LayoutId,
                         principalSchema: "book2business",
                         principalTable: "ScheduleLayout",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Availability",
+                schema: "book2business",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
+                    BookableEndDateTime = table.Column<DateTime>(nullable: false),
+                    EndDateTime = table.Column<DateTime>(nullable: false),
+                    Friday = table.Column<bool>(nullable: false),
+                    LocationId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Monday = table.Column<bool>(nullable: false),
+                    Saturday = table.Column<bool>(nullable: false),
+                    ServiceItemId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    SiteId = table.Column<Guid>(nullable: false),
+                    StaffId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    StartDateTime = table.Column<DateTime>(nullable: false),
+                    Sunday = table.Column<bool>(nullable: false),
+                    Thursday = table.Column<bool>(nullable: false),
+                    Tuesday = table.Column<bool>(nullable: false),
+                    Wednesday = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Availability", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Availability_ServiceItem_ServiceItemId",
+                        column: x => x.ServiceItemId,
+                        principalSchema: "book2business",
+                        principalTable: "ServiceItem",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Availability_Site_SiteId",
+                        column: x => x.SiteId,
+                        principalSchema: "book2business",
+                        principalTable: "Site",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Availability_Staff_StaffId",
+                        column: x => x.StaffId,
+                        principalSchema: "book2business",
+                        principalTable: "Staff",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Unavailability",
+                schema: "book2business",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Description = table.Column<string>(type: "varchar(2000)", nullable: true),
+                    EndDateTime = table.Column<DateTime>(nullable: false),
+                    Friday = table.Column<bool>(nullable: false),
+                    LocationId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    Monday = table.Column<bool>(nullable: false),
+                    Saturday = table.Column<bool>(nullable: false),
+                    ServiceItemId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    SiteId = table.Column<Guid>(nullable: false),
+                    StaffId = table.Column<Guid>(type: "char(36)", nullable: false),
+                    StartDateTime = table.Column<DateTime>(nullable: false),
+                    Sunday = table.Column<bool>(nullable: false),
+                    Thursday = table.Column<bool>(nullable: false),
+                    Tuesday = table.Column<bool>(nullable: false),
+                    Wednesday = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Unavailability", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Unavailability_ServiceItem_ServiceItemId",
+                        column: x => x.ServiceItemId,
+                        principalSchema: "book2business",
+                        principalTable: "ServiceItem",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Unavailability_Site_SiteId",
+                        column: x => x.SiteId,
+                        principalSchema: "book2business",
+                        principalTable: "Site",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Unavailability_Staff_StaffId",
+                        column: x => x.StaffId,
+                        principalSchema: "book2business",
+                        principalTable: "Staff",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -461,6 +555,36 @@ namespace Business.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Program",
+                schema: "book2business",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    AvailabilityId = table.Column<Guid>(nullable: true),
+                    CancelOffset = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    ScheduleTypeId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Program", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Program_Availability_AvailabilityId",
+                        column: x => x.AvailabilityId,
+                        principalSchema: "book2business",
+                        principalTable: "Availability",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Program_ScheduleType_ScheduleTypeId",
+                        column: x => x.ScheduleTypeId,
+                        principalSchema: "book2business",
+                        principalTable: "ScheduleType",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ResourceLocation",
                 schema: "book2business",
                 columns: table => new
@@ -487,6 +611,24 @@ namespace Business.Infra.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Availability_ServiceItemId",
+                schema: "book2business",
+                table: "Availability",
+                column: "ServiceItemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Availability_SiteId",
+                schema: "book2business",
+                table: "Availability",
+                column: "SiteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Availability_StaffId",
+                schema: "book2business",
+                table: "Availability",
+                column: "StaffId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Branding_SiteId",
@@ -518,6 +660,18 @@ namespace Business.Infra.Data.Migrations
                 schema: "book2business",
                 table: "LocationImage",
                 column: "SiteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Program_AvailabilityId",
+                schema: "book2business",
+                table: "Program",
+                column: "AvailabilityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Program_ScheduleTypeId",
+                schema: "book2business",
+                table: "Program",
+                column: "ScheduleTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Resource_ResourceTypeId",
@@ -620,6 +774,24 @@ namespace Business.Infra.Data.Migrations
                 schema: "book2business",
                 table: "StaffLoginLocation",
                 column: "StaffId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Unavailability_ServiceItemId",
+                schema: "book2business",
+                table: "Unavailability",
+                column: "ServiceItemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Unavailability_SiteId",
+                schema: "book2business",
+                table: "Unavailability",
+                column: "SiteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Unavailability_StaffId",
+                schema: "book2business",
+                table: "Unavailability",
+                column: "StaffId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -630,6 +802,10 @@ namespace Business.Infra.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "LocationImage",
+                schema: "book2business");
+
+            migrationBuilder.DropTable(
+                name: "Program",
                 schema: "book2business");
 
             migrationBuilder.DropTable(
@@ -645,11 +821,15 @@ namespace Business.Infra.Data.Migrations
                 schema: "book2business");
 
             migrationBuilder.DropTable(
-                name: "ServiceItem",
+                name: "StaffLoginLocation",
                 schema: "book2business");
 
             migrationBuilder.DropTable(
-                name: "StaffLoginLocation",
+                name: "Unavailability",
+                schema: "book2business");
+
+            migrationBuilder.DropTable(
+                name: "Availability",
                 schema: "book2business");
 
             migrationBuilder.DropTable(
@@ -657,15 +837,11 @@ namespace Business.Infra.Data.Migrations
                 schema: "book2business");
 
             migrationBuilder.DropTable(
-                name: "IndustryStandardCategory",
-                schema: "book2business");
-
-            migrationBuilder.DropTable(
-                name: "ServiceCategory",
-                schema: "book2business");
-
-            migrationBuilder.DropTable(
                 name: "Location",
+                schema: "book2business");
+
+            migrationBuilder.DropTable(
+                name: "ServiceItem",
                 schema: "book2business");
 
             migrationBuilder.DropTable(
@@ -685,15 +861,23 @@ namespace Business.Infra.Data.Migrations
                 schema: "book2business");
 
             migrationBuilder.DropTable(
+                name: "IndustryStandardCategory",
+                schema: "book2business");
+
+            migrationBuilder.DropTable(
+                name: "ServiceCategory",
+                schema: "book2business");
+
+            migrationBuilder.DropTable(
+                name: "ScheduleLayout",
+                schema: "book2business");
+
+            migrationBuilder.DropTable(
                 name: "ScheduleType",
                 schema: "book2business");
 
             migrationBuilder.DropTable(
                 name: "Site",
-                schema: "book2business");
-
-            migrationBuilder.DropTable(
-                name: "ScheduleLayout",
                 schema: "book2business");
 
             migrationBuilder.DropTable(

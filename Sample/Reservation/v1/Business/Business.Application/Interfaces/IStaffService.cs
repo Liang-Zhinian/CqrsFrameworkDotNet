@@ -7,7 +7,7 @@ namespace Business.Application.Interfaces
 {
     public interface IStaffService
     {
-        Task<Staff> AddAvailability(AddAvailabilityCommand addAvailabilityCommand);
-        Task<Staff> AddUnavailability(AddUnavailabilityCommand addUnavailabilityCommand);
+        //Task<Staff> AddAvailability(AddAvailabilityCommand addAvailabilityCommand);
+        //Task<Staff> AddUnavailability(AddUnavailabilityCommand addUnavailabilityCommand);
     }
 }

@@ -78,6 +78,8 @@ namespace Business.Infra.Data.Context
             modelBuilder.ApplyConfiguration(new ServiceCategoryMap());
 
             modelBuilder.ApplyConfiguration(new ScheduleTypeMap());
+            modelBuilder.ApplyConfiguration(new AvailabilityMap());
+            modelBuilder.ApplyConfiguration(new UnavailabilityMap());
 
             //foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             //{
