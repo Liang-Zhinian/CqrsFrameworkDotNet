@@ -2,7 +2,7 @@
 
 namespace Registration.Contracts.Events.Appointments
 {
-    public class AppointmentUpdated : BaseEvent, IEvent
+    public class AppointmentUpdatedEvent : BaseEvent, IEvent
     {
         //public IEnumerable<SeatQuantity> Seats { get; set; }
     }

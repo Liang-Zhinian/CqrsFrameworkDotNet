@@ -46,10 +46,13 @@ namespace Registration.Application.Services
 
             return new ServiceItem(
                 serviceCategory.SiteId,
-                serviceCategory.Id,
                 serviceItem.Name,
                 serviceItem.Description,
-                serviceItem.DefaultTimeLength
+                serviceItem.DefaultTimeLength,
+                serviceItem.Price,
+                serviceItem.AllowOnlineScheduling,
+                serviceCategory.Id,
+                serviceItem.IndustryStandardCategoryId
             );
         }
 

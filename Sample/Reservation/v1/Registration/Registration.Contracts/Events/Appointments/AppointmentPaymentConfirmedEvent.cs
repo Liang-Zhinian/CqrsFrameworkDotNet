@@ -2,7 +2,7 @@
 
 namespace Registration.Contracts.Events.Appointments
 {
-    public class AppointmentPaymentConfirmed : BaseEvent, IEvent
+    public class AppointmentPaymentConfirmedEvent : BaseEvent, IEvent
     {
     }
 }

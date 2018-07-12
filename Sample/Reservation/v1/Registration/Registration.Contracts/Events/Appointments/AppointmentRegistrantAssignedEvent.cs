@@ -2,7 +2,7 @@
 
 namespace Registration.Contracts.Events.Appointments
 {
-    public class AppointmentRegistrantAssigned : BaseEvent, IEvent
+    public class AppointmentRegistrantAssignedEvent : BaseEvent, IEvent
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

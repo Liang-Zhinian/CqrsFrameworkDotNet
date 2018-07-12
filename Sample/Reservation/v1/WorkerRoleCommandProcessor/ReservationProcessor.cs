@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Registration.Domain.CommandHandlers.Appointments;
 using Registration.Domain.EventHandlers;
 using Registration.Domain.Repositories.Interfaces;
 using Registration.Infra.Data.Context;
@@ -77,12 +78,19 @@ namespace WorkerRoleCommandProcessor
                 .AddScoped<ILocationRepository, LocationRepository>()
                 .AddScoped<IServiceCategoryRepository, ServiceCategoryRepository>()
                 .AddScoped<IServiceItemRepository, ServiceItemRepository>()
-                .AddScoped<TenantEventHandler>(y => new TenantEventHandler(y.GetService<ITenantRepository>()))
-                .AddScoped<SiteEventHandler>(y => new SiteEventHandler(y.GetService<ISiteRepository>()))
-                .AddScoped<LocationEventHandler>(y => new LocationEventHandler(y.GetService<ILocationRepository>()))
-                .AddScoped<ServiceCategoryEventHandler>(y => new ServiceCategoryEventHandler(y.GetService<IServiceCategoryRepository>(),
-                                                                                             y.GetService<IServiceItemRepository>()))
+                .AddScoped<IAvailabilityRepository, AvailabilityRepository>()
+                .AddScoped<IUnavailabilityRepository, UnavailabilityRepository>()
+
+                // event handlers
+                .AddScoped<TenantEventHandler>()
+                .AddScoped<SiteEventHandler>()
+                .AddScoped<LocationEventHandler>()
+                .AddScoped<ServiceCategoryEventHandler>()
                 .AddSingleton(new TestEventHandler())
+
+                // command handlers
+                .AddScoped<AppointmentCommandHandler>()
+
 
                 .AddRabbitMQEventBusSetup(configuration);
 
@@ -100,8 +108,11 @@ namespace WorkerRoleCommandProcessor
         {
             var registrar = new RouteRegistrar(provider);
             registrar.RegisterInAssemblyOf(typeof(LocationEventHandler));
-            registrar.RegisterInAssemblyOf(typeof(Business.Domain.EventHandlers.TenantDomainEventHandler));
+            //registrar.RegisterInAssemblyOf(typeof(Business.Domain.EventHandlers.TenantDomainEventHandler));
 
+
+            // register command handlers
+            registrar.RegisterInAssemblyOf(typeof(AppointmentCommandHandler));
         }
     }
 

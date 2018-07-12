@@ -1,13 +1,15 @@
 ﻿using System;
 namespace Registration.Contracts
 {
-    public class AppointmentServiceItem
+    public class AppointmentServiceItem: OrderLine
     {
         public AppointmentServiceItem()
         {
         }
 
         public Guid Id { get; private set; }
+
+        public Guid ServiceItemId { get; private set; }
 
         public string Name { get; private set; }
 

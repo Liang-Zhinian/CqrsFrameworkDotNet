@@ -8,6 +8,7 @@
     <Folder Include="Commands\" />
     <Folder Include="Events\" />
     <Folder Include="Events\Appointments\" />
+    <Folder Include="Commands\Appointments\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="7.6.103" />

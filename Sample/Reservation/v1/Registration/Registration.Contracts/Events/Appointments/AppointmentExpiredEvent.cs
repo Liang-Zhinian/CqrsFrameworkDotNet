@@ -2,8 +2,7 @@
 
 namespace Registration.Contracts.Events.Appointments
 {
-
-    public class AppointmentConfirmed: BaseEvent, IEvent
+    public class AppointmentExpiredEvent: BaseEvent, IEvent
     {
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CqrsFramework.Domain;
+using Registration.Contracts;
 using Registration.Contracts.Events.Appointments;
 
 namespace Registration.Domain.AggregatesModel.AppointmentAggregate
@@ -9,13 +10,18 @@ namespace Registration.Domain.AggregatesModel.AppointmentAggregate
     {
         #region ctor
 
-        public Appointment()
+        protected Appointment()
         {
         }
 
-        public Appointment(Guid siteId,
+        protected Appointment(Guid id)
+        {
+            this.Id = id;
+        }
+
+        public Appointment(Guid id,
+                            Guid siteId,
                            Guid staffId,
-                           Guid serviceItemId,
                            Guid locationId,
                            DateTime startDateTime,
                            DateTime endDateTime,
@@ -24,12 +30,12 @@ namespace Registration.Domain.AggregatesModel.AppointmentAggregate
                            int duration,
                            bool staffRequested,
                           string notes,
-                           IList<Guid> resources)
+                           IList<AppointmentServiceItem> appointmentServiceItems,
+                           IList<AppointmentResource> resources)
+            : this(id)
         {
-            this.Id = Guid.NewGuid();
             this.SiteId = siteId;
             this.StaffId = staffId;
-            this.ServiceItemId = serviceItemId;
             this.LocationId = locationId;
             this.StartDateTime = startDateTime;
             this.EndDateTime = endDateTime;
@@ -38,29 +44,41 @@ namespace Registration.Domain.AggregatesModel.AppointmentAggregate
             this.Duration = duration;
             this.StaffRequested = staffRequested;
             this.Notes = notes;
+            this.AppointmentServiceItems = appointmentServiceItems;
             this.Resources = resources;
 
-            ApplyChange(new AppointmentPlaced
-            {
-                Id = this.Id,
-                SiteId = siteId,
-                LocationId = locationId,
-                StaffId = staffId,
-                ServiceItemId = serviceItemId,
-                StartDateTime = startDateTime,
-                EndDateTime = endDateTime,
-                ClientId = clientId,
-                GenderPreference = genderPreference,
-                Duration = duration,
-                StaffRequested = staffRequested,
-                Notes = notes,
-                Resources = resources
-            });
+            ApplyChange(new AppointmentPlacedEvent(
+                this.Id,
+                siteId,
+                locationId,
+                staffId,
+                startDateTime,
+                endDateTime,
+                clientId,
+                genderPreference,
+                duration,
+                staffRequested,
+                notes,
+                appointmentServiceItems,
+                resources
+            ));
+        }
+
+        public static Appointment NewDraft()
+        {
+            var appointment = new Appointment();
+            appointment._isDraft = true;
+            return appointment;
         }
 
         #endregion
 
         #region properties
+
+        // Draft orders have this set to true. Currently we don't check anywhere the draft status of an Order, but we could do it if needed
+        private bool _isDraft;
+
+        public DateTime OrderDate { get; private set; }
 
         /// Start time
         public DateTime StartDateTime { get; private set; }
@@ -72,7 +90,7 @@ namespace Registration.Domain.AggregatesModel.AppointmentAggregate
         public Guid StaffId { get; private set; }
 
         /// The session type of the schedule
-        public Guid ServiceItemId { get; private set; }
+        //public Guid ServiceItemId { get; private set; }
 
         /// The location of the schedule
         public Guid LocationId { get; private set; }
@@ -86,10 +104,11 @@ namespace Registration.Domain.AggregatesModel.AppointmentAggregate
         public int Duration { get; private set; }
 
         /// If a user has Complementary and Alternative Medicine features enabled. This will allow a Provider ID to be assigned to an appointment.
-        public string ProviderID { get; private set; }
+        //public string ProviderID { get; private set; }
 
         /// The status of this appointment.
-        public string Status { get; private set; }
+        private int _appointmentStatusId;
+        public AppointmentStatus AppointmentStatus { get; private set; }
 
         /// The appointment notes.
         public string Notes { get; private set; }
@@ -107,8 +126,10 @@ namespace Registration.Domain.AggregatesModel.AppointmentAggregate
         /// The service on the client's account that is paying for this appointment.
         //public PurchasedService ClientService { get; private set; }
 
+        public ICollection<AppointmentServiceItem> AppointmentServiceItems { get; private set; }
+
         /// The resources this appointment is using.
-        public ICollection<Guid> Resources { get; private set; }
+        public ICollection<AppointmentResource> Resources { get; private set; }
 
         #endregion
 

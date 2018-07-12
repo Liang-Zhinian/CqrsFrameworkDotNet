@@ -1,4 +1,6 @@
 ﻿using System;
+using Business.Domain.Entities.ServiceCategories;
+
 namespace Business.Domain.Entities.Orders
 {
     public class ClassDescription
@@ -25,7 +27,7 @@ namespace Business.Domain.Entities.Orders
 
         public DateTime LastUpdated { get; private set; }
 
-        public Program Program { get; private set; }
+        //public Program Program { get; private set; }
 
         public ServiceItem ServiceItem { get; private set; }
 

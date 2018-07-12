@@ -2,7 +2,7 @@
 
 namespace Registration.Contracts.Events.Appointments
 {
-    public class AppointmentTotalsCalculated : BaseEvent, IEvent
+    public class AppointmentTotalsCalculatedEvent : BaseEvent, IEvent
     {
         public decimal Total { get; set; }
 

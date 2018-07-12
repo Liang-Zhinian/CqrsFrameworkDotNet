@@ -144,10 +144,16 @@ namespace Registration.Api
             //app.UseMvc();
 
             ConfigureEventBus(app);
+            ConfigureCommandBus(app);
 
         }
 
         private void ConfigureEventBus(IApplicationBuilder app)
+        {
+            var services = app.ApplicationServices;
+        }
+
+        private void ConfigureCommandBus(IApplicationBuilder app)
         {
             var services = app.ApplicationServices;
         }
