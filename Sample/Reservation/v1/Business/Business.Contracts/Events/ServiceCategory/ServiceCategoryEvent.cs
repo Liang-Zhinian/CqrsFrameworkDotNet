@@ -5,7 +5,7 @@ namespace Business.Contracts.Events.ServiceCategory
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public int CancelOffset { get; set; }
+        public bool AllowOnlineScheduling { get; set; }
         public int ScheduleTypeValue { get; set; }
     }
 }

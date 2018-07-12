@@ -9,9 +9,9 @@ namespace Registration.Domain.ReadModel
         {
         }
 
-        protected ScheduleItem(Guid siteId, Guid staffId, Guid serviceItemId, Guid locationId, DateTime startTime, DateTime endTime, bool Sunday, bool Monday, bool Tuesday, bool Wednesday, bool Thursday, bool Friday, bool Saturday)
+        protected ScheduleItem(Guid id, Guid siteId, Guid staffId, Guid serviceItemId, Guid locationId, DateTime startTime, DateTime endTime, bool Sunday, bool Monday, bool Tuesday, bool Wednesday, bool Thursday, bool Friday, bool Saturday)
         {
-            this.Id = Guid.NewGuid();
+            this.Id = id;
             this.SiteId = siteId;
             this.StaffId = staffId;
             this.ServiceItemId = serviceItemId;

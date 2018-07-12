@@ -25,9 +25,13 @@ namespace CqrsFramework.EventSourcing
         void ConfigureEventEntry(EntityTypeBuilder<Event> builder)
         {
             
-            builder.HasKey(x => new { x.AggregateId, x.AggregateType, x.Version });
+            builder.HasKey(x => x.Id /*new { x.AggregateId, x.AggregateType, x.Version }*/);
             builder.ToTable("Events");
 
+            builder.Property(e => e.Id)
+                   .IsRequired()
+                   .ValueGeneratedOnAdd();
+            
             builder.Property(e => e.AggregateId)
                    .IsRequired();
 
@@ -52,6 +56,7 @@ namespace CqrsFramework.EventSourcing
 
     public class Event
     {
+        public Guid Id { get; set; }
         public Guid AggregateId { get; set; }
         public string AggregateType { get; set; }
         public int Version { get; set; }

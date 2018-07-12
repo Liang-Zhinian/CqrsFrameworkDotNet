@@ -29,5 +29,6 @@
   <ItemGroup>
     <Compile Remove="Migrations\20180711081446_first.cs" />
     <Compile Remove="Migrations\20180711081919_first.cs" />
+    <Compile Remove="Migrations\20180711094216_first.cs" />
   </ItemGroup>
 </Project>

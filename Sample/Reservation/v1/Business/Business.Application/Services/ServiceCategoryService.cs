@@ -58,15 +58,16 @@ namespace Business.Application.Services
             _serviceItemRepository.Add(domainservice);
 
             var serviceItemCreatedEvent = new ServiceItemCreatedEvent(
-                                                                        domainservice.SiteId,
-                                                                      domainservice.Id,
-                                                                        domainservice.Name,
-                                                                      domainservice.Description,
-                                                                      domainservice.DefaultTimeLength,
-                                                                      domainservice.Price,
-                                                                      domainservice.ServiceCategoryId,
-                                                                      domainservice.IndustryStandardCategoryId
-                                                                     );
+                domainservice.SiteId,
+                domainservice.Id,
+                domainservice.Name,
+                domainservice.Description,
+                domainservice.DefaultTimeLength,
+                domainservice.Price,
+                domainservice.AllowOnlineScheduling,
+                domainservice.ServiceCategoryId,
+                domainservice.IndustryStandardCategoryId
+            );
             
             await _businessIntegrationEventService.PublishThroughEventBusAsync(serviceItemCreatedEvent);
 
@@ -83,7 +84,7 @@ namespace Business.Application.Services
                 serviceCategory.SiteId,
                 serviceCategory.Name,
                 serviceCategory.Description,
-                serviceCategory.CancelOffset,
+                serviceCategory.AllowOnlineScheduling,
                 serviceCategory.ScheduleTypeId
             );
 
@@ -97,7 +98,7 @@ namespace Business.Application.Services
                                                                                 domainServiceCategory.Id,
                                                                               domainServiceCategory.Name,
                                                                               domainServiceCategory.Description,
-                                                                              domainServiceCategory.CancelOffset,
+                                                                                domainServiceCategory.AllowOnlineScheduling,
                                                                               domainServiceCategory.ScheduleTypeId
                                                                              );
 

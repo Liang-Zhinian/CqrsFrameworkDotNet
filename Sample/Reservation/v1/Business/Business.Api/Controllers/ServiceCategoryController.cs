@@ -86,5 +86,23 @@ namespace Business.Api.Controllers
 
             return CreatedAtAction(nameof(AddAvailability), new { id = result.Id }, null);
         }
+
+        [HttpPost]
+        //[Authorize(Policy = "CanWriteTenantData")]
+        [Route("AddUnavailability")]
+        [ProducesResponseType((int)HttpStatusCode.Created)]
+        public async Task<IActionResult> AddUnavailability([FromBody]
+                                                         AddUnavailabilityCommand command
+                                  )
+        {
+            if (!ModelState.IsValid)
+            {
+                return (IActionResult)BadRequest();
+            }
+
+            var result = await _serviceCategoryService.AddUnavailability(command);
+
+            return CreatedAtAction(nameof(AddUnavailability), new { id = result.Id }, null);
+        }
     }
 }

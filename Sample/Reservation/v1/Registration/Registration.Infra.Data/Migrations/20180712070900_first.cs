@@ -13,6 +13,29 @@ namespace Registration.Infra.Data.Migrations
                 name: "book2public");
 
             migrationBuilder.CreateTable(
+                name: "IndustryStandardCategory",
+                schema: "book2public",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    LastModified = table.Column<DateTime>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    ParentCategoryId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IndustryStandardCategory", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_IndustryStandardCategory_IndustryStandardCategory_ParentCategoryId",
+                        column: x => x.ParentCategoryId,
+                        principalSchema: "book2public",
+                        principalTable: "IndustryStandardCategory",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "V_Region",
                 schema: "book2public",
                 columns: table => new
@@ -196,7 +219,7 @@ namespace Registration.Infra.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
-                    CancelOffset = table.Column<int>(nullable: false),
+                    AllowOnlineScheduling = table.Column<bool>(nullable: false),
                     Description = table.Column<string>(type: "varchar(2000)", nullable: false),
                     LastModified = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(type: "varchar(255)", nullable: false),
@@ -361,16 +384,26 @@ namespace Registration.Infra.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false),
+                    AllowOnlineScheduling = table.Column<bool>(nullable: false),
                     DefaultTimeLength = table.Column<int>(nullable: false),
                     Description = table.Column<string>(type: "varchar(2000)", nullable: false),
+                    IndustryStandardCategoryId = table.Column<int>(nullable: false),
                     LastModified = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(type: "varchar(255)", nullable: false),
+                    Price = table.Column<double>(nullable: false),
                     ServiceCategoryId = table.Column<Guid>(type: "char(36)", nullable: false),
                     SiteId = table.Column<Guid>(type: "char(36)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_V_ServiceItem", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_V_ServiceItem_IndustryStandardCategory_IndustryStandardCategoryId",
+                        column: x => x.IndustryStandardCategoryId,
+                        principalSchema: "book2public",
+                        principalTable: "IndustryStandardCategory",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_V_ServiceItem_V_ServiceCategory_ServiceCategoryId",
                         column: x => x.ServiceCategoryId,
@@ -426,6 +459,12 @@ namespace Registration.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_IndustryStandardCategory_ParentCategoryId",
+                schema: "book2public",
+                table: "IndustryStandardCategory",
+                column: "ParentCategoryId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_V_Availability_SiteId",
                 schema: "book2public",
                 table: "V_Availability",
@@ -466,6 +505,12 @@ namespace Registration.Infra.Data.Migrations
                 schema: "book2public",
                 table: "V_ServiceCategory",
                 column: "SiteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_V_ServiceItem_IndustryStandardCategoryId",
+                schema: "book2public",
+                table: "V_ServiceItem",
+                column: "IndustryStandardCategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_V_ServiceItem_ServiceCategoryId",
@@ -552,6 +597,10 @@ namespace Registration.Infra.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "V_Unavailability",
+                schema: "book2public");
+
+            migrationBuilder.DropTable(
+                name: "IndustryStandardCategory",
                 schema: "book2public");
 
             migrationBuilder.DropTable(

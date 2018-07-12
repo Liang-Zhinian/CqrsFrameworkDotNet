@@ -83,7 +83,7 @@ namespace Business.Application.Services.Queries
                 Name = categoriy.Name,
                 Description = categoriy.Description,
                 ScheduleTypeId = categoriy.ScheduleTypeId,
-                CancelOffset = categoriy.CancelOffset
+                AllowOnlineScheduling = categoriy.AllowOnlineScheduling
             };
         }
 

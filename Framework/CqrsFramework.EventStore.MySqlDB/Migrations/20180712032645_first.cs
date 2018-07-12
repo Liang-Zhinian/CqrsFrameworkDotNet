@@ -12,18 +12,19 @@ namespace CqrsFramework.EventStore.MySqlDB.Migrations
                 name: "Events",
                 columns: table => new
                 {
+                    Id = table.Column<Guid>(nullable: false),
                     AggregateId = table.Column<Guid>(nullable: false),
-                    AggregateType = table.Column<string>(nullable: false),
-                    Version = table.Column<int>(nullable: false),
+                    AggregateType = table.Column<string>(nullable: true),
                     CorrelationId = table.Column<string>(nullable: true),
                     EventType = table.Column<string>(nullable: false),
                     Payload = table.Column<string>(nullable: false),
                     State = table.Column<int>(nullable: false),
-                    TimeStamp = table.Column<DateTimeOffset>(nullable: false)
+                    TimeStamp = table.Column<DateTimeOffset>(nullable: false),
+                    Version = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Events", x => new { x.AggregateId, x.AggregateType, x.Version });
+                    table.PrimaryKey("PK_Events", x => x.Id);
                 });
         }
 

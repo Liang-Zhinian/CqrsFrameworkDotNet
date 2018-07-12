@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Registration.Domain.ReadModel
+namespace Registration.Domain.SeedWork
 {
     public abstract class Enumeration : IComparable
     {

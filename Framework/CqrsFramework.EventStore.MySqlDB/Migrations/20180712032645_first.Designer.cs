@@ -11,7 +11,7 @@ using System;
 namespace CqrsFramework.EventStore.MySqlDB.Migrations
 {
     [DbContext(typeof(EventStoreDbContext))]
-    [Migration("20180709150631_first")]
+    [Migration("20180712032645_first")]
     partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,11 +23,12 @@ namespace CqrsFramework.EventStore.MySqlDB.Migrations
 
             modelBuilder.Entity("CqrsFramework.EventSourcing.Event", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
                     b.Property<Guid>("AggregateId");
 
                     b.Property<string>("AggregateType");
-
-                    b.Property<int>("Version");
 
                     b.Property<string>("CorrelationId");
 
@@ -41,7 +42,9 @@ namespace CqrsFramework.EventStore.MySqlDB.Migrations
 
                     b.Property<DateTimeOffset>("TimeStamp");
 
-                    b.HasKey("AggregateId", "AggregateType", "Version");
+                    b.Property<int>("Version");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Events");
                 });

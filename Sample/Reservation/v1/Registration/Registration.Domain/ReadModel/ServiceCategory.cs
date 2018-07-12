@@ -12,23 +12,27 @@ namespace Registration.Domain.ReadModel
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public int CancelOffset { get; set; }
+        public bool AllowOnlineScheduling { get; set; }
         public int ScheduleTypeId { get; set; }
         public Guid SiteId { get; private set; }
         public virtual Site Site { get; set; }
 
+        private ServiceCategory()
+        {
+
+        }
 
         public ServiceCategory(Guid id,
                                string name, 
                                string description, 
-                               int cancelOffset, 
+                               bool allowOnlineScheduling, 
                                int scheduleType,
                               Guid siteId)
         {
             Id = id;
             Name = name;
             Description = description;
-            CancelOffset = cancelOffset;
+            AllowOnlineScheduling = allowOnlineScheduling;
             ScheduleTypeId = scheduleType;
             SiteId = siteId;
         }

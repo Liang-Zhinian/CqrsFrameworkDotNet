@@ -5,12 +5,12 @@ namespace Business.Contracts.Events.ServiceCategory
 {
     public class ServiceCategoryCreatedEvent :ServiceCategoryEvent, IEvent
     {
-        public ServiceCategoryCreatedEvent(Guid siteId, Guid id, string name, string description, int cancelOffset, int scheduleTypeValue)
+        public ServiceCategoryCreatedEvent(Guid siteId, Guid id, string name, string description, bool allowOnlineScheduling, int scheduleTypeValue)
         {
             Id = id;
             Name = name;
             Description = description;
-            CancelOffset = cancelOffset;
+            AllowOnlineScheduling = allowOnlineScheduling;
             ScheduleTypeValue = scheduleTypeValue;
             SiteId = siteId;
             Version = 1;

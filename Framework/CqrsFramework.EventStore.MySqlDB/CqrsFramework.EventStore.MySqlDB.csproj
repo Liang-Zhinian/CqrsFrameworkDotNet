@@ -14,4 +14,7 @@
     <ProjectReference Include="..\CqrsFramework\CqrsFramework.csproj" />
     <ProjectReference Include="..\CqrsFramework.EventStore.EF\CqrsFramework.EventSourcing.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Migrations\20180709150631_first.cs" />
+  </ItemGroup>
 </Project>

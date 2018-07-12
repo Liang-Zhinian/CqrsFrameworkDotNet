@@ -3,7 +3,7 @@ using System;
 
 namespace Registration.Contracts.Events
 {
-    public class BaseEvent : IEvent
+    public class BaseEvent
     {
         /// <summary>
         /// The ID of the Aggregate being affected by this event
@@ -19,6 +19,5 @@ namespace Registration.Contracts.Events
         /// The UTC time when this event occurred.
         /// </summary>
         public DateTimeOffset TimeStamp { get; set; }
-        public string MessageType { get; set; }
     }
 }

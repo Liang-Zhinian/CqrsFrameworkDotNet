@@ -22,11 +22,12 @@ namespace CqrsFramework.EventStore.MySqlDB.Migrations
 
             modelBuilder.Entity("CqrsFramework.EventSourcing.Event", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
                     b.Property<Guid>("AggregateId");
 
                     b.Property<string>("AggregateType");
-
-                    b.Property<int>("Version");
 
                     b.Property<string>("CorrelationId");
 
@@ -40,7 +41,9 @@ namespace CqrsFramework.EventStore.MySqlDB.Migrations
 
                     b.Property<DateTimeOffset>("TimeStamp");
 
-                    b.HasKey("AggregateId", "AggregateType", "Version");
+                    b.Property<int>("Version");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Events");
                 });

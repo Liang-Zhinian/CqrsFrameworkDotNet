@@ -63,7 +63,7 @@ namespace Business.Domain.Entities.ServiceCategories
 
         public double Price { get; private set; }
 
-        public bool AllowOnline { get; private set; } // or Show in Consumer Mode?
+        public bool AllowOnlineScheduling { get; private set; } // or Show in Consumer Mode?
 
         //public double TaxRate { get; private set; }
 

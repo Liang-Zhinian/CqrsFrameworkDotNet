@@ -7,11 +7,17 @@
   <ItemGroup>
     <Folder Include="Commands\" />
     <Folder Include="Events\" />
+    <Folder Include="Events\Appointments\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="7.6.103" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\..\Framework\CqrsFramework\CqrsFramework.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Events\Appointments\AppointmentAggregate\Appointment.cs" />
+    <Compile Remove="Events\Appointments\OrderPartiallyReserved.cs" />
+    <Compile Remove="Events\Appointments\OrderPlaced.cs" />
   </ItemGroup>
 </Project>

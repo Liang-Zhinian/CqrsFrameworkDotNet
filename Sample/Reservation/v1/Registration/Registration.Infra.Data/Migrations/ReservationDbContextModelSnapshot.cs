@@ -109,6 +109,24 @@ namespace Registration.Infra.Data.Migrations
                     b.ToTable("V_HomePageImage");
                 });
 
+            modelBuilder.Entity("Registration.Domain.ReadModel.IndustryStandardCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("LastModified");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("ParentCategoryId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentCategoryId");
+
+                    b.ToTable("IndustryStandardCategory");
+                });
+
             modelBuilder.Entity("Registration.Domain.ReadModel.Region", b =>
                 {
                     b.Property<int>("Id")
@@ -464,7 +482,7 @@ namespace Registration.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<int>("CancelOffset");
+                    b.Property<bool>("AllowOnlineScheduling");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -495,17 +513,23 @@ namespace Registration.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<bool>("AllowOnlineScheduling");
+
                     b.Property<int>("DefaultTimeLength");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("varchar(2000)");
 
+                    b.Property<int>("IndustryStandardCategoryId");
+
                     b.Property<DateTime>("LastModified");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
+
+                    b.Property<double>("Price");
 
                     b.Property<Guid>("ServiceCategoryId")
                         .HasColumnType("char(36)");
@@ -515,6 +539,8 @@ namespace Registration.Infra.Data.Migrations
                         .HasColumnType("char(36)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IndustryStandardCategoryId");
 
                     b.HasIndex("ServiceCategoryId");
 
@@ -613,6 +639,14 @@ namespace Registration.Infra.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("Registration.Domain.ReadModel.IndustryStandardCategory", b =>
+                {
+                    b.HasOne("Registration.Domain.ReadModel.IndustryStandardCategory", "ParentCategory")
+                        .WithMany()
+                        .HasForeignKey("ParentCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Registration.Domain.ReadModel.Security.Location", b =>
                 {
                     b.HasOne("Registration.Domain.ReadModel.Security.Site", "Site")
@@ -678,6 +712,11 @@ namespace Registration.Infra.Data.Migrations
 
             modelBuilder.Entity("Registration.Domain.ReadModel.ServiceItem", b =>
                 {
+                    b.HasOne("Registration.Domain.ReadModel.IndustryStandardCategory", "IndustryStandardCategory")
+                        .WithMany()
+                        .HasForeignKey("IndustryStandardCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("Registration.Domain.ReadModel.ServiceCategory", "ServiceCategory")
                         .WithMany()
                         .HasForeignKey("ServiceCategoryId")

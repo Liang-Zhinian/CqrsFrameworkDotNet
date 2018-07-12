@@ -3,13 +3,14 @@ using Business.Domain.Entities.ServiceCategories;
 
 namespace Business.Domain.Entities
 {
-    public class ScheduleItem
+    public abstract class ScheduleItem
     {
         protected ScheduleItem()
         {
         }
 
-        protected ScheduleItem(Guid siteId, Guid staffId, Guid serviceItemId, Guid locationId, DateTime startTime, DateTime endTime, bool Sunday, bool Monday, bool Tuesday, bool Wednesday, bool Thursday, bool Friday, bool Saturday)
+        protected ScheduleItem(Guid siteId, Guid staffId, Guid serviceItemId, Guid locationId, DateTime startTime, DateTime endTime
+                               /*, bool Sunday, bool Monday, bool Tuesday, bool Wednesday, bool Thursday, bool Friday, bool Saturday*/)
         {
             this.Id = Guid.NewGuid();
             this.SiteId = siteId;
@@ -18,13 +19,13 @@ namespace Business.Domain.Entities
             this.LocationId = locationId;
             this.StartDateTime = startTime;
             this.EndDateTime = endTime;
-            this.Sunday = Sunday;
-            this.Monday = Monday;
-            this.Tuesday = Tuesday;
-            this.Wednesday = Wednesday;
-            this.Thursday = Thursday;
-            this.Friday = Friday;
-            this.Saturday = Saturday;
+            //this.Sunday = Sunday;
+            //this.Monday = Monday;
+            //this.Tuesday = Tuesday;
+            //this.Wednesday = Wednesday;
+            //this.Thursday = Thursday;
+            //this.Friday = Friday;
+            //this.Saturday = Saturday;
         }
 
         /// The unique ID
@@ -51,12 +52,12 @@ namespace Business.Domain.Entities
         public Guid SiteId { get; private set; }
         public virtual Site Site { get; private set; }
 
-        public bool Sunday { get; private set; }
-        public bool Monday { get; private set; }
-        public bool Tuesday { get; private set; }
-        public bool Wednesday { get; private set; }
-        public bool Thursday { get; private set; }
-        public bool Friday { get; private set; }
-        public bool Saturday { get; private set; }
+        //public bool Sunday { get; private set; }
+        //public bool Monday { get; private set; }
+        //public bool Tuesday { get; private set; }
+        //public bool Wednesday { get; private set; }
+        //public bool Thursday { get; private set; }
+        //public bool Friday { get; private set; }
+        //public bool Saturday { get; private set; }
     }
 }

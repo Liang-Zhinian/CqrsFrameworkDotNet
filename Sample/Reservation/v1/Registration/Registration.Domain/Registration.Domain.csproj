@@ -23,4 +23,15 @@
     <ProjectReference Include="..\..\..\..\..\Framework\CqrsFramework.Extensions\CqrsFramework.Extensions.csproj" />
     <ProjectReference Include="..\..\..\..\SaaSEqt\SaaSEqt.IdentityAccess.Contracts\SaaSEqt.IdentityAccess.Contracts.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AggregatesModel\" />
+    <Folder Include="AggregatesModel\AppointmentAggregate\" />
+    <Folder Include="AggregatesModel\ClassAggregate\" />
+    <Folder Include="SeedWork\" />
+    <Folder Include="Exceptions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="WriteModel\Orders\Appointment.cs" />
+    <Compile Remove="ReadModel\Enumeration.cs" />
+  </ItemGroup>
 </Project>

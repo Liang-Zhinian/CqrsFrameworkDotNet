@@ -10,7 +10,7 @@ namespace Business.Application.ViewModels
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public int CancelOffset { get; set; }
+        public bool AllowOnlineScheduling { get; set; }
         public int ScheduleTypeId { get; set; }
         public Guid SiteId { get; set; }
     }
