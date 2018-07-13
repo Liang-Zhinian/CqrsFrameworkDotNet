@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MySql.Data.EntityFrameworkCore.Extensions;
 using SaaSEqt.Common.Domain.Model;
-using SaaSEqt.IdentityAccess.Domain.Entities;
+using SaaSEqt.IdentityAccess.Domain.Identity.Entities;
 
 namespace SaaSEqt.IdentityAccess.Infra.Data.Mappings
 {

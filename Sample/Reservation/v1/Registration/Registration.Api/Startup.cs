@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using CqrsFramework.EventSourcing;
 using Infrastructure.IoC;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +19,8 @@ using Newtonsoft.Json.Serialization;
 using Registration.Api.Configurations;
 using Registration.Api.Infrastructure.AutofacModules;
 using Registration.Api.Infrastructure.Filters;
+using Registration.Contracts.Commands.Appointments;
+using Registration.Domain.CommandHandlers.Appointments;
 using Registration.Infra.Data.Context;
 using SaaSEqt.Infrastructure.HealthChecks.MySQL;
 
@@ -60,6 +65,7 @@ namespace Registration.Api
                     minutes = minutesParsed;
                 }
                 checks.AddMySQLCheck("book2publicdb", Configuration["ConnectionString"], TimeSpan.FromMinutes(minutes));
+                checks.AddMySQLCheck("book2businessdb", Configuration["EventStoreConnectionString"], TimeSpan.FromMinutes(minutes));
                 checks.AddUrlCheck("http://localhost:15672/", TimeSpan.FromMinutes(minutes));
 
             });
@@ -80,6 +86,19 @@ namespace Registration.Api
                 //Check Client vs. Server evaluation: https://docs.microsoft.com/en-us/ef/core/querying/client-eval
             }, ServiceLifetime.Scoped);
 
+
+            services.AddDbContext<EventStoreDbContext>(options =>
+            {
+                options.UseMySql(Configuration["EventStoreConnectionString"],
+                                 mySqlOptionsAction: sqlOptions =>
+                                 {
+                                     sqlOptions.MigrationsAssembly(typeof(Startup).GetTypeInfo().Assembly.GetName().Name);
+                                     //sqlOptions.EnableRetryOnFailure(maxRetryCount: 10, maxRetryDelay: TimeSpan.FromSeconds(30), errorNumbersToAdd: null);
+                                 });
+
+                options.ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryClientEvaluationWarning));
+            }, ServiceLifetime.Scoped);
+
             services.AddSwaggerSupport();
 
             services.AddCors(options =>
@@ -90,6 +109,9 @@ namespace Registration.Api
                     .AllowAnyHeader()
                     .AllowCredentials());
             });
+
+            services.AddScoped<IMediator, Mediator>();
+            services.AddMediatorHandlersSetup(typeof(AppointmentCommandHandler).GetTypeInfo().Assembly);
 
             services.AddAutoMapperSetup();
 
@@ -102,8 +124,8 @@ namespace Registration.Api
             var container = new ContainerBuilder();
             container.Populate(services);
 
-            container.RegisterModule(new ApplicationModule());
             container.RegisterModule(new MediatorModule());
+            container.RegisterModule(new ApplicationModule());
             return new AutofacServiceProvider(container.Build());
         }
 

@@ -73,7 +73,7 @@ namespace Infrastructure.IoC
                 return new RabbitMQBus(rabbitMQPersistentConnection, logger, iLifetimeScope, "book2_event_bus", "fanout", subscriptionClientName, false, retryCount);
             });
 
-            services.AddSingleton<ICommandSender>(y => y.GetService<RabbitMQBus>());
+            //services.AddSingleton<ICommandSender>(y => y.GetService<RabbitMQBus>());
             services.AddSingleton<IEventPublisher>(y => y.GetService<RabbitMQBus>());
             services.AddSingleton<IHandlerRegistrar>(y => y.GetService<RabbitMQBus>());
 

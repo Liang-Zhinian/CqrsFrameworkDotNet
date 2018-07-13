@@ -3,8 +3,8 @@ namespace SaaSEqt.IdentityAccess
 {
 	using System;
 
-	using SaaSEqt.IdentityAccess.Domain.Entities;
-    using SaaSEqt.IdentityAccess.Domain.Services;
+	using SaaSEqt.IdentityAccess.Domain.Identity.Entities;
+    using SaaSEqt.IdentityAccess.Domain.Identity.Services;
 
 	/// <summary>
 	/// Holds static references to domain services

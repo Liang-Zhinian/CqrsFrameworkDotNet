@@ -58,6 +58,8 @@ namespace CqrsFramework.EventStore.MySqlDB
                 _eventStoreContext.Events.Add(eventEntity);
 
                 await _publisher.Publish(@event, cancellationToken);
+                //eventEntity.Version++;
+                eventEntity.State = EventStateEnum.Published;
 
                 //eventEntity.State = EventStateEnum.Published;
                 //eventEntity.Version++;

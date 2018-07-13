@@ -4,10 +4,10 @@ using CqrsFramework.Events;
 using SaaSEqt.Common.Domain.Model;
 using SaaSEqt.IdentityAccess.Contracts.IntegrationEvents.Tenant;
 using SaaSEqt.IdentityAccess.Contracts.IntegrationEvents.User;
-using SaaSEqt.IdentityAccess.Domain.Entities;
-using SaaSEqt.IdentityAccess.Domain.Events.Identity.Tenant;
-using SaaSEqt.IdentityAccess.Domain.Events.Identity.User;
-using SaaSEqt.IdentityAccess.Domain.Repositories;
+using SaaSEqt.IdentityAccess.Domain.Identity.Entities;
+using SaaSEqt.IdentityAccess.Domain.Identity.Events.Tenant;
+using SaaSEqt.IdentityAccess.Domain.Identity.Events.User;
+using SaaSEqt.IdentityAccess.Domain.Identity.Repositories;
 
 namespace SaaSEqt.IdentityAccess.Application
 {

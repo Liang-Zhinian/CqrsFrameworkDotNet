@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Linq;
-using DomainModels = SaaSEqt.IdentityAccess.Domain.Entities;
-using SaaSEqt.IdentityAccess.Domain.Repositories;
+using SaaSEqt.IdentityAccess.Domain.Identity.Entities;
+using SaaSEqt.IdentityAccess.Domain.Identity.Repositories;
 using SaaSEqt.IdentityAccess.Infra.Data.Context;
 //using ReadModels = SaaSEqt.IdentityAccess.Infra.Data.Models;
 
 namespace SaaSEqt.IdentityAccess.Infra.Data.Repositories
 {
-    public class TenantRepository : DomainRepository<DomainModels.Tenant>, ITenantRepository
+    public class TenantRepository : DomainRepository<Tenant>, ITenantRepository
     {
         public TenantRepository(IdentityAccessDbContext context):base(context){}
 
-        public void Add(DomainModels.Tenant tenant)
+        public void Add(Tenant tenant)
         {
             //ReadModels.Tenant t = new ReadModels.Tenant();
             //t.Id = Guid.Parse(tenant.TenantId.Id);
@@ -22,7 +22,7 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Repositories
             //base.SaveChanges();
         }
 
-        public DomainModels.Tenant Get(DomainModels.TenantId tenantId)
+        public Tenant Get(TenantId tenantId)
         {
             var tenant = this.Find(Guid.Parse(tenantId.Id));
             return tenant;
@@ -34,7 +34,7 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Repositories
             //);
         }
 
-        public DomainModels.Tenant GetByName(string name)
+        public Tenant GetByName(string name)
         {
             var tenant = this.Find(_=>_.Name.Equals(name)).First();
             return tenant;
@@ -46,18 +46,18 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Repositories
             //);
         }
 
-        public DomainModels.TenantId GetNextIdentity()
+        public TenantId GetNextIdentity()
         {
-            return new DomainModels.TenantId(Guid.NewGuid().ToString());
+            return new TenantId(Guid.NewGuid().ToString());
         }
 
-        public void Register(DomainModels.Tenant tenant)
+        public void Register(Tenant tenant)
         {
             base.Add(tenant);
             //base.SaveChanges();
         }
 
-        public void Remove(DomainModels.Tenant tenant)
+        public void Remove(Tenant tenant)
         {
             //var t = this.Find(Guid.Parse(tenant.TenantId.Id));
             //tenant.Deactivate();

@@ -3,9 +3,12 @@
 	using System;
 
 	using SaaSEqt.IdentityAccess.Application.Commands;
-    using SaaSEqt.IdentityAccess.Domain.Entities;
-    using SaaSEqt.IdentityAccess.Domain.Services;
-    using SaaSEqt.IdentityAccess.Domain.Repositories;
+    using SaaSEqt.IdentityAccess.Domain.Access.Entities;
+    using SaaSEqt.IdentityAccess.Domain.Access.Services;
+    using SaaSEqt.IdentityAccess.Domain.Access.Repositories;
+    using SaaSEqt.IdentityAccess.Domain.Identity.Entities;
+    using SaaSEqt.IdentityAccess.Domain.Identity.Services;
+    using SaaSEqt.IdentityAccess.Domain.Identity.Repositories;
     using SaaSEqt.Common.Domain.Model;
 
     public sealed class AccessApplicationService

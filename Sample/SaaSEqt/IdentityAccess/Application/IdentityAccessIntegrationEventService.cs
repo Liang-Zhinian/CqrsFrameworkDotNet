@@ -27,11 +27,14 @@ namespace SaaSEqt.IdentityAccess.Application
             _eventLogService = _integrationEventLogServiceFactory(_context.Database.GetDbConnection());
         }
 
-        public async Task PublishThroughEventBusAsync(IEvent evt)
+        public Task PublishThroughEventBusAsync(IEvent evt)
         {
-            await _eventLogService.SaveEventAsync(evt, _context.Database.CurrentTransaction.GetDbTransaction());
-            await _eventBus.Publish(evt);
-            await _eventLogService.MarkEventAsPublishedAsync(evt);
+            Task[] tasks = new Task[3];
+            tasks[0] = _eventLogService.SaveEventAsync(evt, _context.Database.CurrentTransaction.GetDbTransaction());
+            tasks[1] = _eventBus.Publish(evt);
+            tasks[2] = _eventLogService.MarkEventAsPublishedAsync(evt);
+
+            return Task.WhenAll(tasks);
         }
     }
 }

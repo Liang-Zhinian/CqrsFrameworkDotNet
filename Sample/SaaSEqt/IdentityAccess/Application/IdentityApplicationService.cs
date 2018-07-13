@@ -3,9 +3,9 @@
 	using System;
 
     using SaaSEqt.IdentityAccess.Application.Commands;
-    using SaaSEqt.IdentityAccess.Domain.Entities;
-    using SaaSEqt.IdentityAccess.Domain.Services;
-    using SaaSEqt.IdentityAccess.Domain.Repositories;
+    using SaaSEqt.IdentityAccess.Domain.Identity.Entities;
+    using SaaSEqt.IdentityAccess.Domain.Identity.Services;
+    using SaaSEqt.IdentityAccess.Domain.Identity.Repositories;
     using SaaSEqt.Common.Domain.Model;
     using System.Threading.Tasks;
 

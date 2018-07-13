@@ -65,6 +65,9 @@ namespace SaaSEqt.Common.Domain.Model
                         }
                     }
                 }
+                catch(Exception ex){
+                    throw ex;
+                }
                 finally
                 {
                     this.publishing = false;

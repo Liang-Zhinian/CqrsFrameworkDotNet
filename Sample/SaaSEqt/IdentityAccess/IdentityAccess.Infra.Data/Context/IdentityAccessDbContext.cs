@@ -2,7 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using SaaSEqt.IdentityAccess.Infra.Data.Mappings;
 using System.ComponentModel.DataAnnotations;
-using SaaSEqt.IdentityAccess.Domain.Entities;
+using SaaSEqt.IdentityAccess.Domain.Access.Entities;
+using SaaSEqt.IdentityAccess.Domain.Identity.Entities;
 using SaaSEqt.IdentityAccess.Infra.Data.Mappings.Constants;
 
 namespace SaaSEqt.IdentityAccess.Infra.Data.Context

@@ -3,7 +3,7 @@ namespace SaaSEqt.IdentityAccess.Contracts.IntegrationEvents.User
 {
     using System;
     using CqrsFramework.Events;
-    using SaaSEqt.IdentityAccess.Domain.Entities;
+    using SaaSEqt.IdentityAccess.Domain.Identity.Entities;
 
     public class PersonContactInformationChangedIntegrationEvent : IEvent
     {

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using CqrsFramework.Commands;
+using MediatR;
 
 namespace Registration.Contracts.Commands.Appointments
 {
-    public class MakeAnAppointmentCommand : BaseCommand, ICommand
+    public class MakeAnAppointmentCommand : BaseCommand, ICommand, IRequest<bool>
     {
         public MakeAnAppointmentCommand()
         {

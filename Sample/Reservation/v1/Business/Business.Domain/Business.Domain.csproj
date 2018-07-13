@@ -24,14 +24,22 @@
     <ProjectReference Include="..\..\..\..\..\Framework\CqrsFramework.Extensions\CqrsFramework.Extensions.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Repositories\" />
-    <Folder Include="Bus\" />
-    <Folder Include="Services\" />
-    <Folder Include="Entities\ServiceCategories\" />
-    <Folder Include="Entities\Schedules\" />
     <Folder Include="Exceptions\" />
-    <Folder Include="UoW\" />
-    <Folder Include="Entities\Orders\" />
+    <Folder Include="Identity\" />
+    <Folder Include="Catalog\" />
+    <Folder Include="Identity\Entities\" />
+    <Folder Include="Identity\Repositories\" />
+    <Folder Include="Identity\Services\" />
+    <Folder Include="Catalog\Repositories\" />
+    <Folder Include="Catalog\Services\" />
+    <Folder Include="Catalog\Entities\" />
+    <Folder Include="Ordering\" />
+    <Folder Include="Ordering\Appointments\" />
+    <Folder Include="Ordering\Classes\" />
+    <Folder Include="Scheduling\" />
+    <Folder Include="Scheduling\Entities\" />
+    <Folder Include="SeedWork\" />
+    <Folder Include="ValueObjects\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\Resource\Resource.cs" />
@@ -51,5 +59,8 @@
     <Compile Remove="Repositories\Interfaces\IServiceCategoryRepository.cs" />
     <Compile Remove="Bus\BusEventPublisher.cs" />
     <Compile Remove="EventHandlers\TenantDomainEventHandler.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Repositories\.DS_Store" />
   </ItemGroup>
 </Project>

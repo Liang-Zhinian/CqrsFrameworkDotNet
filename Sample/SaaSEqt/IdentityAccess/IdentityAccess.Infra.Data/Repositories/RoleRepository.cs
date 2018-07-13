@@ -1,5 +1,6 @@
-﻿using DomainModels = SaaSEqt.IdentityAccess.Domain.Entities;
-using SaaSEqt.IdentityAccess.Domain.Repositories;
+﻿using SaaSEqt.IdentityAccess.Domain.Access.Entities;
+using SaaSEqt.IdentityAccess.Domain.Identity.Entities;
+using SaaSEqt.IdentityAccess.Domain.Access.Repositories;
 using SaaSEqt.IdentityAccess.Infra.Data.Context;
 //using ReadModels = SaaSEqt.IdentityAccess.Infra.Data.Models;
 using System;
@@ -18,11 +19,11 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Repositories
     /// persisted, and adding the same entity a second time will have no effect.
     /// </remarks>
 
-    public class RoleRepository : DomainRepository<DomainModels.Role>, IRoleRepository
+    public class RoleRepository : DomainRepository<Role>, IRoleRepository
     {
         public RoleRepository(IdentityAccessDbContext context) : base(context) { }
 
-        public void Add(DomainModels.Role role)
+        public void Add(Role role)
         {
             //ReadModels.Role r = new ReadModels.Role
             //{
@@ -36,9 +37,9 @@ namespace SaaSEqt.IdentityAccess.Infra.Data.Repositories
             //base.SaveChanges();
         }
 
-        public DomainModels.Role RoleNamed(DomainModels.TenantId tenantId, string roleName)
+        public Role RoleNamed(TenantId tenantId, string roleName)
         {
-            DomainModels.Role role = Find(_ => _.TenantId.Equals(tenantId.Id)
+            Role role = Find(_ => _.TenantId.Equals(tenantId.Id)
                         && _.Name.Equals(roleName)).First();
 
             return role; //new DomainModels.Role(tenantId, roleName, role.Description, role.SupportsNesting);
