@@ -5,7 +5,7 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Business.Application.Services;
 using Business.Domain.Services;
-using Business.Infra.Data.Context;
+using Business.Infrastructure.Context;
 using Business.Api.Configurations;
 using Business.Api.Infrastructure.AutofacModules;
 using Business.Api.Infrastructure.Filters;

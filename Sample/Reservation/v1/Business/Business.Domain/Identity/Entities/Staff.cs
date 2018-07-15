@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Business.Domain.Entities.Schedules;
-using CqrsFramework.Domain;
-using SaaSEqt.IdentityAccess.Domain.Identity.Entities;
+using Business.Domain.Catalog.SchedulableCatalog.Entities;
 
-namespace Business.Domain.Entities
+namespace Business.Domain.Identity.Entities
 {
     public class Staff
     {

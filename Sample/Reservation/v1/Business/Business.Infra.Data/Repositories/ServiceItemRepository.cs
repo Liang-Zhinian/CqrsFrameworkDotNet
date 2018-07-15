@@ -1,10 +1,10 @@
 ﻿using Business.Domain.Entities.ServiceCategories;
 using Business.Domain.Repositories;
-using Business.Infra.Data.Context;
+using Business.Infrastructure.Context;
 
-namespace Business.Infra.Data.Repositories
+namespace Business.Infrastructure.Repositories
 {
-    public class ServiceItemRepository : DomainRepository<ServiceItem>, IServiceItemRepository
+    public class ServiceItemRepository : DomainRepository<SchedulableCatalogItem>, IServiceItemRepository
     {
         public ServiceItemRepository(BusinessDbContext context):base(context){}
 

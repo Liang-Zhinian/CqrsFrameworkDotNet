@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Business.Domain.Entities
+namespace Business.Domain.Resourcing.Entities
 {
     public class ResourceStatus
     {
         [Key]
         public int Id { get; set; }
         public string Label { get; set; }
-
-        public virtual ICollection<Resource> Resources { get; set; }
     }
 }

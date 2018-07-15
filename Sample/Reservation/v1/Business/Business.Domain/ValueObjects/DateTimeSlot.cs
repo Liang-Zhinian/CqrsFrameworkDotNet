@@ -1,7 +1,7 @@
 ﻿using CqrsFramework.Domain;
 using System;
 
-namespace Business.Domain.Entities
+namespace Business.Domain.ValueObjects
 {
     public class DateTimeSlot : ValueObject<DateTimeSlot>
     {

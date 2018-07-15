@@ -1,6 +1,6 @@
 ﻿using Autofac;
 using Business.Domain.Repositories;
-using Business.Infra.Data.Repositories;
+using Business.Infrastructure.Repositories;
 using SaaSEqt.IdentityAccess.Domain.Identity.Repositories;
 using SaaSEqt.IdentityAccess.Domain.Access.Repositories;
 using SaaSEqt.IdentityAccess.Infra.Data.Repositories;

@@ -1,11 +1,13 @@
-﻿using Business.Domain.Entities;
-using Business.Domain.Entities.Schedules;
-using Business.Domain.Entities.ServiceCategories;
-using Business.Domain.UoW;
-using Business.Infra.Data.Mappings;
+﻿using System.Security.Policy;
+using Business.Domain;
+using Business.Domain.Catalog.SchedulableCatalog.Entities;
+using Business.Domain.Identity.Entities;
+using Business.Domain.Resourcing.Entities;
+using Business.Domain.SeedWork;
+using Business.Infrastructure.Mappings;
 using Microsoft.EntityFrameworkCore;
 
-namespace Business.Infra.Data.Context
+namespace Business.Infrastructure.Context
 {
     public class BusinessDbContext : DbContext, IUnitOfWork
     {
@@ -13,11 +15,11 @@ namespace Business.Infra.Data.Context
         //public DbSet<TenantAddress> TenantAddresses { get; set; }
         //public DbSet<TenantContact> TenantContacts { get; set; }
 
-        public DbSet<ServiceCategory> ServiceCategories { get; set; }
-        public DbSet<ServiceItem> ServiceItems { get; set; }
+        public DbSet<SchedulableCatalogType> ServiceCategories { get; set; }
+        public DbSet<SchedulableCatalogItem> ServiceItems { get; set; }
 
         public DbSet<Region> Regions { get; set; }
-        public DbSet<Domain.Entities.TimeZone> TimeZones { get; set; }
+        public DbSet<Domain.TimeZone> TimeZones { get; set; }
 
         public DbSet<Site> Sites { get; set; }
         public DbSet<Branding> Brandings { get; set; }
@@ -25,7 +27,7 @@ namespace Business.Infra.Data.Context
         public DbSet<Staff> Staffs { get; set; }
 
         public DbSet<Resource> Resources { get; set; }
-        public DbSet<ResourceType> ResourceTypes { get; set; }
+        //public DbSet<ResourceType> ResourceTypes { get; set; }
 
         public DbSet<ScheduleType> ScheduleTypes { get; set; }
         public DbSet<Availability> Availabilities { get; set; }
@@ -67,8 +69,8 @@ namespace Business.Infra.Data.Context
 
             modelBuilder.ApplyConfiguration(new ResourceMap());
             modelBuilder.ApplyConfiguration(new ResourceStatusMap());
-            modelBuilder.ApplyConfiguration(new ResourceTypeMap());
-            modelBuilder.ApplyConfiguration(new ResourceLocationMap());
+            //modelBuilder.ApplyConfiguration(new ResourceTypeMap());
+            //modelBuilder.ApplyConfiguration(new ResourceLocationMap());
 
             //modelBuilder.ApplyConfiguration(new ScheduleMap());
             //modelBuilder.ApplyConfiguration(new ScheduleLayoutMap());

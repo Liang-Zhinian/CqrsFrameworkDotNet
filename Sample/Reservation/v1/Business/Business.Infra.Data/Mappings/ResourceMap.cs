@@ -4,7 +4,7 @@ using Business.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Business.Infra.Data.Mappings
+namespace Business.Infrastructure.Mappings
 {
     public class ResourceMap : IEntityTypeConfiguration<Resource>
     {

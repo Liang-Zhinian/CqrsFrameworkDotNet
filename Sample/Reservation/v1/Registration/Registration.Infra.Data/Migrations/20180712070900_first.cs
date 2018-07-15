@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
-namespace Registration.Infra.Data.Migrations
+namespace Registration.Infrastructure.Migrations
 {
     public partial class first : Migration
     {

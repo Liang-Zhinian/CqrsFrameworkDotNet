@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Registration.Domain.ReadModel;
 
-namespace Registration.Infra.Data.Mappings
+namespace Registration.Infrastructure.Mappings
 {
     public class RegionMap : IEntityTypeConfiguration<Region>
     {

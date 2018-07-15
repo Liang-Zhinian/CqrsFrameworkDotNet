@@ -59,7 +59,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business.Contracts", "Sampl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business.Domain", "Sample\Reservation\v1\Business\Business.Domain\Business.Domain.csproj", "{B679562E-9F24-44F5-A2B7-7CAFA1345A45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business.Infra.Data", "Sample\Reservation\v1\Business\Business.Infra.Data\Business.Infra.Data.csproj", "{2F2DE914-B249-4B3D-A1DB-A7D87DF52C1E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business.Infrastructure", "Sample\Reservation\v1\Business\Business.Infra.Data\Business.Infrastructure.csproj", "{2F2DE914-B249-4B3D-A1DB-A7D87DF52C1E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registration.Application", "Sample\Reservation\v1\Registration\Registration.Application\Registration.Application.csproj", "{61701269-788C-41BB-8767-11760883FD28}"
 EndProject
@@ -67,7 +67,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registration.Contracts", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registration.Domain", "Sample\Reservation\v1\Registration\Registration.Domain\Registration.Domain.csproj", "{7C98FB32-013F-4678-876D-2DAC614200BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registration.Infra.Data", "Sample\Reservation\v1\Registration\Registration.Infra.Data\Registration.Infra.Data.csproj", "{CD6CD11A-599D-4073-9E9E-D594FB81E1ED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registration.Infrastructure", "Sample\Reservation\v1\Registration\Registration.Infra.Data\Registration.Infrastructure.csproj", "{CD6CD11A-599D-4073-9E9E-D594FB81E1ED}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{9CFC7A59-2C9F-4D52-A915-B77957B52031}"
 EndProject

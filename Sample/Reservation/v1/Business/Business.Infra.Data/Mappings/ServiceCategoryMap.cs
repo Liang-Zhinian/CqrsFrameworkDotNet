@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Business.Domain.Entities;
 using Business.Domain.Entities.ServiceCategories;
 
-namespace Business.Infra.Data.Mappings
+namespace Business.Infrastructure.Mappings
 {
     public class ServiceCategoryMap : IEntityTypeConfiguration<ServiceCategory>
     {

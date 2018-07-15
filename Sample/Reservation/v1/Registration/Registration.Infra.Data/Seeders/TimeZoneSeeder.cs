@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
 using Microsoft.EntityFrameworkCore;
-using Registration.Infra.Data.Context;
+using Registration.Infrastructure.Context;
 
-namespace Registration.Infra.Data.Seeders
+namespace Registration.Infrastructure.Seeders
 {
     public class TimeZoneSeeder
     {

@@ -3,7 +3,7 @@ using Registration.Domain.ReadModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Registration.Infra.Data.Mappings
+namespace Registration.Infrastructure.Mappings
 {
     public class ScheduleTypeMap : IEntityTypeConfiguration<ScheduleType>
     {

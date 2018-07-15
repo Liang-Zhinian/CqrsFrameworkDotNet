@@ -21,7 +21,7 @@ using Registration.Api.Infrastructure.AutofacModules;
 using Registration.Api.Infrastructure.Filters;
 using Registration.Contracts.Commands.Appointments;
 using Registration.Domain.CommandHandlers.Appointments;
-using Registration.Infra.Data.Context;
+using Registration.Infrastructure.Context;
 using SaaSEqt.Infrastructure.HealthChecks.MySQL;
 
 namespace Registration.Api

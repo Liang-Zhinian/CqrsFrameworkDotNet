@@ -7,7 +7,7 @@ using CqrsFramework.EventStore.MySqlDB;
 using Microsoft.EntityFrameworkCore;
 using Registration.Domain.CommandHandlers.Appointments;
 using Registration.Domain.Repositories.Interfaces;
-using Registration.Infra.Data.Repositories;
+using Registration.Infrastructure.Repositories;
 using System;
 using System.Reflection;
 

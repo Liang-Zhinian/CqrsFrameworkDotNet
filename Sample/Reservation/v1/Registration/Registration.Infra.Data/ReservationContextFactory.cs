@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Registration.Infra.Data.Context;
+using Registration.Infrastructure.Context;
 
-namespace Registration.Infra.Data
+namespace Registration.Infrastructure
 {
     public class ReservationContextFactory : IDesignTimeDbContextFactory<ReservationDbContext>
     {

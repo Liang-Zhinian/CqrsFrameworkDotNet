@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MySql.Data.EntityFrameworkCore.Extensions;
 using Registration.Domain.ReadModel.Security;
 
-namespace Registration.Infra.Data.Mappings
+namespace Registration.Infrastructure.Mappings
 {
     public class BaseMap<TEntity> where TEntity : class
     {

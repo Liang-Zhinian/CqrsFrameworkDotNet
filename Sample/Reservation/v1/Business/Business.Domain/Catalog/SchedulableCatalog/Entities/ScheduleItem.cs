@@ -1,7 +1,7 @@
 ﻿using System;
-using Business.Domain.Entities.ServiceCategories;
+using Business.Domain.Identity.Entities;
 
-namespace Business.Domain.Entities
+namespace Business.Domain.Catalog.SchedulableCatalog.Entities
 {
     public abstract class ScheduleItem
     {
@@ -9,13 +9,13 @@ namespace Business.Domain.Entities
         {
         }
 
-        protected ScheduleItem(Guid siteId, Guid staffId, Guid serviceItemId, Guid locationId, DateTime startTime, DateTime endTime
+        protected ScheduleItem(Guid siteId, Guid staffId, Guid schedulableCatalogItemId, Guid locationId, DateTime startTime, DateTime endTime
                                /*, bool Sunday, bool Monday, bool Tuesday, bool Wednesday, bool Thursday, bool Friday, bool Saturday*/)
         {
             this.Id = Guid.NewGuid();
             this.SiteId = siteId;
             this.StaffId = staffId;
-            this.ServiceItemId = serviceItemId;
+            this.SchedulableCatalogItemId = schedulableCatalogItemId;
             this.LocationId = locationId;
             this.StartDateTime = startTime;
             this.EndDateTime = endTime;
@@ -42,12 +42,12 @@ namespace Business.Domain.Entities
         public virtual Staff Staff { get; private set; }
 
         /// The session type of the schedule
-        public Guid ServiceItemId { get; private set; }
-        public ServiceItem ServiceItem { get; private set; }
+        public Guid SchedulableCatalogItemId { get; private set; }
+        public virtual SchedulableCatalogItem SchedulableCatalogItem { get; private set; }
 
         /// The location of the schedule
         public Guid LocationId { get; private set; }
-        public Location Location { get; private set; }
+        public virtual Location Location { get; private set; }
 
         public Guid SiteId { get; private set; }
         public virtual Site Site { get; private set; }

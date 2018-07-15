@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Registration.Domain.ReadModel.Security;
 
-namespace Registration.Infra.Data.Repositories
+namespace Registration.Infrastructure.Repositories
 {
     public static class InMemoryDatabase
     {

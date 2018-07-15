@@ -14,8 +14,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Registration.Domain.CommandHandlers.Appointments;
 using Registration.Domain.EventHandlers;
 using Registration.Domain.Repositories.Interfaces;
-using Registration.Infra.Data.Context;
-using Registration.Infra.Data.Repositories;
+using Registration.Infrastructure.Context;
+using Registration.Infrastructure.Repositories;
 
 namespace WorkerRoleCommandProcessor
 {

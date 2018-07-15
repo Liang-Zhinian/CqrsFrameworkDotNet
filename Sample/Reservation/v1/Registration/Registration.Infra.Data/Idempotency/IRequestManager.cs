@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Registration.Infra.Data.Idempotency
+namespace Registration.Infrastructure.Idempotency
 {
     public interface IRequestManager
     {

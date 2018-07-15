@@ -1,7 +1,8 @@
 ﻿using System;
-using Business.Domain.Entities;
+using Business.Domain.Identity.Entities;
+using Business.Domain.SeedWork;
 
-namespace Business.Domain.Repositories
+namespace Business.Domain.Identity.Repositories
 {
     public interface IStaffRepository: IDomainRepository<Staff>
     {

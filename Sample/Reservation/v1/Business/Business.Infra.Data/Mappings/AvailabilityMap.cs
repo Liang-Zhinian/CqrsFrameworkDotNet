@@ -1,10 +1,9 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
+using Business.Domain.Catalog.SchedulableCatalog.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Business.Domain.Entities.Schedules;
 
-namespace Business.Infra.Data.Mappings
+namespace Business.Infrastructure.Mappings
 {
     public class AvailabilityMap : IEntityTypeConfiguration<Availability>
     {

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using CqrsFramework.Events;
 
-namespace Business.Domain.Services
+namespace Business.Domain.SeedWork
 {
     public interface IBusinessIntegrationEventService
     {

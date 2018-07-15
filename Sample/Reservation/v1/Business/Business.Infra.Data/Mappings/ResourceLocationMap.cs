@@ -1,10 +1,8 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
-using Business.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Business.Infra.Data.Mappings
+namespace Business.Infrastructure.Mappings
 {
     public class ResourceLocationMap : IEntityTypeConfiguration<ResourceLocation>
     {

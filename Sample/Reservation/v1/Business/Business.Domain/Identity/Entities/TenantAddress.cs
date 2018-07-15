@@ -1,9 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Business.Contracts;
+using Business.Domain.ValueObjects;
 using CqrsFramework.Domain;
 
-namespace Business.Domain.Entities
+namespace Business.Domain.Identity.Entities
 {
     public class TenantAddress
     {

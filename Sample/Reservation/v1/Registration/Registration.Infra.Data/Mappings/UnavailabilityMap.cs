@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Registration.Domain.ReadModel;
 
-namespace Registration.Infra.Data.Mappings
+namespace Registration.Infrastructure.Mappings
 {
     public class UnavailabilityMap : BaseMap<Unavailability>, IEntityTypeConfiguration<Unavailability>
     {

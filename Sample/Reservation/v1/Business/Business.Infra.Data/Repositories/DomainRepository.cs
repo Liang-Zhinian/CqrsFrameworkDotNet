@@ -3,10 +3,10 @@ using System.Linq;
 using System.Linq.Expressions;
 using Business.Domain.Repositories;
 using Business.Domain.UoW;
-using Business.Infra.Data.Context;
+using Business.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace Business.Infra.Data.Repositories
+namespace Business.Infrastructure.Repositories
 {
     public class DomainRepository<TEntity> : IDomainRepository<TEntity> where TEntity : class
     {

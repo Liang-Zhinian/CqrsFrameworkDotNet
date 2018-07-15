@@ -1,5 +1,5 @@
 ﻿using System;
-using Business.Domain.Entities.ServiceCategories;
+using Business.Domain.Catalog.SchedulableCatalog.Entities;
 
 namespace Business.Domain.Entities.Orders
 {
@@ -13,10 +13,6 @@ namespace Business.Domain.Entities.Orders
 
         public byte[] Image { get; private set; }
 
-        //public Level Level { get; private set; }
-
-        public ActionCode Action { get; private set; }
-
         public string Name { get; private set; }
 
         public string Description { get; private set; }
@@ -29,7 +25,7 @@ namespace Business.Domain.Entities.Orders
 
         //public Program Program { get; private set; }
 
-        public ServiceItem ServiceItem { get; private set; }
+        public SchedulableCatalogItem SchedulableCatalogItem { get; private set; }
 
         public bool Active { get; private set; }
     }

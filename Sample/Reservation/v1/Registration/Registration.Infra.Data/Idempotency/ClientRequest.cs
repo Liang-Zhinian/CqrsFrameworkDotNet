@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Registration.Infra.Data.Idempotency
+namespace Registration.Infrastructure.Idempotency
 {
     public class ClientRequest
     {

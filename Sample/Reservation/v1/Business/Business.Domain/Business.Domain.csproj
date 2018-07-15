@@ -30,16 +30,18 @@
     <Folder Include="Identity\Entities\" />
     <Folder Include="Identity\Repositories\" />
     <Folder Include="Identity\Services\" />
-    <Folder Include="Catalog\Repositories\" />
-    <Folder Include="Catalog\Services\" />
-    <Folder Include="Catalog\Entities\" />
+    <Folder Include="Catalog\SchedulableCatalog\" />
     <Folder Include="Ordering\" />
     <Folder Include="Ordering\Appointments\" />
     <Folder Include="Ordering\Classes\" />
-    <Folder Include="Scheduling\" />
-    <Folder Include="Scheduling\Entities\" />
     <Folder Include="SeedWork\" />
     <Folder Include="ValueObjects\" />
+    <Folder Include="Client\" />
+    <Folder Include="Resourcing\" />
+    <Folder Include="Catalog\SchedulableCatalog\Repositories\" />
+    <Folder Include="Catalog\SchedulableCatalog\Entities\" />
+    <Folder Include="Catalog\SchedulableCatalog\Services\" />
+    <Folder Include="Resourcing\Entities\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\Resource\Resource.cs" />
@@ -59,6 +61,8 @@
     <Compile Remove="Repositories\Interfaces\IServiceCategoryRepository.cs" />
     <Compile Remove="Bus\BusEventPublisher.cs" />
     <Compile Remove="EventHandlers\TenantDomainEventHandler.cs" />
+    <Compile Remove="Ordering\Appointments\AppointmentType.cs" />
+    <Compile Remove="Resource\ResourceType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Repositories\.DS_Store" />

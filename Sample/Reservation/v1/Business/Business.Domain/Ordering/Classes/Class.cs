@@ -1,4 +1,7 @@
 ﻿using System;
+using Business.Domain.Catalog.SchedulableCatalog.Entities;
+using Business.Domain.Client;
+
 namespace Business.Domain.Entities.Orders
 {
     public class Class : ScheduleItem
@@ -53,7 +56,7 @@ namespace Business.Domain.Entities.Orders
         public ClassDescription ClassDescription { get; private set; }
 
         /// Client
-        public Client Client { get; private set; }
+        public Clients Client { get; private set; }
 
     }
 }

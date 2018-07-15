@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Business.Domain.Entities.ServiceCategories;
 
-namespace Business.Domain.Entities.Schedules
+namespace Business.Domain.Catalog.SchedulableCatalog.Entities
 {
     public class Availability :ScheduleItem
     {
@@ -30,7 +29,7 @@ namespace Business.Domain.Entities.Schedules
         //public Guid StaffId { get; private set; }
         //public virtual Staff Staff { get; private set; }
 
-        public ICollection<Program> Programs { get; private set; }
+        //public ICollection<Program> Programs { get; private set; }
 
         // DaysOfWeek?
         public bool Sunday { get; private set; }

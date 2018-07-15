@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Business.Domain.UoW
+namespace Business.Domain.SeedWork
 {
     public interface IUnitOfWork : IDisposable
     {

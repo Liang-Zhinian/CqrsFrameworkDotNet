@@ -1,9 +1,9 @@
 ﻿using System;
 using Business.Domain.Entities;
 using Business.Domain.Repositories;
-using Business.Infra.Data.Context;
+using Business.Infrastructure.Context;
 
-namespace Business.Infra.Data.Repositories
+namespace Business.Infrastructure.Repositories
 {
     public class SiteRepository : DomainRepository<Site>, ISiteRepository
     {

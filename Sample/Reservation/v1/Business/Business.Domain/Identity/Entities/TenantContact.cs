@@ -1,7 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Business.Contracts;
 
-namespace Business.Domain.Entities
+namespace Business.Domain.Identity.Entities
 {
     public class TenantContact
     {

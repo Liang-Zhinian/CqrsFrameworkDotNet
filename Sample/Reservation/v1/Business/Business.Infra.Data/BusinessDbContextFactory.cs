@@ -1,9 +1,9 @@
-﻿using Business.Infra.Data.Context;
+﻿using Business.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
-namespace Business.Infra.Data
+namespace Business.Infrastructure
 {
     public class IdentityAccessContextFactory : IDesignTimeDbContextFactory<BusinessDbContext>
     {

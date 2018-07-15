@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Polly;
 
-namespace Business.Infra.Data.Context
+namespace Business.Infrastructure.Context
 {
     public class BusinessDbContextSeed
     {

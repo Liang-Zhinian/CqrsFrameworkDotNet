@@ -1,10 +1,8 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using Business.Domain.Identity.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Business.Domain.Entities;
 
-namespace Business.Infra.Data.Mappings
+namespace Business.Infrastructure.Mappings
 {
     public class BrandingMap : IEntityTypeConfiguration<Branding>
     {

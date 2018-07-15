@@ -1,27 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Business.Contracts.Events.ServiceCategory;
-using Business.Domain.Entities.Schedules;
-using CqrsFramework.Domain;
+using Business.Domain.Identity.Entities;
 
-namespace Business.Domain.Entities.ServiceCategories
+namespace Business.Domain.Catalog.SchedulableCatalog.Entities
 {
-    public class ServiceItem // : AggregateRoot
+    public class SchedulableCatalogItem : CatalogItem // : AggregateRoot
     {
-        private ServiceItem()
+        private SchedulableCatalogItem()
         {
             Id = Guid.NewGuid();
         }
 
-        public ServiceItem(Guid siteId, string name, string description, int defaultTimeLength, double price, Guid serviceCategoryId, int industryStandardCategoryId)
+        public SchedulableCatalogItem(Guid siteId, string name, string description, int defaultTimeLength, double price, Guid schedulableCatalogTypeId, int industryStandardCategoryId)
             : this()
         {
             SiteId = siteId;
             Name = name;
             Description = description;
             DefaultTimeLength = defaultTimeLength;
-            ServiceCategoryId = serviceCategoryId;
+            SchedulableCatalogTypeId = schedulableCatalogTypeId;
             Price = price;
             IndustryStandardCategoryId = industryStandardCategoryId;
 
@@ -40,23 +38,16 @@ namespace Business.Domain.Entities.ServiceCategories
 
         #region public properties
 
-        public Guid Id { get; private set; }
+        //public Guid Id { get; private set; }
 
-        public string Name { get; private set; }
+        //public string Name { get; private set; }
 
-        public string Description { get; private set; }
+        //public string Description { get; private set; }
 
         public int DefaultTimeLength { get; private set; }
 
-        //public Guid ProgramId { get; private set; }
-        //public virtual Program Program { get; private set; }
-
-        //public int NumDeducted { get; private set; }
-
-        //public ActionCode Action { get; private set; }
-
-        public Guid ServiceCategoryId { get; private set; }
-        public virtual ServiceCategory ServiceCategory { get; private set; }
+        public Guid SchedulableCatalogTypeId { get; private set; }
+        public virtual SchedulableCatalogType SchedulableCatalogType { get; private set; }
 
         public int IndustryStandardCategoryId { get; private set; }
         public virtual IndustryStandardCategory IndustryStandardCategory { get; private set; }
@@ -65,12 +56,9 @@ namespace Business.Domain.Entities.ServiceCategories
 
         public bool AllowOnlineScheduling { get; private set; } // or Show in Consumer Mode?
 
-        //public double TaxRate { get; private set; }
+        public double TaxRate { get; private set; }
 
-        //public double TaxAmount => Price * TaxRate;
-
-        //public Guid LocationId { get; private set; }
-        //public virtual Location Location { get; private set; }
+        public double TaxAmount => Price * TaxRate;
 
         public Guid SiteId { get; private set; }
         public virtual Site Site { get; private set; }

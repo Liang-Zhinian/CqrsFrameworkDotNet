@@ -2,9 +2,9 @@
 using System.Linq;
 using Registration.Domain.ReadModel.Security;
 using Registration.Domain.Repositories.Interfaces;
-using Registration.Infra.Data.Context;
+using Registration.Infrastructure.Context;
 
-namespace Registration.Infra.Data.Repositories
+namespace Registration.Infrastructure.Repositories
 {
     public class SiteRepository : ReadDbRepository<Site>, ISiteRepository
     {
