@@ -34,14 +34,10 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\..\..\Framework\CqrsFramework\CqrsFramework.csproj" />
     <ProjectReference Include="..\..\..\..\..\..\Framework\CqrsFramework.Bus.RabbitMQ\CqrsFramework.Bus.RabbitMQ.csproj" />
-    <ProjectReference Include="..\..\..\..\..\SaaSEqt\IdentityAccess\IdentityAccess\SaaSEqt.IdentityAccess.csproj" />
-    <ProjectReference Include="..\..\..\..\..\SaaSEqt\IdentityAccess\IdentityAccess.Infra.Data\SaaSEqt.IdentityAccess.Infra.Data.csproj" />
-    <ProjectReference Include="..\..\..\..\..\SaaSEqt\IdentityAccess\Application\SaaSEqt.IdentityAccess.Application.csproj" />
     <ProjectReference Include="..\..\..\..\..\Infrastructure\HealthChecks\src\Microsoft.Extensions.HealthChecks\Microsoft.Extensions.HealthChecks.csproj" />
     <ProjectReference Include="..\..\..\..\..\Infrastructure\HealthChecks\src\Microsoft.AspNetCore.HealthChecks\Microsoft.AspNetCore.HealthChecks.csproj" />
     <ProjectReference Include="..\..\..\..\..\Infrastructure\HealthChecks\src\HealthChecks.MySQL\HealthChecks.MySQL.csproj" />
     <ProjectReference Include="..\..\..\..\v1\Infrastructure.IoC\Infrastructure.IoC.csproj" />
-    <ProjectReference Include="..\..\..\..\..\SaaSEqt\IdentityAccess\IdentityAccess.Infra.Services\SaaSEqt.IdentityAccess.Infra.Services.csproj" />
     <ProjectReference Include="..\..\..\..\..\Infrastructure\WebHostCustomization\WebHost.Customization\WebHost.Customization.csproj" />
   </ItemGroup>
   <ItemGroup>

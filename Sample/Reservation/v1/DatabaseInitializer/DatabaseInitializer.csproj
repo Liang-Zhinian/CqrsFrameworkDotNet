@@ -8,7 +8,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Business\Business.Infra.Data\Business.Infra.Data.csproj" />
     <ProjectReference Include="..\Registration\Registration.Infra.Data\Registration.Infra.Data.csproj" />
-    <ProjectReference Include="..\..\..\SaaSEqt\IdentityAccess\IdentityAccess.Infra.Data\SaaSEqt.IdentityAccess.Infra.Data.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="appsettings.json">

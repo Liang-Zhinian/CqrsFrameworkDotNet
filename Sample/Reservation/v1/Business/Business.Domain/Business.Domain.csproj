@@ -20,7 +20,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Business.Contracts\Business.Contracts.csproj" />
     <ProjectReference Include="..\..\..\..\..\Framework\CqrsFramework\CqrsFramework.csproj" />
-    <ProjectReference Include="..\..\..\..\SaaSEqt\IdentityAccess\IdentityAccess\SaaSEqt.IdentityAccess.csproj" />
     <ProjectReference Include="..\..\..\..\..\Framework\CqrsFramework.Extensions\CqrsFramework.Extensions.csproj" />
   </ItemGroup>
   <ItemGroup>

@@ -21,7 +21,6 @@
     <ProjectReference Include="..\..\Business\Business.Contracts\Business.Contracts.csproj" />
     <ProjectReference Include="..\..\..\..\..\Framework\CqrsFramework\CqrsFramework.csproj" />
     <ProjectReference Include="..\..\..\..\..\Framework\CqrsFramework.Extensions\CqrsFramework.Extensions.csproj" />
-    <ProjectReference Include="..\..\..\..\SaaSEqt\SaaSEqt.IdentityAccess.Contracts\SaaSEqt.IdentityAccess.Contracts.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AggregatesModel\" />

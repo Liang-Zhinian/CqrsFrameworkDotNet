@@ -16,7 +16,6 @@
     <ProjectReference Include="..\Business.Contracts\Business.Contracts.csproj" />
     <ProjectReference Include="..\Business.Infra.Data\Business.Infra.Data.csproj" />
     <ProjectReference Include="..\..\..\..\..\Framework\CqrsFramework.EventStore.MySqlDB\CqrsFramework.EventStore.MySqlDB.csproj" />
-    <ProjectReference Include="..\..\..\..\SaaSEqt\IdentityAccess\Application\SaaSEqt.IdentityAccess.Application.csproj" />
     <ProjectReference Include="..\..\..\..\Infrastructure\Infrastructure\Infrastructure.csproj" />
   </ItemGroup>
 </Project>
