@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Registration.Domain.ReadModel;
-using Registration.Infra.Data.Constants;
+using Registration.Infrastructure.Constants;
 
-namespace Registration.Infra.Data.Mappings
+namespace Registration.Infrastructure.Mappings
 {
     public class HomePageImageMap : BaseMap<HomePageImage>, IEntityTypeConfiguration<HomePageImage>
     {

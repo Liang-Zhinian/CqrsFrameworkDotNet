@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Business.Domain.Catalog.SchedulableCatalog.Entities;
+using Business.Domain.Resourcing.Entities;
 
-namespace Business.Domain.Entities.Orders
+namespace Business.Domain.Ordering.Appointments
 {
     public class Appointment : ScheduleItem
     {

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Business.Contracts;
 using Business.Contracts.Events.Sites;
+using Business.Domain.ValueObjects;
 using CqrsFramework.Domain;
 
-namespace Business.Domain.Entities
+namespace Business.Domain.Identity.Entities
 {
     public class Site // : AggregateRoot
     {

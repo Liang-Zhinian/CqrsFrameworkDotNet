@@ -46,7 +46,7 @@ namespace Business.Application.Services
 
         public async Task<ServiceItemViewModel> AddServiceItem(ServiceItemViewModel serviceItem)
         {
-            var domainservice = new ServiceItem(
+            var domainservice = new SchedulableCatalogItem(
                 serviceItem.SiteId,
                 serviceItem.Name,
                 serviceItem.Description,
@@ -111,7 +111,7 @@ namespace Business.Application.Services
 
         public async Task<Availability> AddAvailability(AddAvailabilityCommand addAvailabilityCommand)
         {
-            ServiceItem serviceItem = GetExistingServiceItem(addAvailabilityCommand.SiteId, addAvailabilityCommand.ServiceItemId);
+            SchedulableCatalogItem serviceItem = GetExistingServiceItem(addAvailabilityCommand.SiteId, addAvailabilityCommand.ServiceItemId);
 
             Availability availability = serviceItem.AddAvailability(
                 addAvailabilityCommand.StaffId,
@@ -150,7 +150,7 @@ namespace Business.Application.Services
 
         public async Task<Unavailability> AddUnavailability(AddUnavailabilityCommand addUnavailabilityCommand)
         {
-            ServiceItem serviceItem = GetExistingServiceItem(addUnavailabilityCommand.SiteId, addUnavailabilityCommand.ServiceItemId);
+            SchedulableCatalogItem serviceItem = GetExistingServiceItem(addUnavailabilityCommand.SiteId, addUnavailabilityCommand.ServiceItemId);
 
             Unavailability unavailability = serviceItem.AddUnavailability(
                 addUnavailabilityCommand.StaffId,
@@ -187,11 +187,11 @@ namespace Business.Application.Services
             return unavailability;
         }
 
-        private ServiceItem GetExistingServiceItem(Guid siteId, Guid serviceItemId){
+        private SchedulableCatalogItem GetExistingServiceItem(Guid siteId, Guid serviceItemId){
             var serviceItem = _serviceItemRepository.Find(y => y.SiteId.Equals(siteId) &&
                                                           y.Id.Equals(serviceItemId)).First();
 
-            if (serviceItem == null) throw new EntityNotFoundException(serviceItemId, typeof(ServiceItem).FullName);
+            if (serviceItem == null) throw new EntityNotFoundException(serviceItemId, typeof(SchedulableCatalogItem).FullName);
 
             return serviceItem;
         }

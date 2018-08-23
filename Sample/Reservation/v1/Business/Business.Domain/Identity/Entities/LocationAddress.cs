@@ -4,8 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using CqrsFramework.Domain;
 using System.ComponentModel.DataAnnotations.Schema;
 using Business.Contracts.Events.Locations;
+using Business.Domain.ValueObjects;
 
-namespace Business.Domain.Entities
+namespace Business.Domain.Identity.Entities
 {
     public class LocationAddress
     {

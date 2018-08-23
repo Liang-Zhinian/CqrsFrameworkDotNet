@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
-using Registration.Infra.Data.Context;
+using Registration.Infrastructure.Context;
 using System;
 
-namespace Registration.Infra.Data.Migrations
+namespace Registration.Infrastructure.Migrations
 {
     [DbContext(typeof(ReservationDbContext))]
     partial class ReservationDbContextModelSnapshot : ModelSnapshot

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Business.Domain.Entities;
 
-namespace Business.Infra.Data.Mappings
+namespace Business.Infrastructure.Mappings
 {
     public class ScheduleLayoutTimeSlotMap : IEntityTypeConfiguration<ScheduleLayoutTimeSlot>
     {

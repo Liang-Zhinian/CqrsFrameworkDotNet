@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Business.Domain.Entities
+namespace Business.Domain.ValueObjects
 {
     public enum Gender
     {

@@ -2,7 +2,7 @@
 using System.IO;
 using Microsoft.Extensions.Configuration;
 
-namespace Registration.Infra.Data.Constants
+namespace Registration.Infrastructure.Constants
 {
     public static class DataBaseServer
     {

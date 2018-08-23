@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Business.Domain.Entities.Orders
+namespace Business.Domain.Ordering.Appointments
 {
     public enum AppointmentStatus
     {

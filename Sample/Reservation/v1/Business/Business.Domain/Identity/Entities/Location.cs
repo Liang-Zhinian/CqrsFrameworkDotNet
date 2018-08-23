@@ -5,8 +5,9 @@ using CqrsFramework.Domain;
 using System.ComponentModel.DataAnnotations.Schema;
 using Business.Contracts.Events.Locations;
 using System.Collections.ObjectModel;
+using Business.Domain.ValueObjects;
 
-namespace Business.Domain.Entities
+namespace Business.Domain.Identity.Entities
 {
     public class Location // : AggregateRoot
     {

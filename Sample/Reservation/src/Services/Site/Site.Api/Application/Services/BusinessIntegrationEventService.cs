@@ -2,7 +2,7 @@
 using System.Data.Common;
 using System.Threading.Tasks;
 using Business.Domain.Services;
-using Business.Infra.Data.Context;
+using Business.Infrastructure.Context;
 using CqrsFramework.Events;
 using CqrsFramework.EventStore.MySqlDB.Services;
 using CqrsFramework.EventStore.MySqlDB.Utilities;

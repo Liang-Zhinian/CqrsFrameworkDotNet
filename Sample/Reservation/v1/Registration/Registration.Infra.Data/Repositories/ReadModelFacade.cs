@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Registration.Domain.ReadModel.Security;
 using Registration.Domain.Repositories.Interfaces;
 
-namespace Registration.Infra.Data.Repositories
+namespace Registration.Infrastructure.Repositories
 {
     public class ReadModelFacade : IReadModelFacade
     {

@@ -3,7 +3,7 @@ using Business.Domain.Entities.Schedules;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Business.Infra.Data.Mappings
+namespace Business.Infrastructure.Mappings
 {
     public class ScheduleTypeMap : IEntityTypeConfiguration<ScheduleType>
     {

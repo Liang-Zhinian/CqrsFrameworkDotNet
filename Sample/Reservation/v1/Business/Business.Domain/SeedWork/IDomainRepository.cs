@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using Business.Domain.UoW;
 
-namespace Business.Domain.Repositories
+namespace Business.Domain.SeedWork
 {
     public interface IDomainRepository<TEntity> : IDisposable where TEntity : class
     {

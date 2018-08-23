@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Business.Domain.Entities.Schedules
+namespace Business.Domain.Catalog.SchedulableCatalog.Entities
 {
     public class Unavailability : ScheduleItem
     {
@@ -8,8 +8,8 @@ namespace Business.Domain.Entities.Schedules
         {
         }
 
-        public Unavailability(Guid siteId, Guid staffId, Guid serviceItemId, Guid locationId, DateTime startTime, DateTime endTime, bool Sunday, bool Monday, bool Tuesday, bool Wednesday, bool Thursday, bool Friday, bool Saturday, string description)
-            : base(siteId, staffId, serviceItemId, locationId, startTime, endTime/*, Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday*/)
+        public Unavailability(Guid siteId, Guid staffId, Guid schedulableCatalogItemId, Guid locationId, DateTime startTime, DateTime endTime, bool Sunday, bool Monday, bool Tuesday, bool Wednesday, bool Thursday, bool Friday, bool Saturday, string description)
+            : base(siteId, staffId, schedulableCatalogItemId, locationId, startTime, endTime/*, Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday*/)
         {
             this.Description = description;
             this.Sunday = Sunday;

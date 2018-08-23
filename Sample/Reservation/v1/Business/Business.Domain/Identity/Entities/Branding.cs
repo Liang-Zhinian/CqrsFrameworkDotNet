@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Business.Domain.Entities
+namespace Business.Domain.Identity.Entities
 {
     public class Branding
     {

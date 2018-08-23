@@ -1,8 +1,8 @@
-﻿using Registration.Infra.Data.Context;
+﻿using Registration.Infrastructure.Context;
 using System;
 using System.Threading.Tasks;
 
-namespace Registration.Infra.Data.Idempotency
+namespace Registration.Infrastructure.Idempotency
 {
     public class RequestManager : IRequestManager
     {

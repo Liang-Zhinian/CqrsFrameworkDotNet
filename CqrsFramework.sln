@@ -21,6 +21,55 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CqrsFramework.EventStore.Sq
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CqrsFramework.Bus.RabbitMQ", "Framework\CqrsFramework.Bus.RabbitMQ\CqrsFramework.Bus.RabbitMQ.csproj", "{0E80C14B-E6E2-44AD-B307-8B44A14009D8}"
 EndProject
+<<<<<<< HEAD
+=======
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{758ACD84-D8E2-4ED2-830E-718CF8F44E80}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Basket", "Basket", "{29A4E306-D48B-4F8E-9806-EC88A84909AB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{151C2F7D-2C60-409B-ABD1-2FB92BB889D0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityAccess", "IdentityAccess", "{E6EB41EF-6AF2-4AFA-9974-F863A00C332D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Site", "Site", "{41EA523D-4F9A-4308-85AC-1B37CAF6EB29}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Marketing", "Marketing", "{AFA1E0D8-755C-4E52-BE54-7CA85B90A387}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ordering", "Ordering", "{841A5922-A7EC-41EE-8A34-F876FC971139}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Payment", "Payment", "{07CB7911-242E-432F-91E2-A2266DBC9C63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Site.Api", "Sample\Reservation\src\Services\Site\Site.Api\Site.Api.csproj", "{B4FFCFF8-A973-4A8E-909D-6063022511BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityAccess.Api", "Sample\Reservation\src\Services\IdentityAccess\IdentityAccess.Api\IdentityAccess.Api.csproj", "{86A7D739-0543-4538-BF10-938EE313A03A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.Api", "Sample\Reservation\src\Services\Catalog\Catalog.Api\Catalog.Api.csproj", "{098B87F7-CE4C-42B8-8C6E-30EEF01922B7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Schedule", "Schedule", "{0505AB92-62F1-42F8-B6F4-7ACF1D319773}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "v1", "v1", "{8666C2DB-1980-4E22-840B-52E4AD6A8CF4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{93D9D871-8FF7-443F-9885-6FE980285EB1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Registration", "Registration", "{AD5C9594-7974-47EB-92C7-733C155BCAA6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business.Application", "Sample\Reservation\v1\Business\Business.Application\Business.Application.csproj", "{56555B34-8591-45A3-9E04-09E9D6A132ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business.Contracts", "Sample\Reservation\v1\Business\Business.Contracts\Business.Contracts.csproj", "{ED3CFC88-F655-4D81-B804-1B856C643A84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business.Domain", "Sample\Reservation\v1\Business\Business.Domain\Business.Domain.csproj", "{B679562E-9F24-44F5-A2B7-7CAFA1345A45}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business.Infrastructure", "Sample\Reservation\v1\Business\Business.Infra.Data\Business.Infrastructure.csproj", "{2F2DE914-B249-4B3D-A1DB-A7D87DF52C1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registration.Application", "Sample\Reservation\v1\Registration\Registration.Application\Registration.Application.csproj", "{61701269-788C-41BB-8767-11760883FD28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registration.Contracts", "Sample\Reservation\v1\Registration\Registration.Contracts\Registration.Contracts.csproj", "{9B5403F9-B7BA-493A-9D5D-7D1BB6533070}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registration.Domain", "Sample\Reservation\v1\Registration\Registration.Domain\Registration.Domain.csproj", "{7C98FB32-013F-4678-876D-2DAC614200BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registration.Infrastructure", "Sample\Reservation\v1\Registration\Registration.Infra.Data\Registration.Infrastructure.csproj", "{CD6CD11A-599D-4073-9E9E-D594FB81E1ED}"
+EndProject
+>>>>>>> c80d917c18830741c8edac1faaeb3fb3534044df
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{9CFC7A59-2C9F-4D52-A915-B77957B52031}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Sample\Infrastructure\Infrastructure\Infrastructure.csproj", "{C59441F0-0A01-4CAA-A3C4-49BA941D8FAF}"

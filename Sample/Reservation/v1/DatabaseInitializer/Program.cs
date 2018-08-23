@@ -1,11 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using Business.Infra.Data.Context;
+using Business.Infrastructure.Context;
 using CqrsFramework.EventStore.IntegrationEventLogEF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Registration.Infra.Data.Context;
+using Registration.Infrastructure.Context;
 using SaaSEqt.IdentityAccess.Infra.Data.Context;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 

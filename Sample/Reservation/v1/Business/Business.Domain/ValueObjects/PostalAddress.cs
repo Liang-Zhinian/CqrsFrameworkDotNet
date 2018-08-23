@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using CqrsFramework.Domain;
 
-namespace Business.Domain.Entities
+namespace Business.Domain.ValueObjects
 {
     public class PostalAddress: ValueObject<PostalAddress>
     {

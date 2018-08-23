@@ -2,9 +2,9 @@
 using System.Linq;
 using Business.Domain.Entities;
 using Business.Domain.Repositories;
-using Business.Infra.Data.Context;
+using Business.Infrastructure.Context;
 
-namespace Business.Infra.Data.Repositories
+namespace Business.Infrastructure.Repositories
 {
     public class LocationRepository : DomainRepository<Location>, ILocationRepository
     {

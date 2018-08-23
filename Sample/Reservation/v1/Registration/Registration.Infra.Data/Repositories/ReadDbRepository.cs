@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
 using Registration.Domain.Repositories.Interfaces;
-using Registration.Infra.Data.Context;
+using Registration.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace Registration.Infra.Data.Repositories
+namespace Registration.Infrastructure.Repositories
 {
     public class ReadDbRepository<TEntity> : IReadDbRepository<TEntity> where TEntity : class
     {

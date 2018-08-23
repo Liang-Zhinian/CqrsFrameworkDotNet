@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Registration.Domain.ReadModel;
 using Registration.Domain.ReadModel.Security;
-using Registration.Infra.Data.Mappings;
+using Registration.Infrastructure.Mappings;
 
-namespace Registration.Infra.Data.Context
+namespace Registration.Infrastructure.Context
 {
     
     public class ReservationDbContext : DbContext

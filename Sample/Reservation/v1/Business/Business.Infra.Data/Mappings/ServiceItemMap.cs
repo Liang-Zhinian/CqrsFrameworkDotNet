@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Business.Domain.Entities.ServiceCategories;
 
-namespace Business.Infra.Data.Mappings
+namespace Business.Infrastructure.Mappings
 {
-    public class ServiceItemMap : IEntityTypeConfiguration<ServiceItem>
+    public class ServiceItemMap : IEntityTypeConfiguration<SchedulableCatalogItem>
     {
-        public void Configure(EntityTypeBuilder<ServiceItem> builder)
+        public void Configure(EntityTypeBuilder<SchedulableCatalogItem> builder)
         {
             builder.HasKey(o => o.Id);
             builder.ToTable(Constants.DbConstants.ServiceItemTable);

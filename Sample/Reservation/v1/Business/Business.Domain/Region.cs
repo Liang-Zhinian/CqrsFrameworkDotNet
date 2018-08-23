@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-namespace Business.Domain.Entities
+namespace Business.Domain
 {
     public class Region
     {

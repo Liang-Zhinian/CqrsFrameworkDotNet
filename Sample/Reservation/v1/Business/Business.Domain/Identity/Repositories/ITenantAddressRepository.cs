@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Business.Domain.Entities;
+using Business.Domain.Identity.Entities;
+using Business.Domain.SeedWork;
 
-namespace Business.Domain.Repositories
+namespace Business.Domain.Identity.Repositories
 {
     public interface ITenantAddressRepository: IDomainRepository<TenantAddress>
     {

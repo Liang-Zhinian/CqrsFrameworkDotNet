@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Business.Domain.Entities.ServiceCategories
+namespace Business.Domain.Catalog
 {
     public class IndustryStandardCategory
     {

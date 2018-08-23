@@ -1,9 +1,10 @@
 ﻿using System;
-using Business.Domain.Entities;
-using Business.Domain.Repositories;
+using Business.Domain.Identity.Entities;
+using Business.Domain.Identity.Repositories;
+using Business.Domain.SeedWork;
 using CqrsFramework.Domain;
 
-namespace Business.Domain.Services
+namespace Business.Domain.Identity.Services
 {
     public class LocationService
     {

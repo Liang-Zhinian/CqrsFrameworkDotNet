@@ -18,7 +18,7 @@ COPY Framework/CqrsFramework.Extensions/CqrsFramework.Extensions.csproj Framewor
 COPY Framework/CqrsFramework.EventStore.IntegrationEventLogEF/CqrsFramework.EventStore.IntegrationEventLogEF.csproj Framework/CqrsFramework.EventStore.IntegrationEventLogEF/
 COPY Sample/SaaSEqt/IdentityAccess/Application/SaaSEqt.Application.csproj Sample/SaaSEqt/IdentityAccess/Application/
 COPY Sample/SaaSEqt/IdentityAccess/IdentityAccess.Infra.Data/SaaSEqt.IdentityAccess.Infra.Data.csproj Sample/SaaSEqt/IdentityAccess/IdentityAccess.Infra.Data/
-COPY Sample/Reservation/v1/Business/Business.Infra.Data/Business.Infra.Data.csproj Sample/Reservation/v1/Business/Business.Infra.Data/
+COPY Sample/Reservation/v1/Business/Business.Infrastructure/Business.Infrastructure.csproj Sample/Reservation/v1/Business/Business.Infrastructure/
 COPY Framework/CqrsFramework.EventStore.MongoDB/CqrsFramework.EventStore.MongoDB.csproj Framework/CqrsFramework.EventStore.MongoDB/
 COPY Sample/Infrastructure/HealthChecks/src/Microsoft.AspNetCore.HealthChecks/Microsoft.AspNetCore.HealthChecks.csproj Sample/Infrastructure/HealthChecks/src/Microsoft.AspNetCore.HealthChecks/
 COPY Sample/Infrastructure/HealthChecks/src/Microsoft.Extensions.HealthChecks/Microsoft.Extensions.HealthChecks.csproj Sample/Infrastructure/HealthChecks/src/Microsoft.Extensions.HealthChecks/

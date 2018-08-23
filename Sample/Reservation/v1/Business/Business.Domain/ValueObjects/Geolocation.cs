@@ -1,7 +1,7 @@
 ﻿using System;
 using CqrsFramework.Domain;
 
-namespace Business.Domain.Entities
+namespace Business.Domain.ValueObjects
 {
     public class Geolocation: ValueObject<Geolocation>
     {

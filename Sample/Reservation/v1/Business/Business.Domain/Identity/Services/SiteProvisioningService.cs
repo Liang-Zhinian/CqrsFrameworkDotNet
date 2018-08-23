@@ -1,12 +1,12 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Business.Contracts;
 using Business.Contracts.Events.Sites;
-using Business.Domain.Entities;
-using Business.Domain.Repositories;
-using CqrsFramework.Domain;
-using CqrsFramework.Events;
+using Business.Domain.Identity.Entities;
+using Business.Domain.Identity.Repositories;
+using Business.Domain.SeedWork;
+using Business.Domain.ValueObjects;
 
-namespace Business.Domain.Services
+namespace Business.Domain.Identity.Services
 {
     public class SiteProvisioningService
     {

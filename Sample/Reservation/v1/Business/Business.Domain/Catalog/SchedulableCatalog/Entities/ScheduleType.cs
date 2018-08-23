@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Business.Domain.Exceptions;
+using Business.Domain.SeedWork;
 
-namespace Business.Domain.Entities.Schedules
+namespace Business.Domain.Catalog.SchedulableCatalog.Entities
 {
     //public class ScheduleTypeTable
     //{

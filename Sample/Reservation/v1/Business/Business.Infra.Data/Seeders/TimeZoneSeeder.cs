@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Business.Infra.Data.Context;
+using Business.Infrastructure.Context;
 
-namespace Business.Infra.Data.Seeders
+namespace Business.Infrastructure.Seeders
 {
     public class TimeZoneSeeder
     {
