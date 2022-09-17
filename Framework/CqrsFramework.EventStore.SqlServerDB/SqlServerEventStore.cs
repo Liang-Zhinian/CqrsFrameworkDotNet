@@ -131,7 +131,7 @@ namespace CqrsFramework.EventStore.SqlServerDB
 
         private IEnumerable<object> LoadEvents(Guid id, long version = 0)
         {
-            const string cmdText = "SELECT EventType, BODY from EventWrappers WHERE StreamId = @StreamId AND Sequence >= @Sequence ORDER BY TimeStamp";
+            const string cmdText = "SELECT EventType, BODY from EventWrappers WHERE StreamId = @StreamId AND Sequence > @Sequence ORDER BY TimeStamp";
             var connectionString = _connectionString;
             using (var con = new SqlConnection(connectionString))
             using (var cmd = new SqlCommand(cmdText, con))
