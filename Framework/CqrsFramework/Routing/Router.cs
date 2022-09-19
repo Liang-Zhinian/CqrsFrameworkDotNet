@@ -1,17 +1,18 @@
-﻿using System;
+﻿using CqrsFramework.Commands;
+using CqrsFramework.Events;
+using CqrsFramework.Messages;
+using CqrsFramework.Queries;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using CqrsFramework.Commands;
-using CqrsFramework.Events;
-using CqrsFramework.Messages;
 
 namespace CqrsFramework.Routing
 {
     /// <summary>
     /// Default router implementation for sending commands and publishing events.
     /// </summary>
-    public class Router : ICommandSender, IEventPublisher, IHandlerRegistrar
+    public class Router : ICommandSender, IEventPublisher, IQueryProcessor, IHandlerRegistrar
     {
         private readonly Dictionary<Type, List<Func<IMessage, CancellationToken, Task>>> _routes = new Dictionary<Type, List<Func<IMessage, CancellationToken, Task>>>();
 
@@ -46,6 +47,16 @@ namespace CqrsFramework.Routing
                 tasks[index] = handlers[index](@event, cancellationToken);
             }
             return Task.WhenAll(tasks);
+        }
+
+        public Task<TResponse> Query<TResponse>(IQuery<TResponse> query, CancellationToken cancellationToken = default)
+        {
+            var type = query.GetType();
+            if (!_routes.TryGetValue(type, out var handlers))
+                throw new InvalidOperationException($"No handler registered for {type.FullName}");
+            if (handlers.Count != 1)
+                throw new InvalidOperationException($"Cannot query more than one handler of {type.FullName}");
+            return (Task<TResponse>)handlers[0](query, cancellationToken);
         }
     }
 }

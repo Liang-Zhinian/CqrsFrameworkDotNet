@@ -7,6 +7,8 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.Loader;
 using System.Reflection;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace CqrsFramework.EventStore.SqlServerDB
 {
@@ -183,7 +185,7 @@ namespace CqrsFramework.EventStore.SqlServerDB
         public IEnumerable<IEvent> Get(Guid aggregateId, int fromVersion)
         {
             IList<IEvent> events = new List<IEvent>();
-            const string cmdText = "SELECT EventType, BODY from EventWrappers WHERE StreamId = @StreamId AND Sequence >= @Sequence ORDER BY TimeStamp";
+            const string cmdText = "SELECT EventType, BODY from EventWrappers WHERE StreamId = @StreamId AND Sequence > @Sequence ORDER BY TimeStamp";
             var connectionString = _connectionString;
             using (var con = new SqlConnection(connectionString))
             using (var cmd = new SqlCommand(cmdText, con))
@@ -205,6 +207,25 @@ namespace CqrsFramework.EventStore.SqlServerDB
             }
 
             return events;
+        }
+
+        public Task Save(IEnumerable<IEvent> events, CancellationToken cancellationToken = default)
+        {
+            return Task.Run(() =>
+            {
+                foreach (var @event in events)
+                {
+                    Save(@event);
+                }
+            }, cancellationToken);
+        }
+
+        public Task<IEnumerable<IEvent>> Get(Guid aggregateId, int fromVersion, CancellationToken cancellationToken = default)
+        {
+            return Task.Run<IEnumerable<IEvent>>(() =>
+            {
+                return Get(aggregateId, fromVersion);
+            }, cancellationToken);
         }
     }
 }

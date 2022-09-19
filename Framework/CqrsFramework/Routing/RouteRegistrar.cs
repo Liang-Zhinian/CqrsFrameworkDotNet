@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using CqrsFramework.Infrastructure;
 using CqrsFramework.Messages;
+using CqrsFramework.Queries;
 using CqrsFramework.Routing.Exception;
 
 namespace CqrsFramework.Routing
@@ -106,17 +107,36 @@ namespace CqrsFramework.Routing
 
         private static bool IsCancellable(Type @interface)
         {
-            return @interface.GetGenericTypeDefinition() == typeof(ICancellableHandler<>);
+            //return @interface.GetGenericTypeDefinition() == typeof(ICancellableHandler<>);
+            var types = new[]
+            {
+                typeof(ICancellableHandler<>),
+                typeof(ICancellableQueryHandler<,>)
+            };
+
+            return types.Contains(@interface.GetGenericTypeDefinition());
         }
 
         private static IEnumerable<Type> ResolveMessageHandlerInterface(Type type)
         {
+            //return type
+            //    .GetInterfaces()
+            //    .Where(i => i.GetTypeInfo().IsGenericType &&
+            //                (i.GetGenericTypeDefinition() == typeof(IHandler<>)
+            //                 || i.GetGenericTypeDefinition() == typeof(ICancellableHandler<>)
+            //                ));
+            var types = new[]
+            {
+                typeof(IHandler<>),
+                typeof(ICancellableHandler<>),
+                typeof(IQueryHandler<,>),
+                typeof(ICancellableQueryHandler<,>)
+            };
+
             return type
                 .GetInterfaces()
                 .Where(i => i.GetTypeInfo().IsGenericType &&
-                            (i.GetGenericTypeDefinition() == typeof(IHandler<>)
-                             || i.GetGenericTypeDefinition() == typeof(ICancellableHandler<>)
-                            ));
+                            types.Contains(i.GetGenericTypeDefinition()));
         }
     }
 }
