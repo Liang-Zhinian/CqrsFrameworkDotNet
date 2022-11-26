@@ -1,35 +1,33 @@
-﻿using CQRSCode.WriteModel.Commands;
+﻿using CQRSCode.ReadModel;
+using CQRSCode.WriteModel.Commands;
 using CqrsFramework.Commands;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using CQRSCode.ReadModel.Queries;
-using CqrsFramework.Queries;
 
 namespace CQRSWeb.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ICommandSender _commandSender;
-        private readonly IQueryProcessor _queryProcessor;
+        private readonly IReadModelFacade _readmodel;
 
-        public HomeController(ICommandSender commandSender, IQueryProcessor queryProcessor)
+        public HomeController(ICommandSender commandSender, IReadModelFacade readmodel)
         {
+            _readmodel = readmodel;
             _commandSender = commandSender;
-            _queryProcessor = queryProcessor;
         }
 
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            ViewData.Model = await _queryProcessor.Query(new GetInventoryItems());
-
+            ViewData.Model = _readmodel.GetInventoryItems();
             return View();
         }
 
-        public async Task<ActionResult> Details(Guid id)
+        public ActionResult Details(Guid id)
         {
-            ViewData.Model = await _queryProcessor.Query(new GetInventoryItemDetails(id));
+            ViewData.Model = _readmodel.GetInventoryItemDetails(id);
             return View();
         }
 
@@ -45,9 +43,9 @@ namespace CQRSWeb.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<ActionResult> ChangeName(Guid id)
+        public ActionResult ChangeName(Guid id)
         {
-            ViewData.Model = await _queryProcessor.Query(new GetInventoryItemDetails(id));
+            ViewData.Model = _readmodel.GetInventoryItemDetails(id);
             return View();
         }
 
@@ -64,9 +62,9 @@ namespace CQRSWeb.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<ActionResult> CheckIn(Guid id)
+        public ActionResult CheckIn(Guid id)
         {
-            ViewData.Model = await _queryProcessor.Query(new GetInventoryItemDetails(id));
+            ViewData.Model = _readmodel.GetInventoryItemDetails(id);
             return View();
         }
 
@@ -77,9 +75,9 @@ namespace CQRSWeb.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<ActionResult> Remove(Guid id)
+        public ActionResult Remove(Guid id)
         {
-            ViewData.Model = await _queryProcessor.Query(new GetInventoryItemDetails(id));
+            ViewData.Model = _readmodel.GetInventoryItemDetails(id);
             return View();
         }
 

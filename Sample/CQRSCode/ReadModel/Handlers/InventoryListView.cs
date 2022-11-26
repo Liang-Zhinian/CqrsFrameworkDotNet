@@ -1,19 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using CQRSCode.ReadModel.Dtos;
 using CQRSCode.ReadModel.Events;
 using CQRSCode.ReadModel.Infrastructure;
-using CQRSCode.ReadModel.Queries;
 using CqrsFramework.Events;
-using CqrsFramework.Queries;
 
 namespace CQRSCode.ReadModel.Handlers
 {
 	public class InventoryListView : ICancellableEventHandler<InventoryItemCreated>,
 	    ICancellableEventHandler<InventoryItemRenamed>,
-	    ICancellableEventHandler<InventoryItemDeactivated>,
-	    ICancellableQueryHandler<GetInventoryItems, List<InventoryItemListDto>>
+	    ICancellableEventHandler<InventoryItemDeactivated>
     {
         public Task Handle(InventoryItemCreated message, CancellationToken token)
         {
@@ -32,11 +28,6 @@ namespace CQRSCode.ReadModel.Handlers
         {
             InMemoryDatabase.List.RemoveAll(x => x.Id == message.Id);
             return Task.CompletedTask;
-        }
-
-        public Task<List<InventoryItemListDto>> Handle(GetInventoryItems message, CancellationToken token = default)
-        {
-            return Task.FromResult(InMemoryDatabase.List);
         }
     }
 }

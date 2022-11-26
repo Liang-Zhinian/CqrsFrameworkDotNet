@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CqrsFramework.Events;
-using CqrsFramework.Events;
 
 namespace CQRSCode.WriteModel
 {
@@ -18,7 +17,7 @@ namespace CQRSCode.WriteModel
             _publisher = publisher;
         }
 
-        public async Task Save(IEnumerable<IEvent> events, CancellationToken cancellationToken = default)
+        public async Task Save(IEnumerable<IEvent> events, CancellationToken cancellationToken = default(CancellationToken))
         {
             foreach (var @event in events)
             {
@@ -33,7 +32,7 @@ namespace CQRSCode.WriteModel
             }
         }
 
-        public Task<IEnumerable<IEvent>> Get(Guid aggregateId, int fromVersion, CancellationToken cancellationToken = default)
+        public Task<IEnumerable<IEvent>> Get(Guid aggregateId, int fromVersion, CancellationToken cancellationToken = default(CancellationToken))
         {
             _inMemoryDb.TryGetValue(aggregateId, out var events);
             return Task.FromResult(events?.Where(x => x.Version > fromVersion) ?? new List<IEvent>());
