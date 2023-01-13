@@ -1,27 +1,31 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26403.0
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
+<<<<<<< Updated upstream
  = ======
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CqrsFramework", "Framework\CqrsFramework\CqrsFramework.csproj", "{2DF95572-5CF5-463A-97D0-DFF3C72FD6EF}"
+=======
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CqrsFramework", "Framework\CqrsFramework\CqrsFramework.csproj", "{2DF95572-5CF5-463A-97D0-DFF3C72FD6EF}"
+>>>>>>> Stashed changes
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CqrsFramework.Tests.Extensions", "Framework\CqrsFramework.Tests.Extensions\CqrsFramework.Tests.Extensions.csproj", "{DDD75F6D-1B10-462E-9D26-AFE883736AC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CqrsFramework.Tests.Extensions", "Framework\CqrsFramework.Tests.Extensions\CqrsFramework.Tests.Extensions.csproj", "{DDD75F6D-1B10-462E-9D26-AFE883736AC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CqrsFramework.Tests", "Framework\CqrsFramework.Tests\CqrsFramework.Tests.csproj", "{29717E0D-4FB3-4B59-ACB2-41F7756A57F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CqrsFramework.Tests", "Framework\CqrsFramework.Tests\CqrsFramework.Tests.csproj", "{29717E0D-4FB3-4B59-ACB2-41F7756A57F5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{CCDA44F7-DC3F-4337-8D2B-005AE17A5B73}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{C26B01E4-52DF-4FF2-8B4F-ECB41998FE23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CqrsFramework.Extensions", "Framework\CqrsFramework.Extensions\CqrsFramework.Extensions.csproj", "{7D7611F0-9498-4050-A880-D06383BDB1E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CqrsFramework.Extensions", "Framework\CqrsFramework.Extensions\CqrsFramework.Extensions.csproj", "{7D7611F0-9498-4050-A880-D06383BDB1E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CqrsFramework.EventStore.MongoDB", "Framework\CqrsFramework.EventStore.MongoDB\CqrsFramework.EventStore.MongoDB.csproj", "{ADFAC7CD-9D83-4FE9-8314-5EE382B4D564}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CqrsFramework.EventStore.MongoDB", "Framework\CqrsFramework.EventStore.MongoDB\CqrsFramework.EventStore.MongoDB.csproj", "{ADFAC7CD-9D83-4FE9-8314-5EE382B4D564}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CqrsFramework.EventStore.SqlServerDB", "Framework\CqrsFramework.EventStore.SqlServerDB\CqrsFramework.EventStore.SqlServerDB.csproj", "{9381ADA7-D4B5-452E-AC28-B7FAF2CF1561}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CqrsFramework.EventStore.SqlServerDB", "Framework\CqrsFramework.EventStore.SqlServerDB\CqrsFramework.EventStore.SqlServerDB.csproj", "{9381ADA7-D4B5-452E-AC28-B7FAF2CF1561}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CqrsFramework.Bus.RabbitMQ", "Framework\CqrsFramework.Bus.RabbitMQ\CqrsFramework.Bus.RabbitMQ.csproj", "{0E80C14B-E6E2-44AD-B307-8B44A14009D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CqrsFramework.Bus.RabbitMQ", "Framework\CqrsFramework.Bus.RabbitMQ\CqrsFramework.Bus.RabbitMQ.csproj", "{0E80C14B-E6E2-44AD-B307-8B44A14009D8}"
 EndProject
+<<<<<<< Updated upstream
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CqrsFramework.EventSourcing", "Framework\CqrsFramework.EventStore.EF\CqrsFramework.EventSourcing.csproj", "{6F427B67-613E-4604-8B28-F4BD08C25434}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CqrsFramework.EventStore.MySqlDB", "Framework\CqrsFramework.EventStore.MySqlDB\CqrsFramework.EventStore.MySqlDB.csproj", "{9ED7F928-5669-41BD-8329-7BCBE6DEB240}"
@@ -29,6 +33,15 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CQRSCode", "Sample\CQRSCode\CQRSCode.csproj", "{D3805272-C791-4C85-AE88-10BC8CE113AB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CQRSWeb", "Sample\CQRSWeb\CQRSWeb.csproj", "{462B07FD-9BD9-4CDC-BBBC-8DAA51E6D935}"
+=======
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CqrsFramework.EventSourcing", "Framework\CqrsFramework.EventStore.EF\CqrsFramework.EventSourcing.csproj", "{6F427B67-613E-4604-8B28-F4BD08C25434}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CqrsFramework.EventStore.MySqlDB", "Framework\CqrsFramework.EventStore.MySqlDB\CqrsFramework.EventStore.MySqlDB.csproj", "{9ED7F928-5669-41BD-8329-7BCBE6DEB240}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CQRSCode", "Sample\CQRSWeb\CQRSCode\CQRSCode.csproj", "{09C36688-7F13-446A-BD0D-5AD8E96EC948}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CQRSWeb", "Sample\CQRSWeb\CQRSWeb\CQRSWeb.csproj", "{74DB259A-F482-495B-ACA8-558511F32801}"
+>>>>>>> Stashed changes
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,6 +85,7 @@ Global
 		{9ED7F928-5669-41BD-8329-7BCBE6DEB240}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9ED7F928-5669-41BD-8329-7BCBE6DEB240}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9ED7F928-5669-41BD-8329-7BCBE6DEB240}.Release|Any CPU.Build.0 = Release|Any CPU
+<<<<<<< Updated upstream
 		{D3805272-C791-4C85-AE88-10BC8CE113AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D3805272-C791-4C85-AE88-10BC8CE113AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3805272-C791-4C85-AE88-10BC8CE113AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -80,6 +94,16 @@ Global
 		{462B07FD-9BD9-4CDC-BBBC-8DAA51E6D935}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{462B07FD-9BD9-4CDC-BBBC-8DAA51E6D935}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{462B07FD-9BD9-4CDC-BBBC-8DAA51E6D935}.Release|Any CPU.Build.0 = Release|Any CPU
+=======
+		{09C36688-7F13-446A-BD0D-5AD8E96EC948}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09C36688-7F13-446A-BD0D-5AD8E96EC948}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09C36688-7F13-446A-BD0D-5AD8E96EC948}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09C36688-7F13-446A-BD0D-5AD8E96EC948}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74DB259A-F482-495B-ACA8-558511F32801}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74DB259A-F482-495B-ACA8-558511F32801}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74DB259A-F482-495B-ACA8-558511F32801}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74DB259A-F482-495B-ACA8-558511F32801}.Release|Any CPU.Build.0 = Release|Any CPU
+>>>>>>> Stashed changes
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -94,7 +118,15 @@ Global
 		{0E80C14B-E6E2-44AD-B307-8B44A14009D8} = {CCDA44F7-DC3F-4337-8D2B-005AE17A5B73}
 		{6F427B67-613E-4604-8B28-F4BD08C25434} = {CCDA44F7-DC3F-4337-8D2B-005AE17A5B73}
 		{9ED7F928-5669-41BD-8329-7BCBE6DEB240} = {CCDA44F7-DC3F-4337-8D2B-005AE17A5B73}
+<<<<<<< Updated upstream
 		{D3805272-C791-4C85-AE88-10BC8CE113AB} = {C26B01E4-52DF-4FF2-8B4F-ECB41998FE23}
 		{462B07FD-9BD9-4CDC-BBBC-8DAA51E6D935} = {C26B01E4-52DF-4FF2-8B4F-ECB41998FE23}
+=======
+		{09C36688-7F13-446A-BD0D-5AD8E96EC948} = {C26B01E4-52DF-4FF2-8B4F-ECB41998FE23}
+		{74DB259A-F482-495B-ACA8-558511F32801} = {C26B01E4-52DF-4FF2-8B4F-ECB41998FE23}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9453F117-CDA7-43DC-AE5B-7375A05ED581}
+>>>>>>> Stashed changes
 	EndGlobalSection
 EndGlobal
